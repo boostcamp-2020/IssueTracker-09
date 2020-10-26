@@ -19,7 +19,7 @@
 
 [공통](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---%EA%B3%B5%ED%86%B5)
 
-[iOS](https://www.notion.so/iOS-d544bf18a88447eea21aff2bcd9a283c)
+[iOS]https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---iOS)
 
 [JS](https://www.notion.so/JS-b853cf8117d84587925001767ab955ed)
 
@@ -32,7 +32,7 @@
 - 데이터베이스 (ERD)
 
     [IssueTracker09](https://www.erdcloud.com/d/zahixjNPz8acSNZAB)
-
+    
 - API (PostMan)
 
 - Feature List (iOS)
