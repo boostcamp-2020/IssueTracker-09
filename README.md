@@ -23,7 +23,7 @@
 
 [JS](https://www.notion.so/JS-b853cf8117d84587925001767ab955ed)
 
-## 기능 요구사항
+## 기능 요구사항 (Notoion)
 
 [ToDo 리스트](https://www.notion.so/092aa8b7eeb94aa484405429d1d30441)
 
