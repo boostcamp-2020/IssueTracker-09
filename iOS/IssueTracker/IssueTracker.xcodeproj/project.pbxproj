@@ -16,6 +16,7 @@
 		FCF196FC2547AED200AED031 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196FB2547AED200AED031 /* IssueTrackerTests.swift */; };
 		FCF197072547AED200AED031 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197062547AED200AED031 /* IssueTrackerUITests.swift */; };
 		FCF197212547BDAB00AED031 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197202547BDAB00AED031 /* User.swift */; };
+		FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197332547FAB100AED031 /* SignCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +53,7 @@
 		FCF197062547AED200AED031 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
 		FCF197082547AED200AED031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF197202547BDAB00AED031 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		FCF197332547FAB100AED031 /* SignCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,9 +162,18 @@
 		FCF197182547BCA500AED031 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				FCF196E82547AED000AED031 /* SignViewController.swift */,
+				FCF197382547FC9A00AED031 /* sign */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FCF197382547FC9A00AED031 /* sign */ = {
+			isa = PBXGroup;
+			children = (
+				FCF196E82547AED000AED031 /* SignViewController.swift */,
+				FCF197332547FAB100AED031 /* SignCoordinator.swift */,
+			);
+			path = sign;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -299,6 +310,7 @@
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
 				FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */,
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
+				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
