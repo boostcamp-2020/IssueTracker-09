@@ -28,7 +28,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print(url)
             if url.absoluteString.starts(with: "issuetracker09://") {
                 if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
-                    GithubSignCotroller.shared.requestAccessToken(with: code)
+                    GithubSignController.shared.requestAccessToken(with: code)
                 }
             }
         }
