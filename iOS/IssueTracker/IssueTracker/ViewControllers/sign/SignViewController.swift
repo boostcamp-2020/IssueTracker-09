@@ -14,10 +14,12 @@ protocol NextCoordinatorDelegate: AnyObject {
 
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
-    var delegate: NextCoordinatorDelegate?
+    private var delegate: NextCoordinatorDelegate?
+    private var request: AuthorizationRequestable?
     
-    init?(coder: NSCoder, delegate: NextCoordinatorDelegate) {
+    init?(coder: NSCoder, delegate: NextCoordinatorDelegate, request: AuthorizationRequestable) {
         self.delegate = delegate
+        self.request = request
         super.init(coder: coder)
     }
     
@@ -54,6 +56,11 @@ class SignViewController: UIViewController {
         authorizationController.delegate = authorization
         authorizationController.presentationContextProvider = authorization
         authorizationController.performRequests()
+    }
+    
+    @IBAction
+    func touchedCompleteButton(_ sender: Any) {
+        request?.requestCode()
     }
     
     @objc
