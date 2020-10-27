@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,28 +17,29 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qlU-7b-yew">
-                                <rect key="frame" x="10" y="384" width="394" height="138"/>
+                                <rect key="frame" x="19.5" y="384" width="375" height="138"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cC7-1q-wKN">
-                                        <rect key="frame" x="0.0" y="0.0" width="394" height="59"/>
-                                        <color key="backgroundColor" systemColor="systemGray2Color"/>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a4C-Ce-ao3">
-                                        <rect key="frame" x="0.0" y="79" width="394" height="59"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                         <color key="backgroundColor" systemColor="systemGray2Color"/>
                                     </view>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="c7b-1P-5IK"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="qlU-7b-yew" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="83x-Wh-wcz"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="qlU-7b-yew" secondAttribute="trailing" constant="10" id="AbN-VJ-Tgh"/>
                             <constraint firstItem="qlU-7b-yew" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.168704" id="Doc-vy-Zlj"/>
-                            <constraint firstItem="qlU-7b-yew" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="eWt-Fd-qgx"/>
+                            <constraint firstItem="qlU-7b-yew" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dHY-M0-B9y"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginProviderStackView" destination="qlU-7b-yew" id="eBC-DG-3Uu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
