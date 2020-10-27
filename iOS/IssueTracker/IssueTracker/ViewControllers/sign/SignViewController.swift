@@ -8,8 +8,22 @@
 import UIKit
 import AuthenticationServices
 
+protocol NextCoordinatorDelegate: AnyObject {
+    func navigateToPage()
+}
+
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
+    var delegate: NextCoordinatorDelegate?
+    
+    init?(coder: NSCoder, delegate: NextCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,62 +41,32 @@ class SignViewController: UIViewController {
         loginProviderStackView.addArrangedSubview(button)
     }
     
+    
+    // 이건 바로 인증 달리는건가??
     func performExistingAccountSetupFlows() {
         // Prepare requests for both Apple ID and password providers.
+        let authorization = AppleAuthorizationController(window: view.window)
         let requests = [ASAuthorizationAppleIDProvider().createRequest(),
                         ASAuthorizationPasswordProvider().createRequest()]
         
         // Create an authorization controller with the given requests.
         let authorizationController = ASAuthorizationController(authorizationRequests: requests)
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
+        authorizationController.delegate = authorization
+        authorizationController.presentationContextProvider = authorization
         authorizationController.performRequests()
     }
     
     @objc
     func handleAuthorizationAppleIDButtonPress() {
+        let authorization = AppleAuthorizationController(window: view.window)
+        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]
         
         let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
+        authorizationController.delegate = authorization
+        authorizationController.presentationContextProvider = authorization
         authorizationController.performRequests()
-    }
-}
-
-extension SignViewController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-            
-            // TODO: - 다음 화면으로 이동
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            
-            DispatchQueue.main.async {
-                // TODO: - 다음 화면으로 이동
-            }
-        default:
-            break
-        }
-    }
-    
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // Handle error.
-    }
-}
-
-extension SignViewController: ASAuthorizationControllerPresentationContextProviding {
-    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        // TODO: - 예외처리를 어떻게 해줘야 하지?
-        //        guard let window = view.window else {
-        //        }
-        return view.window!
     }
 }
