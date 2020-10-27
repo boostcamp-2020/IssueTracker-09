@@ -13,21 +13,30 @@ protocol Coordinator : AnyObject {
 
 class SignCoordinator: Coordinator {
     private let storyboardName: String = "Main"
-    private var window: UIWindow?
+    private let window: UIWindow
     
     init(window: UIWindow? = UIWindow()) {
-        self.window = window
+        if let window = window {
+            self.window = window
+        } else {
+            self.window = UIWindow()
+        }
     }
     
     func start() {
-        window?.makeKeyAndVisible()
+        window.makeKeyAndVisible()
         
         let storyBoard = UIStoryboard(name: storyboardName, bundle: nil)
-        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
-        window?.rootViewController = viewController
+        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController", creator: { coder in
+                return SignViewController(coder: coder, delegate: self)
+            }) 
+//        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
+        window.rootViewController = viewController
     }
-    
-//    private func navigationToPage() {
-//
-//    }
+}
+
+extension SignCoordinator: NextCoordinatorDelegate {
+    func navigateToPage() {
+        print("move next page")
+    }
 }
