@@ -11,7 +11,7 @@ import AuthenticationServices
 class AppleAuthorizationController: NSObject {
     let window: UIWindow
     
-    init(window: UIWindow? = UIWindow()) {
+    init(window: UIWindow?) {
         if let window = window {
             self.window = window
         } else  {
