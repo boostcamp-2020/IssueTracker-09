@@ -4,9 +4,9 @@ module.exports = {
   gitHubLogin: (user) => {
     try {
       const userId = user.dataValues.name;
-      console.log(userId);
+
       return createJWT(userId);
-    } catch {
+    } catch (error) {
       return false;
     }
   },
