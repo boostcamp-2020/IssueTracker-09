@@ -1,12 +1,12 @@
 // Dependencies
 const express = require('express');
 const morgan = require('morgan');
-const dotenv = require('dotenv');
 
 // Router
 const indexRouter = require('./routes');
 
-dotenv.config();
+// Config
+const { config } = require('./config');
 
 const app = express();
 
@@ -16,6 +16,6 @@ app.use(morgan('dev'));
 
 app.use('/api', indexRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`server is running on ${process.env.PORT} port`);
+app.listen(config.port, () => {
+  console.log(`server is running on ${config.port} port`);
 });
