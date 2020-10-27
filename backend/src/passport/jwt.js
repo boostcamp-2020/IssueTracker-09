@@ -4,7 +4,7 @@ const User = require('../model').User;
 
 const options = {
   jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: 'secret',
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 module.exports = () => {
@@ -14,12 +14,12 @@ module.exports = () => {
         const user = await User.findOne({ where: { name: jwt_payload.name } });
 
         if (user) {
-          done(null, user);
+          return done(null, user);
         }
 
-        done(null, false);
+        return done(null, false);
       } catch (error) {
-        done(error, false);
+        return done(error, false);
       }
     })
   );

@@ -7,7 +7,7 @@ module.exports = {
     try {
       const id = jwt.verify(token, JWT_SECRET);
       return id;
-    } catch {
+    } catch (error) {
       return false;
     }
   },
