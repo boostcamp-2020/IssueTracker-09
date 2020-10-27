@@ -17,6 +17,7 @@
 		FCF197072547AED200AED031 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197062547AED200AED031 /* IssueTrackerUITests.swift */; };
 		FCF197212547BDAB00AED031 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197202547BDAB00AED031 /* User.swift */; };
 		FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197332547FAB100AED031 /* SignCoordinator.swift */; };
+		FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF1973C2547FE8800AED031 /* AppleAuthorizationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		FCF197082547AED200AED031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF197202547BDAB00AED031 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		FCF197332547FAB100AED031 /* SignCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignCoordinator.swift; sourceTree = "<group>"; };
+		FCF1973C2547FE8800AED031 /* AppleAuthorizationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,8 +172,9 @@
 		FCF197382547FC9A00AED031 /* sign */ = {
 			isa = PBXGroup;
 			children = (
-				FCF196E82547AED000AED031 /* SignViewController.swift */,
 				FCF197332547FAB100AED031 /* SignCoordinator.swift */,
+				FCF196E82547AED000AED031 /* SignViewController.swift */,
+				FCF1973C2547FE8800AED031 /* AppleAuthorizationController.swift */,
 			);
 			path = sign;
 			sourceTree = "<group>";
@@ -311,6 +314,7 @@
 				FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */,
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
+				FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
