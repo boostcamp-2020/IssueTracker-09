@@ -28,7 +28,7 @@ class SignCoordinator: Coordinator {
         
         let storyBoard = UIStoryboard(name: storyboardName, bundle: nil)
         let viewController = storyBoard.instantiateViewController(identifier: "SignViewController", creator: { coder in
-                return SignViewController(coder: coder, delegate: self)
+            return SignViewController(coder: coder, delegate: self, request: GithubSignController.shared)
             }) 
 //        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
         window.rootViewController = viewController
