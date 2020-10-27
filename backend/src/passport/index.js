@@ -1,7 +1,9 @@
-const githubPassport = require('./github');
+const githubStrategy = require('./github');
+const jwtStrategy = require('./jwt');
 
-const initPassport = () => {
-  githubPassport();
+const initStrategy = () => {
+  githubStrategy();
+  jwtStrategy();
 };
 
-module.exports = initPassport;
+module.exports = initStrategy;
