@@ -48,14 +48,43 @@
                                                         </label>
                                                     </subviews>
                                                 </stackView>
-                                                <stackView opaque="NO" contentMode="top" axis="vertical" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
-                                                    <rect key="frame" x="229" y="10" width="165" height="20.5"/>
+                                                <stackView opaque="NO" contentMode="top" horizontalHuggingPriority="251" horizontalCompressionResistancePriority="749" axis="vertical" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
+                                                    <rect key="frame" x="313" y="10" width="81" height="46"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e">
-                                                            <rect key="frame" x="123.5" y="0.0" width="41.5" height="20.5"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="0.0" width="81" height="20.5"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" systemColor="systemGrayColor"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
+                                                            <rect key="frame" x="15" y="25.5" width="66" height="20.5"/>
+                                                            <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                    <real key="value" value="1"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                    <real key="value" value="5"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                    <color key="value" red="0.23529411759999999" green="0.79607843140000001" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
                                                         </label>
                                                     </subviews>
                                                 </stackView>
@@ -63,11 +92,11 @@
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="dEt-P3-k0v" secondAttribute="bottom" constant="10" id="7jg-NB-NQ2"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="A42-0J-GOV" secondAttribute="bottom" id="930-7M-g3A"/>
-                                                <constraint firstItem="dEt-P3-k0v" firstAttribute="trailing" secondItem="A42-0J-GOV" secondAttribute="leading" id="E7V-7w-x0k"/>
                                                 <constraint firstItem="dEt-P3-k0v" firstAttribute="leading" secondItem="Wht-cS-CBT" secondAttribute="leading" constant="10" id="Npa-7Z-Hga"/>
                                                 <constraint firstItem="dEt-P3-k0v" firstAttribute="top" secondItem="Wht-cS-CBT" secondAttribute="top" constant="10" id="XKx-K4-c52"/>
                                                 <constraint firstItem="A42-0J-GOV" firstAttribute="trailing" secondItem="Wht-cS-CBT" secondAttribute="trailingMargin" id="aQu-q5-sci"/>
                                                 <constraint firstItem="A42-0J-GOV" firstAttribute="top" secondItem="gLx-UE-tcy" secondAttribute="top" id="c0Z-uh-YbM"/>
+                                                <constraint firstItem="dEt-P3-k0v" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="A42-0J-GOV" secondAttribute="leading" id="xrv-k4-6uz"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -77,7 +106,7 @@
                                     <outlet property="delegate" destination="n0Y-7T-26G" id="wBd-wr-yIi"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-l3-4fa">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-l3-4fa" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="349" y="797" width="40" height="40"/>
                                 <color key="backgroundColor" red="0.037953577336054783" green="0.43238500179686556" blue="0.73365461907419194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -88,6 +117,11 @@
                                 <state key="normal" title="+">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Kr-OP-3Wt"/>
@@ -138,6 +172,17 @@
             <point key="canvasLocation" x="-100.00000000000001" y="8.7053571428571423"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="b5r-hP-nEJ">
+            <size key="intrinsicContentSize" width="81" height="20.5"/>
+        </designable>
+        <designable name="iEa-l3-4fa">
+            <size key="intrinsicContentSize" width="30" height="48"/>
+        </designable>
+        <designable name="iO3-1R-V9e">
+            <size key="intrinsicContentSize" width="66" height="20.5"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
