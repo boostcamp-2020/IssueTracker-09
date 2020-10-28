@@ -29,6 +29,20 @@ module.exports = {
       if (users) {
         return res.status(200).json(users);
       }
+      res.status(403).json(false);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
+
+  iOSGitHubLogin: async (req, res) => {
+    try {
+      const token = await userService.iOSGithubLogin(req.body);
+
+      if (token) {
+        return res.status(201).json({ token });
+      }
+      return res.status(403).json(false);
     } catch (error) {
       return res.status(500).json({ error });
     }

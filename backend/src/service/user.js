@@ -33,4 +33,17 @@ module.exports = {
     const users = await User.findAll({ attributes: ['id', 'name', 'image'] });
     return users;
   },
+
+  iOSGithubLogin: async ({ code, name, image }) => {
+    const user = await User.findOrCreate({
+      where: { user_code: 'g' + code },
+      defaults: {
+        user_code: code,
+        name,
+        image,
+      },
+    });
+
+    return createJWT(user.id);
+  },
 };

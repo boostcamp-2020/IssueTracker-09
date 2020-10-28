@@ -19,4 +19,6 @@ router.get('/github/callback', githubAuth, User.gitHubLogin);
 
 router.post('/apple', User.iosAppleLogin);
 
+router.post('/github/ios', User.iOSGitHubLogin);
+
 module.exports = router;
