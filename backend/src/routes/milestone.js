@@ -7,10 +7,12 @@ const milestone = require('../controller/milestone');
 
 const router = express.Router();
 
-router.post('/', jwtAuth, milestone.create);
+router.post('/', milestone.create);
 
-router.get('/', jwtAuth, milestone.read);
+router.get('/', milestone.read);
 
-router.put('/', jwtAuth, milestone.update);
+router.put('/', milestone.update);
+
+router.delete('/', milestone.remove);
 
 module.exports = router;

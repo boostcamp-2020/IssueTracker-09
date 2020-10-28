@@ -37,4 +37,13 @@ module.exports = {
       return false;
     }
   },
+  remove: async ({ milestone_id }) => {
+    try {
+      return await Milestone.destroy({
+        where: { id: milestone_id },
+      });
+    } catch (error) {
+      return false;
+    }
+  },
 };
