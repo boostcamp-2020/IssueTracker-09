@@ -14,7 +14,6 @@ class IssueViewController: UIViewController {
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        print(editing)
     }
     
     @IBAction func didEditButtonTapped(sender: UIBarButtonItem) {
