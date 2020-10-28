@@ -9,8 +9,8 @@ module.exports = {
       res.status(403).json(false);
     }
   },
-  iosAppleLogin: async (req, res) => {
-    const data = await userService.iosAppleLogin(req.body);
+  iOSAppleLogin: async (req, res) => {
+    const data = await userService.iOSAppleLogin(req.body);
     console.log(data);
     if (data.token) {
       res.status(200).json(data);

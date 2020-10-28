@@ -17,7 +17,7 @@ router.get('/github', passport.authenticate('github'));
 
 router.get('/github/callback', githubAuth, User.gitHubLogin);
 
-router.post('/apple', User.iosAppleLogin);
+router.post('/apple', User.iOSAppleLogin);
 
 router.post('/github/ios', User.iOSGitHubLogin);
 

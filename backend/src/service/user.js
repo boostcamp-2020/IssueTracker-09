@@ -11,13 +11,13 @@ module.exports = {
       return false;
     }
   },
-  iosAppleLogin: async (data) => {
+  iOSAppleLogin: async (data) => {
     try {
       const { code, name } = data;
       const [result] = await User.findOrCreate({
-        where: { user_code: code },
+        where: { user_code: 'a' + code },
         defaults: {
-          user_code: code,
+          user_code: 'a' + code,
           name: name,
         },
       });

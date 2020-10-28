@@ -12,9 +12,9 @@ module.exports = () => {
       },
       async (accessToken, refreshToken, profile, cb) => {
         const data = await User.findOrCreate({
-          where: { user_code: profile.id },
+          where: { user_code: 'g' + profile.id },
           defaults: {
-            user_code: profile.id,
+            user_code: 'g' + profile.id,
             name: profile.username,
             image: profile.photos[0].value,
           },
