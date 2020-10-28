@@ -16,11 +16,23 @@ module.exports = {
       return false;
     }
   },
-  read: async (body) => {
+  read: async () => {
     try {
       return await Milestone.findAll({
         include: [Issue],
       });
+    } catch (error) {
+      return false;
+    }
+  },
+  update: async (body) => {
+    try {
+      const { milestone_id, title, deadline, content } = body;
+
+      return await Milestone.update(
+        { title, deadline, content },
+        { where: { id: milestone_id } }
+      );
     } catch (error) {
       return false;
     }
