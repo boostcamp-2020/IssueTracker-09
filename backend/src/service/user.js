@@ -1,4 +1,4 @@
-const { createJWT } = require('../utils/jwt');
+const { createJWT } = require('../lib/utils/jwt');
 const User = require('../model').User;
 
 module.exports = {
