@@ -5,6 +5,7 @@ const commentService = require('../../service/comment');
 const httpMocks = require('node-mocks-http');
 
 commentService.create = jest.fn();
+commentService.remove = jest.fn();
 
 const newComment = {
   content: 'helloworld',
@@ -60,6 +61,53 @@ describe('create comment Controller 테스트', () => {
     const rejectedPromise = Promise.reject(errorMessage);
     commentService.create.mockReturnValue(rejectedPromise);
     await commentController.create(req, res);
+    expect(res.statusCode).toBe(500);
+  });
+});
+
+describe('remove comment Controller 테스트', () => {
+  const removeData = { commentId: 1 };
+  beforeEach(() => {
+    req.body = removeData;
+  });
+
+  it('함수인가', () => {
+    commentService.remove.mockReturnValue(removeData);
+    expect(typeof commentController.remove).toBe('function');
+  });
+
+  it('service에 data가 들어가는가', async () => {
+    commentService.remove.mockReturnValue(removeData);
+    await commentController.remove(req, res);
+    expect(commentService.remove).toBeCalledWith(removeData);
+  });
+
+  it('성공 시 200응답이 오는가', async () => {
+    commentService.remove.mockReturnValue(removeData);
+    await commentController.remove(req, res);
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('json을 리턴하는가', async () => {
+    commentService.remove.mockReturnValue(removeData);
+    await commentController.remove(req, res);
+    expect(res._isJSON()).toBeTruthy();
+  });
+
+  it('에러가 나면 403응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    commentService.remove.mockReturnValue(errorMessage);
+    await commentController.remove(req, res);
+    expect(res.statusCode).toBe(403);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('서버에서 에러가 나면 500응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    const rejectedPromise = Promise.reject(errorMessage);
+    commentService.remove.mockReturnValue(rejectedPromise);
+    await commentController.remove(req, res);
     expect(res.statusCode).toBe(500);
   });
 });

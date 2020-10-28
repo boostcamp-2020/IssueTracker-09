@@ -14,4 +14,6 @@ module.exports = {
 
     return comment;
   },
+
+  remove: async () => {},
 };
