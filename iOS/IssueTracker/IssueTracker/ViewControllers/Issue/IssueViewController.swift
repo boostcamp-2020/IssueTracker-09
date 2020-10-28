@@ -9,6 +9,8 @@ import UIKit
 
 class IssueViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
+    var delegate: NextCoordinatorDelegate?
+    var service: IssueService?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,13 +43,15 @@ extension IssueViewController: UITableViewDelegate {
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        service?.issues.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? IssueTableViewCell,
+              let issue = service?.issues[indexPath.row] else {
             return UITableViewCell()
         }
+        cell.configure(issue: issue)
         return cell
     }
     

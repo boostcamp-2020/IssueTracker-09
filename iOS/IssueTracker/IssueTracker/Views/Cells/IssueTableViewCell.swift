@@ -14,4 +14,10 @@ class IssueTableViewCell: UITableViewCell {
     @IBOutlet weak var badgeStackView: UIStackView!
     
     @IBOutlet weak var wrapperStackView: UIStackView!
+    
+    func configure(issue: Issue) {
+        titleLabel.text = issue.title
+        descriptionLabel.text = issue.description
+        
+    }
 }
