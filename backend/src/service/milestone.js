@@ -2,8 +2,10 @@ const Milestone = require('../model').Milestone;
 const Issue = require('../model').Issue;
 
 module.exports = {
-  create: async (body) => {
-    const { title, content, deadline } = body;
+  create: async ({ title, content, deadline }) => {
+    if (!title || !content || deadline) {
+      return { error: '정보가 부족합니다.' };
+    }
     const result = await Milestone.create({
       title,
       content,
@@ -17,17 +19,23 @@ module.exports = {
       include: [Issue],
     });
   },
-  update: async (body) => {
-    const { milestone_id, title, deadline, content } = body;
+  update: async ({ milestoneId, title, deadline, content }) => {
+    if (!milestoneId) {
+      return { error: '정보가 부족합니다' };
+    }
 
     return await Milestone.update(
       { title, deadline, content },
-      { where: { id: milestone_id } }
+      { where: { id: milestoneId } }
     );
   },
-  remove: async ({ milestone_id }) => {
+  remove: async ({ milestoneId }) => {
+    if (!milestoneId) {
+      return { error: '정보가 부족합니다' };
+    }
+
     return await Milestone.destroy({
-      where: { id: milestone_id },
+      where: { id: milestoneId },
     });
   },
 };
