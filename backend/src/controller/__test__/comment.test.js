@@ -4,7 +4,7 @@ const commentService = require('../../service/comment');
 
 const httpMocks = require('node-mocks-http');
 
-commentService.addComment = jest.fn();
+commentService.createComment = jest.fn();
 
 const newComment = {
   content: 'helloworld',
@@ -18,39 +18,39 @@ beforeEach(() => {
   res = httpMocks.createResponse();
 });
 
-describe('add comment Controller 테스트', () => {
+describe('create comment Controller 테스트', () => {
   beforeEach(() => {
     req.body = newComment;
   });
 
   it('함수인가', () => {
-    commentService.addComment.mockReturnValue(newComment);
-    expect(typeof commentController.addComment).toBe('function');
+    commentService.createComment.mockReturnValue(newComment);
+    expect(typeof commentController.createComment).toBe('function');
   });
 
   it('service에 newComment가 들어가는가', async () => {
-    commentService.addComment.mockReturnValue(newComment);
-    await commentController.addComment(req, res);
-    expect(commentService.addComment).toBeCalledWith(newComment);
+    commentService.createComment.mockReturnValue(newComment);
+    await commentController.createComment(req, res);
+    expect(commentService.createComment).toBeCalledWith(newComment);
   });
 
   it('성공 시 201응답이 오는가', async () => {
-    commentService.addComment.mockReturnValue(newComment);
-    await commentController.addComment(req, res);
+    commentService.createComment.mockReturnValue(newComment);
+    await commentController.createComment(req, res);
     expect(res.statusCode).toBe(201);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
   it('json을 리턴하는가', async () => {
-    commentService.addComment.mockReturnValue(newComment);
-    await commentController.addComment(req, res);
+    commentService.createComment.mockReturnValue(newComment);
+    await commentController.createComment(req, res);
     expect(res._isJSON()).toBeTruthy();
   });
 
   it('에러가 나면 403응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
-    commentService.addComment.mockReturnValue(errorMessage);
-    await commentController.addComment(req, res);
+    commentService.createComment.mockReturnValue(errorMessage);
+    await commentController.createComment(req, res);
     expect(res.statusCode).toBe(403);
     expect(res._isEndCalled()).toBeTruthy();
   });
@@ -58,8 +58,8 @@ describe('add comment Controller 테스트', () => {
   it('서버에서 에러가 나면 500응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     const rejectedPromise = Promise.reject(errorMessage);
-    commentService.addComment.mockReturnValue(rejectedPromise);
-    await commentController.addComment(req, res);
+    commentService.createComment.mockReturnValue(rejectedPromise);
+    await commentController.createComment(req, res);
     expect(res.statusCode).toBe(500);
   });
 });

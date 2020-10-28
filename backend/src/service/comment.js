@@ -1,7 +1,7 @@
 const Comment = require('../model').Comment;
 
 module.exports = {
-  addComment: async ({ content, userId, issueId }) => {
+  createComment: async ({ content, userId, issueId }) => {
     if (!content || !userId || !issueId) {
       return { error: '정보가 부족합니다' };
     }

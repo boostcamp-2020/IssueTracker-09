@@ -1,9 +1,9 @@
 const commentService = require('../service/comment');
 
 module.exports = {
-  addComment: async (req, res) => {
+  createComment: async (req, res) => {
     try {
-      const comment = await commentService.addComment(req.body);
+      const comment = await commentService.createComment(req.body);
 
       if (!comment.error) {
         return res.status(201).json(comment);
