@@ -25,17 +25,34 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="94"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="94.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="center" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="70"/>
+                                                <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
+                                                    <rect key="frame" x="12" y="12" width="390" height="70.5"/>
                                                     <subviews>
+                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb">
+                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="70.5"/>
+                                                            <subviews>
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="23" width="25" height="25"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
+                                                                        <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
+                                                                    </constraints>
+                                                                </button>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstItem="ipx-hw-RNe" firstAttribute="centerY" secondItem="ZPJ-zs-Zfb" secondAttribute="centerY" id="YGl-52-5pY"/>
+                                                                <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="width" id="dE8-NR-OUB"/>
+                                                                <constraint firstItem="ipx-hw-RNe" firstAttribute="centerX" secondItem="ZPJ-zs-Zfb" secondAttribute="centerX" id="hut-iI-x3q"/>
+                                                            </constraints>
+                                                        </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dEt-P3-k0v">
-                                                            <rect key="frame" x="0.0" y="0.0" width="219" height="69.5"/>
+                                                            <rect key="frame" x="35" y="0.0" width="219" height="69.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLx-UE-tcy">
                                                                     <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
@@ -52,10 +69,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="top" horizontalHuggingPriority="251" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
-                                                            <rect key="frame" x="219" y="0.0" width="171" height="46"/>
+                                                            <rect key="frame" x="264" y="0.0" width="126" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="90" y="0.0" width="81" height="20.5"/>
+                                                                    <rect key="frame" x="45" y="0.0" width="81" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -72,7 +89,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="105" y="25.5" width="66" height="20.5"/>
+                                                                    <rect key="frame" x="60" y="25.5" width="66" height="20.5"/>
                                                                     <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -92,6 +109,9 @@
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="ZPJ-zs-Zfb" firstAttribute="height" secondItem="MHV-fG-1GI" secondAttribute="height" id="h7f-SZ-Hf3"/>
+                                                    </constraints>
                                                 </stackView>
                                             </subviews>
                                             <constraints>
@@ -187,6 +207,9 @@
         </designable>
         <designable name="iO3-1R-V9e">
             <size key="intrinsicContentSize" width="66" height="20.5"/>
+        </designable>
+        <designable name="ipx-hw-RNe">
+            <size key="intrinsicContentSize" width="30" height="30"/>
         </designable>
     </designables>
     <resources>
