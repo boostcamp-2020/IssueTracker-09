@@ -2,38 +2,18 @@ const milestoneService = require('../service/milestone');
 
 module.exports = {
   create: async (req, res) => {
-    const milestone = await milestoneService.setMilestone(req.body);
+    const milestone = await milestoneService.create(req.body);
     if (milestone) {
-      res.status(201).json({ milestone: milestone.dataValues });
-    } else {
-      res.status(403).json(false);
+      return res.status(201).json({ milestone: milestone.dataValues });
     }
+    return res.status(403).json(false);
   },
 
   read: async (req, res) => {
-    const milestone = await milestoneService.getUserMilestone(req.body);
+    const milestone = await milestoneService.read(req.body);
     if (milestone) {
-      res.status(200).json({ milestone });
-    } else {
-      res.status(403).json(false);
+      return res.status(200).json({ milestone });
     }
-  },
-
-  remove: async (req, res) => {
-    const milestone = await milestoneService.removeMilestone(req.body);
-    if (milestone) {
-      res.status(200).json({ milestone });
-    } else {
-      res.status(403).json(false);
-    }
-  },
-
-  update: async (req, res) => {
-    const milestone = await milestoneService.removeMilestone(req.body);
-    if (milestone) {
-      res.status(200).json({ milestone });
-    } else {
-      res.status(403).json(false);
-    }
+    return res.status(403).json(false);
   },
 };
