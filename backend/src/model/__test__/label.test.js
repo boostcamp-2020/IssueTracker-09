@@ -1,15 +1,15 @@
 /* eslint-disable no-undef */
 const SequelizeMock = require('sequelize-mock');
-const Comment = require('../comment');
+const Label = require('../label');
 
 const sequelize = new SequelizeMock();
 const DataTypes = sequelize.Sequelize;
-const model = Comment(sequelize, DataTypes);
+const model = Label(sequelize, DataTypes);
 const schema = model._defaults;
 
-describe('Comment 모델 테스트', () => {
+describe('Label모델 테스트', () => {
   it('모델명이 알맞은가', () => {
-    expect(model.name).toBe('Comment');
+    expect(model.name).toBe('Label');
   });
 
   it('모델의 Schema가 알맞는가', () => {
@@ -19,13 +19,16 @@ describe('Comment 모델 테스트', () => {
         autoIncrement: true,
         primaryKey: true,
       },
-      content: {
-        type: DataTypes.TEXT,
+      color: {
+        type: DataTypes.MEDIUMINT,
         allowNull: false,
       },
-      timestamp: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW,
+      title: {
+        type: DataTypes.STRING(255),
+        allowNull: false,
+      },
+      content: {
+        type: DataTypes.TEXT,
       },
     });
   });

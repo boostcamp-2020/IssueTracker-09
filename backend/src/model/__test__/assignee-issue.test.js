@@ -7,7 +7,7 @@ const DataTypes = sequelize.Sequelize;
 const model = AssigneeIssue(sequelize, DataTypes);
 const schema = model._defaults;
 
-describe('User모델 테스트', () => {
+describe('Assignee_Issue 모델 테스트', () => {
   it('모델명이 알맞은가', () => {
     expect(model.name).toBe('Assignee_Issue');
   });

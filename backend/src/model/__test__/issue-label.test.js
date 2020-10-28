@@ -7,7 +7,7 @@ const DataTypes = sequelize.Sequelize;
 const model = IssueLabel(sequelize, DataTypes);
 const schema = model._defaults;
 
-describe('User모델 테스트', () => {
+describe('Issue-Label 모델 테스트', () => {
   it('모델명이 알맞은가', () => {
     expect(model.name).toBe('Issue_Label');
   });
