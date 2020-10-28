@@ -39,10 +39,10 @@ module.exports = {
     try {
       const token = await userService.iOSGithubLogin(req.body);
 
-      if (token) {
+      if (!token.error) {
         return res.status(201).json({ token });
       }
-      return res.status(403).json(false);
+      return res.status(403).json(token.error);
     } catch (error) {
       return res.status(500).json({ error });
     }
