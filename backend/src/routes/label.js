@@ -1,15 +1,17 @@
 // Dependencies
 const express = require('express');
 
+// controller
+const labelController = require('../controller/label');
+
 const router = express.Router();
-const Label = require('../controller/label');
 
-router.get('/', Label.get);
+router.get('/', labelController.read);
 
-router.post('/', Label.create);
+router.post('/', labelController.create);
 
-router.put('/', Label.update);
+router.put('/', labelController.update);
 
-router.delete('/:id', Label.remove);
+router.delete('/:id', labelController.remove);
 
 module.exports = router;
