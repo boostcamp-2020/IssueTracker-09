@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   const IssueLabel = sequelize.define('Issue_Label');
   IssueLabel.associate = (db) => {
     db.IssueLabel.belongsTo(db.Issue, {
