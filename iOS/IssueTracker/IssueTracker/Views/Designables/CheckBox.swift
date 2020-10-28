@@ -30,11 +30,13 @@ class CheckBox: UIButton {
 
         layer.borderWidth = 1
         layer.borderColor = UIColor.systemGray.cgColor
+        tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
+        let blueCheckmark = UIImage(systemName: "checkmark")?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        self.setBackgroundImage(blueCheckmark, for: .selected)
     }
     
     @objc private func didChecked(sender: UIButton) {
         isSelected = !isSelected
-        tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        setBackgroundImage(UIImage(systemName: "checkmark")?.withTintColor(.blue, renderingMode: .alwaysOriginal), for: .selected)
+        // TODO: - 체크버튼 애니메이션 넣기
     }
 }
