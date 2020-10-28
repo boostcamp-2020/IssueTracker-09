@@ -3,29 +3,24 @@ const Label = require('../model').Label;
 module.exports = {
   create: async ({ color, title, content }) => {
     try {
-      const result = await Label.create({ color, title, content });
-      return true;
+      return await Label.create({ color, title, content });
     } catch (error) {
-      return false;
+      return { error };
     }
   },
-  get: async () => {
+  read: async () => {
     try {
-      const result = await Label.findAll();
-      return result;
+      return await Label.findAll();
     } catch (error) {
-      return false;
+      return { error };
     }
   },
   update: async ({ id, color, title, content }) => {
     try {
-      const result = await Label.update(
-        { color, title, content },
-        { where: { id } }
-      );
+      await Label.update({ color, title, content }, { where: { id } });
       return true;
     } catch (error) {
-      return false;
+      return { error };
     }
   },
   remove: async ({ id }) => {
@@ -33,7 +28,7 @@ module.exports = {
       await Label.destroy({ where: { id } });
       return true;
     } catch (error) {
-      return false;
+      return { error };
     }
   },
 };
