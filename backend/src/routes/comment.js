@@ -10,4 +10,6 @@ router.post('/', comment.create);
 
 router.delete('/', comment.remove);
 
+router.put('/', comment.update);
+
 module.exports = router;

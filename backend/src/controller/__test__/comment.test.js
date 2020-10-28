@@ -6,6 +6,7 @@ const httpMocks = require('node-mocks-http');
 
 commentService.create = jest.fn();
 commentService.remove = jest.fn();
+commentService.update = jest.fn();
 
 const newComment = {
   content: 'helloworld',
@@ -108,6 +109,53 @@ describe('remove comment Controller 테스트', () => {
     const rejectedPromise = Promise.reject(errorMessage);
     commentService.remove.mockReturnValue(rejectedPromise);
     await commentController.remove(req, res);
+    expect(res.statusCode).toBe(500);
+  });
+});
+
+describe('update comment Controller 테스트', () => {
+  const updateData = { commentId: 1, content: 'byeworld' };
+  beforeEach(() => {
+    req.body = updateData;
+  });
+
+  it('함수인가', () => {
+    commentService.update.mockReturnValue(1);
+    expect(typeof commentController.update).toBe('function');
+  });
+
+  it('service에 data가 들어가는가', async () => {
+    commentService.update.mockReturnValue(1);
+    await commentController.update(req, res);
+    expect(commentService.update).toBeCalledWith(updateData);
+  });
+
+  it('성공 시 200응답이 오는가', async () => {
+    commentService.update.mockReturnValue(1);
+    await commentController.update(req, res);
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('json을 리턴하는가', async () => {
+    commentService.update.mockReturnValue(1);
+    await commentController.update(req, res);
+    expect(res._isJSON()).toBeTruthy();
+  });
+
+  it('에러가 나면 403응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    commentService.update.mockReturnValue(errorMessage);
+    await commentController.update(req, res);
+    expect(res.statusCode).toBe(403);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('서버에서 에러가 나면 500응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    const rejectedPromise = Promise.reject(errorMessage);
+    commentService.update.mockReturnValue(rejectedPromise);
+    await commentController.update(req, res);
     expect(res.statusCode).toBe(500);
   });
 });
