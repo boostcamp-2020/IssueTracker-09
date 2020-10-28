@@ -21,8 +21,17 @@ class IssueCoordinator: Coordinator {
     
     func start() {
         window.makeKeyAndVisible()
-        let issueViewController = UIStoryboard(name: "Issue", bundle: nil).instantiateInitialViewController()
-        window.rootViewController = issueViewController
+
+        guard let issueViewController = UIStoryboard(name: "Issue", bundle: nil).instantiateInitialViewController() as? IssueViewController else {
+            return
+        }
+        issueViewController.delegate = self
+        issueViewController.service = LocalIssueService()
+        
+        let navigationController = UINavigationController()
+        navigationController.viewControllers = [issueViewController]
+        window.rootViewController = navigationController
+        window.makeKeyAndVisible()
     }
 }
 
