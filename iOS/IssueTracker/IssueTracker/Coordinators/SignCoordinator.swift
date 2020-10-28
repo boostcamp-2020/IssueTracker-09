@@ -7,12 +7,8 @@
 
 import UIKit
 
-protocol Coordinator : AnyObject {
-    func start()
-}
-
 class SignCoordinator: Coordinator {
-    private let storyboardName: String = "Main"
+    private let storyboardName: String = "SignIn"
     private let window: UIWindow
     
     init(window: UIWindow? = UIWindow()) {
@@ -29,7 +25,7 @@ class SignCoordinator: Coordinator {
         let storyBoard = UIStoryboard(name: storyboardName, bundle: nil)
         let viewController = storyBoard.instantiateViewController(identifier: "SignViewController", creator: { coder in
             return SignViewController(coder: coder, delegate: self, request: GithubSignController.shared)
-            }) 
+            })
 //        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
         window.rootViewController = viewController
     }
