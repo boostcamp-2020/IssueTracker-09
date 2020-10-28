@@ -8,12 +8,22 @@
 import UIKit
 
 class IssueViewController: UIViewController {
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
+        tableView
+            .visibleCells
+            .compactMap { $0 as? IssueTableViewCell }
+            .forEach { cell in
+                UIView.animate(withDuration: 0.2) {
+                    cell.checkBoxWrapper.isHidden = !editing
+                }
+            }
     }
     
     @IBAction func didEditButtonTapped(sender: UIBarButtonItem) {

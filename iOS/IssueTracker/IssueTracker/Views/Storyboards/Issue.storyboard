@@ -24,21 +24,21 @@
                                 <rect key="frame" x="0.0" y="144" width="414" height="718"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="94.5"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="99"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="94.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="70.5"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="75"/>
                                                     <subviews>
-                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb">
-                                                            <rect key="frame" x="0.0" y="0.0" width="25" height="70.5"/>
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb">
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="75"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="23" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="25" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -52,7 +52,7 @@
                                                             </constraints>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dEt-P3-k0v">
-                                                            <rect key="frame" x="35" y="0.0" width="219" height="69.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="219" height="69.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLx-UE-tcy">
                                                                     <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
@@ -69,10 +69,10 @@
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="top" horizontalHuggingPriority="251" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
-                                                            <rect key="frame" x="264" y="0.0" width="126" height="46"/>
+                                                            <rect key="frame" x="229" y="0.0" width="161" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="45" y="0.0" width="81" height="20.5"/>
+                                                                    <rect key="frame" x="80" y="0.0" width="81" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="60" y="25.5" width="66" height="20.5"/>
+                                                                    <rect key="frame" x="95" y="25.5" width="66" height="20.5"/>
                                                                     <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -121,6 +121,13 @@
                                                 <constraint firstItem="MHV-fG-1GI" firstAttribute="leading" secondItem="Wht-cS-CBT" secondAttribute="leading" constant="12" id="WRN-cj-ycV"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="badgeStackView" destination="A42-0J-GOV" id="0ll-aE-qaJ"/>
+                                            <outlet property="checkBoxWrapper" destination="ZPJ-zs-Zfb" id="05S-dd-Hfh"/>
+                                            <outlet property="descriptionLabel" destination="UWi-1w-HlH" id="M6J-Mw-O8F"/>
+                                            <outlet property="titleLabel" destination="gLx-UE-tcy" id="GsD-kx-065"/>
+                                            <outlet property="wrapperStackView" destination="MHV-fG-1GI" id="t6h-Pg-e0a"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -174,6 +181,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="vMq-gg-33U" id="Ooq-r1-knZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNQ-Y0-3ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
