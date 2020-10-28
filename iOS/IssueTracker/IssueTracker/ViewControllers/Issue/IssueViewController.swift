@@ -43,7 +43,7 @@ extension IssueViewController: UITableViewDataSource {
     
     // https://zetal.tistory.com/entry/UIContextualAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let share = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+        let close = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
             completion(true)
         }
         
@@ -52,6 +52,6 @@ extension IssueViewController: UITableViewDataSource {
             // tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
             completion(true)
         }
-        return UISwipeActionsConfiguration(actions: [delete, share])
+        return UISwipeActionsConfiguration(actions: [delete, close])
     }
 }
