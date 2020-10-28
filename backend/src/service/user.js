@@ -1,5 +1,5 @@
 const { createJWT } = require('../utils/jwt');
-const { User } = require('../model');
+const User = require('../model').User;
 
 module.exports = {
   gitHubLogin: (user) => {
@@ -27,5 +27,10 @@ module.exports = {
     } catch (error) {
       return false;
     }
+  },
+
+  getUsers: async () => {
+    const users = await User.findAll({ attributes: ['id', 'name', 'image'] });
+    return users;
   },
 };
