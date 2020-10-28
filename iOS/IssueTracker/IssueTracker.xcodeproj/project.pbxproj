@@ -14,6 +14,7 @@
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
 		F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4383ED2254931C9003FB09D /* BadgeView.swift */; };
+		F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4383EF2254946A4003FB09D /* CheckBox.swift */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
 		FC7851A32548A13300E60957 /* GithubSignController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7851A22548A13300E60957 /* GithubSignController.swift */; };
@@ -59,6 +60,7 @@
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4383ED2254931C9003FB09D /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
+		F4383EF2254946A4003FB09D /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		FC78518E2548996400E60957 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				FC78518E2548996400E60957 /* RoundButton.swift */,
 				F4383ED2254931C9003FB09D /* BadgeView.swift */,
+				F4383EF2254946A4003FB09D /* CheckBox.swift */,
 			);
 			path = Designables;
 			sourceTree = "<group>";
@@ -492,6 +495,7 @@
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				FCF197212547BDAB00AED031 /* User.swift in Sources */,
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
+				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */,
 				FC78518F2548996400E60957 /* RoundButton.swift in Sources */,
 				FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */,
