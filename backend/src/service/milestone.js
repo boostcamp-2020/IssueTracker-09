@@ -3,47 +3,31 @@ const Issue = require('../model').Issue;
 
 module.exports = {
   create: async (body) => {
-    try {
-      const { title, content, deadline } = body;
-      const result = await Milestone.create({
-        title,
-        content,
-        deadline,
-        is_opened: true,
-      });
-      return result;
-    } catch (error) {
-      return false;
-    }
+    const { title, content, deadline } = body;
+    const result = await Milestone.create({
+      title,
+      content,
+      deadline,
+      is_opened: true,
+    });
+    return result;
   },
   read: async () => {
-    try {
-      return await Milestone.findAll({
-        include: [Issue],
-      });
-    } catch (error) {
-      return false;
-    }
+    return await Milestone.findAll({
+      include: [Issue],
+    });
   },
   update: async (body) => {
-    try {
-      const { milestone_id, title, deadline, content } = body;
+    const { milestone_id, title, deadline, content } = body;
 
-      return await Milestone.update(
-        { title, deadline, content },
-        { where: { id: milestone_id } }
-      );
-    } catch (error) {
-      return false;
-    }
+    return await Milestone.update(
+      { title, deadline, content },
+      { where: { id: milestone_id } }
+    );
   },
   remove: async ({ milestone_id }) => {
-    try {
-      return await Milestone.destroy({
-        where: { id: milestone_id },
-      });
-    } catch (error) {
-      return false;
-    }
+    return await Milestone.destroy({
+      where: { id: milestone_id },
+    });
   },
 };
