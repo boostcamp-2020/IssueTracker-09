@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="h8X-Zb-4Vv">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0Y-7T-26G">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
@@ -11,34 +11,34 @@
         <!--이슈-->
         <scene sceneID="hdZ-8d-l3h">
             <objects>
-                <viewController id="n0Y-7T-26G" customClass="IssueViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueViewController" id="n0Y-7T-26G" customClass="IssueViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eQ2-ib-mWV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Dzu-pF-9tR">
-                                <rect key="frame" x="0.0" y="88" width="414" height="56"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vMq-gg-33U">
-                                <rect key="frame" x="0.0" y="144" width="414" height="718"/>
+                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="99"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="103"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="75"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="79"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="75"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="79"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="25" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="27" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -72,7 +72,7 @@
                                                             <rect key="frame" x="229" y="0.0" width="161" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="80" y="0.0" width="81" height="20.5"/>
+                                                                    <rect key="frame" x="92" y="0.0" width="69" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -89,7 +89,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="95" y="25.5" width="66" height="20.5"/>
+                                                                    <rect key="frame" x="107" y="25.5" width="54" height="20.5"/>
                                                                     <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -189,34 +189,16 @@
             </objects>
             <point key="canvasLocation" x="810.14492753623199" y="8.7053571428571423"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="vBP-zv-6Q0">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="h8X-Zb-4Vv" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="4lx-8p-0wf">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="n0Y-7T-26G" kind="relationship" relationship="rootViewController" id="HGB-5a-me8"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="MJb-s7-qSh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-100.00000000000001" y="8.7053571428571423"/>
-        </scene>
     </scenes>
     <designables>
         <designable name="b5r-hP-nEJ">
-            <size key="intrinsicContentSize" width="81" height="20.5"/>
+            <size key="intrinsicContentSize" width="69" height="20.5"/>
         </designable>
         <designable name="iEa-l3-4fa">
             <size key="intrinsicContentSize" width="30" height="48"/>
         </designable>
         <designable name="iO3-1R-V9e">
-            <size key="intrinsicContentSize" width="66" height="20.5"/>
+            <size key="intrinsicContentSize" width="54" height="20.5"/>
         </designable>
         <designable name="ipx-hw-RNe">
             <size key="intrinsicContentSize" width="30" height="30"/>
