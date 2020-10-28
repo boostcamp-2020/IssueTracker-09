@@ -19,4 +19,8 @@ router.post('/', jwtAuth, milestone.create);
 
 router.get('/', jwtAuth, milestone.read);
 
+// router.put('/', milestone.update);
+
+// router.delete('/', milestone.remove);
+
 module.exports = router;

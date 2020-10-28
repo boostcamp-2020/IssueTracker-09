@@ -17,8 +17,12 @@ module.exports = {
     }
   },
   read: async (body) => {
-    return await Milestone.findAll({
-      include: [Issue],
-    });
+    try {
+      return await Milestone.findAll({
+        include: [Issue],
+      });
+    } catch (error) {
+      return false;
+    }
   },
 };
