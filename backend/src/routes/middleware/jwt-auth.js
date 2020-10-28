@@ -10,7 +10,7 @@ module.exports = (req, res, next) => {
       return res.status(401).json(error);
     }
     // 권한 등 체크 가능
-
+    req.user = user;
     return next();
   })(req, res, next);
 };
