@@ -10,6 +10,6 @@ router.post('/', Label.create);
 
 router.put('/', Label.update);
 
-router.delete('/+id', Label.remove);
+router.delete('/:id', Label.remove);
 
 module.exports = router;

@@ -12,7 +12,7 @@ module.exports = {
   get: async (req, res) => {
     const result = await labelService.get(req.user);
     if (result) {
-      res.status(201).json(result);
+      res.status(200).json(result);
     } else {
       res.status(403).json(false);
     }
@@ -20,10 +20,17 @@ module.exports = {
   update: async (req, res) => {
     const result = await labelService.update(req.body);
     if (result) {
-      res.status(201).json(true);
+      res.status(200).json(true);
     } else {
       res.status(403).json(false);
     }
   },
-  remove: (req, res) => {},
+  remove: async (req, res) => {
+    const result = await labelService.remove(req.params);
+    if (result) {
+      res.status(200).json(true);
+    } else {
+      res.status(403).json(false);
+    }
+  },
 };

@@ -28,4 +28,12 @@ module.exports = {
       return false;
     }
   },
+  remove: async ({ id }) => {
+    try {
+      await Label.destroy({ where: { id } });
+      return true;
+    } catch (error) {
+      return false;
+    }
+  },
 };
