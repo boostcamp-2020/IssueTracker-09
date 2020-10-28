@@ -11,6 +11,17 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        print(editing)
+    }
+    
+    @IBAction func didEditButtonTapped(sender: UIBarButtonItem) {
+        let editMode = !isEditing
+        setEditing(editMode, animated: true)
+        sender.title = editMode ? "Cancel" : "Edit"
+    }
 }
 
 extension IssueViewController: UITableViewDelegate {
@@ -29,5 +40,19 @@ extension IssueViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         return cell
+    }
+    
+    // https://zetal.tistory.com/entry/UIContextualAction
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let share = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+            completion(true)
+        }
+        
+        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
+            // self?.langs.remove(at: indexPath.row)
+            // tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
+            completion(true)
+        }
+        return UISwipeActionsConfiguration(actions: [delete, share])
     }
 }

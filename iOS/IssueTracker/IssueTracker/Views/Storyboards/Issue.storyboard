@@ -146,7 +146,11 @@
                                 <state key="normal" title="Filter"/>
                             </button>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="edit" id="Pj5-w3-XRu"/>
+                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="Pj5-w3-XRu">
+                            <connections>
+                                <action selector="didEditButtonTappedWithSender:" destination="n0Y-7T-26G" id="gKj-rE-azT"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNQ-Y0-3ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
