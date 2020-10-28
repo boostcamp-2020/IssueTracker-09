@@ -1,14 +1,14 @@
-const commentService = require('../service/comment');
+const comment = require('../service/comment');
 
 module.exports = {
-  createComment: async (req, res) => {
+  create: async (req, res) => {
     try {
-      const comment = await commentService.createComment(req.body);
+      const result = await comment.create(req.body);
 
-      if (!comment.error) {
-        return res.status(201).json(comment);
+      if (!result.error) {
+        return res.status(201).json(result);
       }
-      return res.status(403).json(comment.error);
+      return res.status(403).json(result.error);
     } catch (error) {
       return res.status(500).json(error);
     }
