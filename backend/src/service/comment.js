@@ -25,5 +25,16 @@ module.exports = {
     return comment;
   },
 
-  update: async () => {},
+  update: async ({ commentId, content }) => {
+    if (!commentId) {
+      return { error: '정보가 부족합니다' };
+    }
+
+    const comment = await Comment.update(
+      { content },
+      { where: { id: commentId } }
+    );
+
+    return comment;
+  },
 };
