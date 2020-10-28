@@ -24,7 +24,17 @@ module.exports = {
       return res.status(500).json(error);
     }
   },
-
+  readById: async (req, res) => {
+    try {
+      const milestone = await milestoneService.readById(req.body);
+      if (milestone) {
+        return res.status(200).json({ milestone });
+      }
+      return res.status(403).json(false);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
   update: async (req, res) => {
     try {
       const milestone = await milestoneService.update(req.body);
