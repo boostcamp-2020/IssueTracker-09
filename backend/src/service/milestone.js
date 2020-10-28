@@ -3,7 +3,7 @@ const User = require('../model').User;
 const Issue = require('../model').Issue;
 
 module.exports = {
-  setMilestone: async (body) => {
+  create: async (body) => {
     try {
       const { title, content, deadline } = body;
       const result = await Milestone.create({
@@ -17,22 +17,11 @@ module.exports = {
       return false;
     }
   },
-  getUserMilestone: async (body) => {
+  read: async (body) => {
     const { user_id } = body;
     return await Milestone.findAll({
       include: [User],
-      // attributes:[
-      //     "milestone_id",
-      //     "title",
-      //     "content",
-      //     "deadline",
-      //     "is_opened"
-      // ]
       raw: true,
-      where: {
-        user_id,
-      },
     });
   },
-  removeMilestone: async (body) => {},
 };
