@@ -17,6 +17,13 @@ module.exports = {
       res.status(403).json(false);
     }
   },
-  update: (req, res) => {},
+  update: async (req, res) => {
+    const result = await labelService.update(req.body);
+    if (result) {
+      res.status(201).json(true);
+    } else {
+      res.status(403).json(false);
+    }
+  },
   remove: (req, res) => {},
 };
