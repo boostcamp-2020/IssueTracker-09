@@ -6,6 +6,8 @@ target 'IssueTracker' do
   use_frameworks!
 
   # Pods for IssueTracker
+pod 'Alamofire', '~> 5.2'
+
 
   target 'IssueTrackerTests' do
     inherit! :search_paths
