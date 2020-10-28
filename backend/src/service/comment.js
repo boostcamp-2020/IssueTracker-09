@@ -15,5 +15,13 @@ module.exports = {
     return comment;
   },
 
-  remove: async () => {},
+  remove: async ({ commentId }) => {
+    if (!commentId) {
+      return { error: '정보가 부족합니다' };
+    }
+
+    const comment = await Comment.destroy({ where: { id: commentId } });
+
+    return comment;
+  },
 };
