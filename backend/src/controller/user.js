@@ -9,8 +9,8 @@ module.exports = {
       res.status(403).json(false);
     }
   },
-  iosAppleLogin: async (req, res) => {
-    const data = await userService.iosAppleLogin(req.body);
+  iOSAppleLogin: async (req, res) => {
+    const data = await userService.iOSAppleLogin(req.body);
     console.log(data);
     if (data.token) {
       res.status(200).json(data);
@@ -21,5 +21,30 @@ module.exports = {
   getUser: (req, res) => {
     const { name, image } = req.user.dataValues;
     res.status(200).json({ name, image });
+  },
+  getUsers: async (req, res) => {
+    try {
+      const users = await userService.getUsers();
+
+      if (users) {
+        return res.status(200).json(users);
+      }
+      res.status(403).json(false);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
+
+  iOSGitHubLogin: async (req, res) => {
+    try {
+      const token = await userService.iOSGithubLogin(req.body);
+
+      if (!token.error) {
+        return res.status(201).json({ token });
+      }
+      return res.status(403).json(token.error);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
   },
 };

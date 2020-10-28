@@ -1,5 +1,5 @@
 const { createJWT } = require('../utils/jwt');
-const { User } = require('../model');
+const User = require('../model').User;
 
 module.exports = {
   gitHubLogin: (user) => {
@@ -11,13 +11,13 @@ module.exports = {
       return false;
     }
   },
-  iosAppleLogin: async (data) => {
+  iOSAppleLogin: async (data) => {
     try {
       const { code, name } = data;
       const [result] = await User.findOrCreate({
-        where: { user_code: code },
+        where: { user_code: 'a' + code },
         defaults: {
-          user_code: code,
+          user_code: 'a' + code,
           name: name,
         },
       });
@@ -27,5 +27,26 @@ module.exports = {
     } catch (error) {
       return false;
     }
+  },
+
+  getUsers: async () => {
+    const users = await User.findAll({ attributes: ['id', 'name', 'image'] });
+    return users;
+  },
+
+  iOSGithubLogin: async ({ code, name, image }) => {
+    if (!name || !code) {
+      return { error: '정보가 부족합니다' };
+    }
+    const user = await User.findOrCreate({
+      where: { user_code: 'g' + code },
+      defaults: {
+        user_code: 'g' + code,
+        name,
+        image,
+      },
+    });
+
+    return createJWT(user[0].id);
   },
 };

@@ -9,8 +9,16 @@ const User = require('../controller/user');
 
 const router = express.Router();
 
-router.get('/github', passport.authenticate('github'));
-router.get('/github/callback', githubAuth, User.gitHubLogin);
-router.post('/apple', User.iosAppleLogin);
 router.get('/', jwtAuth, User.getUser);
+
+router.get('/users', User.getUsers);
+
+router.get('/github', passport.authenticate('github'));
+
+router.get('/github/callback', githubAuth, User.gitHubLogin);
+
+router.post('/apple', User.iOSAppleLogin);
+
+router.post('/github/ios', User.iOSGitHubLogin);
+
 module.exports = router;
