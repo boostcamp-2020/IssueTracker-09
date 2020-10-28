@@ -8,10 +8,6 @@
 import UIKit
 import AuthenticationServices
 
-protocol NextCoordinatorDelegate: AnyObject {
-    func navigateToPage()
-}
-
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
     private var delegate: NextCoordinatorDelegate?

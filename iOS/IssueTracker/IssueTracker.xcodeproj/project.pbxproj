@@ -15,6 +15,8 @@
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
 		F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4383ED2254931C9003FB09D /* BadgeView.swift */; };
 		F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4383EF2254946A4003FB09D /* CheckBox.swift */; };
+		F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* IssueCoordinator.swift */; };
+		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
@@ -62,6 +64,8 @@
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4383ED2254931C9003FB09D /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		F4383EF2254946A4003FB09D /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
+		F448517E2549834F00A84527 /* IssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCoordinator.swift; sourceTree = "<group>"; };
+		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
@@ -133,6 +137,16 @@
 				F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F448517D2549833700A84527 /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				FCF197332547FAB100AED031 /* SignCoordinator.swift */,
+				F448517E2549834F00A84527 /* IssueCoordinator.swift */,
+				F44851862549835600A84527 /* Coordinator.swift */,
+			);
+			path = Coordinators;
 			sourceTree = "<group>";
 		};
 		F4AF30422547CF26006D7D0A /* Views */ = {
@@ -210,6 +224,7 @@
 				F4AF30422547CF26006D7D0A /* Views */,
 				FCF197182547BCA500AED031 /* ViewControllers */,
 				FCF197172547BC9F00AED031 /* Models */,
+				F448517D2549833700A84527 /* Coordinators */,
 				FCF196E42547AED000AED031 /* AppDelegate.swift */,
 				FCF196E62547AED000AED031 /* SceneDelegate.swift */,
 				FCF196ED2547AED200AED031 /* Assets.xcassets */,
@@ -256,7 +271,6 @@
 		FCF197382547FC9A00AED031 /* Sign */ = {
 			isa = PBXGroup;
 			children = (
-				FCF197332547FAB100AED031 /* SignCoordinator.swift */,
 				FCF196E82547AED000AED031 /* SignViewController.swift */,
 				FCF1973C2547FE8800AED031 /* AppleAuthorizationController.swift */,
 				FC7851A22548A13300E60957 /* GithubSignController.swift */,
@@ -510,10 +524,12 @@
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */,
 				FC78518F2548996400E60957 /* RoundButton.swift in Sources */,
+				F44851872549835600A84527 /* Coordinator.swift in Sources */,
 				FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */,
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignController.swift in Sources */,
+				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
 				FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
