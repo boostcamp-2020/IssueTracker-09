@@ -9,8 +9,8 @@ module.exports = {
   },
   checkList: (userId) => {
     if (userList[userId]) {
-      return true;
+      return false;
     }
-    return false;
+    return true;
   },
 };

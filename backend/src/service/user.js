@@ -1,6 +1,6 @@
 const { createJWT } = require('../lib/utils/jwt');
 const User = require('../model').User;
-const { enrollList } = require('../lib/store');
+const { enrollList, dodgeList } = require('../lib/store');
 
 module.exports = {
   gitHubLogin: (user) => {
@@ -58,5 +58,9 @@ module.exports = {
     } catch (error) {
       return error;
     }
+  },
+
+  logout: (user) => {
+    dodgeList(user.id);
   },
 };
