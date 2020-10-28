@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
   Milestone.associate = (db) => {
     db.Milestone.hasMany(db.Issue, {
       foreignKey: 'milestone_id',
+      allowNull: true,
     });
   };
   return Milestone;
