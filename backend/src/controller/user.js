@@ -47,4 +47,14 @@ module.exports = {
       return res.status(500).json({ error });
     }
   },
+
+  logout: (req, res) => {
+    try {
+      userService.logout(req.user);
+
+      return res.status(200).json(true);
+    } catch (error) {
+      return res.status(500).json({ error });
+    }
+  },
 };

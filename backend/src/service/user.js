@@ -1,11 +1,14 @@
-const { createJWT } = require('../utils/jwt');
+const { createJWT } = require('../lib/utils/jwt');
 const User = require('../model').User;
+const { enrollList, dodgeList } = require('../lib/store');
 
 module.exports = {
   gitHubLogin: (user) => {
     try {
       const { id, image, name } = user.dataValues;
       const jwtToken = createJWT(id);
+      enrollList(id);
+
       return { token: jwtToken, image, name };
     } catch (error) {
       return false;
@@ -23,6 +26,8 @@ module.exports = {
       });
       const { id } = result.dataValues;
       const jwtToken = createJWT(id);
+
+      enrollList(id);
       return { token: jwtToken };
     } catch (error) {
       return false;
@@ -35,18 +40,27 @@ module.exports = {
   },
 
   iOSGithubLogin: async ({ code, name, image }) => {
-    if (!name || !code) {
-      return { error: '정보가 부족합니다' };
-    }
-    const user = await User.findOrCreate({
-      where: { user_code: 'g' + code },
-      defaults: {
-        user_code: 'g' + code,
-        name,
-        image,
-      },
-    });
+    try {
+      if (!name || !code) {
+        return { error: '정보가 부족합니다' };
+      }
+      const user = await User.findOrCreate({
+        where: { user_code: 'g' + code },
+        defaults: {
+          user_code: 'g' + code,
+          name,
+          image,
+        },
+      });
 
-    return createJWT(user[0].id);
+      enrollList(user[0].id);
+      return createJWT(user[0].id);
+    } catch (error) {
+      return error;
+    }
+  },
+
+  logout: (user) => {
+    dodgeList(user.id);
   },
 };
