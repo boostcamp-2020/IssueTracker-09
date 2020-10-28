@@ -5,7 +5,23 @@ const Sequelize = require('sequelize');
 const { dbConfig } = require('../config');
 
 const sequelize = new Sequelize(dbConfig);
-const db = {};
+const User = require('./user')(sequelize, Sequelize);
+const Issue = require('./issue')(sequelize, Sequelize);
+const Comment = require('./comment')(sequelize, Sequelize);
+const Label = require('./label')(sequelize, Sequelize);
+const Milestone = require('./milestone')(sequelize, Sequelize);
+const AssigneeIssue = require('./assignee-issue')(sequelize, Sequelize);
+const IssueLabel = require('./issue-label')(sequelize, Sequelize);
+
+const db = {
+  User,
+  Issue,
+  Comment,
+  Label,
+  Milestone,
+  AssigneeIssue,
+  IssueLabel,
+};
 
 Object.keys(db).forEach((modelName) => {
   if (db[modelName].associate) {
