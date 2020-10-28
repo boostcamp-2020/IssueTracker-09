@@ -1,5 +1,4 @@
 const Milestone = require('../model').Milestone;
-const User = require('../model').User;
 const Issue = require('../model').Issue;
 
 module.exports = {
@@ -18,10 +17,8 @@ module.exports = {
     }
   },
   read: async (body) => {
-    const { user_id } = body;
     return await Milestone.findAll({
-      include: [User],
-      raw: true,
+      include: [Issue],
     });
   },
 };

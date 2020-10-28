@@ -15,12 +15,8 @@ const router = express.Router();
 
 // router.delete('/', jwtAuth, Milestone.removeMilestone);
 
-router.post('/', milestone.create);
+router.post('/', jwtAuth, milestone.create);
 
-router.get('/', milestone.read);
-
-router.put('/', milestone.update);
-
-router.delete('/', milestone.remove);
+router.get('/', jwtAuth, milestone.read);
 
 module.exports = router;
