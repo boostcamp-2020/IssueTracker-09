@@ -1,10 +1,11 @@
 // Dependencies
 const express = require('express');
 
+// Controller
+const commentController = require('../controller/comment');
+
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('hello world');
-});
+router.post('/', commentController.addComment);
 
 module.exports = router;

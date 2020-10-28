@@ -27,3 +27,5 @@ sequelize.sync().then(() => {
     console.log(`server is running on ${config.port} port`);
   });
 });
+
+module.exports = app;
