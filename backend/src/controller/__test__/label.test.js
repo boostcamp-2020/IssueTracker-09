@@ -20,10 +20,7 @@ const label = {
   title: 'test',
   content: 'test',
 };
-const updateLabel = {
-  id: 1,
-  data: { color: '#AAAAAA', title: 'test', content: 'test' },
-};
+
 let req, res;
 beforeEach(() => {
   req = httpMocks.createRequest();

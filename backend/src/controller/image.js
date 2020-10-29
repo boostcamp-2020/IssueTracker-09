@@ -5,7 +5,7 @@ module.exports = {
     try {
       const fileURL = imageService.upload(req.file);
       if (fileURL) {
-        return res.status(200).json({ fileURL });
+        return res.status(201).json({ fileURL });
       }
       return res.status(401).json({ error: '업로드 에러' });
     } catch (error) {
