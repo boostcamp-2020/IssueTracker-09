@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const passport = require('passport');
 const passportStrategy = require('./passport');
 const sequelize = require('./model').sequelize;
+const path = require('path');
 
 // Router
 const indexRouter = require('./routes');
@@ -15,10 +16,12 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(express.static('uploads'));
 app.use(morgan('dev'));
 app.use(passport.initialize());
 passportStrategy();
 
+app.use(express.static(path.join(__dirname, '../uploads/')));
 app.use('/api', indexRouter);
 
 sequelize.sync().then(() => {
