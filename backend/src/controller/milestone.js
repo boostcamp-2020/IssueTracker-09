@@ -19,29 +19,19 @@ module.exports = {
       if (milestone) {
         return res.status(200).json({ milestone });
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '정보를 찾지 못했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }
   },
-  readById: async (req, res) => {
-    try {
-      const milestone = await milestoneService.readById(req.body);
-      if (milestone) {
-        return res.status(200).json({ milestone });
-      }
-      return res.status(403).json(false);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
-  },
+
   update: async (req, res) => {
     try {
-      const milestone = await milestoneService.update(req.body);
+      const milestone = await milestoneService.update(req.params, req.body);
       if (milestone) {
         return res.status(200).json(true);
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '수정에 실패했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -49,11 +39,11 @@ module.exports = {
 
   remove: async (req, res) => {
     try {
-      const milestone = await milestoneService.remove(req.body);
+      const milestone = await milestoneService.remove(req.params);
       if (milestone) {
         return res.status(200).json(true);
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '삭제에 실패했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }
