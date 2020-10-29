@@ -3,7 +3,7 @@ const comment = require('../service/comment');
 module.exports = {
   create: async (req, res) => {
     try {
-      const result = await comment.create(req.body);
+      const result = await comment.create({ ...req.body, userId: req.user.id });
 
       if (!result.error) {
         return res.status(201).json(result);
