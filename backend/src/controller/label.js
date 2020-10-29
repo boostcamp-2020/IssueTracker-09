@@ -29,7 +29,7 @@ module.exports = {
       if (!result.error) {
         return res.status(200).json(result);
       }
-      return res.status(403).json(false);
+      return res.status(403).json(result.error);
     } catch (error) {
       res.status(500).json(error);
     }
