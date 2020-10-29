@@ -1,6 +1,5 @@
 // Dependencies
 const express = require('express');
-const issueController = require('../controller/issue');
 
 // Controller
 const issueController = require('../controller/issue');

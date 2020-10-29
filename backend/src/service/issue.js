@@ -25,16 +25,6 @@ module.exports = {
       return { error };
     }
   },
-  remove: async ({ id }) => {
-    if (!id) {
-      return { error: '없는 id값 입니다.' };
-    }
-    const issue = await Issue.destroy({ where: { id } });
-    if (issue) {
-      return true;
-    }
-    return { error: '없는 id값 입니다.' };
-  },
   read: async () => {
     const issues = await Model.Issue.findAll({
       group: 'Comments.id',
@@ -52,5 +42,16 @@ module.exports = {
       ],
     });
     return issues;
+  },
+
+  remove: async ({ id }) => {
+    if (!id) {
+      return { error: '없는 id값 입니다.' };
+    }
+    const issue = await Model.Issue.destroy({ where: { id } });
+    if (issue) {
+      return true;
+    }
+    return { error: '없는 id값 입니다.' };
   },
 };
