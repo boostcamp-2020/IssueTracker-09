@@ -4,10 +4,10 @@ module.exports = {
   upload: (req, res) => {
     try {
       const fileURL = imageService.upload(req.file);
-      if (fileURL) {
+      if (!fileURL.error) {
         return res.status(201).json({ fileURL });
       }
-      return res.status(401).json({ error: '업로드 에러' });
+      return res.status(401).json(fileURL.error);
     } catch (error) {
       return res.status(500).json({ error });
     }
