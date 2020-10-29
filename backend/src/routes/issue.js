@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get('/', issueController.read);
 
-router.post('/');
+router.post('/', issueController.create);
 
 router.put('/title/:id');
 

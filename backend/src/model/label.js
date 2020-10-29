@@ -18,7 +18,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
   Label.associate = (db) => {
-    db.Label.hasMany(db.IssueLabel, {
+    db.Label.belongsToMany(db.Issue, {
+      through: 'Issue_Label',
       foreignKey: 'label_id',
     });
   };

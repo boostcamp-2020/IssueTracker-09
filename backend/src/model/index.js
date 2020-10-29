@@ -10,8 +10,6 @@ const Issue = require('./issue')(sequelize, Sequelize);
 const Comment = require('./comment')(sequelize, Sequelize);
 const Label = require('./label')(sequelize, Sequelize);
 const Milestone = require('./milestone')(sequelize, Sequelize);
-const AssigneeIssue = require('./assignee-issue')(sequelize, Sequelize);
-const IssueLabel = require('./issue-label')(sequelize, Sequelize);
 
 const db = {
   User,
@@ -19,8 +17,6 @@ const db = {
   Comment,
   Label,
   Milestone,
-  AssigneeIssue,
-  IssueLabel,
 };
 
 Object.keys(db).forEach((modelName) => {

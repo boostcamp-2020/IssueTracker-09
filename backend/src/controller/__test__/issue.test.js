@@ -5,6 +5,7 @@ const issueService = require('../../service/issue');
 const httpMocks = require('node-mocks-http');
 
 issueService.read = jest.fn();
+issueService.create = jest.fn();
 
 const newIssue = [
   {
@@ -15,6 +16,7 @@ const newIssue = [
     timestamp: '2020-20-20',
     milestone_id: 1,
     user_id: 1,
+    commentCount: 1,
     Milestone: {
       title: 'title',
       content: 'content',
@@ -31,15 +33,67 @@ const newIssue = [
         label_id: 1,
       },
     ],
-    Comment: {
-      commentCount: 1,
-    },
   },
 ];
+
+const issue1 = {
+  milestoneId: 1,
+  assigneeId: [1, 2],
+  labelId: [1, 2],
+  title: 'title',
+  content: 'content',
+  id: 1,
+};
+const issue = {
+  milestoneId: 1,
+  assigneeId: [1, 2],
+  labelId: [1, 2],
+  title: 'title',
+  content: 'content',
+};
 
 beforeEach(() => {
   req = httpMocks.createRequest();
   res = httpMocks.createResponse();
+});
+
+describe('create issue Controller 테스트', () => {
+  beforeEach(() => {
+    req.body = issue;
+    req.user = { id: 1 };
+  });
+
+  it('함수인가', () => {
+    expect(typeof issueController.create).toBe('function');
+  });
+
+  it('service에 newIssue가 들어가는가', async () => {
+    await issueController.create(req, res);
+    expect(issueService.create).toBeCalledWith(issue1);
+  });
+
+  it('성공 시 201응답이 오는가', async () => {
+    issueService.create.mockReturnValue(newIssue);
+    await issueController.create(req, res);
+    expect(res.statusCode).toBe(201);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('에러가 나면 403응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    issueService.create.mockReturnValue(errorMessage);
+    await issueController.create(req, res);
+    expect(res.statusCode).toBe(403);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('서버에서 에러가 나면 500응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    const rejectedPromise = Promise.reject(errorMessage);
+    issueService.create.mockReturnValue(rejectedPromise);
+    await issueController.create(req, res);
+    expect(res.statusCode).toBe(500);
+  });
 });
 
 describe('read issue Controller 테스트', () => {
