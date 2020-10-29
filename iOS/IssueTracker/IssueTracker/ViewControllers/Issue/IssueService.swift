@@ -8,8 +8,7 @@
 import Foundation
 
 protocol IssueService {
-    var issues: [Issue] { get }
-    func insert(_ number: Issue)
-    func close(_ number: Int)
-    func delete(_ number: Int)
+    var count: Int { get }
+    subscript(at: Int) -> Issue { get }
+    func remove(indexOf: Int)
 }
