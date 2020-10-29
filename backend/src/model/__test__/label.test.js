@@ -20,7 +20,7 @@ describe('Label모델 테스트', () => {
         primaryKey: true,
       },
       color: {
-        type: DataTypes.MEDIUMINT,
+        type: DataTypes.STRING(7),
         allowNull: false,
       },
       title: {
