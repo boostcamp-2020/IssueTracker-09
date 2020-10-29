@@ -2,6 +2,9 @@
 const express = require('express');
 const issueController = require('../controller/issue');
 
+// Controller
+const issueController = require('../controller/issue');
+
 const router = express.Router();
 
 router.get('/', issueController.read);
@@ -16,6 +19,6 @@ router.put('/assignee/:id');
 
 router.put('/label/:id');
 
-router.delete('/:id');
+router.delete('/:id', issueController.remove);
 
 module.exports = router;
