@@ -16,7 +16,7 @@ module.exports = {
 
   read: async (req, res) => {
     try {
-      const result = await comment.read(req.body);
+      const result = await comment.read(req.query);
 
       if (!result.error) {
         return res.status(200).json(result);
