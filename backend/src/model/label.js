@@ -6,7 +6,7 @@ module.exports = (sequelize, DataTypes) => {
       primaryKey: true,
     },
     color: {
-      type: DataTypes.MEDIUMINT,
+      type: DataTypes.STRING(7),
       allowNull: false,
     },
     title: {
