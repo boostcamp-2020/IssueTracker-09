@@ -20,6 +20,10 @@ const label = {
   title: 'test',
   content: 'test',
 };
+const updateLabel = {
+  id: 1,
+  data: { color: '#AAAAAA', title: 'test', content: 'test' },
+};
 let req, res;
 beforeEach(() => {
   req = httpMocks.createRequest();
@@ -106,7 +110,8 @@ describe('Label Controller 테스트', () => {
   });
   describe('update 테스트', () => {
     beforeEach(() => {
-      req.body = label;
+      req.body = newLabel;
+      req.params = { id: 1 };
     });
     it('함수인가', () => {
       expect(typeof labelController.update).toBe('function');

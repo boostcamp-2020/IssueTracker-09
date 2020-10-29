@@ -14,9 +14,22 @@ module.exports = {
     }
   },
 
+  read: async (req, res) => {
+    try {
+      const result = await comment.read(req.body);
+
+      if (!result.error) {
+        return res.status(200).json(result);
+      }
+      return res.status(403).json(result.error);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
+
   remove: async (req, res) => {
     try {
-      const result = await comment.remove(req.body);
+      const result = await comment.remove(req.params);
 
       if (!result.error) {
         return res.status(200).json(result);
@@ -29,7 +42,7 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      const result = await comment.update(req.body);
+      const result = await comment.update({ ...req.body, ...req.params });
 
       if (!result.error) {
         return res.status(200).json(result[0]);
