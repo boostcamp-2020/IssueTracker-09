@@ -41,7 +41,17 @@ module.exports = {
         ],
       ],
     });
-
     return issues;
+  },
+
+  remove: async ({ id }) => {
+    if (!id) {
+      return { error: '없는 id값 입니다.' };
+    }
+    const issue = await Model.Issue.destroy({ where: { id } });
+    if (issue) {
+      return true;
+    }
+    return { error: '없는 id값 입니다.' };
   },
 };

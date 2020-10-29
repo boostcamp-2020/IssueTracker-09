@@ -1,10 +1,12 @@
 // Dependencies
 const express = require('express');
+const upload = require('../lib/utils/multer').uploads;
+
+// Controller
+const imageController = require('../controller/image');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-  res.send('hello world');
-});
+router.post('/', upload, imageController.upload);
 
 module.exports = router;

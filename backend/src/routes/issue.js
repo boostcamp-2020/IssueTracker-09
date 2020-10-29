@@ -1,5 +1,7 @@
 // Dependencies
 const express = require('express');
+
+// Controller
 const issueController = require('../controller/issue');
 
 const router = express.Router();
@@ -16,6 +18,6 @@ router.put('/assignee/:id');
 
 router.put('/label/:id');
 
-router.delete('/:id');
+router.delete('/:id', issueController.remove);
 
 module.exports = router;

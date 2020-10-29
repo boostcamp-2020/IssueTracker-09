@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.post('/', comment.create);
 
+router.get('/', comment.read);
+
 router.delete('/:id', comment.remove);
 
 router.put('/:id', comment.update);
