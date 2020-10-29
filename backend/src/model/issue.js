@@ -27,6 +27,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     db.Issue.belongsTo(db.Milestone, {
       foreignKey: 'milestone_id',
+      allowNull: true,
     });
     db.Issue.hasMany(db.Comment, {
       foreignKey: 'issue_id',

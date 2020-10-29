@@ -17,10 +17,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       defaultValue: null,
     },
-    user_code: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-    },
   });
   User.associate = (db) => {
     db.User.hasMany(db.Issue, {

@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = (sequelize) => {
   const AssigneeIssue = sequelize.define('Assignee_Issue');
   AssigneeIssue.associate = (db) => {
     db.AssigneeIssue.belongsTo(db.User, {
