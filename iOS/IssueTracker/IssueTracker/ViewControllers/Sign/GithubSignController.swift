@@ -12,15 +12,16 @@ protocol AuthorizationRequestable {
     func requestCode()
 }
 
-class GithubSignController: AuthorizationRequestable {
-    static let shared = GithubSignController()
+class GithubSignService: AuthorizationRequestable {
+    static let shared = GithubSignService()
     private let client_id = "2edb801e4c9525f90d37"
     private let client_secret = "db7be4b8c52fe7279086fab14c071bcd7e100c1c"
     
     private init() {}
     
     func requestCode() {
-        let scope = "repo,user"
+        //        let scope = "repo,user"
+        let scope = "user"
         let urlString = "https://github.com/login/oauth/authorize?client_id=\(client_id)&scope=\(scope)"
         if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
