@@ -25,10 +25,7 @@ module.exports = {
   },
   update: async (req, res) => {
     try {
-      const result = await labelService.update({
-        id: req.params.id,
-        data: req.body,
-      });
+      const result = await labelService.update({ ...req.body, ...req.params });
       if (!result.error) {
         return res.status(200).json(result);
       }

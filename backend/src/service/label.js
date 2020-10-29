@@ -10,7 +10,7 @@ module.exports = {
   read: async () => {
     return await Label.findAll();
   },
-  update: async ({ id, data: { color, title, content } }) => {
+  update: async ({ id, color, title, content }) => {
     if (!id || !color || !title) {
       return { error: '정보가 부족합니다' };
     }

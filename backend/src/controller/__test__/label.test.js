@@ -118,9 +118,9 @@ describe('Label Controller 테스트', () => {
     });
 
     it('service에 updateLabel이 전달 되는가', async () => {
-      labelService.update.mockReturnValue(newLabel);
+      labelService.update.mockReturnValue(label);
       await labelController.update(req, res);
-      expect(labelService.update).toBeCalledWith(updateLabel);
+      expect(labelService.update).toBeCalledWith(label);
     });
 
     it('성공 시 200응답이 오는가', async () => {
