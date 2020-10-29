@@ -19,14 +19,6 @@ module.exports = {
       include: [Issue],
     });
   },
-  readById: async ({ milestoneId }) => {
-    if (!milestoneId) {
-      return { error: '정보가 부족합니다.' };
-    }
-    return await Milestone.findOne({
-      where: { id: milestoneId },
-    });
-  },
 
   update: async ({ milestoneId, title, deadline, content }) => {
     if (!milestoneId) {

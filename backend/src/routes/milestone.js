@@ -10,7 +10,6 @@ const router = express.Router();
 router.post('/', milestone.create);
 
 router.get('/', milestone.read);
-router.get('/id', milestone.readById);
 
 router.put('/', milestone.update);
 
