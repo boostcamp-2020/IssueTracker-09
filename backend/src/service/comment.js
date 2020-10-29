@@ -22,10 +22,7 @@ module.exports = {
 
     const comment = await Comment.findAll({ where: { issue_id: issueId } });
 
-    if (comment.length > 0) {
-      return comment;
-    }
-    return { error: '댓글이 존재하지 않습니다' };
+    return comment;
   },
 
   remove: async ({ id }) => {
