@@ -67,31 +67,31 @@ describe('create comment Controller 테스트', () => {
 });
 
 describe('remove comment Controller 테스트', () => {
-  const removeData = { commentId: 1 };
+  const removeParams = { id: 1 };
   beforeEach(() => {
-    req.body = removeData;
+    req.params = removeParams;
   });
 
   it('함수인가', () => {
-    commentService.remove.mockReturnValue(removeData);
+    commentService.remove.mockReturnValue(true);
     expect(typeof commentController.remove).toBe('function');
   });
 
   it('service에 data가 들어가는가', async () => {
-    commentService.remove.mockReturnValue(removeData);
+    commentService.remove.mockReturnValue(true);
     await commentController.remove(req, res);
-    expect(commentService.remove).toBeCalledWith(removeData);
+    expect(commentService.remove).toBeCalledWith(removeParams);
   });
 
   it('성공 시 200응답이 오는가', async () => {
-    commentService.remove.mockReturnValue(removeData);
+    commentService.remove.mockReturnValue(true);
     await commentController.remove(req, res);
     expect(res.statusCode).toBe(200);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
   it('json을 리턴하는가', async () => {
-    commentService.remove.mockReturnValue(removeData);
+    commentService.remove.mockReturnValue(true);
     await commentController.remove(req, res);
     expect(res._isJSON()).toBeTruthy();
   });
@@ -114,31 +114,37 @@ describe('remove comment Controller 테스트', () => {
 });
 
 describe('update comment Controller 테스트', () => {
-  const updateData = { commentId: 1, content: 'byeworld' };
+  const updateData = { content: 'byeworld' };
+  const updateParams = { id: 1 };
+
   beforeEach(() => {
     req.body = updateData;
+    req.params = updateParams;
   });
 
   it('함수인가', () => {
-    commentService.update.mockReturnValue(1);
+    commentService.update.mockReturnValue(true);
     expect(typeof commentController.update).toBe('function');
   });
 
   it('service에 data가 들어가는가', async () => {
-    commentService.update.mockReturnValue(1);
+    commentService.update.mockReturnValue(true);
     await commentController.update(req, res);
-    expect(commentService.update).toBeCalledWith(updateData);
+    expect(commentService.update).toBeCalledWith({
+      ...updateData,
+      ...updateParams,
+    });
   });
 
   it('성공 시 200응답이 오는가', async () => {
-    commentService.update.mockReturnValue(1);
+    commentService.update.mockReturnValue(true);
     await commentController.update(req, res);
     expect(res.statusCode).toBe(200);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
   it('json을 리턴하는가', async () => {
-    commentService.update.mockReturnValue(1);
+    commentService.update.mockReturnValue(true);
     await commentController.update(req, res);
     expect(res._isJSON()).toBeTruthy();
   });
