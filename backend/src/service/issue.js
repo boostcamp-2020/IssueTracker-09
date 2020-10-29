@@ -8,7 +8,13 @@ module.exports = {
         { model: Model.Milestone },
         { model: Model.AssigneeIssue },
         { model: Model.IssueLabel },
-        { model: Model.Comment },
+        { model: Model.Comment, attributes: [] },
+      ],
+      attributes: [
+        [
+          Model.sequelize.fn('count', Model.sequelize.col('Comments.id')),
+          'commentCount',
+        ],
       ],
     });
 
