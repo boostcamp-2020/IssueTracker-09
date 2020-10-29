@@ -1,7 +1,14 @@
 const Model = require('../model');
 
 module.exports = {
-  create: async ({ milestoneId, assigneeId, labelId, title, content, id }) => {
+  create: async ({
+    milestoneId,
+    assigneeId,
+    labelId,
+    title,
+    content,
+    dataValues: { id },
+  }) => {
     if (!title) {
       return { error: '정보가 부족합니다' };
     }
@@ -27,21 +34,27 @@ module.exports = {
   },
   read: async () => {
     const issues = await Model.Issue.findAll({
-      group: 'Comments.id',
       include: [
-        { model: Model.Milestone },
-        { model: Model.AssigneeIssue },
-        { model: Model.IssueLabel },
-        { model: Model.Comment, attributes: [] },
+        { model: Model.Milestone, required: false },
+        {
+          model: Model.Comment,
+          required: false,
+        },
       ],
-      attributes: [
-        [
-          Model.sequelize.fn('count', Model.sequelize.col('Comments.id')),
-          'commentCount',
-        ],
-      ],
+      attributes: ['id', 'title', 'content', 'is_opened'],
     });
-    return issues;
+    const issue = await Promise.all(
+      issues.map(async (issue) => {
+        issue.dataValues['commentCount'] = issue.dataValues.Comments.length;
+        delete issue.dataValues.Comments;
+        const users = await issue.getUsers();
+        const labels = await issue.getLabels();
+        issue.dataValues['user'] = users;
+        issue.dataValues['label'] = labels;
+        return issue.dataValues;
+      })
+    );
+    return issue;
   },
 
   remove: async ({ id }) => {
