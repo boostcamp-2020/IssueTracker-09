@@ -13,6 +13,7 @@ const newComment = {
   userId: 1,
   issueId: 1,
 };
+
 let req, res;
 
 beforeEach(() => {
@@ -21,8 +22,10 @@ beforeEach(() => {
 });
 
 describe('create comment Controller 테스트', () => {
+  const user = { id: 1 };
   beforeEach(() => {
     req.body = newComment;
+    req.user = user;
   });
 
   it('함수인가', () => {
