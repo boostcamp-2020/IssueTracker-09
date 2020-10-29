@@ -3,7 +3,7 @@ const Issue = require('../model').Issue;
 
 module.exports = {
   create: async ({ title, content, deadline }) => {
-    if (!title || !content || deadline) {
+    if (!title || !content || !deadline) {
       return { error: '정보가 부족합니다.' };
     }
     const result = await Milestone.create({
