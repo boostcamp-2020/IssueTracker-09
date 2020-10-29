@@ -22,7 +22,10 @@ module.exports = {
 
     const comment = await Comment.destroy({ where: { id: commentId } });
 
-    return comment;
+    if (comment) {
+      return true;
+    }
+    return { error: '존재하지 않는 댓글입니다' };
   },
 
   update: async ({ commentId, content }) => {
@@ -30,11 +33,14 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.update(
+    const [comment] = await Comment.update(
       { content },
       { where: { id: commentId } }
     );
 
-    return comment;
+    if (comment) {
+      return true;
+    }
+    return { error: '존재하지 않는 댓글입니다' };
   },
 };
