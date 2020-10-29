@@ -8,9 +8,8 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
-    var window: UIWindow?
-    
+//    var window: UIWindow?
+    var coordinatorManager: CoordinatorManager?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,11 +17,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
         guard let scene = (scene as? UIWindowScene) else { return }
         
-        window = UIWindow(windowScene: scene)
-        let coordinator = SignCoordinator(window: window)
-        coordinator.start()
+        let window = UIWindow(windowScene: scene)
+        coordinatorManager = CoordinatorManager(window: window)
+        
+        // user 정보 없을 시,
+        coordinatorManager?.start(name: .Sign)
+        
+        // user 정보 존재 시,
+        // coordinatorManager?.start(name: .Issue)
     }
-    
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -31,7 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             print(url)
             if url.absoluteString.starts(with: "issuetracker09://") {
                 if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
-                    GithubSignController.shared.requestAccessToken(with: code)
+                    GithubSignService.shared.requestAccessToken(with: code)
                 }
             }
         }
