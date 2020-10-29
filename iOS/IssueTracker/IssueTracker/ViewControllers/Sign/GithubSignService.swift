@@ -19,6 +19,7 @@ class GithubSignService: AuthorizationRequestable {
     
     private init() {}
     
+    // signviewcontroller 실행 함수
     func requestCode() {
         //        let scope = "repo,user"
         let scope = "user"
@@ -29,6 +30,7 @@ class GithubSignService: AuthorizationRequestable {
         }
     }
     
+    // scene delegate redirect function
     func requestAccessToken(with code: String) {
         let url = "https://github.com/login/oauth/access_token"
         
@@ -71,7 +73,7 @@ class GithubSignService: AuthorizationRequestable {
         })
     }
     
-    func logout() {
+//    func logout() {
         //        KeychainSwift().clear()
-    }
+//    }
 }

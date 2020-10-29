@@ -10,7 +10,7 @@ import AuthenticationServices
 
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
-    private var delegate: NextCoordinatorDelegate?
+    private weak var delegate: NextCoordinatorDelegate?
     private var request: AuthorizationRequestable?
     
     init?(coder: NSCoder, delegate: NextCoordinatorDelegate, request: AuthorizationRequestable) {
@@ -54,13 +54,13 @@ class SignViewController: UIViewController {
         authorizationController.performRequests()
     }
     
-    @IBAction
-    func touchedCompleteButton(_ sender: Any) {
-        request?.requestCode()
+    @IBAction func touchedCompleteButton(_ sender: Any) {
+//        request?.requestCode()
+        
+        self.delegate?.navigateToPage()
     }
     
-    @objc
-    func handleAuthorizationAppleIDButtonPress() {
+    @objc func handleAuthorizationAppleIDButtonPress() {
         let authorization = AppleAuthorizationController(window: view.window)
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()

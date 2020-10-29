@@ -10,18 +10,14 @@ import UIKit
 class IssueCoordinator: Coordinator {
     private let storyboardName: String = "Issue"
     private let window: UIWindow
+    private weak var delegate: CoordinatorDelegate?
     
-    init(window: UIWindow? = UIWindow()) {
-        if let window = window {
-            self.window = window
-        } else {
-            self.window = UIWindow()
-        }
+    init(window: UIWindow, delegate: CoordinatorDelegate) {
+        self.window = window
+        self.delegate = delegate
     }
     
     func start() {
-        window.makeKeyAndVisible()
-
         guard let issueViewController = UIStoryboard(name: "Issue", bundle: nil).instantiateInitialViewController() as? IssueViewController else {
             return
         }

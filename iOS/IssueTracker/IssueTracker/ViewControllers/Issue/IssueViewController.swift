@@ -7,51 +7,84 @@
 
 import UIKit
 
+
 class IssueViewController: UIViewController {
-    @IBOutlet var tableView: UITableView!
+    @IBOutlet var tableView: IssueTableView!
     var delegate: NextCoordinatorDelegate?
     var service: IssueService?
+    var checks: [Bool] = []
+    let barButtonController = BarButtonController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        checks = Array(repeating: false, count: service?.count ?? 0)
+        
+        barButtonController.addTarget(option: .selectAll, target: self, action: #selector(touchedSelectButton))
+        barButtonController.addTarget(option: .deselectAll, target: self, action: #selector(touchedDeselectButton))
+        barButtonController.addTarget(option: .filter, target: self, action: #selector(touchedFilterButton))
+    
+        self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        tableView
-            .visibleCells
-            .compactMap { $0 as? IssueTableViewCell }
-            .forEach { cell in
-                UIView.animate(withDuration: 0.2) {
-                    cell.checkBoxWrapper.isHidden = !editing
-                }
-            }
+        
+        tableView.applyAll(animated: true) { cell in
+            cell.checkBoxWrapper.isHidden = !editing
+        }
+        
+        if editing {
+            self.navigationItem.setLeftBarButton(barButtonController.buttons[.selectAll], animated: true)
+        } else {
+            self.navigationItem.setLeftBarButton(barButtonController.buttons[.filter], animated: true)
+        }
+    }
+    
+    private func createBarItem(name: String) -> UIBarButtonItem {
+        let button = UIButton()
+        button.setTitle(name, for: .normal)
+        button.setTitleColor(UIColor.systemBlue, for: .normal)
+        let item = UIBarButtonItem(customView: button)
+        return item
     }
     
     @IBAction func didEditButtonTapped(sender: UIBarButtonItem) {
         let editMode = !isEditing
         setEditing(editMode, animated: true)
-        sender.title = editMode ? "Cancel" : "Edit"
+        sender.title = editMode ? "취소" : "편집"
+    }
+    
+    @objc func touchedFilterButton(_ sender: Any) {
+        print("touchedFilter")
+    }
+    
+    @objc func touchedDeselectButton(_ sender: Any) {
+        print("touched deselect")
+    }
+    
+    @objc func touchedSelectButton(_ sender: Any) {
+        tableView.applyAll(animated: true) { cell in
+            cell.checkBoxWrapper.button.isSelected = true
+        }
+        checks = Array(repeating: true, count: service?.count ?? 0)
     }
 }
 
-extension IssueViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-}
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        service?.issues.count ?? 0
+        service?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? IssueTableViewCell,
-              let issue = service?.issues[indexPath.row] else {
+              let issue = service?[indexPath.row] else {
             return UITableViewCell()
         }
-        cell.configure(issue: issue)
+        cell.delegate = self
+        cell.configure(issue: issue, isCheck: checks[indexPath.item])
+        cell.checkBoxWrapper.isHidden = !isEditing
+        
         return cell
     }
     
@@ -67,5 +100,22 @@ extension IssueViewController: UITableViewDataSource {
             completion(true)
         }
         return UISwipeActionsConfiguration(actions: [delete, close])
+    }
+}
+
+extension IssueViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+}
+
+
+extension IssueViewController: IssueCellDelegate {
+    func checked(_ cell: IssueTableViewCell) {
+        guard let index = self.tableView.indexPath(for: cell) else {
+            return
+        }
+        
+        checks[index.item] = !checks[index.item]
     }
 }

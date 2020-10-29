@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0Y-7T-26G">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -20,29 +20,32 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vMq-gg-33U">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vMq-gg-33U" customClass="IssueTableView" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="100" width="414" height="762"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="103"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="117.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="103"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="79"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="93.5"/>
                                                     <subviews>
-                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="79"/>
+                                                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="93.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="27" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="34.5" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
                                                                     </constraints>
+                                                                    <connections>
+                                                                        <action selector="toucedCheck:" destination="zLX-wx-5tY" eventType="touchUpInside" id="2Bc-Ie-nCb"/>
+                                                                    </connections>
                                                                 </button>
                                                             </subviews>
                                                             <constraints>
@@ -50,6 +53,9 @@
                                                                 <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="width" id="dE8-NR-OUB"/>
                                                                 <constraint firstItem="ipx-hw-RNe" firstAttribute="centerX" secondItem="ZPJ-zs-Zfb" secondAttribute="centerX" id="hut-iI-x3q"/>
                                                             </constraints>
+                                                            <connections>
+                                                                <outlet property="button" destination="ipx-hw-RNe" id="Xiv-Hb-iok"/>
+                                                            </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dEt-P3-k0v">
                                                             <rect key="frame" x="0.0" y="0.0" width="219" height="69.5"/>
@@ -136,14 +142,14 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iEa-l3-4fa" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="349" y="797" width="40" height="40"/>
-                                <color key="backgroundColor" red="0.037953577336054783" green="0.43238500179686556" blue="0.73365461907419194" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="354" y="802.5" width="50" height="49"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="lbk-2b-Z1R"/>
-                                    <constraint firstAttribute="width" constant="40" id="lpk-qh-Wyi"/>
+                                    <constraint firstAttribute="height" constant="50" id="lbk-2b-Z1R"/>
+                                    <constraint firstAttribute="width" constant="50" id="lpk-qh-Wyi"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="30"/>
-                                <state key="normal" title="+">
+                                <state key="normal" backgroundImage="plus.circle.fill" catalog="system">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -156,8 +162,8 @@
                         <viewLayoutGuide key="safeArea" id="3Kr-OP-3Wt"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="iEa-l3-4fa" secondAttribute="trailing" constant="25" id="5As-VJ-cLf"/>
-                            <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="iEa-l3-4fa" secondAttribute="bottom" constant="25" id="8v2-lo-j3T"/>
+                            <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="iEa-l3-4fa" secondAttribute="trailing" constant="10" id="5As-VJ-cLf"/>
+                            <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="iEa-l3-4fa" secondAttribute="bottom" constant="10" id="8v2-lo-j3T"/>
                             <constraint firstItem="vMq-gg-33U" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="GcY-ya-bdZ"/>
                             <constraint firstItem="Dzu-pF-9tR" firstAttribute="top" secondItem="3Kr-OP-3Wt" secondAttribute="top" id="IY0-f3-hk2"/>
                             <constraint firstItem="Dzu-pF-9tR" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="Psg-xb-k98"/>
@@ -168,14 +174,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="이슈" id="7sz-GR-GrP">
-                        <barButtonItem key="leftBarButtonItem" style="plain" id="j2D-Tl-ZLz">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="jJc-2Q-ez4">
-                                <rect key="frame" x="20" y="7" width="92" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Filter"/>
-                            </button>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Edit" style="plain" id="Pj5-w3-XRu">
+                        <barButtonItem key="rightBarButtonItem" title="편집" style="plain" id="Pj5-w3-XRu">
                             <connections>
                                 <action selector="didEditButtonTappedWithSender:" destination="n0Y-7T-26G" id="gKj-rE-azT"/>
                             </connections>
@@ -187,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNQ-Y0-3ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="810.14492753623199" y="8.7053571428571423"/>
+            <point key="canvasLocation" x="1786" y="40"/>
         </scene>
     </scenes>
     <designables>
@@ -195,7 +194,7 @@
             <size key="intrinsicContentSize" width="69" height="20.5"/>
         </designable>
         <designable name="iEa-l3-4fa">
-            <size key="intrinsicContentSize" width="30" height="48"/>
+            <size key="intrinsicContentSize" width="20" height="37"/>
         </designable>
         <designable name="iO3-1R-V9e">
             <size key="intrinsicContentSize" width="54" height="20.5"/>
@@ -205,6 +204,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
