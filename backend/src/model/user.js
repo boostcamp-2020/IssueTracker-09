@@ -25,7 +25,8 @@ module.exports = (sequelize, DataTypes) => {
     db.User.hasMany(db.Comment, {
       foreignKey: 'user_id',
     });
-    db.User.hasMany(db.AssigneeIssue, {
+    db.User.belongsToMany(db.Issue, {
+      through: 'Assignee_Issue',
       foreignKey: 'user_id',
     });
   };

@@ -32,10 +32,12 @@ module.exports = (sequelize, DataTypes) => {
     db.Issue.hasMany(db.Comment, {
       foreignKey: 'issue_id',
     });
-    db.Issue.hasMany(db.AssigneeIssue, {
+    db.Issue.belongsToMany(db.User, {
+      through: 'Assignee_Issue',
       foreignKey: 'issue_id',
     });
-    db.Issue.hasMany(db.IssueLabel, {
+    db.Issue.belongsToMany(db.Label, {
+      through: 'Issue_Label',
       foreignKey: 'issue_id',
     });
   };
