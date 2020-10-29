@@ -6,7 +6,7 @@ module.exports = {
       const result = await issueService.read();
 
       if (!result.error) {
-        return res.status(200).json(true);
+        return res.status(200).json(result);
       }
       return res.status(403).json(result.error);
     } catch (error) {
