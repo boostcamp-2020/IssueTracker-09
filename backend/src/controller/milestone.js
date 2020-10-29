@@ -19,7 +19,7 @@ module.exports = {
       if (milestone) {
         return res.status(200).json({ milestone });
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '정보를 찾지 못했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }

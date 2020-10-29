@@ -14,9 +14,19 @@ module.exports = {
     });
     return result;
   },
+
   read: async () => {
-    return await Milestone.findAll({
+    const milestones = await Milestone.findAll({
       include: [Issue],
+    });
+
+    return milestones.map((mile) => {
+      const open = mile.Issues.filter((issue) => issue.is_opened).length;
+      const total = mile.Issues.length;
+      mile.dataValues['openCount'] = open;
+      mile.dataValues['totalCount'] = total;
+      delete mile.dataValues.Issues;
+      return mile.dataValues;
     });
   },
 
