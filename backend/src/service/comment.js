@@ -15,6 +15,19 @@ module.exports = {
     return comment;
   },
 
+  read: async ({ issueId }) => {
+    if (!issueId) {
+      return { error: '정보가 부족합니다' };
+    }
+
+    const comment = await Comment.findAll({ where: { issue_id: issueId } });
+
+    if (comment.length > 0) {
+      return comment;
+    }
+    return { error: '댓글이 존재하지 않습니다' };
+  },
+
   remove: async ({ id }) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
