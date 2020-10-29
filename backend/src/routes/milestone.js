@@ -11,7 +11,7 @@ router.post('/', milestone.create);
 
 router.get('/', milestone.read);
 
-router.put('/', milestone.update);
+router.put('/:id', milestone.update);
 
 router.delete('/', milestone.remove);
 

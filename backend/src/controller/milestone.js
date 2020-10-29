@@ -27,11 +27,11 @@ module.exports = {
 
   update: async (req, res) => {
     try {
-      const milestone = await milestoneService.update(req.body);
+      const milestone = await milestoneService.update(req.params, req.body);
       if (milestone) {
         return res.status(200).json(true);
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '수정에 실패했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }

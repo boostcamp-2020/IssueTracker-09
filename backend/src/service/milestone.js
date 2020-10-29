@@ -20,15 +20,17 @@ module.exports = {
     });
   },
 
-  update: async ({ milestoneId, title, deadline, content }) => {
-    if (!milestoneId) {
+  update: async ({ id }, { title, deadline, content }) => {
+    if (!id) {
       return { error: '정보가 부족합니다' };
     }
 
-    return await Milestone.update(
+    const [result] = await Milestone.update(
       { title, deadline, content },
-      { where: { id: milestoneId } }
+      { where: { id } }
     );
+    if (result === 1) return true;
+    return false;
   },
   remove: async ({ milestoneId }) => {
     if (!milestoneId) {
