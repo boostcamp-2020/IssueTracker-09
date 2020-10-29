@@ -30,7 +30,7 @@ describe('create comment service 테스트', () => {
 });
 
 describe('remove comment service 테스트', () => {
-  const commentResult = { commentId: 1 };
+  const commentResult = { id: 1 };
 
   it('함수인가', () => {
     expect(typeof commentService.remove).toBe('function');
@@ -55,7 +55,7 @@ describe('remove comment service 테스트', () => {
 });
 
 describe('update comment service 테스트', () => {
-  const commentResult = { commentId: 1 };
+  const commentResult = { id: 1 };
 
   it('함수인가', () => {
     expect(typeof commentService.update).toBe('function');

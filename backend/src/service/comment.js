@@ -15,12 +15,12 @@ module.exports = {
     return comment;
   },
 
-  remove: async ({ commentId }) => {
-    if (!commentId) {
+  remove: async ({ id }) => {
+    if (!id) {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.destroy({ where: { id: commentId } });
+    const comment = await Comment.destroy({ where: { id } });
 
     if (comment) {
       return true;
@@ -28,15 +28,12 @@ module.exports = {
     return { error: '존재하지 않는 댓글입니다' };
   },
 
-  update: async ({ commentId, content }) => {
-    if (!commentId) {
+  update: async ({ id, content }) => {
+    if (!id) {
       return { error: '정보가 부족합니다' };
     }
 
-    const [comment] = await Comment.update(
-      { content },
-      { where: { id: commentId } }
-    );
+    const [comment] = await Comment.update({ content }, { where: { id } });
 
     if (comment) {
       return true;
