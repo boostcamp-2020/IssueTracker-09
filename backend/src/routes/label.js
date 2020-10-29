@@ -10,7 +10,7 @@ router.get('/', labelController.read);
 
 router.post('/', labelController.create);
 
-router.put('/', labelController.update);
+router.put('/:id', labelController.update);
 
 router.delete('/:id', labelController.remove);
 
