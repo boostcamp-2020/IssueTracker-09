@@ -21,7 +21,6 @@ class AppleAuthorizationController: NSObject {
     }
 }
 
-
 extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
