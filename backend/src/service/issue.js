@@ -30,18 +30,29 @@ module.exports = {
       group: 'Comments.id',
       include: [
         { model: Model.Milestone },
-        { model: Model.AssigneeIssue },
-        { model: Model.IssueLabel },
         { model: Model.Comment, attributes: [] },
       ],
       attributes: [
+        'id',
+        'title',
+        'content',
+        'is_opened',
         [
           Model.sequelize.fn('count', Model.sequelize.col('Comments.id')),
           'commentCount',
         ],
       ],
     });
-    return issues;
+    const issue = await Promise.all(
+      issues.map(async (issue) => {
+        const users = await issue.getUsers();
+        const labels = await issue.getLabels();
+        issue.dataValues['user'] = users;
+        issue.dataValues['label'] = labels;
+        return issue.dataValues;
+      })
+    );
+    return issue;
   },
 
   remove: async ({ id }) => {
