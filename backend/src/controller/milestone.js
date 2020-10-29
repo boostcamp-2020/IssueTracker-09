@@ -39,11 +39,11 @@ module.exports = {
 
   remove: async (req, res) => {
     try {
-      const milestone = await milestoneService.remove(req.body);
+      const milestone = await milestoneService.remove(req.params);
       if (milestone) {
         return res.status(200).json(true);
       }
-      return res.status(403).json(false);
+      return res.status(403).json({ error: '삭제에 실패했습니다.' });
     } catch (error) {
       return res.status(500).json(error);
     }

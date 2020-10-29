@@ -13,6 +13,6 @@ router.get('/', milestone.read);
 
 router.put('/:id', milestone.update);
 
-router.delete('/', milestone.remove);
+router.delete('/:id', milestone.remove);
 
 module.exports = router;

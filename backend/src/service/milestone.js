@@ -32,13 +32,15 @@ module.exports = {
     if (result === 1) return true;
     return false;
   },
-  remove: async ({ milestoneId }) => {
-    if (!milestoneId) {
+  remove: async ({ id }) => {
+    if (!id) {
       return { error: '정보가 부족합니다' };
     }
 
-    return await Milestone.destroy({
-      where: { id: milestoneId },
+    const result = await Milestone.destroy({
+      where: { id },
     });
+    if (result === 1) return true;
+    return false;
   },
 };
