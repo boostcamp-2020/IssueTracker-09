@@ -62,6 +62,4 @@
 
 ## 데모 영상
 
-![깃헙로그인](https://user-images.githubusercontent.com/57888770/97651315-091dc400-1a9f-11eb-8375-0e5fbf4c901b.gif)
-
-![이슈목록](https://user-images.githubusercontent.com/57888770/97651319-0a4ef100-1a9f-11eb-99cd-b039ccd66c68.gif)
+<img src="https://user-images.githubusercontent.com/16751025/97651361-29e61980-1a9f-11eb-8d7b-83b04c0aaed3.gif" width=300px> <img src="https://user-images.githubusercontent.com/57888770/97651315-091dc400-1a9f-11eb-8375-0e5fbf4c901b.gif" width=300px> <img src="https://user-images.githubusercontent.com/57888770/97651319-0a4ef100-1a9f-11eb-99cd-b039ccd66c68.gif" width=300px> 
