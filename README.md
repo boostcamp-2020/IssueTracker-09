@@ -40,14 +40,14 @@
 
 - 데이터베이스 (ERD)
 
-    [IssueTracker09](https://www.erdcloud.com/d/zahixjNPz8acSNZAB)
+    [ERD](https://www.erdcloud.com/d/zahixjNPz8acSNZAB)
     
     ![스크린샷 2020-10-30 오전 10 40 53](https://user-images.githubusercontent.com/57888770/97650172-7714bc00-1a9c-11eb-895e-bf75221c0ed7.png)
     
-- API (PostMan)
+- API (Postman)
 
-    https://documenter.getpostman.com/view/12373515/TVYJ7dN1
+    [Postman](https://documenter.getpostman.com/view/12373515/TVYJ7dN1)
 
 - Feature List (iOS)
 
-    [Google Sheets - create and edit spreadsheets online, for free.](https://docs.google.com/spreadsheets/d/1c4khN9WnOH5Y188t8uiwruJ2TbhPEZDRNfFqx7ItewE/edit#gid=0)
+    [iOS FeatureList](https://docs.google.com/spreadsheets/d/1c4khN9WnOH5Y188t8uiwruJ2TbhPEZDRNfFqx7ItewE/edit#gid=0)
