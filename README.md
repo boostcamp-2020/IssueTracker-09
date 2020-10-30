@@ -32,7 +32,7 @@
 [iOS](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---iOS)  | 
 [JS](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)-%EC%9B%B9)
 
-## 기능 요구사항 (Notoion) 🛠
+## 기능 요구사항 (Notion) 🛠
 
 [ToDo 리스트](https://www.notion.so/092aa8b7eeb94aa484405429d1d30441)
 
