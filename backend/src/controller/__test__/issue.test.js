@@ -6,6 +6,7 @@ const httpMocks = require('node-mocks-http');
 
 issueService.read = jest.fn();
 issueService.create = jest.fn();
+issueService.remove = jest.fn();
 
 const newIssue = [
   {
@@ -127,6 +128,45 @@ describe('read issue Controller 테스트', () => {
     const rejectedPromise = Promise.reject(errorMessage);
     issueService.read.mockReturnValue(rejectedPromise);
     await issueController.read(req, res);
+    expect(res.statusCode).toBe(500);
+  });
+});
+
+describe('remove issue Controller 테스트', () => {
+  const removeParams = { id: 1 };
+  beforeEach(() => {
+    req.params = removeParams;
+  });
+
+  it('함수인가', () => {
+    expect(typeof issueController.remove).toBe('function');
+  });
+
+  it('service에 newIssue가 들어가는가', async () => {
+    await issueController.remove(req, res);
+    expect(issueService.remove).toBeCalledWith(removeParams);
+  });
+
+  it('성공 시 200응답이 오는가', async () => {
+    issueService.remove.mockReturnValue(true);
+    await issueController.remove(req, res);
+    expect(res.statusCode).toBe(200);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('에러가 나면 403응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    issueService.remove.mockReturnValue(errorMessage);
+    await issueController.remove(req, res);
+    expect(res.statusCode).toBe(403);
+    expect(res._isEndCalled()).toBeTruthy();
+  });
+
+  it('서버에서 에러가 나면 500응답이 오는가', async () => {
+    const errorMessage = { error: 'Error Message' };
+    const rejectedPromise = Promise.reject(errorMessage);
+    issueService.remove.mockReturnValue(rejectedPromise);
+    await issueController.remove(req, res);
     expect(res.statusCode).toBe(500);
   });
 });

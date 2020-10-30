@@ -2,20 +2,27 @@ const userService = require('../service/user');
 
 module.exports = {
   gitHubLogin: (req, res) => {
-    const data = userService.gitHubLogin(req.user);
-    if (data.token) {
-      res.status(200).json(data);
-    } else {
-      res.status(403).json(false);
+    try {
+      const data = userService.gitHubLogin(req.user);
+
+      if (!data.error) {
+        return res.status(200).json(data);
+      }
+      return res.status(403).json(data.error);
+    } catch (error) {
+      return res.status(500).json({ error });
     }
   },
   iOSAppleLogin: async (req, res) => {
-    const data = await userService.iOSAppleLogin(req.body);
-    console.log(data);
-    if (data.token) {
-      res.status(200).json(data);
-    } else {
-      res.status(403).json(false);
+    try {
+      const data = await userService.iOSAppleLogin(req.body);
+
+      if (!data.error) {
+        return res.status(200).json(data);
+      }
+      return res.status(403).json(data.error);
+    } catch (error) {
+      return res.status(500).json({ error });
     }
   },
   getUser: (req, res) => {
@@ -26,10 +33,10 @@ module.exports = {
     try {
       const users = await userService.getUsers();
 
-      if (users) {
+      if (!users.error) {
         return res.status(200).json(users);
       }
-      res.status(403).json(false);
+      res.status(403).json(users.error);
     } catch (error) {
       return res.status(500).json({ error });
     }

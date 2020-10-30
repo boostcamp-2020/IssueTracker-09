@@ -45,7 +45,7 @@ module.exports = {
       const result = await comment.update({ ...req.body, ...req.params });
 
       if (!result.error) {
-        return res.status(200).json(result[0]);
+        return res.status(200).json(result);
       }
       return res.status(403).json(result.error);
     } catch (error) {
