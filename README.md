@@ -1,5 +1,9 @@
 # IssueTracker-09
 
+<p align="center">
+<img src="https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif" alt="github-icon" width="200" height="200" />
+</p>
+
 
 ## 기술 스택
 
