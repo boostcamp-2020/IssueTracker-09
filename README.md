@@ -9,7 +9,7 @@
 ![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)
 ![react](https://img.shields.io/badge/react-0.0-9cf?logo=react)
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
-
+![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 
 
 ## 그룹 인원 🧑🏻‍💻
