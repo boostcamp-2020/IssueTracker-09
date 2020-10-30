@@ -35,6 +35,8 @@
 ## 기능 요구사항 (Notoion) 🛠
 
 [ToDo 리스트](https://www.notion.so/092aa8b7eeb94aa484405429d1d30441)
+[Backend 일정관리](https://github.com/boostcamp-2020/IssueTracker-09/projects/2)
+[iOS 일정관리](https://github.com/boostcamp-2020/IssueTracker-09/projects/1)
 
 ## 산출문(문서화) 📑
 
