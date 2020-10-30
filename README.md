@@ -42,6 +42,8 @@
 
     [IssueTracker09](https://www.erdcloud.com/d/zahixjNPz8acSNZAB)
     
+    ![스크린샷 2020-10-30 오전 10 40 53](https://user-images.githubusercontent.com/57888770/97650172-7714bc00-1a9c-11eb-895e-bf75221c0ed7.png)
+    
 - API (PostMan)
 
     https://documenter.getpostman.com/view/12373515/TVYJ7dN1
