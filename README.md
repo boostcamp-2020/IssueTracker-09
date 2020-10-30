@@ -1,4 +1,4 @@
-# IssueTracker-09 / 3주 그룹 프로젝트
+# IssueTracker-09
 
 
 ## 기술 스택
