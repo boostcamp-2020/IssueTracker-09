@@ -30,7 +30,7 @@ module.exports = {
     });
   },
 
-  update: async ({ id }, { title, deadline, content }) => {
+  update: async ({ id, title, deadline, content }) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
     }

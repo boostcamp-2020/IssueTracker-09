@@ -1,58 +1,39 @@
 const userService = require('../service/user');
+const control = require('../lib/controller');
 
 module.exports = {
-  gitHubLogin: (req, res) => {
-    try {
-      const data = userService.gitHubLogin(req.user);
+  gitHubLogin: async (req, res) => {
+    const { status, result } = await control(userService.gitHubLogin, req.user);
 
-      if (!data.error) {
-        return res.status(200).json(data);
-      }
-      return res.status(403).json(data.error);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    return res.status(status).json(result);
   },
   iOSAppleLogin: async (req, res) => {
-    try {
-      const data = await userService.iOSAppleLogin(req.body);
+    const { status, result } = await control(
+      userService.iOSAppleLogin,
+      req.body
+    );
 
-      if (!data.error) {
-        return res.status(200).json(data);
-      }
-      return res.status(403).json(data.error);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    return res.status(status).json(result);
   },
+
   getUser: (req, res) => {
     const { name, image } = req.user.dataValues;
     res.status(200).json({ name, image });
   },
-  getUsers: async (req, res) => {
-    try {
-      const users = await userService.getUsers();
 
-      if (!users.error) {
-        return res.status(200).json(users);
-      }
-      res.status(403).json(users.error);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+  getUsers: async (req, res) => {
+    const { status, result } = await control(userService.getUsers);
+
+    return res.status(status).json(result);
   },
 
   iOSGitHubLogin: async (req, res) => {
-    try {
-      const token = await userService.iOSGithubLogin(req.body);
+    const { status, result } = await control(
+      userService.iOSGithubLogin,
+      req.body
+    );
 
-      if (!token.error) {
-        return res.status(201).json({ token });
-      }
-      return res.status(403).json(token.error);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    return res.status(status).json(result);
   },
 
   logout: (req, res) => {

@@ -1,112 +1,74 @@
 const issueService = require('../service/issue');
+const control = require('../lib/controller');
 
 module.exports = {
   create: async (req, res) => {
-    try {
-      const result = await issueService.create({ ...req.body, ...req.user });
-      if (!result.error) {
-        return res.status(201).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(
+      issueService.create,
+      {
+        ...req.body,
+        ...req.user,
+      },
+      201
+    );
+
+    return res.status(status).json(result);
   },
 
   remove: async (req, res) => {
-    try {
-      const result = await issueService.remove(req.params);
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(issueService.remove, req.params);
+
+    return res.status(status).json(result);
   },
 
   read: async (req, res) => {
-    try {
-      const result = await issueService.read();
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(issueService.read);
+
+    return res.status(status).json(result);
   },
 
   updateTitle: async (req, res) => {
-    try {
-      const result = await issueService.updateTitle({
-        ...req.body,
-        ...req.params,
-      });
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(issueService.updateTitle, {
+      ...req.body,
+      ...req.params,
+    });
+
+    return res.status(status).json(result);
   },
 
   updateAssignee: async (req, res) => {
-    try {
-      const result = await issueService.updateAssignee({
-        ...req.params,
-        ...req.body,
-      });
+    const { status, result } = await control(issueService.updateAssignee, {
+      ...req.body,
+      ...req.params,
+    });
 
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 
   updateMilestone: async (req, res) => {
-    try {
-      const result = await issueService.updateMilestone({
-        ...req.body,
-        ...req.params,
-      });
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(issueService.updateMilestone, {
+      ...req.body,
+      ...req.params,
+    });
+
+    return res.status(status).json(result);
   },
+
   updateState: async (req, res) => {
-    try {
-      const result = await issueService.updateState(req.params);
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(
+      issueService.updateState,
+      req.params
+    );
+
+    return res.status(status).json(result);
   },
 
   updateLabel: async (req, res) => {
-    try {
-      const result = await issueService.updateLabel({
-        ...req.params,
-        ...req.body,
-      });
+    const { status, result } = await control(issueService.updateLabel, {
+      ...req.body,
+      ...req.params,
+    });
 
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 };

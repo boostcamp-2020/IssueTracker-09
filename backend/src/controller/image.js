@@ -1,15 +1,10 @@
 const imageService = require('../service/image');
+const control = require('../lib/controller');
 
 module.exports = {
   upload: (req, res) => {
-    try {
-      const fileURL = imageService.upload(req.file);
-      if (!fileURL.error) {
-        return res.status(201).json({ fileURL });
-      }
-      return res.status(401).json(fileURL.error);
-    } catch (error) {
-      return res.status(500).json({ error });
-    }
+    const { status, result } = control(imageService.upload, req.file, 201);
+
+    return res.status(status).json(result);
   },
 };

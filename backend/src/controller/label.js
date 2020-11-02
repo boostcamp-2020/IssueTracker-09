@@ -1,48 +1,32 @@
 const labelService = require('../service/label');
+const control = require('../lib/controller');
 
 module.exports = {
   create: async (req, res) => {
-    try {
-      const result = await labelService.create(req.body);
-      if (!result.error) {
-        return res.status(201).json(result);
-      }
-      res.status(403).json(result.error);
-    } catch (error) {
-      res.status(500).json(error);
-    }
+    const { status, result } = await control(
+      labelService.create,
+      req.body,
+      201
+    );
+
+    return res.status(status).json(result);
   },
   read: async (req, res) => {
-    try {
-      const result = await labelService.read();
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      res.status(500).json(error);
-    }
+    const { status, result } = await control(labelService.read);
+
+    return res.status(status).json(result);
   },
   update: async (req, res) => {
-    try {
-      const result = await labelService.update({ ...req.body, ...req.params });
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      res.status(500).json(error);
-    }
+    const { status, result } = await control(labelService.update, {
+      ...req.body,
+      ...req.params,
+    });
+
+    return res.status(status).json(result);
   },
   remove: async (req, res) => {
-    try {
-      const result = await labelService.remove(req.params);
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      res.status(500).json(error);
-    }
+    const { status, result } = await control(labelService.remove, req.params);
+
+    return res.status(status).json(result);
   },
 };
