@@ -34,7 +34,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     db.Issue.belongsToMany(db.User, {
       through: 'Assignee_Issue',
-      foreignKey: 'issue_id',
+      as: 'Issues',
     });
     db.Issue.belongsToMany(db.Label, {
       through: 'Issue_Label',
