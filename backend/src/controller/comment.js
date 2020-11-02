@@ -1,55 +1,35 @@
-const comment = require('../service/comment');
+const commentService = require('../service/comment');
+const control = require('../lib/controller');
 
 module.exports = {
   create: async (req, res) => {
-    try {
-      const result = await comment.create({ ...req.body, userId: req.user.id });
+    const { status, result } = await control(
+      commentService.create,
+      { ...req.body, userId: req.user.id },
+      201
+    );
 
-      if (!result.error) {
-        return res.status(201).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 
   read: async (req, res) => {
-    try {
-      const result = await comment.read(req.query);
+    const { status, result } = await control(commentService.read, req.query);
 
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 
   remove: async (req, res) => {
-    try {
-      const result = await comment.remove(req.params);
+    const { status, result } = await control(commentService.remove, req.params);
 
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 
   update: async (req, res) => {
-    try {
-      const result = await comment.update({ ...req.body, ...req.params });
+    const { status, result } = await control(commentService.update, {
+      ...req.body,
+      ...req.params,
+    });
 
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    return res.status(status).json(result);
   },
 };
