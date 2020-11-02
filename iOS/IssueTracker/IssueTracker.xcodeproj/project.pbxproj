@@ -325,6 +325,7 @@
 			children = (
 				FCF196FD2547AED200AED031 /* Info.plist */,
 				F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */,
+				F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
@@ -612,6 +613,7 @@
 				FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
+				F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */,
 				F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */,
 				FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */,
 				F403F375254FFDC4004E8CF0 /* CommentNetworkService.swift in Sources */,
@@ -648,6 +650,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */,
 				F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
