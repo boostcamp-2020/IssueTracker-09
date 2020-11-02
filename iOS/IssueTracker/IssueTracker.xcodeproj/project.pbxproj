@@ -10,6 +10,7 @@
 		19FD95BC9026B8AEE33B4109 /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89229A57067B707D9CB2A4CA /* Pods_IssueTrackerTests.framework */; };
 		89150E3734F65360C8454EF7 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501DBAF80480CA260A53F37D /* Pods_IssueTracker.framework */; };
 		AB6D4AAFBB7C541FE6F6CE42 /* Pods_IssueTracker_IssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F94E7BBED9364B061AB20 /* Pods_IssueTracker_IssueTrackerUITests.framework */; };
+		F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */; };
 		F403F353254FE67E004E8CF0 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F352254FE67E004E8CF0 /* Label.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
@@ -71,6 +72,7 @@
 		BC861D99C25ED94CF15F7D8B /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E934C920EDEFA21987108F25 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		F403F352254FE67E004E8CF0 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
@@ -161,6 +163,14 @@
 				F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		F403F349254FE532004E8CF0 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		F448517D2549833700A84527 /* Coordinators */ = {
@@ -275,6 +285,7 @@
 		FCF196E32547AED000AED031 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
+				F403F349254FE532004E8CF0 /* Extensions */,
 				F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */,
 				FC5CAE6E254FD4E20086EA13 /* utils */,
 				F4AF30422547CF26006D7D0A /* Views */,
@@ -413,6 +424,7 @@
 					};
 					FCF196F62547AED200AED031 = {
 						CreatedOnToolsVersion = 12.0;
+						LastSwiftMigration = 1210;
 						TestTargetID = FCF196E02547AED000AED031;
 					};
 					FCF197012547AED200AED031 = {
@@ -594,6 +606,7 @@
 				F448516F254971F600A84527 /* IssueService.swift in Sources */,
 				F44851872549835600A84527 /* Coordinator.swift in Sources */,
 				FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */,
+				F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */,
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
@@ -802,6 +815,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = IssueTrackerTests/Info.plist;
@@ -813,6 +827,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.boostcamp.membership.IssueTrackerTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/IssueTracker.app/IssueTracker";
@@ -825,6 +840,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = B3PWYBKFUK;
 				INFOPLIST_FILE = IssueTrackerTests/Info.plist;
