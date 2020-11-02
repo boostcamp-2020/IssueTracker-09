@@ -67,4 +67,15 @@ module.exports = {
     }
     return { error: '없는 id값 입니다.' };
   },
+
+  updateTitle: async ({ id, title }) => {
+    if (!id || !title) {
+      return { error: '정보가 부족합니다.' };
+    }
+    const [result] = await Model.Issue.update({ title }, { where: { id } });
+    if (result) {
+      return true;
+    }
+    return { error: '없는 id값 입니다.' };
+  },
 };
