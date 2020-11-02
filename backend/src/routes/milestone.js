@@ -1,18 +1,19 @@
 // Dependencies
 const express = require('express');
-const jwtAuth = require('./middleware/jwt-auth');
 
 // Controller
-const milestone = require('../controller/milestone');
+const milestoneController = require('../controller/milestone');
 
 const router = express.Router();
 
-router.post('/', milestone.create);
+router.post('/', milestoneController.create);
 
-router.get('/', milestone.read);
+router.get('/', milestoneController.read);
 
-router.put('/:id', milestone.update);
+router.put('/:id', milestoneController.update);
 
-router.delete('/:id', milestone.remove);
+router.put('/state/:id', milestoneController.updateState);
+
+router.delete('/:id', milestoneController.remove);
 
 module.exports = router;

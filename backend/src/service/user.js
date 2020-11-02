@@ -32,7 +32,7 @@ module.exports = {
 
   getUsers: async () => {
     const users = await User.findAll({ attributes: ['id', 'name', 'image'] });
-    return users;
+    return { assignee: users };
   },
 
   iOSGithubLogin: async ({ code, name, image }) => {
