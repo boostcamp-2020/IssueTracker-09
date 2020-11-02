@@ -53,7 +53,7 @@ class CommentNetworkService: NetworkService {
             }
     }
     
-    func deleteComment(comment: Comment, completion handler: @escaping (Result<Bool, AFError>) -> Void) {
+    func deleteComment(comment: Comment, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "/\(comment.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -65,12 +65,10 @@ class CommentNetworkService: NetworkService {
                    method: .delete,
                    headers: headers)
             .validate()
-            .responseString { string in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
     
-    func modifyComment(comment: Comment, completion handler: @escaping (Result<Bool, AFError>) -> Void) {
+    func modifyComment(comment: Comment, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "/\(comment.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -84,8 +82,6 @@ class CommentNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseString { string in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
 }

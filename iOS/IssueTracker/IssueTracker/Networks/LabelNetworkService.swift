@@ -49,7 +49,7 @@ class LabelNetworkService: NetworkService {
             }
     }
     
-    func modifyLabel(to label: Label) {
+    func modifyLabel(to label: Label, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(label.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -63,12 +63,10 @@ class LabelNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseString { response in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
     
-    func deleteLabel(id: Int) {
+    func deleteLabel(id: Int, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -80,8 +78,6 @@ class LabelNetworkService: NetworkService {
                    method: .delete,
                    headers: headers)
             .validate()
-            .responseString { response in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
 }

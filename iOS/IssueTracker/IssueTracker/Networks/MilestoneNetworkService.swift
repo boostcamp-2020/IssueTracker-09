@@ -54,7 +54,7 @@ class MilestoneNetworkService: NetworkService {
             }
     }
     
-    func modifyMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, AFError>) -> Void) {
+    func modifyMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.milestone.rawValue + "/\(milestone.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -72,12 +72,10 @@ class MilestoneNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseString { string in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
     
-    func deleteMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, AFError>) -> Void) {
+    func deleteMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.milestone.rawValue + "/\(milestone.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -89,8 +87,6 @@ class MilestoneNetworkService: NetworkService {
                    method: .delete,
                    headers: headers)
             .validate()
-            .responseString { string in
-                
-            }
+            .responseBool(completionHandler: handler)
     }
 }

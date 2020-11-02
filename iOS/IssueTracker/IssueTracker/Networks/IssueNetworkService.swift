@@ -62,7 +62,7 @@ class IssueNetworkService: NetworkService {
             }
     }
     
-    func modifyIssueTitle(of id: Int, to title: String) {
+    func modifyIssueTitle(of id: Int, to title: String, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -76,9 +76,10 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
+            .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueMilestone(of id: Int, to milestone: Milestone) {
+    func modifyIssueMilestone(of id: Int, to milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -92,9 +93,10 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
+            .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueStatus(of id: Int) {
+    func modifyIssueStatus(of id: Int, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -106,9 +108,10 @@ class IssueNetworkService: NetworkService {
                    method: .put,
                    headers: headers)
             .validate()
+            .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueAssignee(of id: Int, to assignee: User) {
+    func modifyIssueAssignee(of id: Int, to assignee: User, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -122,5 +125,6 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
+            .responseBool(completionHandler: handler)
     }
 }
