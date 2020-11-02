@@ -16,7 +16,7 @@ router.put('/milestone/:id', issueController.updateMilestone);
 
 router.put('/state/:id', issueController.updateState);
 
-router.put('/assignee/:id');
+router.put('/assignee/:id', issueController.updateAssignee);
 
 router.put('/label/:id');
 

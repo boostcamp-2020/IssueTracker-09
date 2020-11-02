@@ -13,7 +13,7 @@ const milestoneRouter = require('./milestone');
 const router = express.Router();
 
 router.use('/user', userRouter);
-router.use(jwtAuth);
+// router.use(jwtAuth);
 router.use('/comment', commentRouter);
 router.use('/image', imageRouter);
 router.use('/issue', issueRouter);
