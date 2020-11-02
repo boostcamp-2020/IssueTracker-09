@@ -25,20 +25,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="117.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="118.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="118.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="93.5"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="94.5"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="93.5"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="94.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="34.5" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="35" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -78,7 +78,7 @@
                                                             <rect key="frame" x="229" y="0.0" width="161" height="46"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="92" y="0.0" width="69" height="20.5"/>
+                                                                    <rect key="frame" x="80" y="0.0" width="81" height="20.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -95,7 +95,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="107" y="25.5" width="54" height="20.5"/>
+                                                                    <rect key="frame" x="95" y="25.5" width="66" height="20.5"/>
                                                                     <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                     <nil key="textColor"/>
@@ -191,13 +191,13 @@
     </scenes>
     <designables>
         <designable name="b5r-hP-nEJ">
-            <size key="intrinsicContentSize" width="69" height="20.5"/>
+            <size key="intrinsicContentSize" width="81" height="20.5"/>
         </designable>
         <designable name="iEa-l3-4fa">
             <size key="intrinsicContentSize" width="20" height="37"/>
         </designable>
         <designable name="iO3-1R-V9e">
-            <size key="intrinsicContentSize" width="54" height="20.5"/>
+            <size key="intrinsicContentSize" width="66" height="20.5"/>
         </designable>
         <designable name="ipx-hw-RNe">
             <size key="intrinsicContentSize" width="30" height="30"/>

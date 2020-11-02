@@ -25,6 +25,9 @@
 		FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */; };
 		FC5CAE67254FA6CC0086EA13 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE66254FA6CC0086EA13 /* NetworkService.swift */; };
 		FC5CAE7B254FD6320086EA13 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */; };
+		FC631A73254FF4B500DFE242 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC631A72254FF4B500DFE242 /* Filter.storyboard */; };
+		FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A7A254FF7A400DFE242 /* FilterViewController.swift */; };
+		FC631A83254FF82F00DFE242 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A82254FF82F00DFE242 /* Filter.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
 		FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7851A22548A13300E60957 /* GithubSignService.swift */; };
 		FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC889A96254A764600E335CF /* CoordinatorManager.swift */; };
@@ -86,6 +89,9 @@
 		FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
 		FC5CAE66254FA6CC0086EA13 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		FC631A72254FF4B500DFE242 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
+		FC631A7A254FF7A400DFE242 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
+		FC631A82254FF82F00DFE242 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		FC78518E2548996400E60957 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		FC7851A22548A13300E60957 /* GithubSignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSignService.swift; sourceTree = "<group>"; };
 		FC889A96254A764600E335CF /* CoordinatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorManager.swift; sourceTree = "<group>"; };
@@ -188,6 +194,7 @@
 				F4383EC325493016003FB09D /* Issue.storyboard */,
 				F4383EC425493016003FB09D /* LaunchScreen.storyboard */,
 				F4383EC225493016003FB09D /* SignIn.storyboard */,
+				FC631A72254FF4B500DFE242 /* Filter.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -205,6 +212,7 @@
 		F4E10861254951F30086F453 /* Customs */ = {
 			isa = PBXGroup;
 			children = (
+				FC78518E2548996400E60957 /* RoundButton.swift */,
 				FC889AB7254AAE9900E335CF /* Issue */,
 			);
 			path = Customs;
@@ -227,10 +235,18 @@
 			path = utils;
 			sourceTree = "<group>";
 		};
+		FC631A79254FF78400DFE242 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				FC631A7A254FF7A400DFE242 /* FilterViewController.swift */,
+				FC631A82254FF82F00DFE242 /* Filter.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		FC78518D2548992900E60957 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
-				FC78518E2548996400E60957 /* RoundButton.swift */,
 				F4383ED2254931C9003FB09D /* BadgeView.swift */,
 			);
 			path = Designables;
@@ -319,6 +335,7 @@
 		FCF197182547BCA500AED031 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC631A79254FF78400DFE242 /* Filter */,
 				F4D544982549132600D9F4B9 /* Issue */,
 				FCF197382547FC9A00AED031 /* Sign */,
 			);
@@ -445,6 +462,7 @@
 			files = (
 				F4383EC525493016003FB09D /* SignIn.storyboard in Resources */,
 				F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */,
+				FC631A73254FF4B500DFE242 /* Filter.storyboard in Resources */,
 				F4383EC625493016003FB09D /* Issue.storyboard in Resources */,
 				FCF196EE2547AED200AED031 /* Assets.xcassets in Resources */,
 			);
@@ -594,10 +612,12 @@
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
+				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FC889AC3254AB17600E335CF /* Issues.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
 				FC889AA2254AA11200E335CF /* SelectButton.swift in Sources */,
+				FC631A83254FF82F00DFE242 /* Filter.swift in Sources */,
 				FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
