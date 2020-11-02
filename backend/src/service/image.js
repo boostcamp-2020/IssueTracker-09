@@ -1,5 +1,5 @@
 module.exports = {
-  upload: async ({ filename }) => {
+  upload: ({ filename }) => {
     if (!filename || !filename.match(/\.(jpeg|jpg|png)$/gi)) {
       return { error: '파일이 잘못되었거나 없습니다' };
     }
