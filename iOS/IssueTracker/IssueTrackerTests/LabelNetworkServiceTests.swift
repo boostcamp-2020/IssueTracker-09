@@ -10,7 +10,7 @@ import XCTest
 
 class LabelNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 1
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjA0MzAyMDA1LCJleHAiOjE2MDQzMDkyMDV9.0a7baujXtTt9BEcz7Rb7cCeOU95vu8TO9tXyw5RR4Lc"
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0MzI2ODY1LCJleHAiOjE2MDQzMzQwNjV9.yZ6tKcK2Tndm6dkseCRZQwk9FXause08HcUSDtbaSmc"
     static var originalToken: String?
     
     override class func setUp() {
