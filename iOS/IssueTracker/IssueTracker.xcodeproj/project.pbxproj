@@ -17,6 +17,7 @@
 		F403F36D254FFAD7004E8CF0 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F36C254FFAD7004E8CF0 /* Milestone.swift */; };
 		F403F375254FFDC4004E8CF0 /* CommentNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F374254FFDC4004E8CF0 /* CommentNetworkService.swift */; };
 		F403F37A254FFEA6004E8CF0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F379254FFEA6004E8CF0 /* Comment.swift */; };
+		F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F37E2550006E004E8CF0 /* MilestoneNetworkService.swift */; };
 		F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F38325500247004E8CF0 /* ImageNetworkService.swift */; };
 		F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
@@ -85,6 +86,7 @@
 		F403F36C254FFAD7004E8CF0 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
 		F403F374254FFDC4004E8CF0 /* CommentNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNetworkService.swift; sourceTree = "<group>"; };
 		F403F379254FFEA6004E8CF0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		F403F37E2550006E004E8CF0 /* MilestoneNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneNetworkService.swift; sourceTree = "<group>"; };
 		F403F38325500247004E8CF0 /* ImageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkService.swift; sourceTree = "<group>"; };
 		F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */,
 				F403F367254FF83C004E8CF0 /* IssueNetworkService.swift */,
 				F403F374254FFDC4004E8CF0 /* CommentNetworkService.swift */,
+				F403F37E2550006E004E8CF0 /* MilestoneNetworkService.swift */,
 				F403F38325500247004E8CF0 /* ImageNetworkService.swift */,
 			);
 			path = Networks;
@@ -609,6 +612,7 @@
 				FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
+				F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */,
 				FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */,
 				F403F375254FFDC4004E8CF0 /* CommentNetworkService.swift in Sources */,
 				FCF197212547BDAB00AED031 /* User.swift in Sources */,
