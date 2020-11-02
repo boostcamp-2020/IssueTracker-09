@@ -5,7 +5,7 @@ module.exports = async (service, param, status = 200) => {
     if (!result.error) {
       return { status, result };
     }
-    return { status: 403, result: result.error };
+    return { status: 400, result: result.error };
   } catch (error) {
     return { status: 500, result: error };
   }
