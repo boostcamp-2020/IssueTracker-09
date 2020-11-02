@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct Milestones: Codable {
+    let milestone: [Milestone]
+}
+
 struct Milestone: Codable {
     let id: Int
     let title, content, deadline: String
