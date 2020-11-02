@@ -39,7 +39,7 @@ module.exports = {
     if (!name || !code) {
       return { error: '정보가 부족합니다' };
     }
-    const user = await User.findOrCreate({
+    const [user] = await User.findOrCreate({
       where: { user_code: 'g' + code },
       defaults: {
         user_code: 'g' + code,
@@ -48,8 +48,8 @@ module.exports = {
       },
     });
 
-    enrollList(user[0].id);
-    return createJWT(user[0].id);
+    enrollList(user.id);
+    return { token: createJWT(user.id) };
   },
 
   logout: (user) => {
