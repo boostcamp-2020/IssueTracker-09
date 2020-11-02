@@ -30,7 +30,7 @@ class SignViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        performExistingAccountSetupFlows()
+//        performExistingAccountSetupFlows()
     }
     
     func setUpProviderLoginView() {
@@ -55,9 +55,8 @@ class SignViewController: UIViewController {
     }
     
     @IBAction func touchedCompleteButton(_ sender: Any) {
-//        request?.requestCode()
-        
-        self.delegate?.navigateToPage()
+        request?.requestCode()
+//        self.delegate?.navigateToPage()
     }
     
     @objc func handleAuthorizationAppleIDButtonPress() {

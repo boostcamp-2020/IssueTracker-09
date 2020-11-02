@@ -34,3 +34,18 @@ extension SignCoordinator: NextCoordinatorDelegate {
         delegate?.start(name: .Issue)
     }
 }
+
+extension SignCoordinator {
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didTokenRecieved), name: .succeededBySign, object: nil)
+    }
+    
+    @objc func didTokenRecieved(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let token = userInfo["token"] as? String else { return }
+        
+        if PersistenceManager.shared.save(token, forKey: .token) {
+            navigateToPage()
+        }
+    }
+}

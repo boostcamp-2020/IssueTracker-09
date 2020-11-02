@@ -22,7 +22,7 @@ class GithubSignService: AuthorizationRequestable {
     // signviewcontroller 실행 함수
     func requestCode() {
         //        let scope = "repo,user"
-        let scope = "user"
+        let scope = "user:email"
         let urlString = "https://github.com/login/oauth/authorize?client_id=\(client_id)&scope=\(scope)"
         if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url)
@@ -45,11 +45,7 @@ class GithubSignService: AuthorizationRequestable {
             case let .success(json):
                 if let dic = json as? [String: String] {
                     let accessToken = dic["access_token"] ?? ""
-                    print(accessToken)
-                    
                     self.getUser(token: accessToken)
-                    //                    KeychainSwift().set(accessToken, forKey: "accessToken")
-                    // accessToken 저장, keychainSwift를 사용하든 userdefault로 만들든
                 }
             case let .failure(error):
                 print(error)
@@ -59,21 +55,29 @@ class GithubSignService: AuthorizationRequestable {
     
     func getUser(token: String) {
         let url = "https://api.github.com/user"
-        //            let accessToken = KeychainSwift().get("accessToken") ?? ""
         let headers: HTTPHeaders = ["Accept": "application/vnd.github.v3+json",
                                     "Authorization": "token \(token)"]
-        
         AF.request(url, method: .get, parameters: [:], headers: headers).responseJSON(completionHandler: { (response) in
             switch response.result {
-            case .success(let json):
-                print(json as! [String: Any])
-            case .failure:
-                print("")
+            case .success(let value):
+                if let jsonObj = value as? Dictionary<String, Any>
+                {
+                    guard let name =  jsonObj["login"] as? String,
+                          let id = jsonObj["id"] as? Int,
+                          let image = jsonObj["avatar_url"] as? String else {
+                        return
+                    }
+                    let service = UserNetworkService(endPoint: .github)
+                    service.post(code: String(id), name: name, image: image)
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
             }
         })
     }
-    
-//    func logout() {
-        //        KeychainSwift().clear()
-//    }
+}
+
+
+extension Notification.Name {
+    static let succeededBySign = Notification.Name(rawValue: "succeededBySign")
 }
