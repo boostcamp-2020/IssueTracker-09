@@ -12,7 +12,7 @@ module.exports = {
       deadline,
       is_opened: true,
     });
-    return result;
+    return { milestone: result };
   },
 
   read: async () => {
@@ -20,7 +20,7 @@ module.exports = {
       include: [Issue],
     });
 
-    return milestones.map((mile) => {
+    const milestone = milestones.map((mile) => {
       const open = mile.Issues.filter((issue) => issue.is_opened).length;
       const total = mile.Issues.length;
       mile.dataValues['openCount'] = open;
@@ -28,6 +28,8 @@ module.exports = {
       delete mile.dataValues.Issues;
       return mile.dataValues;
     });
+
+    return { milestone };
   },
 
   update: async ({ id, title, deadline, content }) => {
@@ -39,8 +41,8 @@ module.exports = {
       { title, deadline, content },
       { where: { id } }
     );
-    if (result === 1) return true;
-    return false;
+    if (result === 1) return { response: true };
+    return { response: false };
   },
   remove: async ({ id }) => {
     if (!id) {
@@ -50,8 +52,8 @@ module.exports = {
     const result = await Milestone.destroy({
       where: { id },
     });
-    if (result === 1) return true;
-    return false;
+    if (result === 1) return { response: true };
+    return { response: false };
   },
 
   updateState: async ({ id }) => {
@@ -72,7 +74,7 @@ module.exports = {
       { where: { id } }
     );
     if (result) {
-      return true;
+      return { response: true };
     }
     return { error: 'Milestone 상태 변경 실패' };
   },
