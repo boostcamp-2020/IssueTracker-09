@@ -43,6 +43,7 @@ module.exports = {
       ],
       attributes: ['id', 'title', 'content', 'is_opened'],
     });
+    // eslint-disable-next-line no-undef
     const issue = await Promise.all(
       issues.map(async (issue) => {
         issue.dataValues['commentCount'] = issue.dataValues.Comments.length;
@@ -78,6 +79,7 @@ module.exports = {
     }
     return { error: '없는 id값 입니다.' };
   },
+
   updateMilestone: async ({ id, milestoneId }) => {
     if (!id) {
       return { error: '정보가 부족합니다.' };
@@ -91,6 +93,7 @@ module.exports = {
     }
     return { error: '없는 id값 입니다.' };
   },
+
   updateState: async ({ id }) => {
     if (!id) {
       return { error: '정보가 부족합니다.' };
@@ -111,5 +114,43 @@ module.exports = {
       return true;
     }
     return { error: 'Issue 상태 변경 실패' };
+  },
+
+  updateAssignee: async ({ id, assigneeId }) => {
+    if (!id || !assigneeId) {
+      return { error: '정보가 부족합니다' };
+    }
+    const issue = await Model.Issue.findOne({ where: { id } });
+    if (!issue) {
+      return { error: '이슈가 없습니다' };
+    }
+
+    const [assignee] = await issue.getUsers({ where: { id: assigneeId } });
+
+    if (assignee) {
+      await issue.removeUser(assigneeId);
+      return true;
+    }
+    await issue.addUser(assigneeId);
+    return true;
+  },
+
+  updateLabel: async ({ id, labelId }) => {
+    if (!id || !labelId) {
+      return { error: '정보가 부족합니다' };
+    }
+    const issue = await Model.Issue.findOne({ where: { id } });
+    if (!issue) {
+      return { error: '이슈가 없습니다' };
+    }
+
+    const [label] = await issue.getLabels({ where: { id: labelId } });
+
+    if (label) {
+      await issue.removeLabel(labelId);
+      return true;
+    }
+    await issue.addLabel(labelId);
+    return true;
   },
 };
