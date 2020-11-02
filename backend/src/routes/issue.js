@@ -10,9 +10,11 @@ router.get('/', issueController.read);
 
 router.post('/', issueController.create);
 
-router.put('/title/:id');
+router.put('/title/:id', issueController.updateTitle);
 
-router.put('/content/:id');
+router.put('/milestone/:id', issueController.updateMilestone);
+
+router.put('/state/:id', issueController.updateState);
 
 router.put('/assignee/:id');
 
