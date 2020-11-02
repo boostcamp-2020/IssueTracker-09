@@ -11,6 +11,7 @@
 		89150E3734F65360C8454EF7 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501DBAF80480CA260A53F37D /* Pods_IssueTracker.framework */; };
 		AB6D4AAFBB7C541FE6F6CE42 /* Pods_IssueTracker_IssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F94E7BBED9364B061AB20 /* Pods_IssueTracker_IssueTrackerUITests.framework */; };
 		F4012A4A255023F50047CE91 /* Milestone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4012A49255023F50047CE91 /* Milestone.storyboard */; };
+		F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A4F255027460047CE91 /* MilestoneViewController.swift */; };
 		F4012A592550277C0047CE91 /* MilestoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A582550277C0047CE91 /* MilestoneCollectionViewCell.swift */; };
 		F4012A7025502BD80047CE91 /* MilestoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */; };
 		F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */; };
@@ -83,6 +84,7 @@
 		E934C920EDEFA21987108F25 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F4012A49255023F50047CE91 /* Milestone.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Milestone.storyboard; sourceTree = "<group>"; };
+		F4012A4F255027460047CE91 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		F4012A582550277C0047CE91 /* MilestoneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCoordinator.swift; sourceTree = "<group>"; };
 		F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 		F4012A4E255027340047CE91 /* Milestone */ = {
 			isa = PBXGroup;
 			children = (
+				F4012A4F255027460047CE91 /* MilestoneViewController.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -667,6 +670,7 @@
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				F403F37A254FFEA6004E8CF0 /* Comment.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
+				F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */,
 				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
 				FC889AA2254AA11200E335CF /* SelectButton.swift in Sources */,
 				F403F353254FE67E004E8CF0 /* Label.swift in Sources */,
