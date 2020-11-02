@@ -8,15 +8,10 @@
 import Foundation
 
 class LocalIssueService: IssueService {
-    let issue = Issue(number: 0,
-                      title: "레이블 목록 보기 구현",
-                      description: "레이블 전체 목록을 볼 수 있어야 한다 2줄까지 보입니다.",
-                      sprint: "",
-                      labels: [""],
-                      status: .opened)
+    let issue = Issue(id: 0, title: "레이블 목록 보기 구현", content: "레이블 전체 목록을 볼 수 있어야 한다 2줄까지 보입니다.", isOpened: true, milestone: nil, commentCount: 0, user: [], label: [])
     
     internal lazy var issues = {
-       return Issues([issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue])
+        return Issues(issues: [issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue])
     }()
     
     subscript(at: Int) -> Issue {
