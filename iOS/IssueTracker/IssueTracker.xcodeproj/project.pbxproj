@@ -15,6 +15,7 @@
 		F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */; };
 		F403F368254FF83C004E8CF0 /* IssueNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F367254FF83C004E8CF0 /* IssueNetworkService.swift */; };
 		F403F36D254FFAD7004E8CF0 /* Milestone.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F36C254FFAD7004E8CF0 /* Milestone.swift */; };
+		F403F37A254FFEA6004E8CF0 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F379254FFEA6004E8CF0 /* Comment.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
@@ -79,6 +80,7 @@
 		F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F403F367254FF83C004E8CF0 /* IssueNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNetworkService.swift; sourceTree = "<group>"; };
 		F403F36C254FFAD7004E8CF0 /* Milestone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Milestone.swift; sourceTree = "<group>"; };
+		F403F379254FFEA6004E8CF0 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				F44851732549721F00A84527 /* Issue.swift */,
 				F403F352254FE67E004E8CF0 /* Label.swift */,
 				F403F36C254FFAD7004E8CF0 /* Milestone.swift */,
+				F403F379254FFEA6004E8CF0 /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
