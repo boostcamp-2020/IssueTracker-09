@@ -8,7 +8,7 @@
 import Foundation
 
 struct Labels: Codable {
-    let labels: [Label]
+    let label: [Label]
 }
 
 struct Label: Codable {
