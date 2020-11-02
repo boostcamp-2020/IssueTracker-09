@@ -8,7 +8,7 @@
 import Foundation
 
 enum NetworkError: Error {
-    case param, server, data, unknown
+    case param, server, data, response, unknown
     
     var localizedDescription: String {
         switch self {
@@ -18,6 +18,8 @@ enum NetworkError: Error {
             return "서버 호출 실패하였습니다."
         case .data:
             return "데이터가 없습니다."
+        case .response:
+            return "잘못된 응답입니다."
         case .unknown:
             return "알 수 없는 에러입니다."
         }
