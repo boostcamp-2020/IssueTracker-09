@@ -23,8 +23,9 @@ module.exports = {
         },
         { transaction }
       );
+
       await issue.addLabels(labelId, { transaction });
-      await issue.addUsers(assigneeId, { transaction });
+      await issue.addIssues(assigneeId, { transaction });
       transaction.commit();
       return true;
     } catch (error) {
@@ -32,30 +33,27 @@ module.exports = {
       return { error };
     }
   },
+
   read: async () => {
     const issues = await Model.Issue.findAll({
       include: [
-        { model: Model.Milestone, required: false },
         {
-          model: Model.Comment,
-          required: false,
+          model: Model.User,
+          as: 'Issues',
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Model.Label,
+          through: {
+            attributes: [],
+          },
         },
       ],
-      attributes: ['id', 'title', 'content', 'is_opened'],
     });
-    // eslint-disable-next-line no-undef
-    const issue = await Promise.all(
-      issues.map(async (issue) => {
-        issue.dataValues['commentCount'] = issue.dataValues.Comments.length;
-        delete issue.dataValues.Comments;
-        const users = await issue.getUsers();
-        const labels = await issue.getLabels();
-        issue.dataValues['user'] = users;
-        issue.dataValues['label'] = labels;
-        return issue.dataValues;
-      })
-    );
-    return issue;
+
+    return issues;
   },
 
   remove: async ({ id }) => {
@@ -125,13 +123,13 @@ module.exports = {
       return { error: '이슈가 없습니다' };
     }
 
-    const [assignee] = await issue.getUsers({ where: { id: assigneeId } });
+    const [assignee] = await issue.getIssues({ where: { id: assigneeId } });
 
     if (assignee) {
-      await issue.removeUser(assigneeId);
+      await issue.removeIssue(assigneeId);
       return true;
     }
-    await issue.addUser(assigneeId);
+    await issue.addIssue(assigneeId);
     return true;
   },
 
