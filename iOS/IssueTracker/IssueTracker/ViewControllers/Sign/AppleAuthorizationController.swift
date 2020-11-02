@@ -25,28 +25,12 @@ extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
+            let id = appleIDCredential.user
+            let name = appleIDCredential.fullName
+            print("name :: \(name)")
             
-            print("ASAuthorizationAppleIDCredential")
-            print("indenifier : \(userIdentifier)")
-            print("name : \(String(describing: fullName))")
-            print("mail : \(String(describing: email))")
-            
-        // TODO: - 다음 화면으로 이동
-        case let passwordCredential as ASPasswordCredential:
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-            
-            print("ASPasswordCredential")
-            print("name : \(username)")
-            print("password : \(password)")
-            
-            
-            DispatchQueue.main.async {
-                // TODO: - 다음 화면으로 이동
-            }
+//            let service = UserNetworkService(endPoint: .apple)
+//            service.post(code: String(id), name: name)
         default:
             print("entry defaault")
             break
