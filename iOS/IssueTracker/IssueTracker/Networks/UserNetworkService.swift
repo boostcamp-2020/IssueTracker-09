@@ -18,7 +18,6 @@ class UserNetworkService: NetworkService {
     
     let endPoint: Endpoint
     
-    
     init(endPoint: Endpoint) {
         self.endPoint = endPoint
     }
