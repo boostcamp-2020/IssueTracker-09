@@ -21,16 +21,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinatorManager = CoordinatorManager(window: window)
         
         // user 정보 없을 시,
-        coordinatorManager?.start(name: .Sign)
+//        coordinatorManager?.start(name: .Sign)
         
         // user 정보 존재 시,
-        // coordinatorManager?.start(name: .Issue)
+         coordinatorManager?.start(name: .Issue)
     }
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
         if let url = URLContexts.first?.url {
-            
             print(url)
             if url.absoluteString.starts(with: "issuetracker09://") {
                 if let code = url.absoluteString.split(separator: "=").last.map({ String($0) }) {
