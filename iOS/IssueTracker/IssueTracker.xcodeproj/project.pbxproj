@@ -10,6 +10,7 @@
 		19FD95BC9026B8AEE33B4109 /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89229A57067B707D9CB2A4CA /* Pods_IssueTrackerTests.framework */; };
 		89150E3734F65360C8454EF7 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501DBAF80480CA260A53F37D /* Pods_IssueTracker.framework */; };
 		AB6D4AAFBB7C541FE6F6CE42 /* Pods_IssueTracker_IssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F94E7BBED9364B061AB20 /* Pods_IssueTracker_IssueTrackerUITests.framework */; };
+		F403F353254FE67E004E8CF0 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F352254FE67E004E8CF0 /* Label.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
@@ -70,6 +71,7 @@
 		BC861D99C25ED94CF15F7D8B /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E934C920EDEFA21987108F25 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		F403F352254FE67E004E8CF0 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -312,6 +314,7 @@
 				FCF197202547BDAB00AED031 /* User.swift */,
 				F44851732549721F00A84527 /* Issue.swift */,
 				FC889AC2254AB17600E335CF /* Issues.swift */,
+				F403F352254FE67E004E8CF0 /* Label.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -598,6 +601,7 @@
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
 				FC889AA2254AA11200E335CF /* SelectButton.swift in Sources */,
+				F403F353254FE67E004E8CF0 /* Label.swift in Sources */,
 				FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
