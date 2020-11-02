@@ -12,7 +12,7 @@ router.post('/', issueController.create);
 
 router.put('/title/:id', issueController.updateTitle);
 
-router.put('/milestone/:id');
+router.put('/milestone/:id', issueController.updateMilestone);
 
 router.put('/state/:id');
 

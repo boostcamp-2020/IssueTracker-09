@@ -50,4 +50,18 @@ module.exports = {
       return res.status(500).json(error);
     }
   },
+  updateMilestone: async (req, res) => {
+    try {
+      const result = await issueService.updateMilestone({
+        ...req.body,
+        ...req.params,
+      });
+      if (!result.error) {
+        return res.status(200).json(result);
+      }
+      return res.status(403).json(result.error);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 };
