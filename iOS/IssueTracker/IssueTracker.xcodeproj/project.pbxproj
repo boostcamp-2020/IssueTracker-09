@@ -22,6 +22,9 @@
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
+		FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */; };
+		FC5CAE67254FA6CC0086EA13 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE66254FA6CC0086EA13 /* NetworkService.swift */; };
+		FC5CAE7B254FD6320086EA13 /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
 		FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7851A22548A13300E60957 /* GithubSignService.swift */; };
 		FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC889A96254A764600E335CF /* CoordinatorManager.swift */; };
@@ -80,6 +83,9 @@
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
+		FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
+		FC5CAE66254FA6CC0086EA13 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
 		FC78518E2548996400E60957 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		FC7851A22548A13300E60957 /* GithubSignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSignService.swift; sourceTree = "<group>"; };
 		FC889A96254A764600E335CF /* CoordinatorManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorManager.swift; sourceTree = "<group>"; };
@@ -204,6 +210,23 @@
 			path = Customs;
 			sourceTree = "<group>";
 		};
+		FC5CAE58254FA11B0086EA13 /* Networks */ = {
+			isa = PBXGroup;
+			children = (
+				FC5CAE66254FA6CC0086EA13 /* NetworkService.swift */,
+				FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */,
+			);
+			path = Networks;
+			sourceTree = "<group>";
+		};
+		FC5CAE6E254FD4E20086EA13 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		FC78518D2548992900E60957 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,10 +274,12 @@
 			isa = PBXGroup;
 			children = (
 				F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */,
+				FC5CAE6E254FD4E20086EA13 /* utils */,
 				F4AF30422547CF26006D7D0A /* Views */,
 				FCF197182547BCA500AED031 /* ViewControllers */,
 				FCF197172547BC9F00AED031 /* Models */,
 				F448517D2549833700A84527 /* Coordinators */,
+				FC5CAE58254FA11B0086EA13 /* Networks */,
 				FCF196E42547AED000AED031 /* AppDelegate.swift */,
 				FCF196E62547AED000AED031 /* SceneDelegate.swift */,
 				FCF196ED2547AED200AED031 /* Assets.xcassets */,
@@ -554,6 +579,8 @@
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
 				FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */,
 				FCF197212547BDAB00AED031 /* User.swift in Sources */,
+				FC5CAE7B254FD6320086EA13 /* PersistenceManager.swift in Sources */,
+				FC5CAE67254FA6CC0086EA13 /* NetworkService.swift in Sources */,
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
 				F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */,
 				F44851792549736900A84527 /* LocalIssueService.swift in Sources */,
@@ -568,6 +595,7 @@
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				FC889AC3254AB17600E335CF /* Issues.swift in Sources */,
+				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
 				FC889AA2254AA11200E335CF /* SelectButton.swift in Sources */,
 				FCF1973D2547FE8800AED031 /* AppleAuthorizationController.swift in Sources */,
