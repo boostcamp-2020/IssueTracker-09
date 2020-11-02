@@ -91,4 +91,25 @@ module.exports = {
     }
     return { error: '없는 id값 입니다.' };
   },
+  updateState: async ({ id }) => {
+    if (!id) {
+      return { error: '정보가 부족합니다.' };
+    }
+    const issue = await Model.Issue.findOne({
+      where: { id },
+      attributes: [['is_opened', 'isOpened']],
+    });
+    if (!issue) {
+      return { error: '없는 id값 입니다.' };
+    }
+    const isOpened = issue.dataValues;
+    const [result] = await Model.Issue.update(
+      { is_opened: !isOpened },
+      { where: { id } }
+    );
+    if (result) {
+      return true;
+    }
+    return { error: 'Issue 상태 변경 실패' };
+  },
 };
