@@ -26,13 +26,15 @@ extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let id = appleIDCredential.user
-            let name = appleIDCredential.fullName
-            print("name :: \(name)")
+            if let name = appleIDCredential.fullName?.givenName {
+                PersistenceManager.shared.save(name, forKey: .name)
+            }
+
+            guard let name = PersistenceManager.shared.load(forKey: .name) else { return }
+            let service = UserNetworkService(endPoint: .apple)
+            service.post(code: id, name: name)
             
-//            let service = UserNetworkService(endPoint: .apple)
-//            service.post(code: String(id), name: name)
         default:
-            print("entry defaault")
             break
         }
     }
