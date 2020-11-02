@@ -37,14 +37,11 @@ module.exports = {
   },
 
   updateState: async (req, res) => {
-    try {
-      const result = await milestoneService.updateState(req.params);
-      if (!result.error) {
-        return res.status(200).json(result);
-      }
-      return res.status(403).json(result.error);
-    } catch (error) {
-      return res.status(500).json(error);
-    }
+    const { status, result } = await control(
+      milestoneService.updateState,
+      req.params
+    );
+
+    return res.status(status).json(result);
   },
 };
