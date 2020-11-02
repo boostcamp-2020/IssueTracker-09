@@ -11,6 +11,8 @@ import KeychainSwift
 
 enum Keys: String {
     case token
+    case name
+    case id
 }
 
 class PersistenceManager {
