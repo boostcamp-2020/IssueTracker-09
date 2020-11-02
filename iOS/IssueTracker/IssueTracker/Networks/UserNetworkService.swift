@@ -12,8 +12,8 @@ import Alamofire
 
 class UserNetworkService: NetworkService {
     enum Endpoint: String {
-        case github = "api/user/github/ios"
-        case apple = "api/user/apple"
+        case github = "/user/github/ios"
+        case apple = "/user/apple"
     }
     
     let endPoint: Endpoint

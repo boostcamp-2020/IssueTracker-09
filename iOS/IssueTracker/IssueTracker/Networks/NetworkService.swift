@@ -25,7 +25,5 @@ enum NetworkError: Error {
 }
 
 class NetworkService {
-    let baseURL: String = "http://49.50.172.108:3000/"
-    
-    
+    let baseURL: String = "http://49.50.172.108:3000/api"
 }
