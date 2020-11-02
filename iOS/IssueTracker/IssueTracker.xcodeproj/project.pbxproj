@@ -10,6 +10,7 @@
 		19FD95BC9026B8AEE33B4109 /* Pods_IssueTrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89229A57067B707D9CB2A4CA /* Pods_IssueTrackerTests.framework */; };
 		89150E3734F65360C8454EF7 /* Pods_IssueTracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 501DBAF80480CA260A53F37D /* Pods_IssueTracker.framework */; };
 		AB6D4AAFBB7C541FE6F6CE42 /* Pods_IssueTracker_IssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F94E7BBED9364B061AB20 /* Pods_IssueTracker_IssueTrackerUITests.framework */; };
+		F4012A7025502BD80047CE91 /* MilestoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */; };
 		F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */; };
 		F403F353254FE67E004E8CF0 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F352254FE67E004E8CF0 /* Label.swift */; };
 		F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */; };
@@ -79,6 +80,7 @@
 		BC861D99C25ED94CF15F7D8B /* Pods-IssueTracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.debug.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.debug.xcconfig"; sourceTree = "<group>"; };
 		E934C920EDEFA21987108F25 /* Pods-IssueTracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTracker.release.xcconfig"; path = "Target Support Files/Pods-IssueTracker/Pods-IssueTracker.release.xcconfig"; sourceTree = "<group>"; };
 		F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCoordinator.swift; sourceTree = "<group>"; };
 		F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		F403F352254FE67E004E8CF0 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
 		F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkServiceTests.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				FCF197332547FAB100AED031 /* SignCoordinator.swift */,
 				F448517E2549834F00A84527 /* IssueCoordinator.swift */,
 				F44851862549835600A84527 /* Coordinator.swift */,
+				F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -613,6 +616,7 @@
 				FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
+				F4012A7025502BD80047CE91 /* MilestoneCoordinator.swift in Sources */,
 				F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */,
 				F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */,
 				FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */,
