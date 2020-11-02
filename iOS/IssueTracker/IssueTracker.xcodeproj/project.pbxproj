@@ -13,6 +13,8 @@
 		F4012A4A255023F50047CE91 /* Milestone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4012A49255023F50047CE91 /* Milestone.storyboard */; };
 		F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A4F255027460047CE91 /* MilestoneViewController.swift */; };
 		F4012A592550277C0047CE91 /* MilestoneCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A582550277C0047CE91 /* MilestoneCollectionViewCell.swift */; };
+		F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A65255028A50047CE91 /* MilestoneService.swift */; };
+		F4012A6B255028AD0047CE91 /* MilestoneCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A6A255028AD0047CE91 /* MilestoneCacheService.swift */; };
 		F4012A7025502BD80047CE91 /* MilestoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */; };
 		F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */; };
 		F403F353254FE67E004E8CF0 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F352254FE67E004E8CF0 /* Label.swift */; };
@@ -86,6 +88,8 @@
 		F4012A49255023F50047CE91 /* Milestone.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Milestone.storyboard; sourceTree = "<group>"; };
 		F4012A4F255027460047CE91 /* MilestoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneViewController.swift; sourceTree = "<group>"; };
 		F4012A582550277C0047CE91 /* MilestoneCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4012A65255028A50047CE91 /* MilestoneService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneService.swift; sourceTree = "<group>"; };
+		F4012A6A255028AD0047CE91 /* MilestoneCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCacheService.swift; sourceTree = "<group>"; };
 		F4012A6F25502BD70047CE91 /* MilestoneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCoordinator.swift; sourceTree = "<group>"; };
 		F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		F403F352254FE67E004E8CF0 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				F4012A4F255027460047CE91 /* MilestoneViewController.swift */,
+				F4012A65255028A50047CE91 /* MilestoneService.swift */,
+				F4012A6A255028AD0047CE91 /* MilestoneCacheService.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -641,6 +647,7 @@
 			files = (
 				FC889A97254A764600E335CF /* CoordinatorManager.swift in Sources */,
 				F4012A592550277C0047CE91 /* MilestoneCollectionViewCell.swift in Sources */,
+				F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
 				F4012A7025502BD80047CE91 /* MilestoneCoordinator.swift in Sources */,
@@ -654,6 +661,7 @@
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
 				F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */,
 				F44851792549736900A84527 /* LocalIssueService.swift in Sources */,
+				F4012A6B255028AD0047CE91 /* MilestoneCacheService.swift in Sources */,
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */,
 				FC889ACB254ABDA300E335CF /* BarButtonController.swift in Sources */,
