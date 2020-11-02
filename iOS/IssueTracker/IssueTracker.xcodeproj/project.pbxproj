@@ -12,6 +12,7 @@
 		AB6D4AAFBB7C541FE6F6CE42 /* Pods_IssueTracker_IssueTrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AB6F94E7BBED9364B061AB20 /* Pods_IssueTracker_IssueTrackerUITests.framework */; };
 		F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */; };
 		F403F353254FE67E004E8CF0 /* Label.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F352254FE67E004E8CF0 /* Label.swift */; };
+		F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
@@ -39,7 +40,6 @@
 		FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E62547AED000AED031 /* SceneDelegate.swift */; };
 		FCF196E92547AED000AED031 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E82547AED000AED031 /* SignViewController.swift */; };
 		FCF196EE2547AED200AED031 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FCF196ED2547AED200AED031 /* Assets.xcassets */; };
-		FCF196FC2547AED200AED031 /* IssueTrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196FB2547AED200AED031 /* IssueTrackerTests.swift */; };
 		FCF197072547AED200AED031 /* IssueTrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197062547AED200AED031 /* IssueTrackerUITests.swift */; };
 		FCF197212547BDAB00AED031 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197202547BDAB00AED031 /* User.swift */; };
 		FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF197332547FAB100AED031 /* SignCoordinator.swift */; };
@@ -75,6 +75,7 @@
 		F1FBA2F30619AD3ECA21E57C /* Pods-IssueTrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IssueTrackerTests.release.xcconfig"; path = "Target Support Files/Pods-IssueTrackerTests/Pods-IssueTrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hexString.swift"; sourceTree = "<group>"; };
 		F403F352254FE67E004E8CF0 /* Label.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Label.swift; sourceTree = "<group>"; };
+		F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -106,7 +107,6 @@
 		FCF196ED2547AED200AED031 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FCF196F22547AED200AED031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF196F72547AED200AED031 /* IssueTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		FCF196FB2547AED200AED031 /* IssueTrackerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerTests.swift; sourceTree = "<group>"; };
 		FCF196FD2547AED200AED031 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FCF197022547AED200AED031 /* IssueTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = IssueTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF197062547AED200AED031 /* IssueTrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTrackerUITests.swift; sourceTree = "<group>"; };
@@ -307,8 +307,8 @@
 		FCF196FA2547AED200AED031 /* IssueTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
-				FCF196FB2547AED200AED031 /* IssueTrackerTests.swift */,
 				FCF196FD2547AED200AED031 /* Info.plist */,
+				F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
@@ -627,7 +627,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCF196FC2547AED200AED031 /* IssueTrackerTests.swift in Sources */,
+				F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
