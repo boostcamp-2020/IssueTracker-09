@@ -11,7 +11,6 @@ struct Issues: Codable {
     var issues: [Issue]
 }
 
-// MARK: - TopLevelElement
 struct Issue: Codable {
     let id: Int
     let title, content: String
@@ -29,7 +28,6 @@ struct Issue: Codable {
     }
 }
 
-// MARK: - AssigneeIssue
 struct AssigneeIssue: Codable {
     let userID, issueID: Int
     
