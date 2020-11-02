@@ -56,11 +56,11 @@ describe('Label Controller 테스트', () => {
       expect(res._isJSON()).toBeTruthy();
     });
 
-    it('에러가 나면 403응답이 오는가', async () => {
+    it('에러가 나면 400응답이 오는가', async () => {
       const errorMessage = { error: 'Error Message' };
       labelService.create.mockReturnValue(errorMessage);
       await labelController.create(req, res);
-      expect(res.statusCode).toBe(403);
+      expect(res.statusCode).toBe(400);
       expect(res._isEndCalled()).toBeTruthy();
     });
     it('서버에서 에러가 나면 500응답이 오는가', async () => {
@@ -89,11 +89,11 @@ describe('Label Controller 테스트', () => {
       expect(res._isJSON()).toBeTruthy();
     });
 
-    it('에러가 나면 403응답이 오는가', async () => {
+    it('에러가 나면 400응답이 오는가', async () => {
       const errorMessage = { error: 'Error Message' };
       labelService.read.mockReturnValue(errorMessage);
       await labelController.read(req, res);
-      expect(res.statusCode).toBe(403);
+      expect(res.statusCode).toBe(400);
       expect(res._isEndCalled()).toBeTruthy();
     });
 
@@ -127,11 +127,11 @@ describe('Label Controller 테스트', () => {
       expect(res._isEndCalled()).toBeTruthy();
     });
 
-    it('에러가 나면 403응답이 오는가', async () => {
+    it('에러가 나면 400응답이 오는가', async () => {
       const errorMessage = { error: 'Error Message' };
       labelService.update.mockReturnValue(errorMessage);
       await labelController.update(req, res);
-      expect(res.statusCode).toBe(403);
+      expect(res.statusCode).toBe(400);
       expect(res._isEndCalled()).toBeTruthy();
     });
 
@@ -164,11 +164,11 @@ describe('Label Controller 테스트', () => {
       expect(res._isEndCalled()).toBeTruthy();
     });
 
-    it('에러가 나면 403응답이 오는가', async () => {
+    it('에러가 나면 400응답이 오는가', async () => {
       const errorMessage = { error: 'Error Message' };
       labelService.remove.mockReturnValue(errorMessage);
       await labelController.remove(req, res);
-      expect(res.statusCode).toBe(403);
+      expect(res.statusCode).toBe(400);
       expect(res._isEndCalled()).toBeTruthy();
     });
 

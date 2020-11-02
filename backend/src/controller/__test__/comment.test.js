@@ -53,11 +53,11 @@ describe('create comment Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     commentService.create.mockReturnValue(errorMessage);
     await commentController.create(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -100,11 +100,11 @@ describe('remove comment Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     commentService.remove.mockReturnValue(errorMessage);
     await commentController.remove(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -153,11 +153,11 @@ describe('update comment Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     commentService.update.mockReturnValue(errorMessage);
     await commentController.update(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -197,11 +197,11 @@ describe('read comment Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     commentService.read.mockReturnValue(errorMessage);
     await commentController.read(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
