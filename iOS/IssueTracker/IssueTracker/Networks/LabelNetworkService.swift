@@ -14,7 +14,8 @@ class LabelNetworkService: NetworkService {
     }
     
     func addLabel(color: UIColor, title: String, content: String, completion handler: @escaping (Result<Label, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.label.rawValue) else {
+        guard let url = URL(string: baseURL + Endpoint.label.rawValue),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
@@ -32,7 +33,8 @@ class LabelNetworkService: NetworkService {
     }
     
     func fetchLabels(completion handler: @escaping (Result<Labels, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.label.rawValue) else {
+        guard let url = URL(string: baseURL + Endpoint.label.rawValue),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
@@ -48,7 +50,8 @@ class LabelNetworkService: NetworkService {
     }
     
     func modifyLabel(to label: Label) {
-        guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(label.id)") else {
+        guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(label.id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
@@ -66,7 +69,8 @@ class LabelNetworkService: NetworkService {
     }
     
     func deleteLabel(id: Int) {
-        guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(id)") else {
+        guard let url = URL(string: baseURL + Endpoint.label.rawValue + "/\(id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
