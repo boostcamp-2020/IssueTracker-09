@@ -48,11 +48,11 @@ describe('gitHubLogin user Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     userService.gitHubLogin.mockReturnValue(errorMessage);
     await userController.gitHubLogin(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 });
@@ -88,11 +88,11 @@ describe('iOSAppleLogin user Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     userService.iOSAppleLogin.mockReturnValue(errorMessage);
     await userController.iOSAppleLogin(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 });
@@ -118,11 +118,11 @@ describe('getUsers user Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     userService.getUsers.mockReturnValue(errorMessage);
     await userController.getUsers(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 });
@@ -145,10 +145,10 @@ describe('iOSGithubLogin user Controller 테스트', () => {
     expect(userService.iOSGithubLogin).toBeCalledWith(newUser);
   });
 
-  it('성공 시 201응답이 오는가', async () => {
+  it('성공 시 200응답이 오는가', async () => {
     userService.iOSGithubLogin.mockReturnValue(resulted);
     await userController.iOSGitHubLogin(req, res);
-    expect(res.statusCode).toBe(201);
+    expect(res.statusCode).toBe(200);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -158,11 +158,11 @@ describe('iOSGithubLogin user Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     userService.iOSGithubLogin.mockReturnValue(errorMessage);
     await userController.iOSGitHubLogin(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 });
