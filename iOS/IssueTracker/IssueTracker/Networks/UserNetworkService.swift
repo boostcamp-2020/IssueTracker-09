@@ -34,9 +34,9 @@ class UserNetworkService: NetworkService {
                                          "name": name,
                                          "image": image ]
         
-        let alamo = AF.request(url, method: .post, parameters: params).validate(statusCode: 200..<300)
-        
-        alamo.responseJSON { response in
+        AF.request(url, method: .post, parameters: params)
+            .validate()
+            .responseJSON { response in
             switch response.result {
             case .success(let value):
                 guard let dic = value as? [String: Any],

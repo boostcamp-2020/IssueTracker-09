@@ -10,7 +10,7 @@ import XCTest
 
 class ImageNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 1
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjA0MzAyMDA1LCJleHAiOjE2MDQzMDkyMDV9.0a7baujXtTt9BEcz7Rb7cCeOU95vu8TO9tXyw5RR4Lc"
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0MzgyNTE2fQ.B2JyeokIT-ImtQBL_J7Blz6H2hTjn70WuDZmmnRGz6Y"
     static var originalToken: String?
     
     override class func setUp() {
@@ -35,7 +35,7 @@ class ImageNetworkServiceTests: XCTestCase {
         let expectTimer = expectation(description: "testUploadImage")
         let image = UIImage(systemName: "trash")!
         
-        ImageNetworkService().uploadImage(image) { result in
+        ImageNetworkService().uploadImage(image, name: "trash.jpg") { result in
             switch result {
             case .success(_):
                 expectTimer.fulfill()

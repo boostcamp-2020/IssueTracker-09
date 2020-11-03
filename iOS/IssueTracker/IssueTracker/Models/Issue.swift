@@ -8,7 +8,7 @@
 import Foundation
 
 struct Issues: Codable {
-    var issues: [Issue]
+    var issue: [Issue]
 }
 
 struct Issue: Codable {

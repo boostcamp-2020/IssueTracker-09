@@ -10,6 +10,7 @@ import UIKit
 enum CoordinatorName {
     case Sign
     case Issue
+    case Milestone
 }
 
 protocol CoordinatorDelegate: AnyObject {
@@ -40,6 +41,8 @@ class CoordinatorManager {
             return SignCoordinator(window: window, delegate: self)
         case .Issue:
             return IssueCoordinator(window: window, delegate: self)
+        case .Milestone:
+            return MilestoneCoordinator(window: window, delegate: self)
         }
     }
     
