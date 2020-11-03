@@ -23,6 +23,7 @@ class SignCoordinator: Coordinator {
             return SignViewController(coder: coder, delegate: self, request: GithubSignService.shared)
         })
         //        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
+        addObserver()
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         addObserver()
