@@ -37,6 +37,7 @@
 		F44851792549736900A84527 /* LocalIssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851782549736900A84527 /* LocalIssueService.swift */; };
 		F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* IssueCoordinator.swift */; };
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
+		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EB411E25515BF1007E56E1 /* InputField.xib */; };
@@ -120,6 +121,7 @@
 		F448517E2549834F00A84527 /* IssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCoordinator.swift; sourceTree = "<group>"; };
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
+		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4EB411E25515BF1007E56E1 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				F4012A4F255027460047CE91 /* MilestoneViewController.swift */,
 				F4012A65255028A50047CE91 /* MilestoneService.swift */,
 				F4012A6A255028AD0047CE91 /* MilestoneCacheService.swift */,
+				F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */,
 			);
 			path = Milestone;
 			sourceTree = "<group>";
@@ -706,6 +709,7 @@
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */,
 				FC889ACB254ABDA300E335CF /* BarButtonController.swift in Sources */,
+				F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */,
 				F4EB412425515FEC007E56E1 /* InputField.swift in Sources */,
 				F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */,
 				FC78518F2548996400E60957 /* RoundButton.swift in Sources */,
