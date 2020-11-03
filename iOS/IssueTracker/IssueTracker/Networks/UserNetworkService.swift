@@ -8,8 +8,6 @@
 import Foundation
 import Alamofire
 
-
-
 class UserNetworkService: NetworkService {
     enum Endpoint: String {
         case github = "/user/github/ios"
@@ -17,7 +15,6 @@ class UserNetworkService: NetworkService {
     }
     
     let endPoint: Endpoint
-    
     
     init(endPoint: Endpoint) {
         self.endPoint = endPoint

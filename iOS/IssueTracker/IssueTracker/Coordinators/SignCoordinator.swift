@@ -26,6 +26,7 @@ class SignCoordinator: Coordinator {
         addObserver()
         window.rootViewController = viewController
         window.makeKeyAndVisible()
+        addObserver()
     }
 }
 

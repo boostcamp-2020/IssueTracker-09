@@ -55,6 +55,9 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
+        let storyBoard = UIStoryboard(name: "Filter", bundle: nil)
+        let viewController = storyBoard.instantiateViewController(identifier: "FilterViewController")
+        present(viewController, animated: true, completion: nil)
         print("touchedFilter")
     }
     
