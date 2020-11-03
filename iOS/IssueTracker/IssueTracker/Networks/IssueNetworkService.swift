@@ -13,7 +13,7 @@ class IssueNetworkService: NetworkService {
         case issue = "/issue"
     }
     
-    func addIssue(issue: Issue, completion handler: @escaping (Result<Issue, AFError>) -> Void) {
+    func addIssue(issue: Issue, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -40,8 +40,8 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseDecodable(of: Issue.self) { response in
-                handler(response.result)
+            .response { response in
+                handler?(response.result)
             }
     }
     

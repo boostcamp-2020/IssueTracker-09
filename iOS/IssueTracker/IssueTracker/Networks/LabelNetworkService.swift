@@ -13,7 +13,7 @@ class LabelNetworkService: NetworkService {
         case label = "/label"
     }
     
-    func addLabel(color: UIColor, title: String, content: String, completion handler: @escaping (Result<Label, AFError>) -> Void) {
+    func addLabel(color: UIColor, title: String, content: String, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.label.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -27,8 +27,8 @@ class LabelNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseDecodable(of: Label.self) { response in
-                handler(response.result)
+            .response { response in
+                handler?(response.result)
             }
     }
     
