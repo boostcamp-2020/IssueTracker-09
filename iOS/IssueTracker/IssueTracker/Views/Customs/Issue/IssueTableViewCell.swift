@@ -22,7 +22,7 @@ class IssueTableViewCell: UITableViewCell {
     
     func configure(issue: Issue, isCheck: Bool) {
         titleLabel.text = issue.title
-        descriptionLabel.text = issue.description
+        descriptionLabel.text = issue.content
         checkBoxWrapper.button.isSelected = isCheck
     }
     
