@@ -38,6 +38,8 @@
 		F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* IssueCoordinator.swift */; };
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
+		F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EB411E25515BF1007E56E1 /* InputField.xib */; };
+		F4EB412425515FEC007E56E1 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB412325515FEC007E56E1 /* InputField.swift */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
 		F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */; };
 		FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */; };
@@ -118,6 +120,8 @@
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		F4EB411E25515BF1007E56E1 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
+		F4EB412325515FEC007E56E1 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkService.swift; sourceTree = "<group>"; };
 		FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkService.swift; sourceTree = "<group>"; };
@@ -226,6 +230,15 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F40E272A2551843B00FE25D0 /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				F4EB412325515FEC007E56E1 /* InputField.swift */,
+				F4EB411E25515BF1007E56E1 /* InputField.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
 		F448517D2549833700A84527 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +254,7 @@
 		F4AF30422547CF26006D7D0A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F40E272A2551843B00FE25D0 /* Xibs */,
 				F4E10861254951F30086F453 /* Customs */,
 				FC78518D2548992900E60957 /* Designables */,
 				F4AF30432547CF2E006D7D0A /* Storyboards */,
@@ -539,6 +553,7 @@
 				F4383EC625493016003FB09D /* Issue.storyboard in Resources */,
 				F4012A4A255023F50047CE91 /* Milestone.storyboard in Resources */,
 				FCF196EE2547AED200AED031 /* Assets.xcassets in Resources */,
+				F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +702,7 @@
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */,
 				FC889ACB254ABDA300E335CF /* BarButtonController.swift in Sources */,
+				F4EB412425515FEC007E56E1 /* InputField.swift in Sources */,
 				F4383ED3254931C9003FB09D /* BadgeView.swift in Sources */,
 				FC78518F2548996400E60957 /* RoundButton.swift in Sources */,
 				F448516F254971F600A84527 /* IssueService.swift in Sources */,
@@ -699,7 +715,6 @@
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
-				FC889AC3254AB17600E335CF /* Issues.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */,
 				F448517F2549834F00A84527 /* IssueCoordinator.swift in Sources */,
