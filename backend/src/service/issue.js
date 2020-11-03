@@ -27,7 +27,7 @@ module.exports = {
       await issue.addLabels(labelId, { transaction });
       await issue.addIssues(assigneeId, { transaction });
       transaction.commit();
-      return true;
+      return { response: true };
     } catch (error) {
       await transaction.rollback();
       return { error };
@@ -35,7 +35,7 @@ module.exports = {
   },
 
   read: async () => {
-    const issues = await Model.Issue.findAll({
+    const issue = await Model.Issue.findAll({
       include: [
         {
           model: Model.User,
@@ -53,7 +53,7 @@ module.exports = {
       ],
     });
 
-    return issues;
+    return { issue };
   },
 
   remove: async ({ id }) => {
@@ -62,7 +62,7 @@ module.exports = {
     }
     const issue = await Model.Issue.destroy({ where: { id } });
     if (issue) {
-      return true;
+      return { response: true };
     }
     return { error: '없는 id값 입니다.' };
   },
@@ -73,7 +73,7 @@ module.exports = {
     }
     const [result] = await Model.Issue.update({ title }, { where: { id } });
     if (result) {
-      return true;
+      return { response: true };
     }
     return { error: '없는 id값 입니다.' };
   },
@@ -87,7 +87,7 @@ module.exports = {
       { where: { id } }
     );
     if (result) {
-      return true;
+      return { response: true };
     }
     return { error: '없는 id값 입니다.' };
   },
@@ -109,7 +109,7 @@ module.exports = {
       { where: { id } }
     );
     if (result) {
-      return true;
+      return { response: true };
     }
     return { error: 'Issue 상태 변경 실패' };
   },
@@ -127,10 +127,10 @@ module.exports = {
 
     if (assignee) {
       await issue.removeIssue(assigneeId);
-      return true;
+      return { response: true };
     }
     await issue.addIssue(assigneeId);
-    return true;
+    return { response: true };
   },
 
   updateLabel: async ({ id, labelId }) => {
@@ -146,9 +146,9 @@ module.exports = {
 
     if (label) {
       await issue.removeLabel(labelId);
-      return true;
+      return { response: true };
     }
     await issue.addLabel(labelId);
-    return true;
+    return { response: true };
   },
 };

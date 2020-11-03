@@ -8,7 +8,6 @@ module.exports = {
       req.file,
       201
     );
-
     return res.status(status).json(result);
   },
 };
