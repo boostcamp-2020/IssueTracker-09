@@ -35,7 +35,7 @@ class ImageNetworkServiceTests: XCTestCase {
         let expectTimer = expectation(description: "testUploadImage")
         let image = UIImage(systemName: "trash")!
         
-        ImageNetworkService().uploadImage(image, name: "trash") { result in
+        ImageNetworkService().uploadImage(image, name: "trash.jpg") { result in
             switch result {
             case .success(_):
                 expectTimer.fulfill()
