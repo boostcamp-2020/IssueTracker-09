@@ -6,7 +6,6 @@ module.exports = {
     assigneeId,
     labelId,
     title,
-    content,
     dataValues: { id },
   }) => {
     if (!title) {
@@ -17,7 +16,6 @@ module.exports = {
       const issue = await Model.Issue.create(
         {
           title,
-          content,
           user_id: id,
           milestone_id: milestoneId,
         },
