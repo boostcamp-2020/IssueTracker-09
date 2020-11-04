@@ -11,11 +11,19 @@
         <!--Milestone Append View Controller-->
         <scene sceneID="cWe-sa-4ZZ">
             <objects>
-                <viewController id="4VG-tg-zFp" customClass="MilestoneAppendViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="SZb-SJ-IiM">
+                <viewController modalPresentationStyle="overCurrentContext" id="4VG-tg-zFp" customClass="MilestoneAppendViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" opaque="NO" contentMode="scaleToFill" id="SZb-SJ-IiM">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <visualEffectView opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ogI-Ga-pC7">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="jRB-ic-K2b">
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIL-t9-IkH" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="20.5" y="243.5" width="373" height="409"/>
                                 <subviews>
@@ -108,6 +116,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="W08-M7-uFl" secondAttribute="bottom" constant="10" id="Ssm-Ai-5dc"/>
                                     <constraint firstItem="W08-M7-uFl" firstAttribute="top" secondItem="lIL-t9-IkH" secondAttribute="top" constant="10" id="USb-nT-NUA"/>
@@ -125,11 +134,15 @@
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="bcS-QG-Lqt"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="ogI-Ga-pC7" firstAttribute="centerY" secondItem="SZb-SJ-IiM" secondAttribute="centerY" id="SQc-oI-2uZ"/>
                             <constraint firstItem="lIL-t9-IkH" firstAttribute="width" secondItem="bcS-QG-Lqt" secondAttribute="width" multiplier="0.9" id="UYt-Gx-CFD"/>
+                            <constraint firstItem="ogI-Ga-pC7" firstAttribute="height" secondItem="SZb-SJ-IiM" secondAttribute="height" id="jEK-ef-Dve"/>
                             <constraint firstItem="lIL-t9-IkH" firstAttribute="centerY" secondItem="SZb-SJ-IiM" secondAttribute="centerY" id="kSY-jA-eOI"/>
+                            <constraint firstItem="ogI-Ga-pC7" firstAttribute="width" secondItem="SZb-SJ-IiM" secondAttribute="width" id="lq6-9A-kjm"/>
                             <constraint firstItem="lIL-t9-IkH" firstAttribute="height" secondItem="bcS-QG-Lqt" secondAttribute="height" multiplier="0.5" id="lxh-rR-9ne"/>
+                            <constraint firstItem="ogI-Ga-pC7" firstAttribute="centerX" secondItem="SZb-SJ-IiM" secondAttribute="centerX" id="mwO-6d-J6m"/>
                             <constraint firstItem="lIL-t9-IkH" firstAttribute="centerX" secondItem="SZb-SJ-IiM" secondAttribute="centerX" id="vMs-KP-bCZ"/>
                         </constraints>
                     </view>
