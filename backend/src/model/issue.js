@@ -31,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     db.Issue.belongsToMany(db.User, {
       through: 'Assignee_Issue',
-      as: 'Issues',
+      as: 'Assignees',
     });
     db.Issue.belongsToMany(db.Label, {
       through: 'Issue_Label',
