@@ -107,20 +107,18 @@ module.exports = {
     return { error: '없는 id값 입니다.' };
   },
 
-  updateState: async ({ id }) => {
+  updateState: async ({ id, isOpened }) => {
     if (!id) {
       return { error: '정보가 부족합니다.' };
     }
-    const issue = await Model.Issue.findOne({
-      where: { id },
-      attributes: [['is_opened', 'isOpened']],
-    });
+    const issue = await Model.Issue.findOne({ where: { id } });
+
     if (!issue) {
       return { error: '없는 id값 입니다.' };
     }
-    const isOpened = issue.dataValues;
+
     const [result] = await Model.Issue.update(
-      { is_opened: !isOpened },
+      { is_opened: isOpened },
       { where: { id } }
     );
     if (result) {
