@@ -8,11 +8,13 @@
 import UIKit
 
 class SignCoordinator: Coordinator {
-    private let storyboardName: String = "SignIn"
-    private let window: UIWindow
-    private weak var delegate: CoordinatorDelegate?
+    private(set) var window: UIWindow
+    private(set) var childCoordinators: [String: ChildCoordinator] = [: ]
     
-    init(window: UIWindow, delegate: CoordinatorDelegate) {
+    private let storyboardName: String = "SignIn"
+    private weak var delegate: RootCoordinateControllerDelegate?
+    
+    init(window: UIWindow, delegate: RootCoordinateControllerDelegate) {
         self.window = window
         self.delegate = delegate
     }
@@ -20,18 +22,12 @@ class SignCoordinator: Coordinator {
     func start() {
         let storyBoard = UIStoryboard(name: storyboardName, bundle: nil)
         let viewController = storyBoard.instantiateViewController(identifier: "SignViewController", creator: { coder in
-            return SignViewController(coder: coder, delegate: self, request: GithubSignService.shared)
+            return SignViewController(coder: coder, request: GithubSignService.shared)
         })
         //        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         addObserver()
-    }
-}
-
-extension SignCoordinator: NextCoordinatorDelegate {
-    func navigateToPage() {
-        delegate?.start(name: .Issue)
     }
 }
 
@@ -45,7 +41,7 @@ extension SignCoordinator {
               let token = userInfo["token"] as? String else { return }
         
         if PersistenceManager.shared.save(token, forKey: .token) {
-            navigateToPage()
+            delegate?.root(name: .Issue)
         }
     }
 }

@@ -9,7 +9,7 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 //    var window: UIWindow?
-    var coordinatorManager: CoordinatorManager?
+    var coordinatorController: RootCoordinateController?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,13 +18,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
-        coordinatorManager = CoordinatorManager(window: window)
+        coordinatorController = RootCoordinateController(window: window)
         
         // user 정보 없을 시,
-//        coordinatorManager?.start(name: .Sign)
+//        coordinatorController?.root(name: .Sign)
         
         // user 정보 존재 시,
-         coordinatorManager?.start(name: .Issue)
+        coordinatorController?.root(name: .Issue)
     }
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데
