@@ -7,12 +7,16 @@ import theme from './style/theme';
 import GlobalStyle from './style/global-style';
 import App from './App';
 
+import { UserProvider } from './stores/userStore';
+
 ReactDom.render(
   <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <App />
-    </ThemeProvider>
+    <UserProvider>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+        <App />
+      </ThemeProvider>
+    </UserProvider>
   </BrowserRouter>,
   document.getElementById('root')
 );
