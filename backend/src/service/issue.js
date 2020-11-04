@@ -1,4 +1,7 @@
 const Model = require('../model');
+const label = require('../model/label');
+const milestone = require('../model/milestone');
+const user = require('../model/user');
 
 module.exports = {
   create: async ({
