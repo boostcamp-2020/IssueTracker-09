@@ -37,6 +37,7 @@ module.exports = {
 
   read: async ({ q }) => {
     const query = makeObj(q);
+    console.log(query);
     const issues = await Model.Issue.findAll({
       include: [
         {
@@ -175,7 +176,6 @@ const makeObj = (query) => {
   const querys = query.split(' ');
   querys.forEach((item) => {
     const temp = item.split(':');
-    console.log(temp);
     if (temp[0] === 'is') {
       obj[temp[0]] = { is_opened: temp[1].includes('close') ? 0 : 1 };
     } else if (temp[0] === 'author' || temp[0] === 'assignee') {
