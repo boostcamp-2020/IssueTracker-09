@@ -8,6 +8,10 @@
 import UIKit
 
 class MainTabBarCoordinator: Coordinator {
+    private enum StoryboardName: String {
+        case Issue, Milestone
+    }
+    
     private enum ChildName: String {
         case Filter
     }
@@ -15,7 +19,7 @@ class MainTabBarCoordinator: Coordinator {
     private(set) var window: UIWindow
     private(set) var childCoordinators: [String: ChildCoordinator] = [: ]
     
-    private let storyboardName: String = "Issue"
+    private let tabBarController = UITabBarController()
     private let navigationController = UINavigationController()
     private weak var delegate: RootCoordinateControllerDelegate?
     
@@ -25,15 +29,32 @@ class MainTabBarCoordinator: Coordinator {
     }
     
     func start() {
-        guard let issueViewController = UIStoryboard(name: "Issue", bundle: nil).instantiateInitialViewController() as? IssueViewController else {
+        makePage()
+        window.rootViewController = tabBarController
+        window.makeKeyAndVisible()
+    }
+    
+    func makePage() {
+        guard let issueViewController = UIStoryboard(name: StoryboardName.Issue.rawValue, bundle: nil).instantiateInitialViewController() as? IssueViewController else {
             return
         }
         issueViewController.delegate = self
         issueViewController.service = LocalIssueService()
         
+        guard let milestoneViewController = UIStoryboard(name: StoryboardName.Milestone.rawValue, bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
+            return
+        }
+        milestoneViewController.delegate = self
+        milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
+        
         navigationController.viewControllers = [issueViewController]
-        window.rootViewController = navigationController
-        window.makeKeyAndVisible()
+        tabBarController.setViewControllers([navigationController, milestoneViewController], animated: true)
+    }
+}
+
+extension MainTabBarCoordinator: MilestoneViewControllerDelegate {
+    func moveToMilestone() {
+        
     }
 }
 
