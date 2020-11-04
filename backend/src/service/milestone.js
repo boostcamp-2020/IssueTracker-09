@@ -6,13 +6,13 @@ module.exports = {
     if (!title || !content || !deadline) {
       return { error: '정보가 부족합니다.' };
     }
-    const result = await Milestone.create({
+    const milestone = await Milestone.create({
       title,
       content,
       deadline,
       is_opened: true,
     });
-    return { milestone: result };
+    return milestone;
   },
 
   read: async () => {
@@ -29,7 +29,7 @@ module.exports = {
       return mile.dataValues;
     });
 
-    return { milestone };
+    return { milestones: milestone };
   },
 
   update: async ({ id, title, deadline, content }) => {
