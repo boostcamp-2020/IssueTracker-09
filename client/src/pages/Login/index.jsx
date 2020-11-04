@@ -8,7 +8,7 @@ const Login = () => {
   } = useContext(UserContext);
   return (
     <Div>
-      <Image width="200px" height="200px"></Image>
+      <Image width="200px" height="200px" />
       <Button width="250px" height="50px" onClick={loginUser}>
         Sign in with GitHub
       </Button>
