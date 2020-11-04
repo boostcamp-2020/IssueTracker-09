@@ -5,10 +5,10 @@ module.exports = {
     if (!color || !title) {
       return { error: '정보가 부족합니다' };
     }
-    return { label: await Label.create({ color, title, content }) };
+    return await Label.create({ color, title, content });
   },
   read: async () => {
-    return { label: await Label.findAll() };
+    return { labels: await Label.findAll() };
   },
   update: async ({ id, color, title, content }) => {
     if (!id || !color || !title) {

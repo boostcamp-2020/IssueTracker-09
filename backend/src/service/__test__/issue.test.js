@@ -3,7 +3,7 @@ const issueService = require('../issue');
 const Issue = require('../../model').Issue;
 
 Issue.findAll = jest.fn();
-
+issueService.makeObj = jest.fn();
 const newIssue = [
   {
     id: 1,
@@ -42,7 +42,8 @@ describe('read issue Service 테스트', () => {
 
   it('리턴 타입이 배열인가', async () => {
     Issue.findAll.mockReturnValue(newIssue);
-    const result = await issueService.read();
+    issueService.makeObj.mockReturnValue({});
+    const result = await issueService.read({ q: '' });
     expect(typeof result).toBe('object');
   });
 });
