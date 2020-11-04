@@ -7,9 +7,12 @@
     "dev": "webpack-dev-server"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.32",
+    "@fortawesome/free-solid-svg-icons": "^5.15.1",
+    "@fortawesome/react-fontawesome": "^0.1.12",
     "prop-types": "^15.7.2",
-    "react-dom": "^17.0.1",
     "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.1",
     "styled-reset": "^4.3.0"

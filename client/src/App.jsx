@@ -10,10 +10,12 @@ import {
   MilestoneNew,
   Milestones,
 } from './pages';
+import Layout from './components/Layout';
 
 const App = () => {
   return (
     <>
+      <Layout />
       <Switch>
         <Route path="/" exact component={Main} />
         <Route path="/login" component={Login} />
