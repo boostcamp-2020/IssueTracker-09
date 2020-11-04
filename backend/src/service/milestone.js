@@ -56,21 +56,17 @@ module.exports = {
     return { response: false };
   },
 
-  updateState: async ({ id }) => {
+  updateState: async ({ id, isOpened }) => {
     if (!id) {
       return { error: '정보가 부족합니다.' };
     }
-    const milestone = await Milestone.findOne({
-      where: { id },
-      attributes: [['is_opened', 'isOpened']],
-    });
+    const milestone = await Milestone.findOne({ where: { id } });
 
     if (!milestone) {
       return { error: '마일스톤이 존재하지 않습니다' };
     }
-    const isOpened = milestone.dataValues;
     const [result] = await Milestone.update(
-      { is_opened: !isOpened },
+      { is_opened: isOpened },
       { where: { id } }
     );
     if (result) {

@@ -37,10 +37,10 @@ module.exports = {
   },
 
   updateState: async (req, res) => {
-    const { status, result } = await control(
-      milestoneService.updateState,
-      req.params
-    );
+    const { status, result } = await control(milestoneService.updateState, {
+      ...req.body,
+      ...req.params,
+    });
 
     return res.status(status).json(result);
   },
