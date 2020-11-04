@@ -7,9 +7,13 @@
 
 import UIKit
 
+protocol MoveToSearchPage: AnyObject {
+    func move()
+}
+
 class FilterViewController: UIViewController {
     typealias Section = Filter.Category
-    struct Item: Hashable {
+    private struct Item: Hashable {
         var filter: Filter
         
         init(filter: Filter) {
@@ -22,8 +26,18 @@ class FilterViewController: UIViewController {
     }
     
     @IBOutlet private weak var collectionView: UICollectionView!
+    private weak var delegate: MoveToSearchPage?
     private var dataSource: UICollectionViewDiffableDataSource<Section, Item>!
     private let sectionHeaderElementKind = "section-header-element-kind"
+    
+    init?(coder: NSCoder, delegate: MoveToSearchPage) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,20 +48,6 @@ class FilterViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // 뭔가 코디네이터를 지원해주는 느낌인데??
-//        if let indexPath = self.collectionView.indexPathsForSelectedItems?.first {
-//            if let coordinator = self.transitionCoordinator {
-//                coordinator.animate(alongsideTransition: { context in
-//                    self.collectionView.deselectItem(at: indexPath, animated: true)
-//                }) { (context) in
-//                    if context.isCancelled {
-//                        self.collectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-//                    }
-//                }
-//            } else {
-//                self.collectionView.deselectItem(at: indexPath, animated: animated)
-//            }
-//        }
     }
     
     @IBAction func touchedCancelButton(_ sender: Any) {
@@ -75,7 +75,6 @@ extension FilterViewController {
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
-    /// - Tag: ValueCellConfiguration
     func configureDataSource() {
         // list cell
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { (cell, indexPath, filter) in
@@ -119,16 +118,18 @@ extension FilterViewController: UICollectionViewDelegate {
             return
         }
         
-        var newData = data
-        newData.filter.checkable = !newData.filter.checkable
-        
-        var newSnapshot = dataSource.snapshot()
-        newSnapshot.insertItems([newData], beforeItem: data)
-        newSnapshot.deleteItems([data])
-        dataSource.apply(newSnapshot)
-        
-        //        let detailViewController = EmojiDetailViewController(with: emoji)
-        //        self.navigationController?.pushViewController(detailViewController, animated: true)
+        if data.filter.category == .condition {
+            var newData = data
+            newData.filter.checkable = !data.filter.checkable
+            
+            var newSnapshot = dataSource.snapshot()
+            newSnapshot.insertItems([newData], beforeItem: data)
+            newSnapshot.deleteItems([data])
+            dataSource.apply(newSnapshot)
+            
+        } else if data.filter.category == .detail {
+            delegate?.move()
+        }
     }
 }
 

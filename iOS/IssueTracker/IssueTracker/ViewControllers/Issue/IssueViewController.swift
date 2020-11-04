@@ -7,10 +7,13 @@
 
 import UIKit
 
+protocol IssueCoordinatorDelegate: AnyObject {
+    func presentToFilterView()
+}
 
 class IssueViewController: UIViewController {
     @IBOutlet var tableView: IssueTableView!
-    var delegate: NextCoordinatorDelegate?
+    var delegate: IssueCoordinatorDelegate?
     var service: IssueService?
     var checks: [Bool] = []
     let barButtonController = BarButtonController()
@@ -55,14 +58,16 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
-        let storyBoard = UIStoryboard(name: "Filter", bundle: nil)
-        let viewController = storyBoard.instantiateViewController(identifier: "FilterViewController")
-        present(viewController, animated: true, completion: nil)
         print("touchedFilter")
+        delegate?.presentToFilterView()
     }
     
     @objc func touchedDeselectButton(_ sender: Any) {
-        print("touched deselect")
+        tableView.applyAll(animated: true) { cell in
+            cell.checkBoxWrapper.button.isSelected = false
+        }
+        checks = Array(repeating: false, count: service?.count ?? 0)
+        self.navigationItem.leftBarButtonItem = barButtonController.buttons[.selectAll]
     }
     
     @objc func touchedSelectButton(_ sender: Any) {
@@ -70,6 +75,7 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.button.isSelected = true
         }
         checks = Array(repeating: true, count: service?.count ?? 0)
+        self.navigationItem.leftBarButtonItem = barButtonController.buttons[.deselectAll]
     }
 }
 
