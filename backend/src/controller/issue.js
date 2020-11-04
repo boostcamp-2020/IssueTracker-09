@@ -22,7 +22,7 @@ module.exports = {
   },
 
   read: async (req, res) => {
-    const { status, result } = await control(issueService.read);
+    const { status, result } = await control(issueService.read, req.query);
 
     return res.status(status).json(result);
   },
