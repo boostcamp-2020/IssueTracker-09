@@ -131,6 +131,27 @@ module.exports = {
     return { response: true };
   },
 
+  updateLabels: async ({ id, checked, unchecked }) => {
+    if (!id) {
+      return { error: '정보가 부족합니다' };
+    }
+    if (!checked.length && !unchecked.length) {
+      return { response: true };
+    }
+    const transaction = await Model.sequelize.transaction();
+    try {
+      const issue = await Model.Issue.findOne({ where: { id } });
+      await issue.removeLabels([...checked, ...unchecked], { transaction });
+      await issue.addLabels(checked, { transaction });
+
+      transaction.commit();
+      return { response: true };
+    } catch (error) {
+      await transaction.rollback();
+      return { error };
+    }
+  },
+
   updateLabel: async ({ id, labelId }) => {
     if (!id || !labelId) {
       return { error: '정보가 부족합니다' };

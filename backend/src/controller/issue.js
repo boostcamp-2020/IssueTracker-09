@@ -45,6 +45,15 @@ module.exports = {
     return res.status(status).json(result);
   },
 
+  updateLabels: async (req, res) => {
+    const { status, result } = await control(issueService.updateLabels, {
+      ...req.body,
+      ...req.params,
+    });
+
+    return res.status(status).json(result);
+  },
+
   updateMilestone: async (req, res) => {
     const { status, result } = await control(issueService.updateMilestone, {
       ...req.body,

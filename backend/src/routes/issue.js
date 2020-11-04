@@ -20,6 +20,8 @@ router.put('/assignee/:id', issueController.updateAssignee);
 
 router.put('/label/:id', issueController.updateLabel);
 
+router.put('/labels/:id', issueController.updateLabels);
+
 router.delete('/:id', issueController.remove);
 
 module.exports = router;
