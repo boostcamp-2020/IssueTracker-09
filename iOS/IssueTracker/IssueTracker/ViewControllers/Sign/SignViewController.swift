@@ -10,12 +10,10 @@ import AuthenticationServices
 
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
-    private weak var delegate: NextCoordinatorDelegate?
     private var request: AuthorizationRequestable?
     private var authorization: AppleAuthorizationController?
     
-    init?(coder: NSCoder, delegate: NextCoordinatorDelegate, request: AuthorizationRequestable) {
-        self.delegate = delegate
+    init?(coder: NSCoder, request: AuthorizationRequestable) {
         self.request = request
         super.init(coder: coder)
     }
