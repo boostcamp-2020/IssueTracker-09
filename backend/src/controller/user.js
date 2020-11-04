@@ -3,9 +3,11 @@ const control = require('../lib/controller');
 
 module.exports = {
   gitHubLogin: async (req, res) => {
-    const { status, result } = await control(userService.gitHubLogin, req.user);
+    await control(userService.gitHubLogin, req.user);
 
-    return res.status(status).json(result);
+    res.cookie('token', 'helloworld');
+    return res.redirect(process.env.CLIENT_URL);
+    // return res.status(status).json(result);
   },
   iOSAppleLogin: async (req, res) => {
     const { status, result } = await control(
