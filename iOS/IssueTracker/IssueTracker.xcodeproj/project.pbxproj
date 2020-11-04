@@ -41,6 +41,7 @@
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EB411E25515BF1007E56E1 /* InputField.xib */; };
 		F4EB412425515FEC007E56E1 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB412325515FEC007E56E1 /* InputField.swift */; };
+		F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
 		F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */; };
 		FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */; };
@@ -129,6 +130,7 @@
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4EB411E25515BF1007E56E1 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
 		F4EB412325515FEC007E56E1 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
+		F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkService.swift; sourceTree = "<group>"; };
 		FC37D59D255136A800689B72 /* ElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementView.swift; sourceTree = "<group>"; };
@@ -283,6 +285,7 @@
 				FCF5EFB425511BA2001A44B3 /* Search.storyboard */,
 				F4012A49255023F50047CE91 /* Milestone.storyboard */,
 				F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */,
+				F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -610,6 +613,7 @@
 				F4383EC525493016003FB09D /* SignIn.storyboard in Resources */,
 				F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */,
 				F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */,
+				F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */,
 				FCF5EFB525511BA2001A44B3 /* Search.storyboard in Resources */,
 				FC631A73254FF4B500DFE242 /* Filter.storyboard in Resources */,
 				F4383EC625493016003FB09D /* Issue.storyboard in Resources */,
