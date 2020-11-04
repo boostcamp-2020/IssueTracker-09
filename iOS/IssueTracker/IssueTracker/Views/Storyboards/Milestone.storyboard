@@ -130,6 +130,9 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <size key="customSize" width="191" height="144"/>
+                                        <connections>
+                                            <segue destination="KVP-Jq-pQc" kind="presentation" id="E6M-Cw-yLL"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -157,6 +160,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fr8-3Y-F27" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="40.579710144927539" y="-56.25"/>
+        </scene>
+        <!--MilestoneAppend-->
+        <scene sceneID="gNd-3b-dO5">
+            <objects>
+                <viewControllerPlaceholder storyboardName="MilestoneAppend" id="KVP-Jq-pQc" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="D7E-fP-g2t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="790" y="-114"/>
         </scene>
     </scenes>
     <designables>
