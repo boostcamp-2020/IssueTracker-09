@@ -14,7 +14,7 @@ class MilestoneCacheService: MilestoneService {
     
     init(delegate: MileStoneServiceDelegate?) {
         self.delegate = delegate
-        reloadData()
+//        reloadData()
     }
     
     subscript(at indexPath: IndexPath) -> Milestone {

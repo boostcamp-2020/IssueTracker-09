@@ -7,14 +7,20 @@
 
 import UIKit
 
+
+protocol MilestoneViewControllerDelegate: AnyObject {
+    func moveToMilestone()
+}
+
 class MilestoneViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var service: MilestoneService?
-    weak var delegate: NextCoordinatorDelegate?
+    weak var delegate: MilestoneViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        service?.reloadData()
     }
 }
 
