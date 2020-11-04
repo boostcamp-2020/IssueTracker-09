@@ -14,7 +14,7 @@ beforeEach(() => {
 });
 
 describe('upload image Controller 테스트', () => {
-  const resulted = 'imageurl.jpg';
+  const resulted = { imageURL: 'imageurl.jpg' };
   beforeEach(() => {
     req.file = resulted;
   });
@@ -30,9 +30,9 @@ describe('upload image Controller 테스트', () => {
     expect(imageService.upload).toBeCalledWith(resulted);
   });
 
-  it('성공 시 201응답이 오는가', () => {
+  it('성공 시 201응답이 오는가', async () => {
     imageService.upload.mockReturnValue(resulted);
-    imageController.upload(req, res);
+    await imageController.upload(req, res);
     expect(res.statusCode).toBe(201);
     expect(res._isEndCalled()).toBeTruthy();
   });
