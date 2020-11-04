@@ -15,7 +15,7 @@ module.exports = {
   },
   devtool: 'eval-cheap-source-map',
   devServer: {
-    port: 3000,
+    port: 4000,
     overlay: true,
     hot: true,
     writeToDisk: true,
