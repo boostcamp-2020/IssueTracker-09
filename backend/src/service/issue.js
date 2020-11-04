@@ -1,7 +1,4 @@
 const Model = require('../model');
-const label = require('../model/label');
-const milestone = require('../model/milestone');
-const user = require('../model/user');
 
 module.exports = {
   create: async ({
@@ -36,8 +33,7 @@ module.exports = {
   },
 
   read: async ({ q }) => {
-    const query = makeObj(q);
-    console.log(query);
+    const query = q ? makeObj(q) : {};
     const issues = await Model.Issue.findAll({
       include: [
         {
