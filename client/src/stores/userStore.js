@@ -1,5 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
+import loginAPI from '../apis/user';
 
 const initialState = {
   name: undefined,
@@ -10,9 +11,11 @@ export const LOGIN_USER = 'LOGIN_USER';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const GET_USER = 'GET_USER';
 
-const userReducer = (state, action) => {
+const userReducer = async (state, action) => {
   switch (action.type) {
     case LOGIN_USER: {
+      const result = await loginAPI();
+      console.log(result);
       return state;
     }
     case LOGOUT_USER: {
