@@ -21,7 +21,9 @@ class MilestoneCacheService: MilestoneService {
         return milestones[indexPath.item]
     }
     
-    var count: Int = 0
+    var count: Int {
+        return milestones.count
+    }
     
     func reloadData() {
         networkService.fetchMilestones { [weak self] result in

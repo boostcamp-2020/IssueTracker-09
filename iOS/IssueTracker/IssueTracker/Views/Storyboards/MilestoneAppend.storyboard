@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="4VG-tg-zFp">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Milestone Append View Controller-->
+        <scene sceneID="cWe-sa-4ZZ">
+            <objects>
+                <viewController id="4VG-tg-zFp" customClass="MilestoneAppendViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SZb-SJ-IiM">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lIL-t9-IkH" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
+                                <rect key="frame" x="20.5" y="243.5" width="373" height="409"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W08-M7-uFl">
+                                        <rect key="frame" x="10" y="10" width="353" height="389"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="acG-9x-Ubw">
+                                                <rect key="frame" x="20" y="20" width="313" height="349"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EaO-vL-eun">
+                                                        <rect key="frame" x="0.0" y="0.0" width="313" height="30"/>
+                                                        <state key="normal" title="x"/>
+                                                        <connections>
+                                                            <action selector="didCloseButtonTapped:" destination="4VG-tg-zFp" eventType="touchUpInside" id="Ox5-0a-gN1"/>
+                                                        </connections>
+                                                    </button>
+                                                    <view contentMode="scaleToFill" verticalHuggingPriority="249" translatesAutoresizingMaskIntoConstraints="NO" id="SJk-CM-FKG">
+                                                        <rect key="frame" x="0.0" y="30" width="313" height="289"/>
+                                                        <subviews>
+                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="quc-Zv-3RS">
+                                                                <rect key="frame" x="0.0" y="39.5" width="313" height="210"/>
+                                                                <subviews>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbN-ZP-muz" customClass="InputField" customModule="IssueTracker" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="313" height="70"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dlx-Wh-gVw" customClass="InputField" customModule="IssueTracker" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="70" width="313" height="70"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LVo-7C-LsJ" customClass="InputField" customModule="IssueTracker" customModuleProvider="target">
+                                                                        <rect key="frame" x="0.0" y="140" width="313" height="70"/>
+                                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                                    </view>
+                                                                </subviews>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="210" id="9Yq-Bf-4KE"/>
+                                                                </constraints>
+                                                            </stackView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="quc-Zv-3RS" firstAttribute="leading" secondItem="SJk-CM-FKG" secondAttribute="leading" id="TWD-D5-nZj"/>
+                                                            <constraint firstAttribute="trailing" secondItem="quc-Zv-3RS" secondAttribute="trailing" id="mC5-4j-WVx"/>
+                                                            <constraint firstItem="quc-Zv-3RS" firstAttribute="centerY" secondItem="SJk-CM-FKG" secondAttribute="centerY" id="q7r-dA-bsF"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="w8Y-pq-smb">
+                                                        <rect key="frame" x="0.0" y="319" width="313" height="30"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LZ1-xF-ff0">
+                                                                <rect key="frame" x="0.0" y="0.0" width="156.5" height="30"/>
+                                                                <state key="normal" title="초기화"/>
+                                                                <connections>
+                                                                    <action selector="didClearButtonTapped:" destination="4VG-tg-zFp" eventType="touchUpInside" id="jhw-Yn-LQ8"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZXv-iK-yOO" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
+                                                                <rect key="frame" x="156.5" y="0.0" width="156.5" height="30"/>
+                                                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                                <state key="normal" title="저장">
+                                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <userDefinedRuntimeAttributes>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                                        <real key="value" value="5"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                                        <real key="value" value="1"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                                        <color key="value" systemColor="systemBlueColor"/>
+                                                                    </userDefinedRuntimeAttribute>
+                                                                </userDefinedRuntimeAttributes>
+                                                                <connections>
+                                                                    <action selector="didSaveButtonTapped:" destination="4VG-tg-zFp" eventType="touchUpInside" id="4jg-QK-VyY"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="acG-9x-Ubw" firstAttribute="centerX" secondItem="W08-M7-uFl" secondAttribute="centerX" id="Tma-uF-kpe"/>
+                                            <constraint firstItem="acG-9x-Ubw" firstAttribute="top" secondItem="W08-M7-uFl" secondAttribute="top" constant="20" id="UwM-SL-WKE"/>
+                                            <constraint firstItem="acG-9x-Ubw" firstAttribute="width" secondItem="W08-M7-uFl" secondAttribute="width" constant="-40" id="xRv-oW-ZG1"/>
+                                            <constraint firstAttribute="bottom" secondItem="acG-9x-Ubw" secondAttribute="bottom" constant="20" id="zFH-eY-OWk"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="W08-M7-uFl" secondAttribute="bottom" constant="10" id="Ssm-Ai-5dc"/>
+                                    <constraint firstItem="W08-M7-uFl" firstAttribute="top" secondItem="lIL-t9-IkH" secondAttribute="top" constant="10" id="USb-nT-NUA"/>
+                                    <constraint firstAttribute="trailing" secondItem="W08-M7-uFl" secondAttribute="trailing" constant="10" id="f0m-XM-ibQ"/>
+                                    <constraint firstItem="W08-M7-uFl" firstAttribute="leading" secondItem="lIL-t9-IkH" secondAttribute="leading" constant="10" id="wHD-mV-KE4"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="bcS-QG-Lqt"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lIL-t9-IkH" firstAttribute="width" secondItem="bcS-QG-Lqt" secondAttribute="width" multiplier="0.9" id="UYt-Gx-CFD"/>
+                            <constraint firstItem="lIL-t9-IkH" firstAttribute="centerY" secondItem="SZb-SJ-IiM" secondAttribute="centerY" id="kSY-jA-eOI"/>
+                            <constraint firstItem="lIL-t9-IkH" firstAttribute="height" secondItem="bcS-QG-Lqt" secondAttribute="height" multiplier="0.5" id="lxh-rR-9ne"/>
+                            <constraint firstItem="lIL-t9-IkH" firstAttribute="centerX" secondItem="SZb-SJ-IiM" secondAttribute="centerX" id="vMs-KP-bCZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="deadlineInputField" destination="dlx-Wh-gVw" id="YZL-Gv-xmu"/>
+                        <outlet property="descriptionInputField" destination="LVo-7C-LsJ" id="dsI-QZ-Wa0"/>
+                        <outlet property="titleInputField" destination="fbN-ZP-muz" id="zz3-gJ-nP5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kHx-2X-gOl" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="978" y="-56"/>
+        </scene>
+    </scenes>
+    <designables>
+        <designable name="ZXv-iK-yOO">
+            <size key="intrinsicContentSize" width="30" height="30"/>
+        </designable>
+        <designable name="lIL-t9-IkH">
+            <size key="intrinsicContentSize" width="12" height="0.0"/>
+        </designable>
+    </designables>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
