@@ -1,4 +1,7 @@
 const Model = require('../model');
+const label = require('../model/label');
+const milestone = require('../model/milestone');
+const user = require('../model/user');
 
 module.exports = {
   create: async ({
@@ -23,35 +26,52 @@ module.exports = {
       );
 
       await issue.addLabels(labelId, { transaction });
-      await issue.addIssues(assigneeId, { transaction });
+      await issue.addAssignees(assigneeId, { transaction });
       transaction.commit();
-      return { response: true };
+      return issue;
     } catch (error) {
       await transaction.rollback();
       return { error };
     }
   },
 
-  read: async () => {
-    const issue = await Model.Issue.findAll({
+  read: async ({ q }) => {
+    const query = makeObj(q);
+    const issues = await Model.Issue.findAll({
       include: [
         {
           model: Model.User,
-          as: 'Issues',
+          as: 'Assignees',
           through: {
             attributes: [],
           },
         },
         {
+          model: Model.Milestone,
+          where: query.milestone,
+        },
+        {
+          model: Model.User,
+          where: query.author,
+        },
+        {
+          model: Model.Comment,
+          where: query.comment,
+          attributes: [],
+        },
+        {
           model: Model.Label,
+          where: query.label,
           through: {
             attributes: [],
           },
         },
       ],
+      attributes: ['id', 'title', 'is_opened', 'timestamp'],
+      where: query.is,
     });
 
-    return { issue };
+    return { issues };
   },
 
   remove: async ({ id }) => {
@@ -191,4 +211,26 @@ module.exports = {
     await issue.addLabel(labelId);
     return { response: true };
   },
+};
+const makeObj = (query) => {
+  const obj = {};
+  const querys = query.split(' ');
+  querys.forEach((item) => {
+    const temp = item.split(':');
+    console.log(temp);
+    if (temp[0] === 'is') {
+      obj[temp[0]] = { is_opened: temp[1].includes('close') ? 0 : 1 };
+    } else if (temp[0] === 'author' || temp[0] === 'assignee') {
+      obj[temp[0]] = { name: temp[1] };
+    } else if (temp[0] === 'label' || temp[0] === 'milestone') {
+      obj[temp[0]] = { title: temp[1] };
+    } else if (temp[0] === 'comment') {
+      obj[temp[0]] = {
+        content: {
+          [Model.Sequelize.Op.like]: '%' + temp[1] + '%',
+        },
+      };
+    }
+  });
+  return obj;
 };
