@@ -18,7 +18,11 @@ router.put('/state/:id', issueController.updateState);
 
 router.put('/assignee/:id', issueController.updateAssignee);
 
+router.put('/assignees/:id', issueController.updateAssignees);
+
 router.put('/label/:id', issueController.updateLabel);
+
+router.put('/labels/:id', issueController.updateLabels);
 
 router.delete('/:id', issueController.remove);
 
