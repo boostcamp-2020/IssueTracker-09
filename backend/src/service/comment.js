@@ -12,7 +12,7 @@ module.exports = {
       issue_id: issueId,
     });
 
-    return { comment };
+    return comment;
   },
 
   read: async ({ issueId }) => {
@@ -20,9 +20,9 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.findAll({ where: { issue_id: issueId } });
+    const comments = await Comment.findAll({ where: { issue_id: issueId } });
 
-    return { comment };
+    return { comments };
   },
 
   remove: async ({ id }) => {
