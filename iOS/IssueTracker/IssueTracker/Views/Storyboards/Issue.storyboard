@@ -16,29 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Dzu-pF-9tR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vMq-gg-33U" customClass="IssueTableView" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="122.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="75.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="122.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="98.5"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="51.5"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="98.5"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="51.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="37" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="13.5" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -125,11 +121,8 @@
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="iEa-l3-4fa" secondAttribute="trailing" constant="10" id="5As-VJ-cLf"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="iEa-l3-4fa" secondAttribute="bottom" constant="10" id="8v2-lo-j3T"/>
                             <constraint firstItem="vMq-gg-33U" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="GcY-ya-bdZ"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="top" secondItem="3Kr-OP-3Wt" secondAttribute="top" id="IY0-f3-hk2"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="Psg-xb-k98"/>
+                            <constraint firstItem="vMq-gg-33U" firstAttribute="top" secondItem="3Kr-OP-3Wt" secondAttribute="top" id="P36-bI-nIt"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="vMq-gg-33U" secondAttribute="bottom" id="Ql7-y9-Jbm"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="trailing" secondItem="3Kr-OP-3Wt" secondAttribute="trailing" id="b9Q-PZ-4EM"/>
-                            <constraint firstItem="vMq-gg-33U" firstAttribute="top" secondItem="Dzu-pF-9tR" secondAttribute="bottom" id="bhN-9x-yTl"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="vMq-gg-33U" secondAttribute="trailing" id="eyF-5a-Tcc"/>
                         </constraints>
                     </view>
