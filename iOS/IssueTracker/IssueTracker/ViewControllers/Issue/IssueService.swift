@@ -11,8 +11,10 @@ protocol IssueService {
     subscript(at indexPath: IndexPath) -> Issue { get }
     var count: Int { get }
     func reloadData()
+    func changeStatus(at indexPath: IndexPath)
 }
 
 protocol IssueServiceDelegate: AnyObject {
     func didDataLoaded()
+    func didChangeStatus(at indexPaht: IndexPath, to response: Bool)
 }

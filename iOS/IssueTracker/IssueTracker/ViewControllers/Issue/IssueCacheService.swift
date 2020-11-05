@@ -8,6 +8,12 @@
 import Foundation
 
 class IssueCacheService: IssueService {
+    func changeStatus(at indexPath: IndexPath) {
+        networkService.modifyIssueStatus(of: issues[indexPath.item]) { [weak self] result in
+            try? self?.delegate?.didChangeStatus(at: indexPath, to: result.get())
+        }
+    }
+    
     private var issues = [Issue]()
     private var networkService = IssueNetworkService()
     private weak var delegate: IssueServiceDelegate?

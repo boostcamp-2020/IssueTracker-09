@@ -109,16 +109,12 @@ extension IssueViewController: UITableViewDataSource {
     
     // https://zetal.tistory.com/entry/UIContextualAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let close = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+        let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
+            self?.service?.changeStatus(at: indexPath)
             completion(true)
         }
         
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
-            // self?.langs.remove(at: indexPath.row)
-            // tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            completion(true)
-        }
-        return UISwipeActionsConfiguration(actions: [delete, close])
+        return UISwipeActionsConfiguration(actions: [close])
     }
 }
 
@@ -140,6 +136,10 @@ extension IssueViewController: IssueCellDelegate {
 }
 
 extension IssueViewController: IssueServiceDelegate {
+    func didChangeStatus(at indexPaht: IndexPath, to response: Bool) {
+        
+    }
+    
     func didDataLoaded() {
         tableView.reloadData()
         
