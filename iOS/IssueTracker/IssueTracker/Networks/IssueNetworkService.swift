@@ -8,6 +8,26 @@
 import Foundation
 import Alamofire
 
+struct IssueFilterQuery {
+    let isOpen: Bool?
+    let author: User?
+    let assignee: User?
+    
+    var rawValue: String? {
+        var query = ""
+        if let isOpen = isOpen {
+            query += "is:\(isOpen ? "open" : "close")"
+        }
+        if let author = author {
+            query += "author:\(author.name)"
+        }
+        if let assignee = assignee {
+            query += "assignee:\(assignee.name)"
+        }
+        return query.isEmpty ? nil : query
+    }
+}
+
 class IssueNetworkService: NetworkService {
     enum Endpoint: String {
         case issue = "/issue"
@@ -27,7 +47,7 @@ class IssueNetworkService: NetworkService {
         // TODO 없는 경우에도 추가할 수 있도록 수정
         guard let labelId = issue.labels?.compactMap({ $0.id }),
               let assigneeId = issue.assignees?.compactMap({ $0.id }),
-              let milestoneId = issue.milestoneID else {
+              let milestoneId = issue.milestone?.id else {
             return
         }
         
@@ -50,8 +70,9 @@ class IssueNetworkService: NetworkService {
             }
     }
     
-    func fetchIssues(completion handler: @escaping (Result<Issues, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
+    func fetchIssues(query: IssueFilterQuery? = nil, completion handler: @escaping (Result<Issues, AFError>) -> Void) {
+        let urlString = baseURL + Endpoint.issue.rawValue + (query?.rawValue ?? "")
+        guard let url = URL(string: urlString),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
