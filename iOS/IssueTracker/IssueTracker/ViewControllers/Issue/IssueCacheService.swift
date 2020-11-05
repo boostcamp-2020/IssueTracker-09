@@ -10,7 +10,9 @@ import Foundation
 class IssueCacheService: IssueService {
     func changeStatus(at indexPath: IndexPath) {
         networkService.modifyIssueStatus(of: issues[indexPath.item]) { [weak self] result in
-            try? self?.delegate?.didChangeStatus(at: indexPath, to: result.get())
+            if let result = try? result.get(), result {
+                self?.delegate?.didDataLoaded(at: indexPath)
+            }
         }
     }
     
@@ -32,7 +34,7 @@ class IssueCacheService: IssueService {
     
     func reloadData() {
         networkService.fetchIssues { [weak self] result in
-            self?.issues = (try? result.get().issue) ?? []
+            self?.issues = (try? result.get().issues) ?? []
             self?.delegate?.didDataLoaded()
         }
     }
