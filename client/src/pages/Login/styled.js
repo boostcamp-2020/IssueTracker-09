@@ -20,6 +20,7 @@ const Image = styled.img.attrs({
     'https://raw.githubusercontent.com/qkrdmstlr3/svg-icon-animation/master/github-icon/github-icon.gif',
   alt: 'github-icon',
 })`
+  margin: 0 auto;
   display: block;
   width: ${(props) => props.width};
   height: ${(props) => props.height};

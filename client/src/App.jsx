@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import {
-  Main,
+  Callback,
   Login,
   Issues,
   IssueNew,
@@ -17,9 +17,9 @@ const App = () => {
     <>
       <Layout />
       <Switch>
-        <Route path="/" exact component={Main} />
+        <Route path="/callback" component={Callback} />
         <Route path="/login" component={Login} />
-        <Route path="/issues" component={Issues} />
+        <Route path="/" exact component={Issues} />
         <Route path="/issues/new" component={IssueNew} />
         <Route path="/issues/:id" component={IssueDetail} />
         <Route path="/milestones" component={Milestones} />

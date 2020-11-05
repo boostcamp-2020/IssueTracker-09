@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
-import { UserContext } from '../../stores/userStore';
+import React from 'react';
 import { Button, Div, Image } from './styled';
+import config from '../../config';
 
 const Login = () => {
-  const {
-    userAction: { loginUser },
-  } = useContext(UserContext);
+  const loginHandler = () => {
+    window.location.href = config.CALLBACK_URL;
+  };
+
   return (
     <Div>
       <Image width="200px" height="200px" />
-      <Button width="250px" height="50px" onClick={loginUser}>
+      <Button width="250px" height="50px" onClick={loginHandler}>
         Sign in with GitHub
       </Button>
     </Div>

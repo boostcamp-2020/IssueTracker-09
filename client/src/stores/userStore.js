@@ -14,8 +14,7 @@ export const GET_USER = 'GET_USER';
 const userReducer = async (state, action) => {
   switch (action.type) {
     case LOGIN_USER: {
-      const result = await loginAPI();
-      console.log(result);
+      await loginAPI(action.code);
       return state;
     }
     case LOGOUT_USER: {
@@ -36,8 +35,8 @@ const UserProvider = ({ children }) => {
   const [userState, dispatch] = useReducer(userReducer, initialState);
 
   const userAction = {
-    loginUser: () => {
-      dispatch({ type: LOGIN_USER });
+    loginUser: (code) => {
+      dispatch({ type: LOGIN_USER, code });
     },
     logoutUser: () => {
       dispatch({ type: LOGOUT_USER });
