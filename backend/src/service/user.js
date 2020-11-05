@@ -4,7 +4,7 @@ const { enrollList, dodgeList } = require('../lib/store');
 
 module.exports = {
   gitHubLogin: (user) => {
-    const { id, image, name } = user.dataValues;
+    const { id, image, name } = user;
     const jwtToken = createJWT(id);
     enrollList(id);
 
