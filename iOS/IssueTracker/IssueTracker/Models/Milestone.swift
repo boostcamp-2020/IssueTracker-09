@@ -17,4 +17,10 @@ struct Milestone: Codable {
     let isOpened: Bool
     let openCount: Int?
     let totalCount: Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, content, deadline
+        case isOpened = "is_opened"
+        case openCount, totalCount
+    }
 }
