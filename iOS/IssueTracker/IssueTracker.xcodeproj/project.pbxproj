@@ -324,6 +324,18 @@
 			path = Customs;
 			sourceTree = "<group>";
 		};
+		F4E3B4C92553D9F300E8430D /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */,
+				F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */,
+				F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */,
+				F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */,
+				F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
 		FC5CAE58254FA11B0086EA13 /* Networks */ = {
 			isa = PBXGroup;
 			children = (
@@ -467,12 +479,8 @@
 		FCF196FA2547AED200AED031 /* IssueTrackerTests */ = {
 			isa = PBXGroup;
 			children = (
+				F4E3B4C92553D9F300E8430D /* NetworkService */,
 				FCF196FD2547AED200AED031 /* Info.plist */,
-				F403F362254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift */,
-				F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */,
-				F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */,
-				F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */,
-				F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
