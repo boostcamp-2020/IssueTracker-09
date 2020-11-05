@@ -5,12 +5,15 @@
 //  Created by 현기엽 on 2020/10/28.
 //
 
-import Foundation
+import UIKit
 
 protocol Coordinator : AnyObject {
+    var window: UIWindow { get }
+    var childCoordinators: [String: ChildCoordinator] { get }
+
     func start()
 }
 
-protocol NextCoordinatorDelegate: AnyObject {
-    func navigateToPage()
+protocol ChildCoordinator: Coordinator {
+    init(window: UIWindow, parent: UIViewController)
 }

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0Y-7T-26G">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -16,29 +16,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Dzu-pF-9tR">
-                                <rect key="frame" x="0.0" y="44" width="414" height="56"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="vMq-gg-33U" customClass="IssueTableView" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="100" width="414" height="762"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="117.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="75.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="117.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="93.5"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="51.5"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="93.5"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="51.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="34.5" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="13.5" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -58,7 +54,7 @@
                                                             </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dEt-P3-k0v">
-                                                            <rect key="frame" x="0.0" y="0.0" width="219" height="69.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLx-UE-tcy">
                                                                     <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
@@ -66,53 +62,10 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" horizontalCompressionResistancePriority="749" text="레이블 전체 목록을 볼 수 있어야 한다 2줄까지 보입니다." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UWi-1w-HlH">
-                                                                    <rect key="frame" x="0.0" y="31.5" width="219" height="38"/>
-                                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleSubhead"/>
-                                                                    <color key="textColor" systemColor="systemGrayColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                </label>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="top" horizontalHuggingPriority="251" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
-                                                            <rect key="frame" x="229" y="0.0" width="161" height="46"/>
-                                                            <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스프린트2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b5r-hP-nEJ" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="92" y="0.0" width="69" height="20.5"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" systemColor="systemGrayColor"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="5"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </label>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="feature" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iO3-1R-V9e" customClass="BadgeView" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="107" y="25.5" width="54" height="20.5"/>
-                                                                    <color key="backgroundColor" red="0.23393238059999999" green="0.79695607629999998" blue="0.63835785209999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                    <nil key="textColor"/>
-                                                                    <nil key="highlightedColor"/>
-                                                                    <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                                            <real key="value" value="1"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                                            <real key="value" value="5"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                                            <color key="value" red="0.23529411759999999" green="0.79607843140000001" blue="0.63921568630000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                                                        </userDefinedRuntimeAttribute>
-                                                                    </userDefinedRuntimeAttributes>
-                                                                </label>
-                                                            </subviews>
+                                                            <rect key="frame" x="229" y="0.0" width="161" height="50"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -130,9 +83,9 @@
                                         <connections>
                                             <outlet property="badgeStackView" destination="A42-0J-GOV" id="0ll-aE-qaJ"/>
                                             <outlet property="checkBoxWrapper" destination="ZPJ-zs-Zfb" id="05S-dd-Hfh"/>
-                                            <outlet property="descriptionLabel" destination="UWi-1w-HlH" id="M6J-Mw-O8F"/>
                                             <outlet property="titleLabel" destination="gLx-UE-tcy" id="GsD-kx-065"/>
                                             <outlet property="wrapperStackView" destination="MHV-fG-1GI" id="t6h-Pg-e0a"/>
+                                            <segue destination="kWc-P2-WDO" kind="show" id="Pu5-ws-97S"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -157,6 +110,9 @@
                                         <real key="value" value="20"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <segue destination="PXi-1d-we0" kind="presentation" id="DmJ-oW-DiQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="3Kr-OP-3Wt"/>
@@ -165,11 +121,8 @@
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="iEa-l3-4fa" secondAttribute="trailing" constant="10" id="5As-VJ-cLf"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="iEa-l3-4fa" secondAttribute="bottom" constant="10" id="8v2-lo-j3T"/>
                             <constraint firstItem="vMq-gg-33U" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="GcY-ya-bdZ"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="top" secondItem="3Kr-OP-3Wt" secondAttribute="top" id="IY0-f3-hk2"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="leading" secondItem="3Kr-OP-3Wt" secondAttribute="leading" id="Psg-xb-k98"/>
+                            <constraint firstItem="vMq-gg-33U" firstAttribute="top" secondItem="3Kr-OP-3Wt" secondAttribute="top" id="P36-bI-nIt"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="bottom" secondItem="vMq-gg-33U" secondAttribute="bottom" id="Ql7-y9-Jbm"/>
-                            <constraint firstItem="Dzu-pF-9tR" firstAttribute="trailing" secondItem="3Kr-OP-3Wt" secondAttribute="trailing" id="b9Q-PZ-4EM"/>
-                            <constraint firstItem="vMq-gg-33U" firstAttribute="top" secondItem="Dzu-pF-9tR" secondAttribute="bottom" id="bhN-9x-yTl"/>
                             <constraint firstItem="3Kr-OP-3Wt" firstAttribute="trailing" secondItem="vMq-gg-33U" secondAttribute="trailing" id="eyF-5a-Tcc"/>
                         </constraints>
                     </view>
@@ -188,16 +141,30 @@
             </objects>
             <point key="canvasLocation" x="1786" y="40"/>
         </scene>
+        <!--IssueDetail-->
+        <scene sceneID="uxS-ga-ev8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IssueDetail" id="kWc-P2-WDO" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="FrV-1h-IQK"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rfi-Lr-B2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2624" y="-50"/>
+        </scene>
+        <!--IssueAppend-->
+        <scene sceneID="621-bT-EZf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="IssueAppend" id="PXi-1d-we0" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Z0j-zn-DvV"/>
+                </viewControllerPlaceholder>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ivL-9Q-FHz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2631" y="151"/>
+        </scene>
     </scenes>
     <designables>
-        <designable name="b5r-hP-nEJ">
-            <size key="intrinsicContentSize" width="69" height="20.5"/>
-        </designable>
         <designable name="iEa-l3-4fa">
             <size key="intrinsicContentSize" width="20" height="37"/>
-        </designable>
-        <designable name="iO3-1R-V9e">
-            <size key="intrinsicContentSize" width="54" height="20.5"/>
         </designable>
         <designable name="ipx-hw-RNe">
             <size key="intrinsicContentSize" width="30" height="30"/>
@@ -207,9 +174,6 @@
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

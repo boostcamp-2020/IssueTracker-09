@@ -10,11 +10,10 @@ import AuthenticationServices
 
 class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
-    private weak var delegate: NextCoordinatorDelegate?
     private var request: AuthorizationRequestable?
+    private var authorization: AppleAuthorizationController?
     
-    init?(coder: NSCoder, delegate: NextCoordinatorDelegate, request: AuthorizationRequestable) {
-        self.delegate = delegate
+    init?(coder: NSCoder, request: AuthorizationRequestable) {
         self.request = request
         super.init(coder: coder)
     }
@@ -26,11 +25,11 @@ class SignViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpProviderLoginView()
+        authorization = AppleAuthorizationController(window: view.window)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        performExistingAccountSetupFlows()
     }
     
     func setUpProviderLoginView() {
@@ -39,30 +38,11 @@ class SignViewController: UIViewController {
         loginProviderStackView.addArrangedSubview(button)
     }
     
-    
-    // 이건 바로 인증 달리는건가??
-    func performExistingAccountSetupFlows() {
-        // Prepare requests for both Apple ID and password providers.
-        let authorization = AppleAuthorizationController(window: view.window)
-        let requests = [ASAuthorizationAppleIDProvider().createRequest(),
-                        ASAuthorizationPasswordProvider().createRequest()]
-        
-        // Create an authorization controller with the given requests.
-        let authorizationController = ASAuthorizationController(authorizationRequests: requests)
-        authorizationController.delegate = authorization
-        authorizationController.presentationContextProvider = authorization
-        authorizationController.performRequests()
-    }
-    
     @IBAction func touchedCompleteButton(_ sender: Any) {
-//        request?.requestCode()
-        
-        self.delegate?.navigateToPage()
+        request?.requestCode()
     }
     
     @objc func handleAuthorizationAppleIDButtonPress() {
-        let authorization = AppleAuthorizationController(window: view.window)
-        
         let appleIDProvider = ASAuthorizationAppleIDProvider()
         let request = appleIDProvider.createRequest()
         request.requestedScopes = [.fullName, .email]

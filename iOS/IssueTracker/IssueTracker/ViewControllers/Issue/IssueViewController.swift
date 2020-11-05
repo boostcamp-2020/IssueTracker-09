@@ -7,23 +7,57 @@
 
 import UIKit
 
+protocol IssueCoordinatorDelegate: AnyObject {
+    func presentToFilterView()
+}
 
 class IssueViewController: UIViewController {
     @IBOutlet var tableView: IssueTableView!
-    var delegate: NextCoordinatorDelegate?
+    var delegate: IssueCoordinatorDelegate?
     var service: IssueService?
-    var checks: [Bool] = []
+    var checks: [Bool] = [] {
+        didSet {
+            if isEditing {
+                setLeftBarButton()
+            }
+        }
+    }
     let barButtonController = BarButtonController()
+    let searchController = UISearchController(searchResultsController: nil)
+    
+    func setLeftBarButton() {
+        let isAllTrue = checks.allSatisfy({ $0 == true })
+        self.navigationItem.leftBarButtonItem = barButtonController.buttons[isAllTrue ? .deselectAll : .selectAll]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        checks = Array(repeating: false, count: service?.count ?? 0)
+        service?.reloadData()
+        checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
         
         barButtonController.addTarget(option: .selectAll, target: self, action: #selector(touchedSelectButton))
         barButtonController.addTarget(option: .deselectAll, target: self, action: #selector(touchedDeselectButton))
         barButtonController.addTarget(option: .filter, target: self, action: #selector(touchedFilterButton))
     
         self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
+        configSearchController()
+    }
+    
+    func configSearchController() {
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "이슈 검색"
+        navigationItem.searchController = searchController
+        definesPresentationContext = true
+    }
+    
+    var searchBarIsEmpty: Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    var isFiltering: Bool {
+        return searchController.isActive && !searchBarIsEmpty
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -34,7 +68,7 @@ class IssueViewController: UIViewController {
         }
         
         if editing {
-            self.navigationItem.setLeftBarButton(barButtonController.buttons[.selectAll], animated: true)
+            setLeftBarButton()
         } else {
             self.navigationItem.setLeftBarButton(barButtonController.buttons[.filter], animated: true)
         }
@@ -55,30 +89,33 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
-        print("touchedFilter")
+        delegate?.presentToFilterView()
     }
     
     @objc func touchedDeselectButton(_ sender: Any) {
-        print("touched deselect")
+        tableView.applyAll(animated: true) { cell in
+            cell.checkBoxWrapper.button.isSelected = false
+        }
+        checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
     
     @objc func touchedSelectButton(_ sender: Any) {
         tableView.applyAll(animated: true) { cell in
             cell.checkBoxWrapper.button.isSelected = true
         }
-        checks = Array(repeating: true, count: service?.count ?? 0)
+        checks = Array(repeating: true, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
 }
 
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        service?.count ?? 0
+        service?.count(isFiltering: isFiltering) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? IssueTableViewCell,
-              let issue = service?[indexPath.row] else {
+              let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
             return UITableViewCell()
         }
         cell.delegate = self
@@ -90,16 +127,12 @@ extension IssueViewController: UITableViewDataSource {
     
     // https://zetal.tistory.com/entry/UIContextualAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let close = UIContextualAction(style: .normal, title: "Close") { action, view, completion in
+        let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
+            self?.service?.changeStatus(at: indexPath)
             completion(true)
         }
         
-        let delete = UIContextualAction(style: .destructive, title: "Delete") { action, view, completion in
-            // self?.langs.remove(at: indexPath.row)
-            // tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.automatic)
-            completion(true)
-        }
-        return UISwipeActionsConfiguration(actions: [delete, close])
+        return UISwipeActionsConfiguration(actions: [close])
     }
 }
 
@@ -117,5 +150,25 @@ extension IssueViewController: IssueCellDelegate {
         }
         
         checks[index.item] = !checks[index.item]
+    }
+}
+
+extension IssueViewController: IssueServiceDelegate {
+    func didDataLoaded(at indexPath: IndexPath?) {
+        // TODO: - indexPath에 따른 처리 필요
+        tableView.reloadData()
+        // 데이터가 바뀌었을 때는 어떻게 해야 할까?
+        checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
+    }
+}
+
+extension IssueViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        
+        service?.filter(text)
+        tableView.reloadData()
     }
 }

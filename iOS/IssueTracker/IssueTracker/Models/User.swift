@@ -7,6 +7,15 @@
 
 import Foundation
 
-struct User {
-    let id: String
+struct User: Codable {
+    let id: Int
+    let name: String
+    let image: String
+    let userCode: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name, image
+        case userCode = "user_code"
+    }
 }
