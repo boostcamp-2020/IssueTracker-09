@@ -8,7 +8,7 @@
 import Foundation
 
 struct Comments: Codable {
-    let comment: [Comment]
+    let comments: [Comment]
 }
 
 struct Comment: Codable {

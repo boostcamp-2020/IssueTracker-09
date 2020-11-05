@@ -8,27 +8,26 @@
 import Foundation
 
 struct Issues: Codable {
-    var issue: [Issue]
+    var issues: [Issue]
 }
 
 struct Issue: Codable {
     let id: Int
     let title: String
-    let content: String?
     let isOpened: Bool
     let timestamp: String
-    let userID: Int
-    let milestoneID: Int?
     let assignees: [User]?
+    let milestone: Milestone?
+    let user: User
     let labels: [Label]?
     
     enum CodingKeys: String, CodingKey {
-        case id, title, content
+        case id, title
         case isOpened = "is_opened"
         case timestamp
-        case userID = "user_id"
-        case milestoneID = "milestone_id"
-        case assignees = "Issues"
+        case assignees = "Assignees"
+        case milestone = "Milestone"
+        case user = "User"
         case labels = "Labels"
     }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 struct Milestones: Codable {
-    let milestone: [Milestone]
+    let milestones: [Milestone]
 }
 
 struct Milestone: Codable {
