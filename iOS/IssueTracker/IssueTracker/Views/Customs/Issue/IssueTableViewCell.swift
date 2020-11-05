@@ -25,11 +25,11 @@ class IssueTableViewCell: UITableViewCell {
     
     func configure(issue: Issue, isCheck: Bool) {
         titleLabel.text = issue.title
-        if let title = issue.milestone?.title {
-            badgeStackView.addArrangedSubview(makeBadgeView(content: title, color: .systemGray))
-        }
+//        if let title = issue.milestoneID?.title {
+//            badgeStackView.addArrangedSubview(makeBadgeView(content: title, color: .systemGray))
+//        }
         
-        issue.labels.forEach { label in
+        issue.labels?.forEach { label in
             badgeStackView.addArrangedSubview(
                 makeBadgeView(content: label.title, color: UIColor(red: 32, green: 156, blue: 128))
             )

@@ -24,9 +24,10 @@ class IssueNetworkService: NetworkService {
             return
         }
         
-        let labelId = issue.labels.map { $0.id }
-        let assigneeId = issue.assignees.map { $0.id }
-        guard let milestoneId = issue.milestone?.id else {
+        // TODO 없는 경우에도 추가할 수 있도록 수정
+        guard let labelId = issue.labels?.compactMap({ $0.id }),
+              let assigneeId = issue.assignees?.compactMap({ $0.id }),
+              let milestoneId = issue.milestoneID else {
             return
         }
         
