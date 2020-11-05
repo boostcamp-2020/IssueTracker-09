@@ -13,26 +13,21 @@ struct Issues: Codable {
 
 struct Issue: Codable {
     let id: Int
-    let title, content: String
+    let title: String
     let isOpened: Bool
+    let timestamp: String
+    let assignees: [User]
     let milestone: Milestone?
-    let commentCount: Int
-    let user: [User]
-    let label: [Label]
+    let user: User
+    let labels: [Label]
     
     enum CodingKeys: String, CodingKey {
-        case id, title, content
+        case id, title
         case isOpened = "is_opened"
+        case timestamp
+        case assignees = "Assignees"
         case milestone = "Milestone"
-        case commentCount, user, label
-    }
-}
-
-struct AssigneeIssue: Codable {
-    let userID, issueID: Int
-    
-    enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
-        case issueID = "issue_id"
+        case user
+        case labels = "Labels"
     }
 }

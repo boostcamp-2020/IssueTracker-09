@@ -8,7 +8,7 @@
 import Foundation
 
 class LocalIssueService: IssueService {
-    let issue = Issue(id: 0, title: "레이블 목록 보기 구현", content: "레이블 전체 목록을 볼 수 있어야 한다 2줄까지 보입니다.", isOpened: true, milestone: nil, commentCount: 0, user: [], label: [])
+    let issue = Issue(id: 0, title: "레이블 목록 보기 구현", isOpened: true, timestamp: "2020-11-03T12:20:25.000Z", assignees: [User(id: 1, name: "joojaewoo", image: "https://avatars2.githubusercontent.com/u/46195613?v=4")], milestone: nil, user: User(id: 1, name: "joojaewoo", image: "https://avatars2.githubusercontent.com/u/46195613?v=4"), labels: [Label(id: 2, color: "#975917", title: "test", content: "입력테스트")])
     
     internal lazy var issues = {
         return Issues(issue: [issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue, issue])
