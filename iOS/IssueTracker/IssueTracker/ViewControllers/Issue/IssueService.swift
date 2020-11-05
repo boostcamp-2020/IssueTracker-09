@@ -15,6 +15,5 @@ protocol IssueService {
 }
 
 protocol IssueServiceDelegate: AnyObject {
-    func didDataLoaded()
-    func didChangeStatus(at indexPaht: IndexPath, to response: Bool)
+    func didDataLoaded(at indexPath: IndexPath?)
 }

@@ -136,11 +136,8 @@ extension IssueViewController: IssueCellDelegate {
 }
 
 extension IssueViewController: IssueServiceDelegate {
-    func didChangeStatus(at indexPaht: IndexPath, to response: Bool) {
-        
-    }
-    
-    func didDataLoaded() {
+    func didDataLoaded(at indexPath: IndexPath?) {
+        // TODO: - indexPath에 따른 처리 필요
         tableView.reloadData()
         
         // 데이터가 바뀌었을 때는 어떻게 해야 할까?
