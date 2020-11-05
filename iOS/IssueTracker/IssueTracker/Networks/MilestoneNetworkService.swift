@@ -75,6 +75,25 @@ class MilestoneNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
+    func modifyMilestoneState(_ milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.milestone.rawValue + "/\(milestone.id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
+            return
+        }
+        
+        let parameters = [
+            "isOpened": !milestone.isOpened
+        ]
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        
+        AF.request(url,
+                   method: .put,
+                   parameters: parameters,
+                   headers: headers)
+            .validate()
+            .responseBool(completionHandler: handler)
+    }
+    
     func deleteMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.milestone.rawValue + "/\(milestone.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
