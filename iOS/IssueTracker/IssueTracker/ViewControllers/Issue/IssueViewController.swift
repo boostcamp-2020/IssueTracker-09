@@ -17,7 +17,9 @@ class IssueViewController: UIViewController {
     var service: IssueService?
     var checks: [Bool] = [] {
         didSet {
-            setLeftBarButton()
+            if isEditing {
+                setLeftBarButton()
+            }
         }
     }
     let barButtonController = BarButtonController()
@@ -29,6 +31,7 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        service?.reloadData()
         checks = Array(repeating: false, count: service?.count ?? 0)
         
         barButtonController.addTarget(option: .selectAll, target: self, action: #selector(touchedSelectButton))
@@ -94,7 +97,7 @@ extension IssueViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "cell") as? IssueTableViewCell,
-              let issue = service?[indexPath.row] else {
+              let issue = service?[at: indexPath] else {
             return UITableViewCell()
         }
         cell.delegate = self
@@ -133,5 +136,14 @@ extension IssueViewController: IssueCellDelegate {
         }
         
         checks[index.item] = !checks[index.item]
+    }
+}
+
+extension IssueViewController: IssueServiceDelegate {
+    func didDataLoaded() {
+        tableView.reloadData()
+        
+        // 데이터가 바뀌었을 때는 어떻게 해야 할까?
+        checks = Array(repeating: false, count: service?.count ?? 0)
     }
 }

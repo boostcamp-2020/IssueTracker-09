@@ -39,7 +39,7 @@ class MainTabBarCoordinator: Coordinator {
             return
         }
         issueViewController.delegate = self
-        issueViewController.service = LocalIssueService()
+        issueViewController.service = IssueCacheService(delegate: issueViewController)
         
         guard let milestoneViewController = UIStoryboard(name: StoryboardName.Milestone.rawValue, bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
             return

@@ -8,7 +8,11 @@
 import Foundation
 
 protocol IssueService {
+    subscript(at indexPath: IndexPath) -> Issue { get }
     var count: Int { get }
-    subscript(at: Int) -> Issue { get }
-    func remove(indexOf: Int)
+    func reloadData()
+}
+
+protocol IssueServiceDelegate: AnyObject {
+    func didDataLoaded()
 }
