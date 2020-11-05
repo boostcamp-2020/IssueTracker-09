@@ -19,12 +19,11 @@ export const loginAPI = async (code) => {
   }
 };
 
-export const getUserAPI = () => {
-  // try {
-  //   // const data = await request({ method: 'get', params: '/user' });
-  //   // return data;
-  //   return { image: 'nice', name: 'nice' };
-  // } catch (error) {
-  //   return false;
-  // }
+export const getUserAPI = async () => {
+  try {
+    const { data } = await request({ method: 'get', params: '/user' });
+    return { image: data.image, name: data.name };
+  } catch (error) {
+    return false;
+  }
 };

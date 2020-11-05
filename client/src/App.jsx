@@ -14,7 +14,6 @@ import Layout from './components/Layout';
 import PrivateRoute from './lib/PrivateRoute';
 
 const App = () => {
-  console.log('!');
   return (
     <>
       <Layout />
