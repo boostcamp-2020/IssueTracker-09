@@ -55,7 +55,7 @@ class IssueNetworkServiceTests: XCTestCase {
     func testFetchIssuesByCondition() throws {
         let expectTimer = expectation(description: "testFetchIssuesByCondition")
         let joojaewoo = User(id: 0, name: "joojaewoo", image: "", userCode: nil)
-        let query = IssueFilterQuery(isOpen: true, author: joojaewoo, assignee: joojaewoo)
+        let query = IssueFilterQuery(isOpen: false, author: joojaewoo, assignee: joojaewoo)
         IssueNetworkService().fetchIssues(query: query) { result in
             switch result {
             case .success(_):
