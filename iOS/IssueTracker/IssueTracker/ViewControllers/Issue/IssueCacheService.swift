@@ -35,7 +35,7 @@ class IssueCacheService: IssueService {
     func reloadData() {
         networkService.fetchIssues { [weak self] result in
             self?.issues = (try? result.get().issues) ?? []
-            self?.delegate?.didDataLoaded()
+            self?.delegate?.didDataLoaded(at: nil)
         }
     }
 }

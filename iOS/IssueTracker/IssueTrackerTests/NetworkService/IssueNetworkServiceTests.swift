@@ -51,4 +51,24 @@ class IssueNetworkServiceTests: XCTestCase {
             }
         }
     }
+    
+    func testFetchIssuesByCondition() throws {
+        let expectTimer = expectation(description: "testFetchIssuesByCondition")
+        let joojaewoo = User(id: 0, name: "joojaewoo", image: "", userCode: nil)
+        let query = IssueFilterQuery(isOpen: true, author: joojaewoo, assignee: joojaewoo)
+        IssueNetworkService().fetchIssues(query: query) { result in
+            switch result {
+            case .success(_):
+                expectTimer.fulfill()
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        }
+        
+        waitForExpectations(timeout: asyncTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 }

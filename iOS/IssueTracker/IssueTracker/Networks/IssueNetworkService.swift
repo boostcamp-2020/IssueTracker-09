@@ -14,17 +14,17 @@ struct IssueFilterQuery {
     let assignee: User?
     
     var rawValue: String? {
-        var query = ""
+        var query = [String]()
         if let isOpen = isOpen {
-            query += "is:\(isOpen ? "open" : "close")"
+            query += ["is:\(isOpen ? "open" : "close")"]
         }
         if let author = author {
-            query += "author:\(author.name)"
+            query += ["author:\(author.name)"]
         }
         if let assignee = assignee {
-            query += "assignee:\(assignee.name)"
+            query += ["assignee:\(assignee.name)"]
         }
-        return query.isEmpty ? nil : query
+        return query.isEmpty ? nil : query.joined(separator: " ")
     }
 }
 
