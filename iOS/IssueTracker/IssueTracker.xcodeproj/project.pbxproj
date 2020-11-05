@@ -48,6 +48,7 @@
 		F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */; };
 		F4EFB7A22552847600328C61 /* IssueDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFB7A12552847600328C61 /* IssueDetailViewController.swift */; };
 		F4EFB7AF2552881200328C61 /* IssueDetailContentCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EFB7AE2552881200328C61 /* IssueDetailContentCollectionViewCell.swift */; };
+		F4FD809C2553EC1E00B997C5 /* IssueAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4FD809B2553EC1E00B997C5 /* IssueAppend.storyboard */; };
 		F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FE9C0E254908F30054DAAD /* IssueViewController.swift */; };
 		F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */; };
 		FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CAE5E254FA1CA0086EA13 /* UserNetworkService.swift */; };
@@ -143,6 +144,7 @@
 		F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
 		F4EFB7A12552847600328C61 /* IssueDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailViewController.swift; sourceTree = "<group>"; };
 		F4EFB7AE2552881200328C61 /* IssueDetailContentCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailContentCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4FD809B2553EC1E00B997C5 /* IssueAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueAppend.storyboard; sourceTree = "<group>"; };
 		F4FE9C0E254908F30054DAAD /* IssueViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IssueViewController.swift; sourceTree = "<group>"; };
 		F4FF1AB4254FE46100635360 /* LabelNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelNetworkService.swift; sourceTree = "<group>"; };
 		FC37D59D255136A800689B72 /* ElementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ElementView.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				F4012A49255023F50047CE91 /* Milestone.storyboard */,
 				F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */,
 				F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */,
+				F4FD809B2553EC1E00B997C5 /* IssueAppend.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				F4012A4A255023F50047CE91 /* Milestone.storyboard in Resources */,
 				FCF196EE2547AED200AED031 /* Assets.xcassets in Resources */,
 				F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */,
+				F4FD809C2553EC1E00B997C5 /* IssueAppend.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
