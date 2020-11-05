@@ -11,5 +11,6 @@ module.exports = {
     'react/require-default-props': 'off',
     'no-plusplus': 'off',
     'react/jsx-filename-extension': 'off',
+    'react/no-array-index-key': 'off',
   },
 };
