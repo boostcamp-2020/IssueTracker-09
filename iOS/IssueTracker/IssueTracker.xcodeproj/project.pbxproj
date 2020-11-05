@@ -42,6 +42,7 @@
 		F4E3B4B02553C4C000E8430D /* UIStackView+clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */; };
 		F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */; };
 		F4E3B4C02553D33B00E8430D /* MilestoneNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */; };
+		F4E3B4C52553D53000E8430D /* CommentNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */; };
 		F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EB411E25515BF1007E56E1 /* InputField.xib */; };
 		F4EB412425515FEC007E56E1 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB412325515FEC007E56E1 /* InputField.swift */; };
 		F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */; };
@@ -136,6 +137,7 @@
 		F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+clear.swift"; sourceTree = "<group>"; };
 		F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneNetworkServiceTests.swift; sourceTree = "<group>"; };
+		F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4EB411E25515BF1007E56E1 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
 		F4EB412325515FEC007E56E1 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
@@ -470,6 +472,7 @@
 				F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */,
 				F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */,
 				F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */,
+				F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
@@ -822,6 +825,7 @@
 				F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */,
 				F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */,
 				F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */,
+				F4E3B4C52553D53000E8430D /* CommentNetworkServiceTests.swift in Sources */,
 				F4E3B4C02553D33B00E8430D /* MilestoneNetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
