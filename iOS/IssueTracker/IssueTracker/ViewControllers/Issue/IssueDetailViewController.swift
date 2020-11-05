@@ -16,12 +16,14 @@ class IssueDetailViewController: UIViewController {
     }
     
     func createLayout() -> UICollectionViewLayout {
-        let configuration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        var configuration = UICollectionLayoutListConfiguration(appearance: .grouped)
+        configuration.showsSeparators = false
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
 }
 
 extension IssueDetailViewController: UICollectionViewDelegate {
+
 }
 
 extension IssueDetailViewController: UICollectionViewDataSource {
