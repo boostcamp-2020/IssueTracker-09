@@ -53,11 +53,11 @@ describe('create milestone Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     milestoneService.create.mockReturnValue(errorMessage);
     await milestoneController.create(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -85,7 +85,10 @@ describe('update milestone Controller 테스트', () => {
   it('service에 newmilestone가 들어가는가', async () => {
     milestoneService.update.mockReturnValue(newmilestone);
     await milestoneController.update(req, res);
-    expect(milestoneService.update).toBeCalledWith(userParams, newmilestone);
+    expect(milestoneService.update).toBeCalledWith({
+      ...userParams,
+      ...newmilestone,
+    });
   });
 
   it('성공 시 200응답이 오는가', async () => {
@@ -101,11 +104,11 @@ describe('update milestone Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     milestoneService.update.mockReturnValue(errorMessage);
     await milestoneController.update(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -148,11 +151,11 @@ describe('remove milestone Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     milestoneService.remove.mockReturnValue(errorMessage);
     await milestoneController.remove(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -194,11 +197,11 @@ describe('read milestone Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     milestoneService.read.mockReturnValue(errorMessage);
     await milestoneController.read(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 

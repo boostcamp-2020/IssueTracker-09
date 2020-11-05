@@ -8,7 +8,7 @@ module.exports = {
     return await Label.create({ color, title, content });
   },
   read: async () => {
-    return await Label.findAll();
+    return { labels: await Label.findAll() };
   },
   update: async ({ id, color, title, content }) => {
     if (!id || !color || !title) {
@@ -19,7 +19,7 @@ module.exports = {
       { where: { id } }
     );
     if (label) {
-      return true;
+      return { response: true };
     }
     return { error: '없는 id값 입니다' };
   },
@@ -29,7 +29,7 @@ module.exports = {
     }
     const label = await Label.destroy({ where: { id } });
     if (label) {
-      return true;
+      return { response: true };
     }
     return { error: '없는 id값 입니다' };
   },

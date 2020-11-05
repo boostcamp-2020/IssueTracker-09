@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING(255),
       allowNull: false,
     },
-    content: {
-      type: DataTypes.TEXT,
-    },
     is_opened: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
@@ -34,7 +31,7 @@ module.exports = (sequelize, DataTypes) => {
     });
     db.Issue.belongsToMany(db.User, {
       through: 'Assignee_Issue',
-      foreignKey: 'issue_id',
+      as: 'Assignees',
     });
     db.Issue.belongsToMany(db.Label, {
       through: 'Issue_Label',
