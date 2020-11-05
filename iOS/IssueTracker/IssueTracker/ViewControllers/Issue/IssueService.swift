@@ -8,10 +8,11 @@
 import Foundation
 
 protocol IssueService {
-    subscript(at indexPath: IndexPath) -> Issue { get }
-    var count: Int { get }
+    func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue
+    func count(isFiltering: Bool) -> Int
     func reloadData()
     func changeStatus(at indexPath: IndexPath)
+    func filter(_ text: String)
 }
 
 protocol IssueServiceDelegate: AnyObject {
