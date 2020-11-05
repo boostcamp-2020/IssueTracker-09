@@ -18,6 +18,7 @@ protocol RootCoordinateControllerDelegate: AnyObject {
 
 class RootCoordinateController {
     let window: UIWindow
+    var coordinator: Coordinator?
     
     init(window: UIWindow) {
         self.window = window
@@ -35,7 +36,7 @@ class RootCoordinateController {
 
 extension RootCoordinateController: RootCoordinateControllerDelegate {
     func root(name: RootCoordinatorName) {
-        let coordinator = self.make(name: name)
-        coordinator.start()
+        coordinator = self.make(name: name)
+        coordinator?.start()
     }
 }

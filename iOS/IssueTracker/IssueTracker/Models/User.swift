@@ -9,14 +9,13 @@ import Foundation
 
 struct User: Codable {
     let id: Int
-    let userCode, name: String
+    let name: String
     let image: String
-    let assigneeIssue: AssigneeIssue
+    let userCode: String?
     
     enum CodingKeys: String, CodingKey {
         case id
-        case userCode = "user_code"
         case name, image
-        case assigneeIssue = "Assignee_Issue"
+        case userCode = "user_code"
     }
 }

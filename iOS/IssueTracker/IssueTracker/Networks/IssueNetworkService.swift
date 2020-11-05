@@ -8,9 +8,34 @@
 import Foundation
 import Alamofire
 
+struct IssueFilterQuery {
+    let isOpen: Bool?
+    let author: User?
+    let assignee: User?
+    
+    var rawValue: String? {
+        var query = [String]()
+        if let isOpen = isOpen {
+            query += ["is:\(isOpen ? "open" : "close")"]
+        }
+        if let author = author {
+            query += ["author:\(author.name)"]
+        }
+        if let assignee = assignee {
+            query += ["assignee:\(assignee.name)"]
+        }
+        return query.isEmpty ? nil : "?q=" + query.joined(separator: " ")
+    }
+}
+
 class IssueNetworkService: NetworkService {
     enum Endpoint: String {
         case issue = "/issue"
+        case milestone = "/milestone"
+        case title = "/title"
+        case state = "/state"
+        case labels = "/labels"
+        case assignees = "/assignees"
     }
     
     func addIssue(issue: Issue, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
@@ -19,15 +44,15 @@ class IssueNetworkService: NetworkService {
             return
         }
         
-        let labelId = issue.label.map { $0.id }
-        let assigneeId = issue.user.map { $0.id }
-        guard let milestoneId = issue.milestone?.id else {
+        // TODO 없는 경우에도 추가할 수 있도록 수정
+        guard let labelId = issue.labels?.compactMap({ $0.id }),
+              let assigneeId = issue.assignees?.compactMap({ $0.id }),
+              let milestoneId = issue.milestone?.id else {
             return
         }
         
         let parameters = [
             "title": issue.title,
-            "content": issue.content,
             "labelId": labelId,
             "assigneeId": assigneeId,
             "milestoneId": milestoneId
@@ -45,8 +70,10 @@ class IssueNetworkService: NetworkService {
             }
     }
     
-    func fetchIssues(completion handler: @escaping (Result<Issues, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
+    func fetchIssues(query: IssueFilterQuery? = nil, completion handler: @escaping (Result<Issues, AFError>) -> Void) {
+        var urlString = baseURL + Endpoint.issue.rawValue + (query?.rawValue ?? "")
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+        guard let url = URL(string: urlString),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
@@ -80,12 +107,12 @@ class IssueNetworkService: NetworkService {
     }
     
     func modifyIssueMilestone(of id: Int, to milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.milestone.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        let parameters = ["milestone": milestone.id]
+        let parameters = ["milestoneId": milestone.id]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
@@ -96,28 +123,48 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueStatus(of id: Int, completion handler: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
+    func modifyIssueStatus(of issue: Issue, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue + "/\(issue.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
+        let parameters = ["isOpened": !issue.isOpened]
+
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
+                   parameters: parameters,
                    headers: headers)
             .validate()
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueAssignee(of id: Int, to assignee: User, completion handler: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
+    func modifyIssueLabels(of id: Int, checked: [Label], unchecked: [Label], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.labels.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        let parameters = ["assigneeId": assignee.id]
+        let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        
+        AF.request(url,
+                   method: .put,
+                   parameters: parameters,
+                   headers: headers)
+            .validate()
+            .responseBool(completionHandler: handler)
+    }
+    
+    func modifyIssueAssignee(of id: Int, checked: [User], unchecked: [User], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.assignees.rawValue + "/\(id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
+            return
+        }
+        
+        let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
