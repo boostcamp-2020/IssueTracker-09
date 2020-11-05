@@ -6,21 +6,38 @@ import { UserContext } from '../../stores/userStore';
 
 const Callback = ({ history, location }) => {
   const {
-    userAction: { loginUser },
+    userState,
+    userAction: { loginUser, realLogin },
   } = useContext(UserContext);
 
-  useEffect(() => {
-    async function getToken() {
-      const { code } = qs.parse(location.search, {
-        ignoreQueryPrefix: true,
-      });
+  // useEffect(() => {
+  //   async function getToken() {
+  //     const { code } = qs.parse(location.search, {
+  //       ignoreQueryPrefix: true,
+  //     });
 
-      await loginUser(code);
+  //     return history.push('/');
+  //   }
+  //   getToken();
+  // }, [location, history]);
 
-      return history.push('/');
-    }
-    getToken();
-  }, [location, history]);
+  useEffect(async () => {
+    const { code } = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    });
+    await loginUser(code);
+  }, []);
+
+  // try {
+  //   if (!userState.name) {
+  //     userState.then((result) => {
+  //       realLogin(result);
+  //     });
+  //   }
+  // } catch (error) {
+  //   console.log(error);
+  // }
+
   return <div>hello</div>;
 };
 

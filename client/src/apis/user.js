@@ -1,15 +1,30 @@
-import axios from 'axios';
+import request from '../lib/axios';
 
-const loginAPI = async (code) => {
-  const {
-    data: { token },
-  } = await axios.post(`http://localhost:3000/api/user/github`, {
-    code,
-  });
+export const loginAPI = async (code) => {
+  try {
+    const {
+      data: { token, image, name },
+    } = await request({
+      method: 'post',
+      params: '/user/github',
+      data: { code },
+    });
 
-  if (token) {
-    localStorage.setItem('jwt_token', token);
+    if (token) {
+      localStorage.setItem('jwt_token', token);
+    }
+    return { image, name };
+  } catch (error) {
+    return false;
   }
 };
 
-export default loginAPI;
+export const getUserAPI = () => {
+  // try {
+  //   // const data = await request({ method: 'get', params: '/user' });
+  //   // return data;
+  //   return { image: 'nice', name: 'nice' };
+  // } catch (error) {
+  //   return false;
+  // }
+};

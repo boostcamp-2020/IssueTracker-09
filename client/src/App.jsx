@@ -11,21 +11,23 @@ import {
   Milestones,
 } from './pages';
 import Layout from './components/Layout';
+import PrivateRoute from './lib/PrivateRoute';
 
 const App = () => {
+  console.log('!');
   return (
     <>
       <Layout />
       <Switch>
         <Route path="/callback" component={Callback} />
         <Route path="/login" component={Login} />
-        <Route path="/" exact component={Issues} />
-        <Route path="/issues/new" component={IssueNew} />
-        <Route path="/issues/:id" component={IssueDetail} />
-        <Route path="/milestones" component={Milestones} />
-        <Route path="/milestone/new" component={MilestoneNew} />
-        <Route path="/milestone/:id/edit" component={MilestoneNew} />
-        <Route path="/labels" component={Login} />
+        <PrivateRoute path="/" exact component={Issues} />
+        <PrivateRoute path="/issues/new" component={IssueNew} />
+        <PrivateRoute path="/issues/:id" component={IssueDetail} />
+        <PrivateRoute path="/milestones" component={Milestones} />
+        <PrivateRoute path="/milestone/new" component={MilestoneNew} />
+        <PrivateRoute path="/milestone/:id/edit" component={MilestoneNew} />
+        <PrivateRoute path="/labels" component={Login} />
       </Switch>
     </>
   );
