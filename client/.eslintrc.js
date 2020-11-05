@@ -6,7 +6,7 @@ module.exports = {
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/jsx-one-expression-per-line': 'off',
     'react/require-default-props': 'off',
     'no-plusplus': 'off',

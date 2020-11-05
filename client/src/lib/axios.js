@@ -2,7 +2,7 @@ const axios = require('axios');
 
 axios.defaults.baseURL = 'http://localhost:3000/api';
 const request = async ({ method, params = '', data = '' }) => {
-  const token = window.localStorage.getItem('token');
+  const token = localStorage.getItem('jwt_token');
 
   const config = {
     method,
