@@ -15,8 +15,17 @@ class IssueViewController: UIViewController {
     @IBOutlet var tableView: IssueTableView!
     var delegate: IssueCoordinatorDelegate?
     var service: IssueService?
-    var checks: [Bool] = []
+    var checks: [Bool] = [] {
+        didSet {
+            setLeftBarButton()
+        }
+    }
     let barButtonController = BarButtonController()
+    
+    func setLeftBarButton() {
+        let isAllTrue = checks.allSatisfy({ $0 == true })
+        self.navigationItem.leftBarButtonItem = barButtonController.buttons[isAllTrue ? .deselectAll : .selectAll]
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +46,7 @@ class IssueViewController: UIViewController {
         }
         
         if editing {
-            self.navigationItem.setLeftBarButton(barButtonController.buttons[.selectAll], animated: true)
+            setLeftBarButton()
         } else {
             self.navigationItem.setLeftBarButton(barButtonController.buttons[.filter], animated: true)
         }
@@ -67,7 +76,6 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.button.isSelected = false
         }
         checks = Array(repeating: false, count: service?.count ?? 0)
-        self.navigationItem.leftBarButtonItem = barButtonController.buttons[.selectAll]
     }
     
     @objc func touchedSelectButton(_ sender: Any) {
@@ -75,7 +83,6 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.button.isSelected = true
         }
         checks = Array(repeating: true, count: service?.count ?? 0)
-        self.navigationItem.leftBarButtonItem = barButtonController.buttons[.deselectAll]
     }
 }
 
