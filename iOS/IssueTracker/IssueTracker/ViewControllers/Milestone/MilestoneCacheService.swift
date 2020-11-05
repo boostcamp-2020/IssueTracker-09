@@ -27,7 +27,7 @@ class MilestoneCacheService: MilestoneService {
 
     func reloadData() {
         networkService.fetchMilestones { [weak self] result in
-            self?.milestones = (try? result.get().milestone) ?? []
+            self?.milestones = (try? result.get().milestones) ?? []
             self?.delegate?.didDataLoaded()
         }
     }
