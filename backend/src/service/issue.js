@@ -108,12 +108,13 @@ module.exports = {
   },
 
   updateState: async ({ id, isOpened }) => {
-    if (!id) {
+    if (!id.length || isOpened === undefined) {
       return { error: '정보가 부족합니다.' };
     }
-    const issue = await Model.Issue.findOne({ where: { id } });
 
-    if (!issue) {
+    const issue = await Model.Issue.findAll({ where: { id } });
+
+    if (issue.length !== id.length) {
       return { error: '없는 id값 입니다.' };
     }
 
@@ -121,6 +122,7 @@ module.exports = {
       { is_opened: isOpened },
       { where: { id } }
     );
+
     if (result) {
       return { response: true };
     }
