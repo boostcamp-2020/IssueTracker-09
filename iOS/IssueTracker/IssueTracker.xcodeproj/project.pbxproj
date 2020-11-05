@@ -39,6 +39,7 @@
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
+		F4E3B4B02553C4C000E8430D /* UIStackView+clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */; };
 		F4EB411F25515BF1007E56E1 /* InputField.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4EB411E25515BF1007E56E1 /* InputField.xib */; };
 		F4EB412425515FEC007E56E1 /* InputField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4EB412325515FEC007E56E1 /* InputField.swift */; };
 		F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */; };
@@ -130,6 +131,7 @@
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
+		F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+clear.swift"; sourceTree = "<group>"; };
 		F4EB411E25515BF1007E56E1 /* InputField.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InputField.xib; sourceTree = "<group>"; };
 		F4EB412325515FEC007E56E1 /* InputField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputField.swift; sourceTree = "<group>"; };
 		F4EFB79C25527A9000328C61 /* IssueDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = IssueDetail.storyboard; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 			isa = PBXGroup;
 			children = (
 				FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */,
+				F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -762,6 +765,7 @@
 				F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */,
 				F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */,
 				FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */,
+				F4E3B4B02553C4C000E8430D /* UIStackView+clear.swift in Sources */,
 				F403F375254FFDC4004E8CF0 /* CommentNetworkService.swift in Sources */,
 				F4EFB7AF2552881200328C61 /* IssueDetailContentCollectionViewCell.swift in Sources */,
 				FCF197212547BDAB00AED031 /* User.swift in Sources */,
