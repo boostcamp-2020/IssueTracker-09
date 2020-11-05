@@ -24,7 +24,7 @@ struct IssueFilterQuery {
         if let assignee = assignee {
             query += ["assignee:\(assignee.name)"]
         }
-        return query.isEmpty ? nil : query.joined(separator: " ")
+        return query.isEmpty ? nil : "?q=" + query.joined(separator: " ")
     }
 }
 
@@ -71,7 +71,8 @@ class IssueNetworkService: NetworkService {
     }
     
     func fetchIssues(query: IssueFilterQuery? = nil, completion handler: @escaping (Result<Issues, AFError>) -> Void) {
-        let urlString = baseURL + Endpoint.issue.rawValue + (query?.rawValue ?? "")
+        var urlString = baseURL + Endpoint.issue.rawValue + (query?.rawValue ?? "")
+        urlString = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
         guard let url = URL(string: urlString),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
