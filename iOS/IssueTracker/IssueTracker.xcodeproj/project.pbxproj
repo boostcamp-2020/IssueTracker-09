@@ -33,7 +33,7 @@
 		F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4383EF2254946A4003FB09D /* CheckBox.swift */; };
 		F448516F254971F600A84527 /* IssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448516E254971F600A84527 /* IssueService.swift */; };
 		F44851742549721F00A84527 /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851732549721F00A84527 /* Issue.swift */; };
-		F44851792549736900A84527 /* LocalIssueService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851782549736900A84527 /* LocalIssueService.swift */; };
+		F44851792549736900A84527 /* IssueCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851782549736900A84527 /* IssueCacheService.swift */; };
 		F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */; };
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
@@ -124,7 +124,7 @@
 		F4383EF2254946A4003FB09D /* CheckBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckBox.swift; sourceTree = "<group>"; };
 		F448516E254971F600A84527 /* IssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueService.swift; sourceTree = "<group>"; };
 		F44851732549721F00A84527 /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
-		F44851782549736900A84527 /* LocalIssueService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalIssueService.swift; sourceTree = "<group>"; };
+		F44851782549736900A84527 /* IssueCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCacheService.swift; sourceTree = "<group>"; };
 		F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
@@ -301,7 +301,7 @@
 			children = (
 				F4FE9C0E254908F30054DAAD /* IssueViewController.swift */,
 				F448516E254971F600A84527 /* IssueService.swift */,
-				F44851782549736900A84527 /* LocalIssueService.swift */,
+				F44851782549736900A84527 /* IssueCacheService.swift */,
 				F4EFB7A12552847600328C61 /* IssueDetailViewController.swift */,
 			);
 			path = Issue;
@@ -775,7 +775,7 @@
 				FC5CAE67254FA6CC0086EA13 /* NetworkService.swift in Sources */,
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
 				F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */,
-				F44851792549736900A84527 /* LocalIssueService.swift in Sources */,
+				F44851792549736900A84527 /* IssueCacheService.swift in Sources */,
 				F4012A6B255028AD0047CE91 /* MilestoneCacheService.swift in Sources */,
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */,
