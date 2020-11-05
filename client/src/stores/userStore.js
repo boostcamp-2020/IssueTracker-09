@@ -12,7 +12,7 @@ export const REAL_LOGIN = 'REAL_LOGIN';
 export const LOGOUT_USER = 'LOGOUT_USER';
 export const GET_USER = 'GET_USER';
 
-const userReducer = async (state, action) => {
+const userReducer = (state, action) => {
   switch (action.type) {
     case LOGIN_USER: {
       if (action.result) {
@@ -23,25 +23,16 @@ const userReducer = async (state, action) => {
       }
       return state;
     }
-    case REAL_LOGIN: {
-      console.log(action);
-      return {
-        name: action.name,
-        image: action.image,
-      };
-    }
     case LOGOUT_USER: {
       return state;
     }
     case GET_USER: {
-      const result = getUserAPI();
-
-      if (result) {
+      if (!action.result) {
         return state;
       }
       return {
-        name: result.name,
-        image: result.image,
+        name: action.result.name,
+        image: action.result.image,
       };
     }
     default: {
@@ -59,17 +50,13 @@ const UserProvider = ({ children }) => {
     loginUser: async (code) => {
       const result = await loginAPI(code);
       dispatch({ type: LOGIN_USER, result });
-      console.log(userState);
     },
     logoutUser: () => {
       dispatch({ type: LOGOUT_USER });
     },
-    getUser: () => {
-      dispatch({ type: GET_USER });
-    },
-    realLogin: ({ name, image }) => {
-      dispatch({ type: REAL_LOGIN, name, image });
-      console.log(userState);
+    getUser: async () => {
+      const result = await getUserAPI();
+      dispatch({ type: GET_USER, result });
     },
   };
 
