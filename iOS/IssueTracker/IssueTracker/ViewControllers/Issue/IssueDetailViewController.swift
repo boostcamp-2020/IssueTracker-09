@@ -12,7 +12,9 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView.collectionViewLayout = createLayout()
+        addBottomSheetView()
     }
     
     func createLayout() -> UICollectionViewLayout {
@@ -22,8 +24,24 @@ class IssueDetailViewController: UIViewController {
     }
 }
 
-extension IssueDetailViewController: UICollectionViewDelegate {
+extension IssueDetailViewController {
+    func addBottomSheetView() {
+        
+        guard let bottomSheetVC = UIStoryboard(name: "IssueBottomSheet", bundle: nil).instantiateInitialViewController() as? IssueBottomSheetViewController else {
+            return
+        }
+        
+        
+//        let bottomSheetVC = IssueBottomSheetViewController()
+        
+        self.addChild(bottomSheetVC)
+        self.view.addSubview(bottomSheetVC.view)
+        bottomSheetVC.didMove(toParent: self)
 
+        let height = view.frame.height
+        let width  = view.frame.width
+        bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+    }
 }
 
 extension IssueDetailViewController: UICollectionViewDataSource {
