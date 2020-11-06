@@ -80,11 +80,11 @@ describe('create issue Controller 테스트', () => {
     expect(res._isEndCalled()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     issueService.create.mockReturnValue(errorMessage);
     await issueController.create(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -115,11 +115,11 @@ describe('read issue Controller 테스트', () => {
     expect(res._isJSON()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     issueService.read.mockReturnValue(errorMessage);
     await issueController.read(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 
@@ -154,11 +154,11 @@ describe('remove issue Controller 테스트', () => {
     expect(res._isEndCalled()).toBeTruthy();
   });
 
-  it('에러가 나면 403응답이 오는가', async () => {
+  it('에러가 나면 400응답이 오는가', async () => {
     const errorMessage = { error: 'Error Message' };
     issueService.remove.mockReturnValue(errorMessage);
     await issueController.remove(req, res);
-    expect(res.statusCode).toBe(403);
+    expect(res.statusCode).toBe(400);
     expect(res._isEndCalled()).toBeTruthy();
   });
 

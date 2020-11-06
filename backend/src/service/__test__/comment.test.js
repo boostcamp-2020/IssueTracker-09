@@ -36,10 +36,10 @@ describe('remove comment service 테스트', () => {
     expect(typeof commentService.remove).toBe('function');
   });
 
-  it('리턴 타입이 boolean인가', async () => {
+  it('리턴 타입이 object인가', async () => {
     Comment.destroy.mockReturnValue(1);
     const result = await commentService.remove(commentResult);
-    expect(typeof result).toBe('boolean');
+    expect(typeof result).toBe('object');
   });
 
   it('잘못된 정보는 에러를 반환하는가', async () => {
@@ -61,10 +61,10 @@ describe('update comment service 테스트', () => {
     expect(typeof commentService.update).toBe('function');
   });
 
-  it('리턴 타입이 boolean인가', async () => {
+  it('리턴 타입이 object인가', async () => {
     Comment.update.mockReturnValue([1]);
     const result = await commentService.update(commentResult);
-    expect(typeof result).toBe('boolean');
+    expect(typeof result).toBe('object');
   });
 
   it('잘못된 정보는 에러를 반환하는가', async () => {

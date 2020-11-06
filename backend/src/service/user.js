@@ -4,7 +4,7 @@ const { enrollList, dodgeList } = require('../lib/store');
 
 module.exports = {
   gitHubLogin: (user) => {
-    const { id, image, name } = user.dataValues;
+    const { id, image, name } = user;
     const jwtToken = createJWT(id);
     enrollList(id);
 
@@ -32,14 +32,14 @@ module.exports = {
 
   getUsers: async () => {
     const users = await User.findAll({ attributes: ['id', 'name', 'image'] });
-    return users;
+    return { assignee: users };
   },
 
   iOSGithubLogin: async ({ code, name, image }) => {
     if (!name || !code) {
       return { error: '정보가 부족합니다' };
     }
-    const user = await User.findOrCreate({
+    const [user] = await User.findOrCreate({
       where: { user_code: 'g' + code },
       defaults: {
         user_code: 'g' + code,
@@ -48,8 +48,8 @@ module.exports = {
       },
     });
 
-    enrollList(user[0].id);
-    return createJWT(user[0].id);
+    enrollList(user.id);
+    return { token: createJWT(user.id) };
   },
 
   logout: (user) => {

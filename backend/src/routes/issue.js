@@ -10,13 +10,19 @@ router.get('/', issueController.read);
 
 router.post('/', issueController.create);
 
-router.put('/title/:id');
+router.put('/title/:id', issueController.updateTitle);
 
-router.put('/content/:id');
+router.put('/milestone/:id', issueController.updateMilestone);
 
-router.put('/assignee/:id');
+router.put('/state', issueController.updateState);
 
-router.put('/label/:id');
+router.put('/assignee/:id', issueController.updateAssignee);
+
+router.put('/assignees/:id', issueController.updateAssignees);
+
+router.put('/label/:id', issueController.updateLabel);
+
+router.put('/labels/:id', issueController.updateLabels);
 
 router.delete('/:id', issueController.remove);
 

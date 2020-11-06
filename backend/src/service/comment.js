@@ -20,9 +20,9 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.findAll({ where: { issue_id: issueId } });
+    const comments = await Comment.findAll({ where: { issue_id: issueId } });
 
-    return comment;
+    return { comments };
   },
 
   remove: async ({ id }) => {
@@ -33,7 +33,7 @@ module.exports = {
     const comment = await Comment.destroy({ where: { id } });
 
     if (comment) {
-      return true;
+      return { response: true };
     }
     return { error: '존재하지 않는 댓글입니다' };
   },
@@ -46,7 +46,7 @@ module.exports = {
     const [comment] = await Comment.update({ content }, { where: { id } });
 
     if (comment) {
-      return true;
+      return { response: true };
     }
     return { error: '존재하지 않는 댓글입니다' };
   },

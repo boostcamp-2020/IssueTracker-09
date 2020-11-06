@@ -23,9 +23,6 @@ describe('Issue모델 테스트', () => {
         type: DataTypes.STRING(255),
         allowNull: false,
       },
-      content: {
-        type: DataTypes.TEXT,
-      },
       is_opened: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,
