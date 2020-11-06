@@ -4,7 +4,7 @@ const { checkList } = require('../../lib/store');
 
 module.exports = (req, res, next) => {
   passport.authenticate('jwt', { session: false }, (error, user) => {
-    if (!user || checkList(user.id)) {
+    if (!user || !checkList(user.id)) {
       return res.status(401).json('로그인 해주시기 바랍니다');
     }
     if (error) {
