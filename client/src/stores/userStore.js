@@ -5,6 +5,7 @@ import { loginAPI, getUserAPI } from '../apis/user';
 const initialState = {
   name: undefined,
   image: undefined,
+  update: false,
 };
 
 export const LOGIN_USER = 'LOGIN_USER';
@@ -19,6 +20,7 @@ const userReducer = (state, action) => {
         return {
           name: action.result.name,
           image: action.result.image,
+          update: false,
         };
       }
       return state;
@@ -28,11 +30,12 @@ const userReducer = (state, action) => {
     }
     case GET_USER: {
       if (!action.result) {
-        return state;
+        return { update: true };
       }
       return {
         name: action.result.name,
         image: action.result.image,
+        update: true,
       };
     }
     default: {
