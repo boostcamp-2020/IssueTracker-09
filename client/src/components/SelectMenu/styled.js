@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const Modal = styled.div`
-  position: fixed;
+  position: relative;
   top: 0;
   right: 0;
   bottom: 0;
