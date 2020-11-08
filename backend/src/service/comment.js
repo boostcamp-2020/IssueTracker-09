@@ -15,7 +15,8 @@ module.exports = {
     return comment;
   },
 
-  read: async ({ issueId }) => {
+  read: async (query) => {
+    const { issueId } = query;
     if (!issueId) {
       return { error: '정보가 부족합니다' };
     }
