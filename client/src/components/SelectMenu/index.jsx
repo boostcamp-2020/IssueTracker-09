@@ -1,57 +1,25 @@
 /* eslint-disable react/self-closing-comp */
 
-import React from 'react';
+import React, { useContext } from 'react';
+import { IssueContext } from '../../stores/issueStore';
+import { UsersContext } from '../../stores/usersStore';
 import { ListItem, Modal, Title, Image, Name, Div } from './styled';
 
 const SelectMenu = () => {
-  const title = 'author';
-  const test = [
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-    {
-      name: 'joojaewoo',
-      image: 'https://avatars2.githubusercontent.com/u/46195613?v=4',
-    },
-  ];
+  const {
+    usersState: { users },
+  } = useContext(UsersContext);
+  const {
+    issueAction: { getList },
+  } = useContext(IssueContext);
   return (
     <Modal>
       <Div>
-        <Title>{title}</Title>
+        <Title>author</Title>
       </Div>
-      <Div />
       <Div>
-        {test.map((item) => (
-          <ListItem>
+        {users.map((item, index) => (
+          <ListItem onClick={() => getList(`author:${item.name}`)} key={index}>
             <Image width="20px" height="20px" src={item.image} />
             <Name>{item.name}</Name>
           </ListItem>

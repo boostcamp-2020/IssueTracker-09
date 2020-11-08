@@ -38,11 +38,11 @@ const Issues = ({ issue }) => {
           <Id>#{issue.id}</Id>
           <Text>
             {issue.is_opened
-              ? `opened yesterday by qkrdmstlr3`
-              : `closed by qkrdmstlr3 yesterday`}
+              ? `opened yesterday by ${issue.User.name}`
+              : `closed by ${issue.User.name} yesterday`}
           </Text>
           <FontAwesomeIcon icon={faFlag} />
-          <Milestone>{issue.Milestone.title}</Milestone>
+          <Milestone>{issue.Milestone ? issue.Milestone.title : ''}</Milestone>
         </Bottom>
       </Issue>
       <Assignees>
