@@ -24,7 +24,7 @@ describe('read comment service 테스트', () => {
 
   it('잘못된 정보는 에러를 반환하는가', async () => {
     Comment.findAll.mockReturnValue(commentResult);
-    const result = await commentService.read({ issueId: undefined });
+    const result = await commentService.read();
     expect(result).toEqual({ error: '정보가 부족합니다' });
   });
 });
