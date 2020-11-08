@@ -18,10 +18,10 @@ beforeEach(() => {
 });
 
 describe('gitHubLogin user Controller 테스트', () => {
-  const newUser = { id: 1, image: '', name: 'name' };
   const resulted = { token: 'token', image: 'image', name: 'name' };
+  const code = { code: 'g12345' };
   beforeEach(() => {
-    req.user = newUser;
+    req.data = code;
   });
 
   it('함수인가', () => {
@@ -32,7 +32,7 @@ describe('gitHubLogin user Controller 테스트', () => {
   it('service에 newuser가 들어가는가', async () => {
     userService.gitHubLogin.mockReturnValue(resulted);
     await userController.gitHubLogin(req, res);
-    expect(userService.gitHubLogin).toBeCalledWith(newUser);
+    expect(userService.gitHubLogin).toBeCalledWith(code);
   });
 
   it('성공 시 200응답이 오는가', async () => {
