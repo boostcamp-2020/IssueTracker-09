@@ -10,8 +10,10 @@ import Foundation
 protocol IssueDetailService {
     var issue: Issue { get set }
     func requestComments()
+    func requestUsers()
 }
 
 protocol IssueDetailServiceDelegate: AnyObject {
     func didCommentsLoaded(comments: [Comment])
+    func didAssigneeLoaded(assignee: [User])
 }
