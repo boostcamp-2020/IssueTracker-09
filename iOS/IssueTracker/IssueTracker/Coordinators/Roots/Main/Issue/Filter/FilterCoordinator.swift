@@ -7,14 +7,14 @@
 
 import UIKit
 
-class FilterCoordinator: ChildCoordinator {
+class FilterCoordinator: Coordinator {
     private enum StoryboardName: String {
         case Filter
         case Search
     }
     
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String : ChildCoordinator] = [: ]
+    private(set) var childCoordinators: [String : Coordinator] = [: ]
     
     private weak var parent: UIViewController?
     private let navigationController = UINavigationController()
