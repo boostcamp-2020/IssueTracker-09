@@ -19,7 +19,7 @@ class FilterCoordinator: Coordinator {
     private weak var parent: UIViewController?
     private let navigationController = UINavigationController()
     
-    required init(window: UIWindow, parent: UIViewController) {
+    init(window: UIWindow, parent: UIViewController) {
         self.window = window
         self.parent = parent
     }
