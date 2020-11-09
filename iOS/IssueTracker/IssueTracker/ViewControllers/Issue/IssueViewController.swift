@@ -112,6 +112,9 @@ class IssueViewController: UIViewController {
         }
         checks = Array(repeating: true, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
+    @IBAction func touchedAppendButton(_ sender: Any) {
+        delegate?.presentToNew()
+    }
 }
 
 
@@ -146,6 +149,10 @@ extension IssueViewController: UITableViewDataSource {
 extension IssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
+            return
+        }
+        delegate?.navigationToIssueDetail(issue: issue)
     }
 }
 
