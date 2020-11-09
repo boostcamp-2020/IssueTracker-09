@@ -21,7 +21,7 @@ describe('gitHubLogin user Controller 테스트', () => {
   const resulted = { token: 'token', image: 'image', name: 'name' };
   const code = { code: 'g12345' };
   beforeEach(() => {
-    req.data = code;
+    req.data = newUser;
   });
 
   it('함수인가', () => {
