@@ -63,10 +63,11 @@ extension MilestoneViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MilestoneCollectionViewCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MilestoneCollectionViewCell,
+              let milestone = service?[at: indexPath] else {
             return UICollectionViewCell()
         }
-        
+        cell.config(milestone: milestone)
         return cell
     }
 }
