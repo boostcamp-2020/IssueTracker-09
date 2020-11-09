@@ -8,16 +8,18 @@ const Modal = styled.div`
   left: 0;
   z-index: 1;
   display: flex;
-  padding: 16px;
-  width: 200px;
-  height: 400px;
+  padding: 6px 3px;
+  width: 150px;
+  height: 200px;
   flex-direction: column;
   background: #ffffff;
   overflow: auto;
+  border: 1px solid black;
+  border-radius: 5px;
 `;
 
 const Div = styled.div`
-  margin: 0 20px;
+  margin: 0 5px;
   font-size: 30px;
   font-weight: bold;
   text-align: center;
@@ -26,28 +28,55 @@ const Div = styled.div`
 const Title = styled.span`
   flex: 1;
   font-size: 20px;
-  margin: 0 auto;
   font-weight: 600;
 `;
 const CloseButton = styled.span``;
 
-const ListItem = styled.a`
+const ListItem = styled.div`
   display: flex;
-  padding: 10px;
-  margin: 5px;
-  justify-content: space-around;
+  margin: 3px 5px;
+  padding: 3px 0;
+  width: 100%;
+  align-items: center;
+  border-bottom: 1px solid gray;
 `;
 
-const Name = styled.div`
-  font-size: 10px;
-  margin: auto;
+const Name = styled.span`
+  font-size: 13px;
+  margin-left: 10px;
 `;
-const Image = styled.img.attrs({
-  alt: 'github-icon',
-})`
+const Image = styled.div`
+  background-image: url(${(props) => props.image});
+  background-size: cover;
   border-radius: 10px;
   display: block;
-  width: ${(props) => props.width};
-  height: ${(props) => props.height};
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
 `;
-export { Div, Modal, Title, CloseButton, ListItem, Image, Name };
+
+const DummyImage = styled.div`
+  border-radius: 10px;
+  display: block;
+  background-color: gray;
+  width: 20px;
+  height: 20px;
+`;
+
+const Color = styled.div`
+  background-color: ${(props) => props.color};
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+`;
+export {
+  Div,
+  Modal,
+  Title,
+  CloseButton,
+  ListItem,
+  Image,
+  Name,
+  DummyImage,
+  Color,
+};
