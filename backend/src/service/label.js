@@ -1,7 +1,7 @@
 const Label = require('../model').Label;
 
 module.exports = {
-  create: async ({ color, title, content }) => {
+  create: async ({ color, title, content } = {}) => {
     if (!color || !title) {
       return { error: '정보가 부족합니다' };
     }
@@ -10,7 +10,7 @@ module.exports = {
   read: async () => {
     return { labels: await Label.findAll() };
   },
-  update: async ({ id, color, title, content }) => {
+  update: async ({ id, color, title, content } = {}) => {
     if (!id || !color || !title) {
       return { error: '정보가 부족합니다' };
     }
@@ -23,7 +23,7 @@ module.exports = {
     }
     return { error: '없는 id값 입니다' };
   },
-  remove: async ({ id }) => {
+  remove: async ({ id } = {}) => {
     if (!id) {
       return { error: '없는 id값 입니다' };
     }

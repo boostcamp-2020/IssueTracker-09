@@ -2,9 +2,9 @@ const Milestone = require('../model').Milestone;
 const Issue = require('../model').Issue;
 
 module.exports = {
-  create: async ({ title, content, deadline }) => {
+  create: async ({ title, content, deadline } = {}) => {
     if (!title || !content || !deadline) {
-      return { error: '정보가 부족합니다.' };
+      return { error: '정보가 부족합니다' };
     }
     const milestone = await Milestone.create({
       title,
@@ -21,8 +21,9 @@ module.exports = {
     });
 
     const milestone = milestones.map((mile) => {
-      const open = mile.Issues.filter((issue) => issue.is_opened).length;
-      const total = mile.Issues.length;
+      const open = mile.dataValues.Issues.filter((issue) => issue.is_opened)
+        .length;
+      const total = mile.dataValues.Issues.length;
       mile.dataValues['openCount'] = open;
       mile.dataValues['totalCount'] = total;
       delete mile.dataValues.Issues;
@@ -32,7 +33,7 @@ module.exports = {
     return { milestones: milestone };
   },
 
-  update: async ({ id, title, deadline, content }) => {
+  update: async ({ id, title, deadline, content } = {}) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
     }
@@ -44,7 +45,7 @@ module.exports = {
     if (result === 1) return { response: true };
     return { response: false };
   },
-  remove: async ({ id }) => {
+  remove: async ({ id } = {}) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
     }
@@ -56,9 +57,9 @@ module.exports = {
     return { response: false };
   },
 
-  updateState: async ({ id, isOpened }) => {
+  updateState: async ({ id, isOpened } = {}) => {
     if (!id) {
-      return { error: '정보가 부족합니다.' };
+      return { error: '정보가 부족합니다' };
     }
     const milestone = await Milestone.findOne({ where: { id } });
 

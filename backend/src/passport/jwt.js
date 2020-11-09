@@ -12,7 +12,7 @@ module.exports = () => {
     new JwtStrategy(options, async function (jwt_payload, done) {
       try {
         const user = await User.findOne({
-          where: { user_code: 'g' + jwt_payload.id },
+          where: { id: jwt_payload.id },
         });
 
         if (user) {

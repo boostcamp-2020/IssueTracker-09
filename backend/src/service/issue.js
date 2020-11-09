@@ -1,13 +1,7 @@
 const Model = require('../model');
 
 module.exports = {
-  create: async ({
-    milestoneId,
-    assigneeId,
-    labelId,
-    title,
-    dataValues: { id },
-  }) => {
+  create: async ({ milestoneId, assigneeId, labelId, title, id } = {}) => {
     if (!title) {
       return { error: '정보가 부족합니다' };
     }
@@ -32,7 +26,7 @@ module.exports = {
     }
   },
 
-  read: async ({ q }) => {
+  read: async ({ q } = {}) => {
     const query = q ? makeObj(q) : {};
     const issues = await Model.Issue.findAll({
       include: [
@@ -71,15 +65,15 @@ module.exports = {
     return { issues };
   },
 
-  remove: async ({ id }) => {
+  remove: async ({ id } = {}) => {
     if (!id) {
-      return { error: '없는 id값 입니다.' };
+      return { error: '없는 id값 입니다' };
     }
     const issue = await Model.Issue.destroy({ where: { id } });
     if (issue) {
       return { response: true };
     }
-    return { error: '없는 id값 입니다.' };
+    return { error: '없는 id값 입니다' };
   },
 
   updateTitle: async ({ id, title }) => {
@@ -107,9 +101,9 @@ module.exports = {
     return { error: '없는 id값 입니다.' };
   },
 
-  updateState: async ({ id, isOpened }) => {
-    if (!id.length || isOpened === undefined) {
-      return { error: '정보가 부족합니다.' };
+  updateState: async ({ id, isOpened } = {}) => {
+    if ((id && !id.length) || isOpened === undefined) {
+      return { error: '정보가 부족합니다' };
     }
 
     const issue = await Model.Issue.findAll({ where: { id } });
@@ -129,7 +123,7 @@ module.exports = {
     return { error: 'Issue 상태 변경 실패' };
   },
 
-  updateAssignee: async ({ id, assigneeId }) => {
+  updateAssignee: async ({ id, assigneeId } = {}) => {
     if (!id || !assigneeId) {
       return { error: '정보가 부족합니다' };
     }
@@ -148,7 +142,7 @@ module.exports = {
     return { response: true };
   },
 
-  updateAssignees: async ({ id, checked, unchecked }) => {
+  updateAssignees: async ({ id, checked, unchecked } = {}) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
     }
@@ -169,7 +163,7 @@ module.exports = {
     }
   },
 
-  updateLabels: async ({ id, checked, unchecked }) => {
+  updateLabels: async ({ id, checked, unchecked } = {}) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
     }
@@ -190,7 +184,7 @@ module.exports = {
     }
   },
 
-  updateLabel: async ({ id, labelId }) => {
+  updateLabel: async ({ id, labelId } = {}) => {
     if (!id || !labelId) {
       return { error: '정보가 부족합니다' };
     }
