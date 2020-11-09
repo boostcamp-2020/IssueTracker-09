@@ -33,6 +33,7 @@ module.exports = {
         {
           model: Model.User,
           as: 'Assignees',
+          where: query.assignee,
           through: {
             attributes: [],
           },
@@ -207,7 +208,7 @@ const makeObj = (query) => {
   const obj = {};
   const querys = query.split(' ');
   querys.forEach((item) => {
-    const temp = item.split(':');
+    const temp = item.toLowerCase().split(':');
     if (temp[0] === 'is') {
       obj[temp[0]] = { is_opened: temp[1].includes('close') ? 0 : 1 };
     } else if (temp[0] === 'author' || temp[0] === 'assignee') {
