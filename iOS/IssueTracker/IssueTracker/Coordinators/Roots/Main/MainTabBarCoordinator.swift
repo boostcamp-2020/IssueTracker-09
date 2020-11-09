@@ -52,7 +52,6 @@ extension MainTabBarCoordinator: MainTabBarDelegate {
             viewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
         }
         tabBarController.addChild(viewController)
-//        tabBarController.setViewControllers([viewController], animated: true)
     }
 }
 
