@@ -67,8 +67,7 @@ class GithubSignService: AuthorizationRequestable {
                           let image = jsonObj["avatar_url"] as? String else {
                         return
                     }
-                    let service = UserNetworkService(endPoint: .github)
-                    service.post(code: String(id), name: name, image: image)
+                    UserNetworkService().login(endPoint: .github, code: String(id), name: name, image: image)
                 }
             case .failure(let error):
                 print(error.localizedDescription)

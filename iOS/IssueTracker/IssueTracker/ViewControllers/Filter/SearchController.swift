@@ -7,18 +7,21 @@
 
 import Foundation
 
+enum SearchType {
+    case User
+    case Label
+    case Milestone
+}
+
 class SearchController {
+    private var elements = [Element]()
+    private let type: SearchType
+    
     struct Element: Hashable {
         let name: String
         let type: SearchType
         let id: Int
         var checkable: Bool = false
-        
-        enum SearchType {
-            case User
-            case Label
-            case Milestone
-        }
         
         static func == (lhs: Element, rhs: Element) -> Bool {
             return lhs.name == rhs.name &&
@@ -26,30 +29,66 @@ class SearchController {
                 lhs.id == rhs.id &&
                 lhs.checkable == rhs.checkable
         }
+    }
+    
+    init(type: SearchType) {
+        self.type = type
+    }
+    
+    func filteredElements(with filter: String? = nil, limit: Int? = nil) -> [Element] {
+        var elements = self.elements
+        if let filter = filter, !filter.isEmpty {
+            elements = elements.filter { $0.name.lowercased().contains(filter.lowercased()) }
+        }
         
-        func contains(_ filter: String?) -> Bool {
-            guard let filterText = filter else { return true }
-            if filterText.isEmpty { return true }
-            let lowercasedFilter = filterText.lowercased()
-            return name.lowercased().contains(lowercasedFilter)
-        }
-    }
-    
-    func filteredElements(with filter: String?=nil, limit: Int?=nil) -> [Element] {
-        let filtered = elements.filter { $0.contains(filter) }
         if let limit = limit {
-            return Array(filtered.prefix(through: limit))
+            return Array(elements.prefix(through: limit))
         } else {
-            return filtered
+            return elements
         }
     }
     
-    private lazy var elements: [Element] = {
-        return [Element(name: "승언", type: .User, id: 0),
-                Element(name: "기엽", type: .User, id: 1),
-                Element(name: "재우", type: .User, id: 2),
-                Element(name: "재익", type: .User, id: 3),
-                Element(name: "은식", type: .User, id: 4),
-                Element(name: "JK", type: .User, id: 5)]
-    }()
+    func load(completion: @escaping () -> Void) {
+        switch type {
+        case .User:
+            loadAssignees(completion: completion)
+        case .Label:
+            loadLabels(completion: completion)
+        case .Milestone:
+            loadMilestones(completion: completion)
+        }
+    }
+    
+    private func loadAssignees(completion: @escaping () -> Void) {
+        UserNetworkService().fetchAssignees { [weak self] result in
+            guard let assignees = try? result.get().assignees else {
+                return
+            }
+            
+            self?.elements = assignees.map { Element(name: $0.name, type: .User, id: $0.id) }
+            completion()
+        }
+    }
+    
+    private func loadLabels(completion: @escaping () -> Void) {
+        LabelNetworkService().fetchLabels { [weak self] result in
+            guard let labels = try? result.get().labels else {
+                return
+            }
+            
+            self?.elements = labels.map { Element(name: $0.title, type: .User, id: $0.id) }
+            completion()
+        }
+    }
+    
+    private func loadMilestones(completion: @escaping () -> Void) {
+        MilestoneNetworkService().fetchMilestones { [weak self] result in
+            guard let milestones = try? result.get().milestones else {
+                return
+            }
+            
+            self?.elements = milestones.map { Element(name: $0.title, type: .User, id: $0.id) }
+            completion()
+        }
+    }
 }

@@ -1,14 +1,16 @@
 //
-//  MilestoneNetworkServiceTests.swift
+//  UserNetworkServiceTests.swift
 //  IssueTrackerTests
 //
-//  Created by 현기엽 on 2020/11/05.
+//  Created by 현기엽 on 2020/11/09.
 //
+
+import Foundation
 
 import XCTest
 @testable import IssueTracker
 
-class MilestoneNetworkServiceTests: XCTestCase {
+class UserNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 5
     static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0NTYwNjIxfQ.9ArX8vJLN6GuseS5tnDr3f_iH2Z925f6Iy68jHrijpo"
     static var originalToken: String?
@@ -31,30 +33,9 @@ class MilestoneNetworkServiceTests: XCTestCase {
         }
     }
     
-    func testAddMilestone() throws {
-        let expectTimer = expectation(description: "testAddMilestone")
-        
-        let milestone = Milestone(id: 0, title: "iOS-testAddMilestone", content: "testAddMilestone", deadline: "2020-11-07", isOpened: true, openCount: nil, totalCount: nil)
-        MilestoneNetworkService().addMilestone(milestone) { result in
-            switch result {
-            case .success(_):
-                expectTimer.fulfill()
-            case .failure(let error):
-                XCTFail(error.localizedDescription)
-            }
-        }
-        
-        waitForExpectations(timeout: asyncTimeout) { error in
-            if let error = error {
-                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
-            }
-        }
-    }
-    
-    func testFetchMilestones() throws {
-        let expectTimer = expectation(description: "testFetchMilestones")
-        
-        MilestoneNetworkService().fetchMilestones { result in
+    func testFetchAssignees() throws {
+        let expectTimer = expectation(description: "testFetchAssignees")
+        UserNetworkService().fetchAssignees { result in
             switch result {
             case .success(_):
                 expectTimer.fulfill()
