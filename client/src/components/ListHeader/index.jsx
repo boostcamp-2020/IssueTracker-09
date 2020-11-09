@@ -1,11 +1,10 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/self-closing-comp */
-
 import React, { useContext } from 'react';
-import { Div, Details } from './styled';
-import SelectMenu from '../SelectMenu';
+import { Div } from './styled';
 import { UsersContext } from '../../stores/usersStore';
 import { IssueContext } from '../../stores/issueStore';
+import DropDown from '../Dropdown';
 
 const ListHeader = ({ checkedHandler, checked }) => {
   const {
@@ -42,16 +41,10 @@ const ListHeader = ({ checkedHandler, checked }) => {
           <Div padding="10px"> close/open</Div>
         )}
         <Div width="100%" align="flex-end">
-          <Details
-            onClick={() => {
-              getUsers();
-            }}
-          >
-            <summary>Assignee</summary>
-            <Div position="absolute">
-              <SelectMenu title="author" />
-            </Div>
-          </Details>
+          <DropDown title="Author" action={getUsers} />
+          <DropDown title="Label" action={getUsers} />
+          <DropDown title="Milestone" action={getUsers} />
+          <DropDown title="Assignee" action={getUsers} />
         </Div>
       </Div>
     </Div>
