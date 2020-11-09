@@ -31,9 +31,8 @@ extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
             }
 
             guard let name = PersistenceManager.shared.load(forKey: .name) else { return }
-            let service = UserNetworkService(endPoint: .apple)
-            service.post(code: id, name: name)
-            
+            UserNetworkService().login(endPoint: .apple, code: id, name: name)
+            // TODO response handler는??
         default:
             break
         }

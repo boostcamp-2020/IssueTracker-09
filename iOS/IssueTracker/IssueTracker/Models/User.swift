@@ -7,10 +7,18 @@
 
 import Foundation
 
+struct Assignees: Codable {
+    let assignees: [User]
+    
+    enum CodingKeys: String, CodingKey {
+        case assignees = "assignee"
+    }
+}
+
 struct User: Codable {
     let id: Int
     let name: String
-    let image: String
+    let image: String?
     let userCode: String?
     
     enum CodingKeys: String, CodingKey {

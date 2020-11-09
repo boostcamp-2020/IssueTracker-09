@@ -12,21 +12,16 @@ class UserNetworkService: NetworkService {
     enum Endpoint: String {
         case github = "/user/github/ios"
         case apple = "/user/apple"
+        case users = "/user/users"
     }
     
-    let endPoint: Endpoint
-    
-    init(endPoint: Endpoint) {
-        self.endPoint = endPoint
-    }
-    
-    private func url() -> URL? {
+    private func url(endPoint: Endpoint) -> URL? {
         let base = baseURL + endPoint.rawValue
         return URL(string: base)
     }
     
-    func post(code: String, name: String, image: String = "https://avatars2.githubusercontent.com/u/46195613?v=4") {
-        guard let url = url() else { return }
+    func login(endPoint: Endpoint, code: String, name: String, image: String = "https://avatars2.githubusercontent.com/u/46195613?v=4") {
+        guard let url = url(endPoint: endPoint) else { return }
         let params: [String: String] = [ "code": code,
                                          "name": name,
                                          "image": image ]
@@ -45,6 +40,23 @@ class UserNetworkService: NetworkService {
                 print("error: \(String(describing: error.errorDescription))")
             }
         }
+    }
+    
+    func fetchAssignees(completion handler: @escaping (Result<Assignees, AFError>) -> Void) {
+        guard let url = url(endPoint: .users),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
+            return
+        }
+        
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate()
+            .responseDecodable(of: Assignees.self) { response in
+                handler(response.result)
+            }
     }
 }
 
