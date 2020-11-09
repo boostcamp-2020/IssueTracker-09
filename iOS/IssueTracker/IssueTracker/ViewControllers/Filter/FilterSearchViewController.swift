@@ -63,7 +63,7 @@ extension FilterSearchViewController {
     
     func performQuery(with filter: String?) {
         let elements = searchController.filteredElements(with: filter).sorted { $0.name < $1.name }
-
+        
         var snapshot = NSDiffableDataSourceSnapshot<Section, SearchController.Element>()
         snapshot.appendSections([.main])
         snapshot.appendItems(elements)
@@ -74,30 +74,30 @@ extension FilterSearchViewController {
 extension FilterSearchViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
-
+                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
+            
             let contentSize = layoutEnvironment.container.effectiveContentSize
             let columns = contentSize.width > 800 ? 3 : 2
             let spacing = CGFloat(10)
-
+            
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                   heightDimension: .fractionalHeight(1.0))
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
+            
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .absolute(32))
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
             group.interItemSpacing = .fixed(spacing)
-
+            
             let section = NSCollectionLayoutSection(group: group)
             section.interGroupSpacing = spacing
             section.contentInsets = NSDirectionalEdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10)
-
+            
             return section
         }
         return layout
     }
-
+    
     func configureHierarchy() {
         view.backgroundColor = .systemBackground
         let layout = createLayout()
