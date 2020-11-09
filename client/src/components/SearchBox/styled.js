@@ -9,9 +9,14 @@ export const Container = styled.div`
 `;
 
 export const FilterBox = styled.details`
+  position: relative;
   width: 80px;
   padding: 0 10px;
   border-right: 1px solid lightGray;
+  summary::-webkit-details-marker {
+    display: none;
+  }
+  z-index: 100;
 `;
 
 export const SearchContainer = styled.div`
@@ -28,6 +33,7 @@ export const Input = styled.input`
   width: calc(100% - 80px);
   padding-left: 10px;
   font-size: 14px;
+  z-index: 50;
 `;
 
 export const LinkName = styled.div`
@@ -57,4 +63,23 @@ export const Button = styled.button`
   font-weight: bold;
   border-radius: 7px;
   cursor: pointer;
+`;
+
+export const DropdownItem = styled.div`
+  font-size: 14px;
+  padding: 3px;
+  margin: 3px 0;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+`;
+
+export const Dropdown = styled.div`
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background-color: white;
+  width: 200px;
+  padding: 6px 3px;
+  border: 1px solid black;
+  border-radius: 5px;
 `;
