@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/self-closing-comp */
 import React, { useContext } from 'react';
-import { Div } from './styled';
+import { Div, Container } from './styled';
 import { IssueContext } from '../../stores/issueStore';
 import DropDown from '../Dropdown';
 import { getUsersAPI } from '../../apis/user';
@@ -21,7 +21,7 @@ const ListHeader = ({ checkedHandler, checked }) => {
   };
 
   return (
-    <Div width="60%" margin="0 auto" border="1px solid lightGray">
+    <Container>
       <Div padding="10px">
         <input
           type="checkbox"
@@ -46,7 +46,7 @@ const ListHeader = ({ checkedHandler, checked }) => {
           <DropDown title="Assignee" action={getUsersAPI} />
         </Div>
       </Div>
-    </Div>
+    </Container>
   );
 };
 

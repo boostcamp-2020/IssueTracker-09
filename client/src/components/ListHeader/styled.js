@@ -10,5 +10,13 @@ const Div = styled.div`
   border: ${(props) => props.border};
 `;
 
-// eslint-disable-next-line import/prefer-default-export
-export { Div };
+const Container = styled.div`
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px solid lightGray;
+  display: flex;
+  align-items: center;
+`;
+
+export { Div, Container };
