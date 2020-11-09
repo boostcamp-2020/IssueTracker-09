@@ -7,17 +7,18 @@
 
 import UIKit
 
+//protocol Issue
+
 class IssueBottomSheetViewController: UIViewController {
     let fullView: CGFloat = 100
+//    private weak var delegate
     var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
-        
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
     }
@@ -33,7 +34,7 @@ class IssueBottomSheetViewController: UIViewController {
         UIView.animate(withDuration: 0.6, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
-            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
+            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height)
             })
     }
 
@@ -43,7 +44,6 @@ class IssueBottomSheetViewController: UIViewController {
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        
         let translation = recognizer.translation(in: self.view)
         let velocity = recognizer.velocity(in: self.view)
 
