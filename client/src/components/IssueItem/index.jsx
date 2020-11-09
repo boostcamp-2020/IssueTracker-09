@@ -20,10 +20,16 @@ import {
   Bottom,
 } from './styled';
 
-const Issues = ({ issue }) => {
+// eslint-disable-next-line react/prop-types
+const Issues = ({ issue, checkedHandler, checked }) => {
   return (
     <Item>
-      <Checkbox type="checkbox" />
+      <Checkbox
+        type="checkbox"
+        // eslint-disable-next-line react/prop-types
+        checked={checked.includes(issue.id) ? 'checked' : ''}
+        onChange={() => checkedHandler(issue.id)}
+      />
       <Issue>
         <Top>
           <Closed isOpened={issue.is_opened}>!</Closed>
@@ -61,6 +67,9 @@ Issues.propTypes = {
     is_opened: PropTypes.bool,
     Assignees: PropTypes.array,
     Labels: PropTypes.array,
+    User: PropTypes.shape({
+      name: PropTypes.string,
+    }),
     Milestone: PropTypes.shape({
       id: PropTypes.number,
       title: PropTypes.string,

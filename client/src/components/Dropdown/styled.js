@@ -9,6 +9,7 @@ const Div = styled.div`
   padding: ${(props) => props.padding};
   border: ${(props) => props.border};
 `;
-
-// eslint-disable-next-line import/prefer-default-export
-export { Div };
+const Details = styled.details`
+  padding: 10px;
+`;
+export { Div, Details };
