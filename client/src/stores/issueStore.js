@@ -12,10 +12,10 @@ export const GET_LIST = 'GET_LIST';
 const IssueReducer = (state, action) => {
   switch (action.type) {
     case GET_LIST: {
-      if (action.issues && action.search) {
+      if (action.issues) {
         return {
-          search: action.search,
           list: action.issues,
+          search: action.search,
         };
       }
       return state;
@@ -33,8 +33,10 @@ const IssueProvider = ({ children }) => {
 
   const issueAction = {
     getList: async (search) => {
-      const { issues } = await getListAPI(search);
-      dispatch({ type: GET_LIST, issues, search });
+      if (issueState.search !== search) {
+        const { issues } = await getListAPI(search);
+        dispatch({ type: GET_LIST, issues, search });
+      }
     },
   };
 
