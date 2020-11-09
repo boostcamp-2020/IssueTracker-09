@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import IssueList from '../../components/IssueList';
 import ListHeader from '../../components/ListHeader';
+import SearchBox from '../../components/SearchBox';
 
 const Issues = () => {
   const [checked, setChecked] = useState([]);
@@ -16,10 +17,11 @@ const Issues = () => {
   };
 
   return (
-    <div>
+    <>
+      <SearchBox />
       <ListHeader checkedHandler={allCheckedHandler} checked={checked} />
       <IssueList checkedHandler={checkedHandler} checked={checked} />
-    </div>
+    </>
   );
 };
 
