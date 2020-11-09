@@ -37,6 +37,7 @@
 		F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */; };
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F497BA012558D625009952BB /* UIImage+gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA002558D625009952BB /* UIImage+gif.swift */; };
+		F497BA112558E678009952BB /* UserNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA102558E678009952BB /* UserNetworkServiceTests.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
@@ -137,6 +138,7 @@
 		F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F497BA002558D625009952BB /* UIImage+gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+gif.swift"; sourceTree = "<group>"; };
+		F497BA102558E678009952BB /* UserNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
@@ -350,6 +352,7 @@
 				F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */,
 				F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */,
 				F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */,
+				F497BA102558E678009952BB /* UserNetworkServiceTests.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -859,6 +862,7 @@
 				F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */,
 				F4E3B4C52553D53000E8430D /* CommentNetworkServiceTests.swift in Sources */,
 				F4E3B4C02553D33B00E8430D /* MilestoneNetworkServiceTests.swift in Sources */,
+				F497BA112558E678009952BB /* UserNetworkServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

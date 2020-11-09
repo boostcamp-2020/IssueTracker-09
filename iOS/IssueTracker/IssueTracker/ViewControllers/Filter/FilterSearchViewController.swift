@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchViewControllerDelegate: AnyObject {
-    func close()
+    func back()
     func done()
 }
 
@@ -16,17 +16,20 @@ class FilterSearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     private weak var delegate: SearchViewControllerDelegate?
-    private let searchController: SearchController = SearchController()
+    private var searchController: SearchController? = nil
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
+    private var type: SearchType?
     
     enum Section: CaseIterable {
         case main
     }
     
-    init?(coder: NSCoder, delegate: SearchViewControllerDelegate) {
+    init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: SearchType) {
         self.delegate = delegate
+        searchController = SearchController(type: type)
         super.init(coder: coder)
+        self.type = type
     }
     
     required init?(coder: NSCoder) {
@@ -37,7 +40,21 @@ class FilterSearchViewController: UIViewController {
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
-        performQuery(with: nil)
+        searchController?.load { [weak self] in
+            self?.performQuery(with: nil)
+        }
+    }
+    
+    @IBAction func didBackButtonTapped(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func didDoneButtonTapped(_ sender: UIButton) {
+        // TODO 네트워크 연결해서 fetch 받아오는 기능 추가
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 
@@ -62,7 +79,10 @@ extension FilterSearchViewController {
     }
     
     func performQuery(with filter: String?) {
-        let elements = searchController.filteredElements(with: filter).sorted { $0.name < $1.name }
+        guard let elements = searchController?.filteredElements(with: filter)
+                .sorted(by: { $0.name < $1.name }) else {
+            return
+        }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, SearchController.Element>()
         snapshot.appendSections([.main])
@@ -110,6 +130,10 @@ extension FilterSearchViewController {
 extension FilterSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         performQuery(with: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
