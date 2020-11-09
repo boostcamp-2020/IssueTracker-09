@@ -12,7 +12,7 @@
         <!--Issue Detail View Controller-->
         <scene sceneID="09i-JC-3iv">
             <objects>
-                <viewController id="uh0-cp-Bqz" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueDetailViewController" id="uh0-cp-Bqz" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rkC-Q0-T95">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -230,10 +230,6 @@
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="uh0-cp-Bqz" id="aWA-3I-Kb2"/>
-                                    <outlet property="delegate" destination="uh0-cp-Bqz" id="ZCZ-tX-yia"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cIc-qU-YQN"/>
@@ -246,7 +242,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="Yjx-av-H83" id="lKp-8V-B0e"/>
+                        <outlet property="collectionView" destination="Yjx-av-H83" id="hL0-HG-3t1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Gg-np-Qtk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
