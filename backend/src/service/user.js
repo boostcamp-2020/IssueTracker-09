@@ -6,7 +6,7 @@ module.exports = {
   gitHubLogin: async (user) => {
     const { id, image, name } = user;
 
-    const newUser = await User.findOrCreate({
+    const [newUser] = await User.findOrCreate({
       where: { user_code: 'g' + id },
       defaults: {
         user_code: 'g' + id,
