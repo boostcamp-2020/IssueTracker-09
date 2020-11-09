@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="n0Y-7T-26G">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,17 +21,17 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="75.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="76"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="51.5"/>
+                                                    <rect key="frame" x="12" y="12" width="390" height="52"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="51.5"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="52"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
                                                                     <rect key="frame" x="0.0" y="13.5" width="25" height="25"/>
@@ -85,7 +85,6 @@
                                             <outlet property="checkBoxWrapper" destination="ZPJ-zs-Zfb" id="05S-dd-Hfh"/>
                                             <outlet property="titleLabel" destination="gLx-UE-tcy" id="GsD-kx-065"/>
                                             <outlet property="wrapperStackView" destination="MHV-fG-1GI" id="t6h-Pg-e0a"/>
-                                            <segue destination="kWc-P2-WDO" kind="show" id="Pu5-ws-97S"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -111,7 +110,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="PXi-1d-we0" kind="presentation" id="DmJ-oW-DiQ"/>
+                                    <action selector="touchedAppendButton:" destination="n0Y-7T-26G" eventType="touchUpInside" id="cAZ-36-gWG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -140,26 +139,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNQ-Y0-3ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1786" y="40"/>
-        </scene>
-        <!--IssueDetail-->
-        <scene sceneID="uxS-ga-ev8">
-            <objects>
-                <viewControllerPlaceholder storyboardName="IssueDetail" id="kWc-P2-WDO" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="FrV-1h-IQK"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rfi-Lr-B2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2624" y="-50"/>
-        </scene>
-        <!--IssueAppend-->
-        <scene sceneID="621-bT-EZf">
-            <objects>
-                <viewControllerPlaceholder storyboardName="IssueAppend" id="PXi-1d-we0" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Z0j-zn-DvV"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ivL-9Q-FHz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2631" y="151"/>
         </scene>
     </scenes>
     <designables>
