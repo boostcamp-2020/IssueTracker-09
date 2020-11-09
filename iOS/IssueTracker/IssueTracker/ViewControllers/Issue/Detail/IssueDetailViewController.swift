@@ -8,18 +8,17 @@
 import UIKit
 
 class IssueDetailViewController: UIViewController {
-    private enum Section {
+    private enum Section: CaseIterable {
         case content, comment
     }
-    
     @IBOutlet weak var collectionView: UICollectionView!
-    private var delegate: IssueEditServiceDelegate?
-    private var service: IssueEditService?
-    private var dataSource: UICollectionViewDiffableDataSource<Section, Issue>!
+    private var service: IssueDetailService?
+    private var issue: Issue?
+    private var comments: [Comment] = []
+    private var assignee: Assignee?
     
-    init?(coder: NSCoder, service: IssueEditService, delegate: IssueEditServiceDelegate) {
+    init?(coder: NSCoder, service: IssueDetailService) {
         self.service = service
-        self.delegate = delegate
         super.init(coder: coder)
     }
     
@@ -30,9 +29,21 @@ class IssueDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.collectionViewLayout = createLayout()
+        service?.requestUsers()
+        service?.requestComments()
+    }
+}
+
+extension IssueDetailViewController: IssueDetailServiceDelegate {
+    func didCommentsLoaded(comments: [Comment]) {
+        issue = service?.issue
+        self.comments = comments
+        configureHierarchy()
         addBottomSheetView()
+    }
+    
+    func didAssigneeLoaded(assignee: [User]) {
+        self.assignee = Assignee(assignee: assignee)
     }
 }
 
@@ -52,56 +63,22 @@ extension IssueDetailViewController {
 }
 
 extension IssueDetailViewController {
-    func configureHierarchy() {
-        collectionView.collectionViewLayout = createLayout()
-        collectionView.delegate = self
-    }
-    
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         var configuration = UICollectionLayoutListConfiguration(appearance: .grouped)
         configuration.showsSeparators = false
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
-//    func configureDataSource() {
-//        // list cell
-//        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Issue> { (cell, indexPath, issue) in
-//            switch filter.category {
-//            case .condition:
-//                if filter.checkable {
-//                    cell.accessories = [.checkmark()]
-//                } else {
-//                    cell.accessories = []
-//                }
-//            case .detail:
-//                cell.accessories = [.disclosureIndicator()]
-//            }
-//        }
-//        
-//        // data source
-//        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
-//            (collectionView, indexPath, item) -> UICollectionViewCell? in
-//            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item.filter)
-//        }
-//    }
-//    
-//    func applyInitialSnapshots() {
-//        for category in Filter.Category.allCases {
-//            var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
-//            let items = category.filters.map { Item(filter: $0) }
-//            sectionSnapshot.append(items)
-//            dataSource.apply(sectionSnapshot, to: category, animatingDifferences: false)
-//        }
-//    }
-}
-
-extension IssueDetailViewController: UICollectionViewDelegate {
-    
+    private func configureHierarchy() {
+        collectionView.collectionViewLayout = createLayout()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
 }
 
 extension IssueDetailViewController: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        2
+        return Section.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -109,16 +86,33 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         case 0:
             return 1
         default:
-            return 3
+            return comments.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath)
+            guard let issue = issue,
+                let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as? IssueContentCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            contentCell.configure(issue: issue)
+            return contentCell
         default:
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath)
+            guard let user = assignee?.find(id: comments[indexPath.item].user_id),
+                let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as? IssueCommentCollectionViewCell else {
+                return UICollectionViewCell()
+            }
+            
+            commentCell.configure(user: user, comment: comments[indexPath.item])
+            return commentCell
+        
         }
     }
+}
+
+extension IssueDetailViewController: UICollectionViewDelegate {
+    
 }
