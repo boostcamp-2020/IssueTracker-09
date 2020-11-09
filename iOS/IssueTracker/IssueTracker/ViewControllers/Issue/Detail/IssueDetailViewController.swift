@@ -12,25 +12,15 @@ class IssueDetailViewController: UIViewController {
         case content, comment
     }
     @IBOutlet weak var collectionView: UICollectionView!
-    private var service: IssueDetailService?
+    var service: IssueDetailService?
     private var issue: Issue?
     private var comments: [Comment] = []
     private var assignee: Assignee?
     
-    init?(coder: NSCoder, service: IssueDetailService) {
-        self.service = service
-        super.init(coder: coder)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        service?.requestUsers()
         service?.requestComments()
+        service?.requestUsers()
     }
 }
 
@@ -38,27 +28,35 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
     func didCommentsLoaded(comments: [Comment]) {
         issue = service?.issue
         self.comments = comments
-        configureHierarchy()
-        addBottomSheetView()
     }
     
     func didAssigneeLoaded(assignee: [User]) {
         self.assignee = Assignee(assignee: assignee)
+        configureHierarchy()
+        addBottomSheetView()
     }
 }
 
 extension IssueDetailViewController {
     func addBottomSheetView() {
-        guard let bottomSheetVC = UIStoryboard(name: "IssueBottomSheet", bundle: nil).instantiateInitialViewController() as? IssueBottomSheetViewController
-        else { return }
-
-        self.addChild(bottomSheetVC)
-        self.view.addSubview(bottomSheetVC.view)
-        bottomSheetVC.didMove(toParent: self)
-
+        guard let issue = issue else {
+            return
+        }
+        
+        let storyBoard = UIStoryboard(name: "IssueBottomSheet", bundle: nil)
+        let bottomSheetViewController = storyBoard.instantiateViewController(
+            identifier: "IssueBottomSheetViewController",
+            creator: {
+                coder in
+                return IssueBottomSheetViewController(coder: coder, issue: issue)
+            })
+        self.addChild(bottomSheetViewController)
+        self.view.addSubview(bottomSheetViewController.view)
+        bottomSheetViewController.didMove(toParent: self)
+        
         let height = view.frame.height
         let width  = view.frame.width
-        bottomSheetVC.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+        bottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
     }
 }
 
@@ -94,21 +92,21 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         switch indexPath.section {
         case 0:
             guard let issue = issue,
-                let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as? IssueContentCollectionViewCell else {
+                  let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as? IssueContentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
             contentCell.configure(issue: issue)
             return contentCell
+            
         default:
             guard let user = assignee?.find(id: comments[indexPath.item].user_id),
-                let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as? IssueCommentCollectionViewCell else {
+                  let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as? IssueCommentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
             commentCell.configure(user: user, comment: comments[indexPath.item])
             return commentCell
-        
         }
     }
 }
