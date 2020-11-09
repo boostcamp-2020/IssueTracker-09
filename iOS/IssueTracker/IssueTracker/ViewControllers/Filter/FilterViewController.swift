@@ -119,16 +119,32 @@ extension FilterViewController: UICollectionViewDelegate {
         }
         
         if data.filter.category == .condition {
+            var newSnapshot = dataSource.snapshot()
+            let checkedFilter = newSnapshot.itemIdentifiers.filter { $0.filter.checkable }
+            
+            // 이미 체크된 항목이 있을 경우
+            if data.filter.checkable == false, checkedFilter.count > 0 {
+                checkedFilter.forEach { data in
+                    var newData = data
+                    newData.filter.checkable = false
+                    
+                    newSnapshot.insertItems([newData], beforeItem: data)
+                    newSnapshot.deleteItems([data])
+                }
+            }
+            
             var newData = data
             newData.filter.checkable = !data.filter.checkable
-            
-            var newSnapshot = dataSource.snapshot()
             newSnapshot.insertItems([newData], beforeItem: data)
             newSnapshot.deleteItems([data])
             dataSource.apply(newSnapshot)
             
         } else if data.filter.category == .detail {
-            delegate?.move()
+            collectionView.deselectItem(at: indexPath, animated: true)
+            guard let type = data.filter.type else {
+                return
+            }
+            delegate?.move(to: type)
         }
     }
 }
