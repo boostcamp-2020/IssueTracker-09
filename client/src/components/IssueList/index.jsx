@@ -13,8 +13,8 @@ const IssueList = ({ checkedHandler, checked }) => {
   } = useContext(IssueContext);
 
   useEffect(async () => {
-    await getList('is:open');
-  }, []);
+    await getList(location.search.substring(3));
+  });
 
   return (
     <List>
