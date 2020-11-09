@@ -1,6 +1,9 @@
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { Details, Div } from './styled';
+
 import SelectMenu from '../SelectMenu';
 
 const Dropdown = ({ title, action }) => {
@@ -17,7 +20,7 @@ const Dropdown = ({ title, action }) => {
     <Details onClick={clickHandler}>
       <summary>{title}</summary>
       <Div position="absolute">
-        <SelectMenu title="author" />
+        <SelectMenu title={title} data={state} />
       </Div>
     </Details>
   );

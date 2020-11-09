@@ -33,7 +33,7 @@ export const getUsersAPI = async () => {
     const {
       data: { assignee },
     } = await request({ method: 'get', params: '/user/users' });
-    return { assignee };
+    return assignee;
   } catch (error) {
     return false;
   }

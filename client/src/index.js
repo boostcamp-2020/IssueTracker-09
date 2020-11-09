@@ -9,18 +9,15 @@ import App from './App';
 
 import { UserProvider } from './stores/userStore';
 import { IssueProvider } from './stores/issueStore';
-import { UsersProvider } from './stores/usersStore';
 
 ReactDom.render(
   <BrowserRouter>
     <UserProvider>
       <IssueProvider>
-        <UsersProvider>
-          <ThemeProvider theme={theme}>
-            <GlobalStyle />
-            <App />
-          </ThemeProvider>
-        </UsersProvider>
+        <ThemeProvider theme={theme}>
+          <GlobalStyle />
+          <App />
+        </ThemeProvider>
       </IssueProvider>
     </UserProvider>
   </BrowserRouter>,
