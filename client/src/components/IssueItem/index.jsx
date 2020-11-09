@@ -47,8 +47,14 @@ const Issues = ({ issue, checkedHandler, checked }) => {
               ? `opened yesterday by ${issue.User.name}`
               : `closed by ${issue.User.name} yesterday`}
           </Text>
-          <FontAwesomeIcon icon={faFlag} />
-          <Milestone>{issue.Milestone ? issue.Milestone.title : ''}</Milestone>
+          {issue.Milestone ? (
+            <>
+              <FontAwesomeIcon icon={faFlag} />
+              <Milestone>{issue.Milestone.title}</Milestone>
+            </>
+          ) : (
+            ''
+          )}
         </Bottom>
       </Issue>
       <Assignees>
