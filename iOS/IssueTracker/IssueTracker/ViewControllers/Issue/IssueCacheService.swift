@@ -13,6 +13,10 @@ class IssueCacheService: IssueService {
     private var networkService = IssueNetworkService()
     private weak var delegate: IssueServiceDelegate?
     
+    init(delegate: IssueServiceDelegate?) {
+        self.delegate = delegate
+    }
+    
     func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue {
         return isFiltering ? filteredIssues[indexPath.item] : issues[indexPath.item]
     }
@@ -28,11 +32,6 @@ class IssueCacheService: IssueService {
             }
         }
     }
-    
-    init(delegate: IssueServiceDelegate?) {
-        self.delegate = delegate
-    }
-    
     func reloadData() {
         networkService.fetchIssues { [weak self] result in
             self?.issues = (try? result.get().issues) ?? []
