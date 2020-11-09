@@ -1,4 +1,4 @@
-const makeSearch = (str, search) => {
+const makeSearch = (str, search = '') => {
   const diff = str.split(':')[0];
   const searchArr = search.split(' ').filter((item) => item !== '');
   let flag = false;
