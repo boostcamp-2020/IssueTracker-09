@@ -42,8 +42,8 @@ export const Closed = styled.div`
   align-items: center;
   font-size: 13px;
   font-weight: bold;
-  color: ${(props) => (!props.is_opened ? 'green' : 'red')};
-  border: 1.5px solid ${(props) => (!props.is_opened ? 'green' : 'red')};
+  color: ${(props) => (props.isOpened ? 'green' : 'red')};
+  border: 1.5px solid ${(props) => (props.isOpened ? 'green' : 'red')};
   border-radius: 8px;
 `;
 
