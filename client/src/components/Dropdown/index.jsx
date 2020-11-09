@@ -15,10 +15,16 @@ const Dropdown = ({ title, action }) => {
       setState(result);
     }
   };
-
+  const overlay = document.getElementById('overlay');
   return (
     <Details onClick={clickHandler}>
-      <summary>{title}</summary>
+      <summary
+        onClick={() => {
+          overlay.hidden = false;
+        }}
+      >
+        {title}
+      </summary>
       <Div position="absolute">
         <SelectMenu title={title} data={state} />
       </Div>
