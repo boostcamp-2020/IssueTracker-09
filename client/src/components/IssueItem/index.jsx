@@ -19,12 +19,14 @@ import {
   Label,
   Milestone,
   Bottom,
+  DummyImage,
 } from './styled';
 
 const Issues = ({ issue, checkedHandler, checked }) => {
   return (
     <Item>
       <Checkbox
+        data-testid="checkbox"
         type="checkbox"
         checked={checked.includes(issue.id) ? 'checked' : ''}
         onChange={() => checkedHandler(issue.id)}
@@ -57,9 +59,13 @@ const Issues = ({ issue, checkedHandler, checked }) => {
         </Bottom>
       </Issue>
       <Assignees>
-        {issue.Assignees.map((assignee, index) => (
-          <Assignee src={assignee.image} key={`assignee${index}`} />
-        ))}
+        {issue.Assignees.map((assignee, index) =>
+          assignee.image ? (
+            <Assignee src={assignee.image} key={`assignee${index}`} />
+          ) : (
+            <DummyImage key={`assignee${index}`} />
+          )
+        )}
       </Assignees>
     </Item>
   );
