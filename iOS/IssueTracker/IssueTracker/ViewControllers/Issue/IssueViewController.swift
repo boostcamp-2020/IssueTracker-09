@@ -7,23 +7,30 @@
 
 import UIKit
 
-protocol IssueCoordinatorDelegate: AnyObject {
-    func presentToFilterView()
-}
-
 class IssueViewController: UIViewController {
-    @IBOutlet var tableView: IssueTableView!
-    var delegate: IssueCoordinatorDelegate?
-    var service: IssueService?
-    var checks: [Bool] = [] {
+    typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
+    @IBOutlet private var tableView: IssueTableView!
+    
+    private weak var delegate: IssueCoordinatorDelegate?
+    private let barButtonController = BarButtonController()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var checks: [Bool] = [] {
         didSet {
             if isEditing {
                 setLeftBarButton()
             }
         }
     }
-    let barButtonController = BarButtonController()
-    let searchController = UISearchController(searchResultsController: nil)
+    var service: IssueService?
+    
+    init?(coder: NSCoder, delegate: IssueCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     func setLeftBarButton() {
         let isAllTrue = checks.allSatisfy({ $0 == true })
@@ -89,7 +96,7 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
-        delegate?.presentToFilterView()
+        delegate?.presentToFilter()
     }
     
     @objc func touchedDeselectButton(_ sender: Any) {
