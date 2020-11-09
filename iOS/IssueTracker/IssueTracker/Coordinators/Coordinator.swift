@@ -9,11 +9,7 @@ import UIKit
 
 protocol Coordinator : AnyObject {
     var window: UIWindow { get }
-    var childCoordinators: [String: ChildCoordinator] { get }
+    var childCoordinators: [String: Coordinator] { get }
 
     func start()
-}
-
-protocol ChildCoordinator: Coordinator {
-    init(window: UIWindow, parent: UIViewController)
 }
