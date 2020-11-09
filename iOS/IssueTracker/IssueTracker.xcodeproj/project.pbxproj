@@ -81,6 +81,9 @@
 		FCBC1D2C2559534400423B8E /* Assignee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D2B2559534400423B8E /* Assignee.swift */; };
 		FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D3525595B4200423B8E /* IssueCoordinator.swift */; };
 		FCBC1D3F25595B6000423B8E /* IssueDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D3E25595B5F00423B8E /* IssueDetailCoordinator.swift */; };
+		FCBC1D542559A10600423B8E /* AssigneeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D532559A10600423B8E /* AssigneeView.swift */; };
+		FCBC1D592559A1B100423B8E /* LabelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D582559A1B100423B8E /* LabelsView.swift */; };
+		FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D5D2559A26300423B8E /* MilestoneView.swift */; };
 		FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E42547AED000AED031 /* AppDelegate.swift */; };
 		FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E62547AED000AED031 /* SceneDelegate.swift */; };
 		FCF196E92547AED000AED031 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E82547AED000AED031 /* SignViewController.swift */; };
@@ -195,6 +198,9 @@
 		FCBC1D2B2559534400423B8E /* Assignee.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignee.swift; sourceTree = "<group>"; };
 		FCBC1D3525595B4200423B8E /* IssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCoordinator.swift; sourceTree = "<group>"; };
 		FCBC1D3E25595B5F00423B8E /* IssueDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailCoordinator.swift; sourceTree = "<group>"; };
+		FCBC1D532559A10600423B8E /* AssigneeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeView.swift; sourceTree = "<group>"; };
+		FCBC1D582559A1B100423B8E /* LabelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsView.swift; sourceTree = "<group>"; };
+		FCBC1D5D2559A26300423B8E /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 		FCF196E12547AED000AED031 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF196E42547AED000AED031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCF196E62547AED000AED031 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -361,6 +367,7 @@
 				FC863BB2255265F800000B19 /* ElementView.swift */,
 				FC78518E2548996400E60957 /* RoundButton.swift */,
 				F4012A57255027660047CE91 /* Milestone */,
+				FCBC1D4F2559A0D100423B8E /* BottomSheet */,
 				FCBC1D1025593BC400423B8E /* IssueDetail */,
 				FC889AB7254AAE9900E335CF /* Issue */,
 			);
@@ -525,6 +532,16 @@
 			children = (
 			);
 			path = Milestone;
+			sourceTree = "<group>";
+		};
+		FCBC1D4F2559A0D100423B8E /* BottomSheet */ = {
+			isa = PBXGroup;
+			children = (
+				FCBC1D532559A10600423B8E /* AssigneeView.swift */,
+				FCBC1D582559A1B100423B8E /* LabelsView.swift */,
+				FCBC1D5D2559A26300423B8E /* MilestoneView.swift */,
+			);
+			path = BottomSheet;
 			sourceTree = "<group>";
 		};
 		FCF196D82547AED000AED031 = {
@@ -878,6 +895,7 @@
 				FCBC1D2C2559534400423B8E /* Assignee.swift in Sources */,
 				F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
+				FCBC1D542559A10600423B8E /* AssigneeView.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
 				F4EFB7A22552847600328C61 /* IssueDetailViewController.swift in Sources */,
 				F4EAFF762553F2BE009372E2 /* IssueAppendViewController.swift in Sources */,
@@ -917,9 +935,11 @@
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
+				FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
+				FCBC1D592559A1B100423B8E /* LabelsView.swift in Sources */,
 				FC863BB82552661400000B19 /* SelectButton.swift in Sources */,
 				FCBC1CEE2559104500423B8E /* IssueEditService.swift in Sources */,
 				FCBC1D0C255925A100423B8E /* IssueDetailCacheService.swift in Sources */,
