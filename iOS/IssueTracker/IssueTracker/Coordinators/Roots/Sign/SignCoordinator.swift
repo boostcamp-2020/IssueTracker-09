@@ -9,7 +9,7 @@ import UIKit
 
 class SignCoordinator: Coordinator {
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String: ChildCoordinator] = [: ]
+    private(set) var childCoordinators: [String: Coordinator] = [: ]
     
     private let storyboardName: String = "SignIn"
     private weak var delegate: RootCoordinateControllerDelegate?
