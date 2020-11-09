@@ -2,14 +2,11 @@
 /* eslint-disable react/self-closing-comp */
 import React, { useContext } from 'react';
 import { Div } from './styled';
-import { UsersContext } from '../../stores/usersStore';
 import { IssueContext } from '../../stores/issueStore';
 import DropDown from '../Dropdown';
+import { getUsersAPI } from '../../apis/user';
 
 const ListHeader = ({ checkedHandler, checked }) => {
-  const {
-    usersAction: { getUsers },
-  } = useContext(UsersContext);
   const {
     issueState: { list },
   } = useContext(IssueContext);
@@ -41,10 +38,10 @@ const ListHeader = ({ checkedHandler, checked }) => {
           <Div padding="10px"> close/open</Div>
         )}
         <Div width="100%" align="flex-end">
-          <DropDown title="Author" action={getUsers} />
-          <DropDown title="Label" action={getUsers} />
-          <DropDown title="Milestone" action={getUsers} />
-          <DropDown title="Assignee" action={getUsers} />
+          <DropDown title="Author" action={getUsersAPI} />
+          <DropDown title="Label" action={getUsersAPI} />
+          <DropDown title="Milestone" action={getUsersAPI} />
+          <DropDown title="Assignee" action={getUsersAPI} />
         </Div>
       </Div>
     </Div>

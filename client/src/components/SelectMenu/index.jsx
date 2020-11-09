@@ -2,26 +2,22 @@
 
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { UsersContext } from '../../stores/usersStore';
 import { ListItem, Modal, Title, Image, Name, Div } from './styled';
 import makeSearch from '../../lib/make-search';
+import { IssueContext } from '../../stores/issueStore';
 
-const SelectMenu = ({ title }) => {
+const SelectMenu = ({ title, data }) => {
   const {
-    usersState: { users },
-  } = useContext(UsersContext);
-
+    issueState: { search },
+  } = useContext(IssueContext);
   return (
     <Modal>
       <Div>
-        <Title>author</Title>
+        <Title>{title}</Title>
       </Div>
       <Div>
-        {users.map((item, index) => (
-          <Link
-            to={makeSearch(`${title}:${item.name}`, 'author:123')}
-            key={index}
-          >
+        {data?.map((item, index) => (
+          <Link to={makeSearch(`${title}:${item.name}`, search)} key={index}>
             <ListItem>
               <Image width="20px" height="20px" src={item.image} />
               <Name>{item.name}</Name>
