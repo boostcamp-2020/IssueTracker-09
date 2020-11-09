@@ -10,10 +10,24 @@ import UIKit
 //protocol Issue
 
 class IssueBottomSheetViewController: UIViewController {
-    let fullView: CGFloat = 100
+    @IBOutlet private weak var assigneeView: AssigneeView!
+    @IBOutlet private weak var labelsView: LabelsView!
+    @IBOutlet private weak var milestoneView: MilestoneView!
+    
+    private var issue: Issue?
+    private let fullView: CGFloat = 100
 //    private weak var delegate
-    var partialView: CGFloat {
+    private var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
+    }
+    
+    init?(coder: NSCoder, issue: Issue) {
+        self.issue = issue
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
     }
     
     override func viewDidLoad() {
@@ -21,11 +35,18 @@ class IssueBottomSheetViewController: UIViewController {
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        prepareBackgroundView()
+        
+        if let user = issue?.user {
+            assigneeView.configure(assignee: user)
+        }
+        
+        if let labels = issue?.labels {
+            labelsView.configure(labels: labels)
+        }
+        
+        if let milestone = issue?.milestone {
+            milestoneView.configure(milestone: milestone)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -71,16 +92,6 @@ class IssueBottomSheetViewController: UIViewController {
                     }
             })
         }
-    }
-    
-    private func prepareBackgroundView(){
-        let blurEffect = UIBlurEffect.init(style: .dark)
-        let visualEffect = UIVisualEffectView.init(effect: blurEffect)
-        let bluredView = UIVisualEffectView.init(effect: blurEffect)
-        bluredView.contentView.addSubview(visualEffect)
-        visualEffect.frame = UIScreen.main.bounds
-        bluredView.frame = UIScreen.main.bounds
-        view.insertSubview(bluredView, at: 0)
     }
 }
 
