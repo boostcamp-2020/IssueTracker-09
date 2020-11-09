@@ -1,5 +1,3 @@
-/* eslint-disable react/self-closing-comp */
-
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
