@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { faTag, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import {
   Container,
   SearchContainer,
@@ -12,6 +12,7 @@ import {
   Button,
   DropdownItem,
   Dropdown,
+  Form,
 } from './styled';
 import makeSearch from '../../lib/make-search';
 import { IssueContext } from '../../stores/issueStore';
@@ -24,7 +25,8 @@ const SearchBox = () => {
   const {
     userState: { name },
   } = useContext(UserContext);
-  const [inputValue, setInputValue] = useState(search);
+  const [inputValue, setInputValue] = useState(search || 'is:open');
+  const history = useHistory();
 
   const dropdown = [
     { title: 'Open issues', condition: 'is:open' },
@@ -33,6 +35,11 @@ const SearchBox = () => {
     { title: 'Everything assigned to you', condition: `Assignee:${name}` },
     { title: 'Everything mentioning you', condition: `Comment:${name}` },
   ];
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+    history.push(`/?q=${inputValue}`);
+  };
 
   return (
     <Container>
@@ -49,10 +56,12 @@ const SearchBox = () => {
             ))}
           </Dropdown>
         </FilterBox>
-        <Input
-          value={inputValue}
-          onChange={(e) => setInputValue(e.target.value)}
-        />
+        <Form onSubmit={submitHandler}>
+          <Input
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+        </Form>
       </SearchContainer>
       <OtherButton>
         <LinkName>
@@ -64,7 +73,9 @@ const SearchBox = () => {
           Milestones
         </LinkName>
       </OtherButton>
-      <Button>new Issue</Button>
+      <Button>
+        <Link to="/issues/new">new Issue</Link>
+      </Button>
     </Container>
   );
 };

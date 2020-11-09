@@ -30,10 +30,14 @@ export const SearchContainer = styled.div`
 
 export const Input = styled.input`
   border: none;
-  width: calc(100% - 80px);
+  width: 100%;
   padding-left: 10px;
   font-size: 14px;
   z-index: 50;
+`;
+
+export const Form = styled.form`
+  width: calc(100% - 80px);
 `;
 
 export const LinkName = styled.div`
