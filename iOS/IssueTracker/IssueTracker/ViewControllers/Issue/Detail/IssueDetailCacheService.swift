@@ -21,7 +21,6 @@ class IssueDetailCacheService: IssueDetailService {
     func requestComments() {
         commentNetrworkService.fetchComments(issue: issue) { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success( _):
                 if let comments = try? result.get().comments {
@@ -36,7 +35,6 @@ class IssueDetailCacheService: IssueDetailService {
     func requestUsers() {
         assigneeNetworkService.fetchAssignee { [weak self] result in
             guard let self = self else { return }
-            
             switch result {
             case .success( _):
                 if let assignee = try? result.get().assignee {
