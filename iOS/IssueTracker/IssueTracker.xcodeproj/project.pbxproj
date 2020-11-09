@@ -36,6 +36,7 @@
 		F44851792549736900A84527 /* IssueCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851782549736900A84527 /* IssueCacheService.swift */; };
 		F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */; };
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
+		F497BA012558D625009952BB /* UIImage+gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA002558D625009952BB /* UIImage+gif.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
@@ -135,6 +136,7 @@
 		F44851782549736900A84527 /* IssueCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCacheService.swift; sourceTree = "<group>"; };
 		F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		F497BA002558D625009952BB /* UIImage+gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+gif.swift"; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
@@ -264,6 +266,7 @@
 			children = (
 				F403F34A254FE53E004E8CF0 /* UIColor+hexString.swift */,
 				F40541CB2550524A001EAF52 /* DataRequest+responseBool.swift */,
+				F497BA002558D625009952BB /* UIImage+gif.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -834,6 +837,7 @@
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				FC863BB82552661400000B19 /* SelectButton.swift in Sources */,
 				FCF5EFBD25513330001A44B3 /* SearchController.swift in Sources */,
+				F497BA012558D625009952BB /* UIImage+gif.swift in Sources */,
 				F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */,
 				FCF5EFA8255110BD001A44B3 /* FilterCoordinator.swift in Sources */,
 				F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */,
