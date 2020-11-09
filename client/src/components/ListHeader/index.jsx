@@ -5,6 +5,8 @@ import { Div } from './styled';
 import { IssueContext } from '../../stores/issueStore';
 import DropDown from '../Dropdown';
 import { getUsersAPI } from '../../apis/user';
+import { getLabelsAPI } from '../../apis/label';
+import { getMilestonesAPI } from '../../apis/milestone';
 
 const ListHeader = ({ checkedHandler, checked }) => {
   const {
@@ -39,8 +41,8 @@ const ListHeader = ({ checkedHandler, checked }) => {
         )}
         <Div width="100%" align="flex-end">
           <DropDown title="Author" action={getUsersAPI} />
-          <DropDown title="Label" action={getUsersAPI} />
-          <DropDown title="Milestone" action={getUsersAPI} />
+          <DropDown title="Label" action={getLabelsAPI} />
+          <DropDown title="Milestone" action={getMilestonesAPI} />
           <DropDown title="Assignee" action={getUsersAPI} />
         </Div>
       </Div>
