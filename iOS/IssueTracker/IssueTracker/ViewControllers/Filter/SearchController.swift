@@ -61,7 +61,7 @@ class SearchController {
     
     private func loadAssignees(completion: @escaping () -> Void) {
         UserNetworkService().fetchAssignees { [weak self] result in
-            guard let assignees = try? result.get().assignees else {
+            guard let assignees = try? result.get().assignee else {
                 return
             }
             
