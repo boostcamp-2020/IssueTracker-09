@@ -52,6 +52,10 @@ class FilterSearchViewController: UIViewController {
     @IBAction func didDoneButtonTapped(_ sender: UIButton) {
         // TODO 네트워크 연결해서 fetch 받아오는 기능 추가
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 extension FilterSearchViewController {
@@ -126,6 +130,10 @@ extension FilterSearchViewController {
 extension FilterSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         performQuery(with: searchText)
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
 }
 
