@@ -9,7 +9,7 @@ import XCTest
 @testable import IssueTracker
 
 class CommentNetworkServiceTests: XCTestCase {
-    let asyncTimeout: TimeInterval = 1
+    let asyncTimeout: TimeInterval = 5
     static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0MzgyNTE2fQ.B2JyeokIT-ImtQBL_J7Blz6H2hTjn70WuDZmmnRGz6Y"
     static var originalToken: String?
     

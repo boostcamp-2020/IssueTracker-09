@@ -11,7 +11,7 @@ import XCTest
 @testable import IssueTracker
 
 class IssueNetworkServiceTests: XCTestCase {
-    let asyncTimeout: TimeInterval = 1
+    let asyncTimeout: TimeInterval = 5
     static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0NTYwNjIxfQ.9ArX8vJLN6GuseS5tnDr3f_iH2Z925f6Iy68jHrijpo"
     static var originalToken: String?
     
