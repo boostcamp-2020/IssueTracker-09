@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoveToSearchPage: AnyObject {
-    func move()
+    func move(to type: SearchType)
 }
 
 class FilterViewController: UIViewController {

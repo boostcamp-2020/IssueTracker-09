@@ -21,6 +21,7 @@ struct Filter: Hashable {
     let text: String
     let category: Category
     var checkable: Bool = false
+    var type: SearchType? = nil
 }
 
 extension Filter.Category: CustomStringConvertible {
@@ -45,10 +46,10 @@ extension Filter.Category: CustomStringConvertible {
             ]
         case .detail:
             return  [
-                Filter(text: "작성자", category: self),
-                Filter(text: "레이블", category: self),
-                Filter(text: "마일스톤", category: self),
-                Filter(text: "담당자", category: self)
+                Filter(text: "작성자", category: self, type: .User),
+                Filter(text: "레이블", category: self, type: .Label),
+                Filter(text: "마일스톤", category: self, type: .Milestone),
+                Filter(text: "담당자", category: self, type: .User)
             ]
         }
     }
