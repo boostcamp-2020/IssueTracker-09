@@ -8,7 +8,7 @@
 import UIKit
 
 protocol IssueNavigationDelegate: AnyObject {
-    func navigationToIssueDetail()
+    func navigationToIssueDetail(issue: Issue)
 }
 
 protocol IssuePresentDelegate: AnyObject {
@@ -20,9 +20,9 @@ protocol IssuePresentDelegate: AnyObject {
 class IssueCoordinator: Coordinator {
     
     private enum ChildCoodinator: String {
-        case Filter, IssueAppend
+        case Filter, IssueAppend, IssueDetail
     }
-    private static let myStorybaord = "Issue"
+    
     private(set) var window: UIWindow
     private(set) var childCoordinators: [String : Coordinator] = [: ]
     
@@ -35,7 +35,7 @@ class IssueCoordinator: Coordinator {
     }
     
     func start() {
-        let storyBoard = UIStoryboard(name: Self.myStorybaord, bundle: nil)
+        let storyBoard = UIStoryboard(name: "Issue", bundle: nil)
         let issueViewController = storyBoard.instantiateViewController(
             identifier: "IssueViewController",
             creator: {
@@ -50,14 +50,27 @@ class IssueCoordinator: Coordinator {
 }
 
 extension IssueCoordinator: IssueNavigationDelegate {
-    func navigationToIssueDetail() {
-        
+    func navigationToIssueDetail(issue: Issue) {
+        if let issueDetailCoordinator = childCoordinators[ChildCoodinator.IssueDetail.rawValue] {
+            issueDetailCoordinator.start()
+        } else {
+            let child = IssueDetailCoordinator(window: window, parent: navigationController,issue: issue)
+            childCoordinators[ChildCoodinator.IssueDetail.rawValue] = child
+            child.start()
+        }
     }
 }
 
 extension IssueCoordinator: IssuePresentDelegate {
     func presentToNew() {
-        
+        let storyBoard = UIStoryboard(name: "IssueAppend", bundle: nil)
+        let issueAppendViewController = storyBoard.instantiateViewController(
+            identifier: "IssueAppendViewController",
+            creator: {
+                coder in
+                return IssueAppendViewController(coder: coder)
+            })
+        navigationController.present(issueAppendViewController, animated: true, completion: nil)
     }
     
     func presentToEdit() {
@@ -73,26 +86,3 @@ extension IssueCoordinator: IssuePresentDelegate {
         }
     }
 }
-
-//extension IssueCoordinator: IssueCoordinatorDelegate {
-//    func naviationToIssue() {
-//
-//    }
-//
-//    func navigationToIssueDetail() {
-//
-//    }
-//}
-//
-//func presentToFilterView() {
-//
-//}
-//protocol IssueNavigationDelegate: AnyObject {
-//    func navigationToIssueDetail()
-//}
-//
-//protocol IssuePresentDelegate: AnyObject {
-//    func presentToFilter()
-//    func presentToNew()
-//    func presentToEdit()
-//}
