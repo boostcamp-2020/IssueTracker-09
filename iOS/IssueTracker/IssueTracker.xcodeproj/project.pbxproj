@@ -68,6 +68,8 @@
 		FC889A97254A764600E335CF /* RootCoordinateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC889A96254A764600E335CF /* RootCoordinateController.swift */; };
 		FC889AB0254AA34B00E335CF /* IssueTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC889AAF254AA34B00E335CF /* IssueTableView.swift */; };
 		FC889ACB254ABDA300E335CF /* BarButtonController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC889ACA254ABDA300E335CF /* BarButtonController.swift */; };
+		FCBC1CC42558E55300423B8E /* IssueEditCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1CC32558E55300423B8E /* IssueEditCacheService.swift */; };
+		FCBC1CEE2559104500423B8E /* IssueEditService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1CED2559104500423B8E /* IssueEditService.swift */; };
 		FCF196E52547AED000AED031 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E42547AED000AED031 /* AppDelegate.swift */; };
 		FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E62547AED000AED031 /* SceneDelegate.swift */; };
 		FCF196E92547AED000AED031 /* SignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF196E82547AED000AED031 /* SignViewController.swift */; };
@@ -169,6 +171,8 @@
 		FC889A96254A764600E335CF /* RootCoordinateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootCoordinateController.swift; sourceTree = "<group>"; };
 		FC889AAF254AA34B00E335CF /* IssueTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableView.swift; sourceTree = "<group>"; };
 		FC889ACA254ABDA300E335CF /* BarButtonController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButtonController.swift; sourceTree = "<group>"; };
+		FCBC1CC32558E55300423B8E /* IssueEditCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEditCacheService.swift; sourceTree = "<group>"; };
+		FCBC1CED2559104500423B8E /* IssueEditService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueEditService.swift; sourceTree = "<group>"; };
 		FCF196E12547AED000AED031 /* IssueTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IssueTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FCF196E42547AED000AED031 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FCF196E62547AED000AED031 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -324,6 +328,8 @@
 				FC808DBE25542909001BCA58 /* IssueBottomSheetViewController.swift */,
 				F4EAFF752553F2BE009372E2 /* IssueAppendViewController.swift */,
 				F4EAFF702553EFF1009372E2 /* EditableTextViewDelegate.swift */,
+				FCBC1CED2559104500423B8E /* IssueEditService.swift */,
+				FCBC1CC32558E55300423B8E /* IssueEditCacheService.swift */,
 			);
 			path = Issue;
 			sourceTree = "<group>";
@@ -475,8 +481,8 @@
 		FCF196E32547AED000AED031 /* IssueTracker */ = {
 			isa = PBXGroup;
 			children = (
-				F403F349254FE532004E8CF0 /* Extensions */,
 				F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */,
+				F403F349254FE532004E8CF0 /* Extensions */,
 				FC5CAE6E254FD4E20086EA13 /* utils */,
 				F4AF30422547CF26006D7D0A /* Views */,
 				FCF197182547BCA500AED031 /* ViewControllers */,
@@ -827,12 +833,14 @@
 				F403F36D254FFAD7004E8CF0 /* Milestone.swift in Sources */,
 				F403F34B254FE53E004E8CF0 /* UIColor+hexString.swift in Sources */,
 				F403F368254FF83C004E8CF0 /* IssueNetworkService.swift in Sources */,
+				FCBC1CC42558E55300423B8E /* IssueEditCacheService.swift in Sources */,
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				FC863BB82552661400000B19 /* SelectButton.swift in Sources */,
+				FCBC1CEE2559104500423B8E /* IssueEditService.swift in Sources */,
 				FCF5EFBD25513330001A44B3 /* SearchController.swift in Sources */,
 				F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */,
 				FCF5EFA8255110BD001A44B3 /* FilterCoordinator.swift in Sources */,
