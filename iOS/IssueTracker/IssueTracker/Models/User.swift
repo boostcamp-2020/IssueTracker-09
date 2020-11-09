@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable {
+struct User: Codable, Hashable {
     let id: Int
     let name: String
     let image: String
@@ -17,5 +17,12 @@ struct User: Codable {
         case id
         case name, image
         case userCode = "user_code"
+    }
+    
+    static func == (lhs: User, rhs: User) -> Bool {
+        return lhs.id == rhs.id &&
+            lhs.name == rhs.name &&
+            lhs.userCode == rhs.userCode &&
+            lhs.image == rhs.userCode
     }
 }
