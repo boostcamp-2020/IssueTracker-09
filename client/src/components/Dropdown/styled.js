@@ -11,5 +11,8 @@ const Div = styled.div`
 `;
 const Details = styled.details`
   padding: 10px;
+  summary::-webkit-details-marker {
+    display: none;
+  }
 `;
 export { Div, Details };
