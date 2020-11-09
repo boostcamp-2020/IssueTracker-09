@@ -1,6 +1,6 @@
 const makeSearch = (str, search = '') => {
   const diff = str.split(':')[0];
-  const searchArr = search.split(' ').filter((item) => item !== '');
+  const searchArr = search.split('%20').filter((item) => item !== '');
   let flag = false;
   const newSearch = searchArr.map((item) => {
     if (item.includes(diff)) {
@@ -9,6 +9,7 @@ const makeSearch = (str, search = '') => {
     }
     return item;
   });
+
   if (!flag) {
     newSearch.push(str);
   }

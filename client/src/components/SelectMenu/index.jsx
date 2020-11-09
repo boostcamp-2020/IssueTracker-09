@@ -16,7 +16,6 @@ import makeSearch from '../../lib/make-search';
 import { IssueContext } from '../../stores/issueStore';
 
 const SelectMenu = ({ title, data }) => {
-  console.log(title, data);
   const {
     issueState: { search },
   } = useContext(IssueContext);
