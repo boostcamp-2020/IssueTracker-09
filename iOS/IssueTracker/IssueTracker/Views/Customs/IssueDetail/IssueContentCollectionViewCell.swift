@@ -15,7 +15,9 @@ class IssueContentCollectionViewCell: UICollectionViewCell {
     @IBOutlet private weak var status: UIButton!
     
     func configure(issue: Issue) {
-        profile.fromURL(url: issue.user.image)
+        if let url = issue.user.image {
+            profile.fromURL(url: url)
+        }
         name.text = issue.user.name
         number.text = "#\(issue.id)"
         content.text = issue.title

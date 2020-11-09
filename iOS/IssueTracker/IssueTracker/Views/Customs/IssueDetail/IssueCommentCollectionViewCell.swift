@@ -14,7 +14,9 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var comment: UILabel!
     
     func configure(user: User, comment: Comment) {
-        profile.fromURL(url: user.image)
+        if let url = user.image {
+            profile.fromURL(url: url)
+        }
         name.text = user.name
         date.text = comment.timestamp
         self.comment.text = comment.content
