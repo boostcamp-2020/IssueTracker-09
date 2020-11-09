@@ -8,14 +8,20 @@ import GlobalStyle from './style/global-style';
 import App from './App';
 
 import { UserProvider } from './stores/userStore';
+import { IssueProvider } from './stores/issueStore';
+import { UsersProvider } from './stores/usersStore';
 
 ReactDom.render(
   <BrowserRouter>
     <UserProvider>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <App />
-      </ThemeProvider>
+      <IssueProvider>
+        <UsersProvider>
+          <ThemeProvider theme={theme}>
+            <GlobalStyle />
+            <App />
+          </ThemeProvider>
+        </UsersProvider>
+      </IssueProvider>
     </UserProvider>
   </BrowserRouter>,
   document.getElementById('root')

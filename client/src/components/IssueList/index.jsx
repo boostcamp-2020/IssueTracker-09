@@ -1,13 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import IssueItem from '../IssueItem';
-import dummy from './dummy';
 
 import { List } from './styled';
+import { IssueContext } from '../../stores/issueStore';
 
 const IssueList = () => {
+  const {
+    issueState: { list },
+    issueAction: { getList },
+  } = useContext(IssueContext);
+  useEffect(async () => {
+    await getList('is:open');
+  }, []);
   return (
     <List>
-      {dummy.map((issue, index) => (
+      {list.map((issue, index) => (
         <IssueItem issue={issue} key={index} />
       ))}
     </List>
