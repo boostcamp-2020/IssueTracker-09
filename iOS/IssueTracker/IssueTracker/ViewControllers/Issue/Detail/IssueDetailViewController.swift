@@ -7,12 +7,20 @@
 
 import UIKit
 
+protocol IssueDetailCoordinatorDelegate: AnyObject {
+    func presentToAssigneeEdit(assignees: Assignees)
+    func presentToLabelEdit(labels: Labels)
+    func presentToMilestoneEdit(milstones: Milestones)
+}
+
 class IssueDetailViewController: UIViewController {
     private enum Section: CaseIterable {
         case content, comment
     }
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     var service: IssueDetailService?
+    private weak var delegate: IssueDetailCoordinatorDelegate?
     private let dispatchGroup = DispatchGroup()
     private var issue: Issue? {
         return service?.issue
@@ -21,6 +29,17 @@ class IssueDetailViewController: UIViewController {
     private var assignee: Assignees?
     private var milestones: Milestones?
     private var labels: Labels?
+    
+    
+    init?(coder: NSCoder, delegate: IssueDetailCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,7 +79,6 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
         if let assignee = assignee {
             self.assignee = Assignees(assignees: assignee)
         }
-        
         dispatchGroup.leave()
     }
     
@@ -68,7 +86,6 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
         if let labels = labels {
             self.labels = Labels(labels: labels)
         }
-        
         dispatchGroup.leave()
     }
     
@@ -76,8 +93,23 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
         if let milestones = milestones {
             self.milestones = Milestones(milestones: milestones)
         }
-        
         dispatchGroup.leave()
+    }
+}
+
+extension IssueDetailViewController: IssueEditDelegate {
+    func touchedEditButton(key: EditKey) {
+        switch key {
+        case .assignee:
+            guard let assignee = assignee else { return }
+            delegate?.presentToAssigneeEdit(assignees: assignee)
+        case .label:
+            guard let labels = labels else { return }
+            delegate?.presentToLabelEdit(labels: labels)
+        case .milestone:
+            guard let milestones = milestones else { return }
+            delegate?.presentToMilestoneEdit(milstones: milestones)
+        }
     }
 }
 
@@ -92,7 +124,7 @@ extension IssueDetailViewController {
             identifier: "IssueBottomSheetViewController",
             creator: {
                 coder in
-                return IssueBottomSheetViewController(coder: coder, issue: issue)
+                return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
         self.addChild(bottomSheetViewController)
