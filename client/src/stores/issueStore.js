@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
-import getListAPI from '../apis/issue';
+import { getListAPI } from '../apis/issue';
 
 const initialState = {
   search: undefined,

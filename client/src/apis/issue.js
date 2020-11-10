@@ -15,4 +15,18 @@ const getListAPI = async (search) => {
   }
 };
 
-export default getListAPI;
+const getIssueByIdAPI = async (id) => {
+  try {
+    const { data } = await request({
+      method: 'get',
+      params: `/issue/${id}`,
+    });
+
+    return data;
+  } catch (error) {
+    return false;
+  }
+};
+
+// export default getIssueByIdAPI;
+export { getListAPI, getIssueByIdAPI };
