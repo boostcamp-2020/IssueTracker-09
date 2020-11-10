@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 // eslint-disable-next-line import/no-named-as-default-member
 import IssueItem from '../IssueItem';
 
@@ -12,12 +11,14 @@ const IssueList = ({ checkedHandler, checked }) => {
     issueAction: { getList },
   } = useContext(IssueContext);
 
-  useEffect(async () => {
+  const getListHandler = async () => {
     const newSearch = window.location.search.substring(3)
       ? window.location.search.substring(3).replace(/(%20)/g, ' ')
       : 'is:open';
     await getList(newSearch);
-  });
+  };
+
+  getListHandler();
 
   return (
     <List>
