@@ -35,7 +35,7 @@ const DropdownItem = ({ title, data, changeState, serverData }) => {
             )}
             {item.color ? <Color color={item.color} /> : ''}
             {item.title ? <Name>{item.title}</Name> : ''}
-            {serverData.some((d) => d.id === item.id) ? (
+            {serverData.some((d) => d?.id === item.id) ? (
               <div>v</div>
             ) : (
               <div> </div>

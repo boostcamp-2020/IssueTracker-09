@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import Dropdown from '../../Dropdown';
 import { getMilestonesAPI } from '../../../apis/milestone';
 import { Bar, Status, MileName, Span } from './styled';
+import { updateMilestoneAPI } from '../../../apis/issue';
 
-const MilestoneContainer = ({ milestone }) => {
+const MilestoneContainer = ({ milestone, issueId }) => {
   const [state, setState] = useState(milestone);
 
-  const changeState = (item) => {
-    if (state.id === item.id) {
-      return setState({});
+  const changeState = async (item) => {
+    if (state?.id !== item.id) {
+      await updateMilestoneAPI(issueId, item.id);
+      return setState(item);
     }
-    return setState(item);
+    return null;
   };
 
   return (
@@ -19,7 +21,7 @@ const MilestoneContainer = ({ milestone }) => {
         title="Milestone"
         action={getMilestonesAPI}
         changeState={changeState}
-        serverData={[state]}
+        serverData={state ? [state] : []}
       />
       {state?.id ? (
         <>
