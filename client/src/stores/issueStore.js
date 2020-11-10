@@ -8,7 +8,6 @@ const initialState = {
 };
 
 export const GET_LIST = 'GET_LIST';
-
 const IssueReducer = (state, action) => {
   switch (action.type) {
     case GET_LIST: {
@@ -39,7 +38,6 @@ const IssueProvider = ({ children }) => {
       }
     },
   };
-
   return (
     // eslint-disable-next-line react/jsx-filename-extension
     <IssueContext.Provider value={{ issueState, issueAction }}>
@@ -47,7 +45,6 @@ const IssueProvider = ({ children }) => {
     </IssueContext.Provider>
   );
 };
-
 IssueProvider.propTypes = {
   children: PropTypes.node,
 };
