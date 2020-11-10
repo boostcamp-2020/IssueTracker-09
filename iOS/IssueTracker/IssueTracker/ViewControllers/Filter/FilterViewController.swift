@@ -51,14 +51,14 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func touchedCancelButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        // 화면을 내려서 닫을 때에도 필터 내용을 초기화하기
+        FilterContext.shared.clear()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func touchedDoneButton(_ sender: Any) {
-        print(dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
-            if item.filter.category == .condition && item.filter.checkable { return true }
-            return false
-        }))
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
     }
 }
 

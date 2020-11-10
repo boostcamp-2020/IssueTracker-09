@@ -43,7 +43,8 @@ class FilterSearchViewController: UIViewController {
     }
 
     @IBAction func didDoneButtonTapped(_ sender: UIButton) {
-        // TODO 네트워크 연결해서 fetch 받아오는 기능 추가
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

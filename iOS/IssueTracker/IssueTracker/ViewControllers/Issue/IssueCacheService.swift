@@ -7,6 +7,10 @@
 
 import Foundation
 
+extension Notification.Name {
+    static let didFilterChangedNotification = Notification.Name(rawValue: "IssueCacheService.didFilterChangedNotification")
+}
+
 class IssueCacheService: IssueService {
     private var issues = [Issue]()
     private var filteredIssues = [Issue]()
@@ -15,6 +19,7 @@ class IssueCacheService: IssueService {
     
     init(delegate: IssueServiceDelegate?) {
         self.delegate = delegate
+        NotificationCenter.default.addObserver(self, selector: #selector(didFilterChanged), name: .didFilterChangedNotification, object: nil)
     }
     
     func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue {
@@ -57,5 +62,9 @@ class IssueCacheService: IssueService {
         filteredIssues = issues.filter { issue in
             return issue.title.lowercased().contains(text.lowercased())
         }
+    }
+    
+    @objc func didFilterChanged(_ notification: Notification) {
+        // FilterContext를 이용하여 내용 필터링 하기
     }
 }
