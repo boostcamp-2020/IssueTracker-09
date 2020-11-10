@@ -11,7 +11,7 @@ struct Issues: Codable {
     var issues: [Issue]
 }
 
-struct Issue: Codable {
+struct Issue: Model, Codable {
     let id: Int
     let title: String
     let isOpened: Bool

@@ -11,7 +11,7 @@ struct Milestones: Codable {
     let milestones: [Milestone]
 }
 
-struct Milestone: Codable {
+struct Milestone: Model, Codable {
     let id: Int
     let title, content, deadline: String
     let isOpened: Bool

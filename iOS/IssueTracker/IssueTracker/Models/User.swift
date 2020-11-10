@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct User: Codable, Hashable {
+struct User: Model, Codable, Hashable {
     let id: Int
     let name: String
     let image: String?
