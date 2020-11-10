@@ -32,7 +32,7 @@ extension IssueBottomSheetViewController: UIGestureRecognizerDelegate {
                 
                 }, completion: { [weak self] _ in
                     if ( velocity.y < 0 ) {
-//                        self?.tableView.isScrollEnabled = true
+                        self?.collectionView.isScrollEnabled = true
                     }
             })
         }
@@ -44,9 +44,9 @@ extension IssueBottomSheetViewController: UIGestureRecognizerDelegate {
 
         let y = view.frame.minY
         if (y == fullView && direction > 0) || (y == partialView) {
-//            tableView.isScrollEnabled = false
+            collectionView.isScrollEnabled = false
         } else {
-//            tableView.isScrollEnabled = true
+            collectionView.isScrollEnabled = true
         }
         
         return false
