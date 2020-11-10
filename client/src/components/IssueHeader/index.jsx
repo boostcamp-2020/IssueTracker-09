@@ -13,9 +13,14 @@ import {
 import { updateTitleAPI } from '../../apis/issue';
 
 const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
+  if (!title) {
+    return null;
+  }
+
   const [inputValue, setInputValue] = useState(title || '');
-  const [state, setState] = useState(false);
   const [issueTitle, setIssueTitle] = useState(title || '');
+  const [state, setState] = useState(false);
+
   const saveTitleHandler = async () => {
     const result = await updateTitleAPI(id, inputValue);
     if (result) {
@@ -23,10 +28,12 @@ const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
     }
     setState(false);
   };
+
   const cancelTitleHandler = () => {
     setInputValue(issueTitle);
     setState(false);
   };
+
   return (
     <Container>
       <FlexDiv align="space-between">
@@ -62,7 +69,7 @@ const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
           <Icon>!</Icon>
           {is_opened ? 'open' : 'close'}
         </IconBackground>
-        <Div padding="5px">{User.name} created this issue</Div>
+        <Div padding="5px">{User?.name} created this issue</Div>
       </FlexDiv>
     </Container>
   );
