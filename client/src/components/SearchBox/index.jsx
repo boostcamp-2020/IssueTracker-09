@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { faTag, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useHistory } from 'react-router-dom';
@@ -40,6 +40,10 @@ const SearchBox = () => {
     event.preventDefault();
     history.push(`/?q=${inputValue}`);
   };
+
+  useEffect(() => {
+    setInputValue(search || 'is:open');
+  }, [search]);
 
   return (
     <Container>

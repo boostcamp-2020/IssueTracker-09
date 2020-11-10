@@ -13,7 +13,7 @@ const IssueList = ({ checkedHandler, checked }) => {
   } = useContext(IssueContext);
 
   useEffect(async () => {
-    await getList(window.location.search.substring(3));
+    await getList(window.location.search.substring(3).replace(/(%20)/g, ' '));
   });
 
   return (
