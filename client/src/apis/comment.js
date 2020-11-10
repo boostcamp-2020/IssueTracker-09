@@ -8,8 +8,7 @@ const getCommentAPI = async (id) => {
       method: 'get',
       params: `/comment/${id}`,
     });
-
-    return { comments };
+    return comments;
   } catch (error) {
     return false;
   }
