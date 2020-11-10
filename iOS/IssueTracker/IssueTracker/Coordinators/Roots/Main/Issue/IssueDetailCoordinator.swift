@@ -9,7 +9,7 @@ import UIKit
 
 class IssueDetailCoordinator: Coordinator {
     private enum StoryboardName: String {
-        case IssueDetail, IssueBottomSheet
+        case IssueDetail, IssueBottomSheet, IssueEdit
     }
     private(set) var window: UIWindow
     private(set) var childCoordinators: [String : Coordinator] = [:]
@@ -17,7 +17,7 @@ class IssueDetailCoordinator: Coordinator {
     
     private var issue: Issue
     
-    required init(window: UIWindow, parent: UIViewController, issue: Issue) {
+    init(window: UIWindow, parent: UIViewController, issue: Issue) {
         self.window = window
         self.parent = parent
         self.issue = issue
@@ -29,11 +29,46 @@ class IssueDetailCoordinator: Coordinator {
             identifier: "IssueDetailViewController",
             creator: {
                 coder in
-                return IssueDetailViewController(coder: coder)
+                return IssueDetailViewController(coder: coder, delegate: self)
             })
         
         issueDeatailViewController.service = IssueDetailCacheService(issue: issue, delegate: issueDeatailViewController)
-         
+        
         (parent as? UINavigationController)?.pushViewController(issueDeatailViewController, animated: true)
+    }
+}
+
+extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
+    func presentToAssigneeEdit(assignees: Assignees) {
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(assignees)
+        
+        presentToEdit(key: .assignee, data: data)
+    }
+    
+    func presentToLabelEdit(labels: Labels) {
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(labels)
+        
+        presentToEdit(key: .label, data: data)
+    }
+    
+    func presentToMilestoneEdit(milstones: Milestones) {
+        let encoder = JSONEncoder()
+        let data = try! encoder.encode(milstones)
+        
+        presentToEdit(key: .milestone, data: data)
+    }
+    
+    private func presentToEdit(key: EditKey, data: Data) {
+        let storyBoard = UIStoryboard(name: StoryboardName.IssueEdit.rawValue, bundle: nil)
+        let issueEditViewController = storyBoard.instantiateViewController(
+            identifier: "IssueEditViewController",
+            creator: {
+                coder in
+                return IssueEditViewController(coder: coder, key: key, data: data)
+            })
+        
+        parent?.present(issueEditViewController, animated: true, completion: nil)
     }
 }
