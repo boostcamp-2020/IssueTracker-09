@@ -12,6 +12,7 @@ class IssueAppendViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
     var textViewDelegate: EditableTextViewDelegate?
     var markdownView: MarkdownView?
+    @IBOutlet weak var titleField: UITextField!
     
     enum SegmentTitle: Int {
         case markdown = 0
@@ -30,8 +31,12 @@ class IssueAppendViewController: UIViewController {
     }
     
     private func configureMarkdownView() {
+        // 재활용 할 순 없을까?
         let markdownView = MarkdownView()
-        markdownView.load(markdown: textView.text)
+        // TODO: - placeholder 하드코딩 제거
+        if !textView.text.isEmpty, textView.text != "코멘트는 여기에 작성하세요" {
+            markdownView.load(markdown: textView.text)
+        }
         markdownView.frame = textView.frame
         view.addSubview(markdownView)
         self.markdownView = markdownView
@@ -58,5 +63,54 @@ class IssueAppendViewController: UIViewController {
         default:
             return
         }
+    }
+    
+    private func requestAddComment(issue: Issue, content: String, completion handler: @escaping () -> Void) {
+        let networkService = CommentNetworkService()
+        networkService.addComment(issue: issue, content: content) { [weak self] result in
+            switch result {
+            case .success(_):
+                handler()
+            case .failure(let error):
+                self?.presentErrorAlert(title: "댓글 추가 실패", message: error.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    private func requestAddIssue(title: String, completion handler: @escaping (Issue) -> Void) {
+        let networkService = IssueNetworkService()
+        networkService.addIssue(title: title, labelId: nil, assigneeId: nil, milestoneId: nil) { [weak self] result in
+            switch result {
+            case .success(let issue):
+                handler(issue)
+            case .failure(let error):
+                self?.presentErrorAlert(title: "이슈 추가 실패", message: error.localizedDescription)
+                break
+            }
+        }
+    }
+    
+    @IBAction func didSendButtonTapped(_ sender: UIButton) {
+        guard let title = titleField.text else {
+            return
+        }
+        
+        guard let content = textView.text else {
+            return
+        }
+        
+        requestAddIssue(title: title) { [weak self] issue in
+            self?.requestAddComment(issue: issue, content: content) {
+                self?.dismiss(animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func presentErrorAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
     }
 }
