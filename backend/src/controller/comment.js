@@ -18,6 +18,15 @@ module.exports = {
     return res.status(status).json(result);
   },
 
+  readById: async (req, res) => {
+    const { status, result } = await control(
+      commentService.readById,
+      req.params
+    );
+
+    return res.status(status).json(result);
+  },
+
   remove: async (req, res) => {
     const { status, result } = await control(commentService.remove, req.params);
 

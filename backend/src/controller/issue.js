@@ -27,6 +27,12 @@ module.exports = {
     return res.status(status).json(result);
   },
 
+  readById: async (req, res) => {
+    const { status, result } = await control(issueService.readById, req.params);
+
+    return res.status(status).json(result);
+  },
+
   updateTitle: async (req, res) => {
     const { status, result } = await control(issueService.updateTitle, {
       ...req.body,

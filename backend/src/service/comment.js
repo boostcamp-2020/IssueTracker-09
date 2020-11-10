@@ -1,4 +1,4 @@
-const Comment = require('../model').Comment;
+const Model = require('../model');
 
 module.exports = {
   create: async ({ content, userId, issueId }) => {
@@ -6,7 +6,7 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.create({
+    const comment = await Model.Comment.create({
       content: content,
       user_id: userId,
       issue_id: issueId,
@@ -15,12 +15,27 @@ module.exports = {
     return comment;
   },
 
-  read: async ({ issueId } = {}) => {
-    if (!issueId) {
+  read: async ({ id } = {}) => {
+    if (!id) {
       return { error: '정보가 부족합니다' };
     }
 
-    const comments = await Comment.findAll({ where: { issue_id: issueId } });
+    const comments = await Model.Comment.findAll({
+      where: { issue_id: id },
+    });
+
+    return { comments };
+  },
+
+  readById: async ({ id }) => {
+    if (!id) {
+      return { error: '정보가 부족합니다.' };
+    }
+
+    const comments = await Model.Comment.findAll({
+      include: [{ model: Model.User }],
+      where: { issue_id: id },
+    });
 
     return { comments };
   },
@@ -30,7 +45,7 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const comment = await Comment.destroy({ where: { id } });
+    const comment = await Model.Comment.destroy({ where: { id } });
 
     if (comment) {
       return { response: true };
@@ -43,7 +58,10 @@ module.exports = {
       return { error: '정보가 부족합니다' };
     }
 
-    const [comment] = await Comment.update({ content }, { where: { id } });
+    const [comment] = await Model.Comment.update(
+      { content },
+      { where: { id } }
+    );
 
     if (comment) {
       return { response: true };

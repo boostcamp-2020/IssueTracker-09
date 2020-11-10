@@ -66,6 +66,40 @@ module.exports = {
     return { issues };
   },
 
+  readById: async ({ id } = {}) => {
+    if (!id) {
+      return { error: '없는 id값 입니다.' };
+    }
+
+    const issue = await Model.Issue.findOne({
+      include: [
+        {
+          model: Model.User,
+          as: 'Assignees',
+          through: {
+            attributes: [],
+          },
+        },
+        {
+          model: Model.Milestone,
+        },
+        {
+          model: Model.User,
+        },
+        {
+          model: Model.Label,
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+      attributes: ['id', 'title', 'is_opened', 'timestamp'],
+      where: { id },
+    });
+
+    return issue;
+  },
+
   remove: async ({ id } = {}) => {
     if (!id) {
       return { error: '없는 id값 입니다' };
