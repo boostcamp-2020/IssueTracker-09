@@ -6,17 +6,17 @@
 //
 
 import UIKit
+import AlamofireImage
 
 // MARK: - 이미지 뷰 URL 로드
 extension UIImageView {
-    func fromURL(url: String) {
-        let url = URL(string: url)
-        DispatchQueue.global().async {
-            guard let data = try? Data(contentsOf: url!) else { return }
-            DispatchQueue.main.async {
-                self.image = UIImage(data: data)
-            }
+    func fromURL(_ url: String) {
+        let placeholderImage = UIImage(named: "github")
+        guard let url = URL(string: url) else {
+            return self.image = placeholderImage
         }
+        
+        self.af.setImage(withURL: url, placeholderImage: placeholderImage)
         return
     }
 }
