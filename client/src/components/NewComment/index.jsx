@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Textarea, WriteBox } from './styled';
 
-const NewComment = ({ addEvent }) => {
+const NewComment = ({ addEvent, updateStateEvent, isOpen }) => {
   const [inputValue, setInputvalue] = useState('');
   return (
     <WriteBox>
@@ -12,7 +12,13 @@ const NewComment = ({ addEvent }) => {
         onChange={(e) => setInputvalue(e.target.value)}
       />
       <div>
-        <button>close issue</button>
+        <button
+          onClick={() => {
+            updateStateEvent();
+          }}
+        >
+          {isOpen ? 'close' : 'Reopen issue'}
+        </button>
         <button
           onClick={() => {
             addEvent(inputValue);
