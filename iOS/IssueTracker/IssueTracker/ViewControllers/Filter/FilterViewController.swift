@@ -63,19 +63,19 @@ class FilterViewController: UIViewController {
 }
 
 extension FilterViewController {
-    func configureHierarchy() {
+    private func configureHierarchy() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.delegate = self
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
-    func configureDataSource() {
+    private func configureDataSource() {
         // list cell
         let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { (cell, indexPath, filter) in
             var contentConfiguration = UIListContentConfiguration.valueCell()
@@ -101,7 +101,7 @@ extension FilterViewController {
         }
     }
     
-    func applyInitialSnapshots() {
+    private func applyInitialSnapshots() {
         for category in Filter.Category.allCases {
             var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
             let items = category.filters.map { Item(filter: $0) }
