@@ -44,5 +44,19 @@ const updateAssigneesAPI = async (id, checked, unchecked) => {
   }
 };
 
+const updateMilestoneAPI = async (id, milestoneId) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/issue/milestone/${id}`,
+      data: {
+        milestoneId,
+      },
+    });
+  } catch (error) {
+    return false;
+  }
+};
+
 // export default getIssueByIdAPI;
-export { getListAPI, getIssueByIdAPI, updateAssigneesAPI };
+export { getListAPI, getIssueByIdAPI, updateAssigneesAPI, updateMilestoneAPI };
