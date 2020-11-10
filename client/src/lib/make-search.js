@@ -9,6 +9,7 @@ const makeSearch = (str, search = '') => {
     }
     return item;
   });
+
   if (!flag) {
     newSearch.push(str);
   }

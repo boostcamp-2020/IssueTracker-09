@@ -10,6 +10,7 @@ const Div = styled.div`
   border: ${(props) => props.border};
 `;
 
+
 const IssueMark = styled.div`
   width: 15px;
   height: 15px;
@@ -24,4 +25,14 @@ const IssueMark = styled.div`
   border-radius: 8px;
 `;
 
-export { Div, IssueMark };
+const Container = styled.div`
+  width: 60%;
+  margin: 0 auto;
+  margin-top: 30px;
+  border: 1px solid lightGray;
+  display: flex;
+  align-items: center;
+`;
+
+export { Div, Container, IssueMark };
+

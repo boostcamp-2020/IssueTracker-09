@@ -5,6 +5,7 @@ module.exports = {
     node: true,
   },
   extends: ['airbnb', 'plugin:prettier/recommended'],
+  parser: 'babel-eslint',
   rules: {
     'prettier/prettier': ['error', { endOfLine: 'auto' }],
     'react/jsx-one-expression-per-line': 'off',
@@ -12,5 +13,7 @@ module.exports = {
     'no-plusplus': 'off',
     'react/jsx-filename-extension': 'off',
     'react/no-array-index-key': 'off',
+    'no-nested-ternary': 'off',
+    'react/prop-types': 'off',
   },
 };

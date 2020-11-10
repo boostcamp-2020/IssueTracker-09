@@ -4,7 +4,8 @@
   "description": "<p align=\"center\"> <img src=\"https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif\" alt=\"github-icon\" width=\"200\" height=\"200\" /> </p>",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server",
+    "test": "jest"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.32",
@@ -20,9 +21,14 @@
   },
   "devDependencies": {
     "@babel/core": "^7.12.3",
+    "@babel/plugin-proposal-optional-chaining": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.1",
     "@babel/preset-env": "^7.12.1",
     "@babel/preset-react": "^7.12.1",
+    "@testing-library/jest-dom": "^5.11.5",
+    "@testing-library/react": "^11.1.1",
+    "@testing-library/user-event": "^12.2.0",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.1.0",
     "clean-webpack-plugin": "^3.0.0",
     "eslint": "^7.2.0",
@@ -35,6 +41,7 @@
     "eslint-plugin-react-hooks": "^4.0.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^4.5.0",
+    "jest": "^26.6.3",
     "prettier": "^2.1.2",
     "style-loader": "^2.0.0",
     "webpack": "^5.3.2",

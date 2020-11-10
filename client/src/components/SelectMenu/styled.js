@@ -52,7 +52,6 @@ const Image = styled.div`
   display: block;
   width: 20px;
   height: 20px;
-  margin-right: 10px;
 `;
 
 const DummyImage = styled.div`
@@ -69,6 +68,12 @@ const Color = styled.div`
   height: 20px;
   border-radius: 10px;
 `;
+
+const Input = styled.input`
+  margin: 0 auto;
+  width: 90%;
+`;
+
 export {
   Div,
   Modal,
@@ -79,4 +84,5 @@ export {
   Name,
   DummyImage,
   Color,
+  Input,
 };

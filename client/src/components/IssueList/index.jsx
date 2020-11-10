@@ -14,7 +14,7 @@ const IssueList = ({ checkedHandler, checked }) => {
 
   useEffect(async () => {
     const newSearch = window.location.search.substring(3)
-      ? window.location.search.substring(3)
+      ? window.location.search.substring(3).replace(/(%20)/g, ' ')
       : 'is:open';
     await getList(newSearch);
   });
