@@ -28,6 +28,23 @@ const getIssueByIdAPI = async (id) => {
   }
 };
 
+const updateState = async (checked, state) => {
+  try {
+    await request({
+      method: 'put',
+      params: '/issue/state',
+      data: {
+        id: checked,
+        isOpened: state,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 const updateAssigneeAPI = async (id, assigneeId, joined) => {
   try {
     console.log(id, assigneeId, joined);
@@ -79,7 +96,20 @@ const updateLabelAPI = async (id, labelId, joined) => {
   }
 };
 
-const updateTitleAPI = async () => {};
+const updateTitleAPI = async (id, title) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/issue/title/${id}`,
+      data: {
+        title,
+      },
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 
 // export default getIssueByIdAPI;
 export {
@@ -88,4 +118,6 @@ export {
   updateAssigneeAPI,
   updateMilestoneAPI,
   updateLabelAPI,
+  updateTitleAPI,
+  updateState,
 };
