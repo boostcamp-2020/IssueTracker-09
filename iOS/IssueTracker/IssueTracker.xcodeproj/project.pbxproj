@@ -40,6 +40,7 @@
 		F497BA112558E678009952BB /* UserNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA102558E678009952BB /* UserNetworkServiceTests.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
+		F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4E3B4B02553C4C000E8430D /* UIStackView+clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */; };
 		F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */; };
@@ -157,6 +158,7 @@
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
+		F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerFactory.swift; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+clear.swift"; sourceTree = "<group>"; };
 		F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNetworkServiceTests.swift; sourceTree = "<group>"; };
@@ -409,6 +411,7 @@
 			children = (
 				FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */,
 				F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */,
+				F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -940,6 +943,7 @@
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */,
+				F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,

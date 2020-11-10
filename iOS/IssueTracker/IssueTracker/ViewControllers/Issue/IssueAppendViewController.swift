@@ -121,11 +121,4 @@ class IssueAppendViewController: UIViewController {
             }
         }
     }
-    
-    private func presentErrorAlert(title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        let okAction = UIAlertAction(title: "OK", style: .default)
-        alert.addAction(okAction)
-        present(alert, animated: true, completion: nil)
-    }
 }
