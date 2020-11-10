@@ -40,7 +40,7 @@ class FilterCoordinator: Coordinator {
 }
 
 extension FilterCoordinator: MoveToSearchPage {
-    func move(to type: SearchType) {
+    func move(to type: Filter.Element) {
         let storyBoard = UIStoryboard(name: StoryboardName.Search.rawValue, bundle: nil)
         let viewController = storyBoard.instantiateViewController(
             identifier: "FilterSearchViewController",

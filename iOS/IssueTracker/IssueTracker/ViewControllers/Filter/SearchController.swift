@@ -15,7 +15,7 @@ enum SearchType {
 
 class SearchController {
     private var elements = [Element]()
-    private let type: SearchType
+    private let type: Filter.Element
     
     struct Element: Hashable {
         let name: String
@@ -31,7 +31,7 @@ class SearchController {
         }
     }
     
-    init(type: SearchType) {
+    init(type: Filter.Element) {
         self.type = type
     }
     
@@ -49,18 +49,20 @@ class SearchController {
     }
     
     func load(completion: @escaping () -> Void) {
-        switch type {
-        case .User:
+        switch type.modelType {
+        case .user:
             loadAssignees(completion: completion)
-        case .Label:
+        case .label:
             loadLabels(completion: completion)
-        case .Milestone:
+        case .milestone:
             loadMilestones(completion: completion)
+        default:
+            return
         }
     }
     
     private func loadAssignees(completion: @escaping () -> Void) {
-        UserNetworkService().fetchAssignees { [weak self] result in
+        AssigneeNetworkService().fetchAssignees { [weak self] result in
             guard let assignees = try? result.get().assignees else {
                 return
             }

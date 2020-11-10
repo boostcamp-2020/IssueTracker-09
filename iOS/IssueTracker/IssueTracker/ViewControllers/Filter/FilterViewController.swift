@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoveToSearchPage: AnyObject {
-    func move(to type: SearchType)
+    func move(to type: Filter.Element)
 }
 
 class FilterViewController: UIViewController {
@@ -141,10 +141,7 @@ extension FilterViewController: UICollectionViewDelegate {
             
         } else if data.filter.category == .detail {
             collectionView.deselectItem(at: indexPath, animated: true)
-            guard let type = data.filter.type else {
-                return
-            }
-            delegate?.move(to: type)
+            delegate?.move(to: data.filter.element)
         }
     }
 }

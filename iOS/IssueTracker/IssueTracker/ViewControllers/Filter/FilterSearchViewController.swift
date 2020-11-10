@@ -19,13 +19,13 @@ class FilterSearchViewController: UIViewController {
     private var searchController: SearchController? = nil
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
-    private var type: SearchType?
+    private var type: Filter.Element?
 
     enum Section: CaseIterable {
         case main
     }
 
-    init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: SearchType) {
+    init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: Filter.Element) {
         self.delegate = delegate
         searchController = SearchController(type: type)
         super.init(coder: coder)
