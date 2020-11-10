@@ -7,15 +7,9 @@
 
 import UIKit
 
-protocol SearchViewControllerDelegate: AnyObject {
-    func back()
-    func done()
-}
-
 class FilterSearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private weak var delegate: SearchViewControllerDelegate?
     private var searchController: SearchController? = nil
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
@@ -25,8 +19,7 @@ class FilterSearchViewController: UIViewController {
         case main
     }
 
-    init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: Filter.Element) {
-        self.delegate = delegate
+    init?(coder: NSCoder, type: Filter.Element) {
         searchController = SearchController(type: type)
         super.init(coder: coder)
         self.type = type
