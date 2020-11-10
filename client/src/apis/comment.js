@@ -17,7 +17,7 @@ const getCommentAPI = async (id) => {
 
 const createCommentAPI = async (content, userId, issueId) => {
   try {
-    const { comment } = await request({
+    await request({
       method: 'POST',
       params: '/comment',
       data: {
@@ -27,7 +27,7 @@ const createCommentAPI = async (content, userId, issueId) => {
       },
     });
 
-    return comment;
+    return true;
   } catch (error) {
     return false;
   }
