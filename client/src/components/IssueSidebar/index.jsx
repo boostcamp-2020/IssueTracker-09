@@ -12,13 +12,13 @@ const IssueSidebar = ({ issue }) => {
   return (
     <Container>
       <DropdownContainer>
-        <AssigneeContainer assignees={issue.Assignees} />
+        <AssigneeContainer assignees={issue.Assignees} issueId={issue.id} />
       </DropdownContainer>
       <DropdownContainer>
-        <LabelContainer labels={issue.Labels} />
+        <LabelContainer labels={issue.Labels} issueId={issue.id} />
       </DropdownContainer>
       <DropdownContainer>
-        <MilestoneContainer milestone={issue.Milestone} />
+        <MilestoneContainer milestone={issue.Milestone} issueId={issue.id} />
       </DropdownContainer>
     </Container>
   );

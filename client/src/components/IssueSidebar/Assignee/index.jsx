@@ -2,15 +2,18 @@ import React, { useState } from 'react';
 import Dropdown from '../../Dropdown';
 import { getUsersAPI } from '../../../apis/user';
 import { Item, Image, DummyImage, Name, Span } from './styled';
+import { updateAssigneeAPI } from '../../../apis/issue';
 
-const AssigneeContainer = ({ assignees }) => {
+const AssigneeContainer = ({ assignees, issueId }) => {
   const [state, setState] = useState(assignees || []);
 
-  const changeState = (item) => {
+  const changeState = async (item) => {
     const index = state.findIndex((s) => s.id === item.id);
     if (index !== -1) {
+      await updateAssigneeAPI(issueId, state[index].id, false);
       return setState(state.filter((s, i) => i !== index));
     }
+    await updateAssigneeAPI(issueId, item.id, true);
     return setState([...state, item]);
   };
 
