@@ -71,7 +71,7 @@ module.exports = {
       return { error: '없는 id값 입니다.' };
     }
 
-    const issue = await Model.Issue.findAll({
+    const issue = await Model.Issue.findOne({
       include: [
         {
           model: Model.User,
