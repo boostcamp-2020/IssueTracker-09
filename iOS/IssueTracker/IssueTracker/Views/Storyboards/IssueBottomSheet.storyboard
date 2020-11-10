@@ -207,6 +207,9 @@
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hAv-lz-mgs">
                                                     <rect key="frame" x="374" y="11" width="30" height="28"/>
                                                     <state key="normal" title="Edit"/>
+                                                    <connections>
+                                                        <action selector="touchedEditButton:" destination="Cnk-ba-JTJ" eventType="touchUpInside" id="OIC-x4-zXg"/>
+                                                    </connections>
                                                 </button>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wQp-MB-3kx">
                                                     <rect key="frame" x="0.0" y="49" width="414" height="1"/>
@@ -241,7 +244,6 @@
                                     </constraints>
                                     <connections>
                                         <outlet property="title" destination="COW-N0-1r8" id="qDq-RQ-dcb"/>
-                                        <outlet property="touchedEditButton" destination="hAv-lz-mgs" id="OJF-MH-g2L"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>

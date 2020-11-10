@@ -21,7 +21,7 @@ class IssueBottomSheetViewController: UIViewController {
             case .assignees:
                 return wideMode ? 4 : 2
             case .labels:
-                return wideMode ? 6 : 3
+                return wideMode ? 8 : 4
             case .milestone:
                 return wideMode ? 2 : 1
             }
@@ -55,9 +55,9 @@ class IssueBottomSheetViewController: UIViewController {
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
-        
         collectionView.collectionViewLayout = createLayout()
         configureDataSource()
+        addNotification()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,18 +69,7 @@ class IssueBottomSheetViewController: UIViewController {
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
         })
     }
-    
-    @IBAction func touchedAssigneeEdit(_ sender: Any) {
-        delegate?.touchedEditButton(key: .assignee)
-    }
-    @IBAction func touchedLabelsEdit(_ sender: Any) {
-        delegate?.touchedEditButton(key: .label)
-    }
-    @IBAction func touchedMilestoneEdit(_ sender: Any) {
-        delegate?.touchedEditButton(key: .milestone)
-    }
 }
-
 
 extension IssueBottomSheetViewController {
     func createLayout() -> UICollectionViewLayout {
@@ -95,15 +84,22 @@ extension IssueBottomSheetViewController {
             let item = NSCollectionLayoutItem(layoutSize: itemSize)
             item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
             
-            let groupHeight = layoutKind == .milestone ?
-                NSCollectionLayoutDimension.absolute(44) : NSCollectionLayoutDimension.fractionalWidth(0.2)
+            var groupHeight: NSCollectionLayoutDimension {
+                switch  layoutKind {
+                case .assignees:
+                    return NSCollectionLayoutDimension.fractionalWidth(0.2)
+                case .labels:
+                    return NSCollectionLayoutDimension.fractionalWidth(0.15)
+                case .milestone:
+                    return NSCollectionLayoutDimension.absolute(44)
+                }
+            }
+            
             let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: groupHeight)
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
             
             let section = NSCollectionLayoutSection(group: group)
-//            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
-            
             
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -146,7 +142,7 @@ extension IssueBottomSheetViewController {
         
         dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
             guard let section = Section(rawValue: indexPath.section),
-                let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueSectionHeader", for: indexPath) as? IssueSectionHeader else {
+                  let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueSectionHeader", for: indexPath) as? IssueSectionHeader else {
                 return UICollectionReusableView()
             }
             
@@ -179,3 +175,17 @@ extension IssueBottomSheetViewController {
         dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
+
+extension IssueBottomSheetViewController {
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(didTokenRecieved), name: .touchedEditKey, object: nil)
+    }
+    
+    @objc func didTokenRecieved(notification: NSNotification) {
+        guard let userInfo = notification.userInfo,
+              let key = userInfo["editKey"] as? EditKey else { return }
+        
+        delegate?.touchedEditButton(key: key)
+    }
+}
+
