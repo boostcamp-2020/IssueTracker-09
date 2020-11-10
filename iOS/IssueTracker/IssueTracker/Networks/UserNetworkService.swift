@@ -41,22 +41,5 @@ class UserNetworkService: NetworkService {
             }
         }
     }
-    
-    func fetchAssignees(completion handler: @escaping (Result<Assignees, AFError>) -> Void) {
-        guard let url = url(endPoint: .users),
-              let token = PersistenceManager.shared.load(forKey: .token) else {
-            return
-        }
-        
-        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        
-        AF.request(url,
-                   method: .get,
-                   headers: headers)
-            .validate()
-            .responseDecodable(of: Assignees.self) { response in
-                handler(response.result)
-            }
-    }
 }
 
