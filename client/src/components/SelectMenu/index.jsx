@@ -15,7 +15,7 @@ import {
 import makeSearch from '../../lib/make-search';
 import { IssueContext } from '../../stores/issueStore';
 
-const SelectMenu = ({ title, data }) => {
+const SelectMenu = ({ title, data, checked }) => {
   console.log(title, data);
   const {
     issueState: { search },
@@ -27,33 +27,34 @@ const SelectMenu = ({ title, data }) => {
         <Title>{title}</Title>
       </Div>
       <Div>
-        {data?.map((item, index) => (
-          <Link
-            to={makeSearch(
-              `${title}:${item.title ? item.title : item.name}`,
-              search
-            )}
-            key={index}
-          >
-            <ListItem>
-              {item.image === '' ? (
-                <>
-                  <DummyImage />
-                  <Name>{item.name}</Name>
-                </>
-              ) : item.image ? (
-                <>
-                  <Image image={item.image} />
-                  <Name>{item.name}</Name>
-                </>
-              ) : (
-                ''
+          {data?.map((item, index) => (
+            <Link
+              to={makeSearch(
+                `${title}:${item.title ? item.title : item.name}`,
+                search
               )}
-              {item.color ? <Color color={item.color} /> : ''}
-              {item.title ? <Name>{item.title}</Name> : ''}
-            </ListItem>
-          </Link>
-        ))}
+              key={index}
+            >
+              <ListItem>
+                {item.image === '' ? (
+                  <>
+                    <DummyImage />
+                    <Name>{item.name}</Name>
+                  </>
+                ) : item.image ? (
+                  <>
+                    <Image image={item.image} />
+                    <Name>{item.name}</Name>
+                  </>
+                ) : (
+                  ''
+                )}
+                {item.color ? <Color color={item.color} /> : ''}
+                {item.title ? <Name>{item.title}</Name> : ''}
+              </ListItem>
+            </Link>
+          ))
+                }
       </Div>
     </Modal>
   );

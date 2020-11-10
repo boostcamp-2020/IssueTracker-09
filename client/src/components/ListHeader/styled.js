@@ -9,6 +9,11 @@ const Div = styled.div`
   padding: ${(props) => props.padding};
   border: ${(props) => props.border};
 `;
-
+const Details = styled.details`
+  padding: 10px;
+  summary::-webkit-details-marker {
+    display: none;
+  }
+`;
 // eslint-disable-next-line import/prefer-default-export
-export { Div };
+export { Div, Details };

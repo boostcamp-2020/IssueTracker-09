@@ -1,7 +1,11 @@
+/* eslint-disable import/named */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/self-closing-comp */
 import React, { useContext } from 'react';
-import { Div } from './styled';
+import { Div, Details } from './styled';
+import MarkAs from '../MarkAs';
 import { IssueContext } from '../../stores/issueStore';
 import DropDown from '../Dropdown';
 import { getUsersAPI } from '../../apis/user';
@@ -35,16 +39,28 @@ const ListHeader = ({ checkedHandler, checked }) => {
       </Div>
       <Div width="100%">
         {checked.length ? (
-          <Div padding="10px"> {checked.length} selected</Div>
+          <>
+            <Div padding="10px"> {checked.length} selected</Div>
+            <Div width="100%" align="flex-end">
+              <Details>
+                <summary>Mark as</summary>
+                <Div position="absolute">
+                  <MarkAs checked={checked} />
+                </Div>
+              </Details>
+            </Div>
+          </>
         ) : (
-          <Div padding="10px"> close/open</Div>
+          <>
+            <Div padding="10px"> close/open</Div>
+            <Div width="100%" align="flex-end">
+              <DropDown title="Author" action={getUsersAPI} />
+              <DropDown title="Label" action={getLabelsAPI} />
+              <DropDown title="Milestone" action={getMilestonesAPI} />
+              <DropDown title="Assignee" action={getUsersAPI} />
+            </Div>
+          </>
         )}
-        <Div width="100%" align="flex-end">
-          <DropDown title="Author" action={getUsersAPI} />
-          <DropDown title="Label" action={getLabelsAPI} />
-          <DropDown title="Milestone" action={getMilestonesAPI} />
-          <DropDown title="Assignee" action={getUsersAPI} />
-        </Div>
       </Div>
     </Div>
   );
