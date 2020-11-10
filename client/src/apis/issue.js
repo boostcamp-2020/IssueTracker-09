@@ -28,5 +28,21 @@ const getIssueByIdAPI = async (id) => {
   }
 };
 
+const updateAssigneesAPI = async (id, checked, unchecked) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/issue/assignees/${id}`,
+      data: {
+        checked,
+        unchecked,
+      },
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 // export default getIssueByIdAPI;
-export { getListAPI, getIssueByIdAPI };
+export { getListAPI, getIssueByIdAPI, updateAssigneesAPI };
