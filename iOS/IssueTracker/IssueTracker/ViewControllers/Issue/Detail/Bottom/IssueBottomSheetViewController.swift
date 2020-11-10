@@ -7,22 +7,46 @@
 
 import UIKit
 
-//protocol Issue
+protocol IssueEditDelegate: AnyObject {
+    func touchedEditButton(key: EditKey)
+}
 
 class IssueBottomSheetViewController: UIViewController {
+    private enum Section: Int, CaseIterable {
+        case assignees, labels, milestone
+        
+        func columnCount(for width: CGFloat) -> Int {
+            let wideMode = width > 800
+            switch self {
+            case .assignees:
+                return wideMode ? 10 : 5
+                
+            case .labels:
+                return wideMode ? 6 : 3
+                
+            case .milestone:
+                return wideMode ? 2 : 1
+            }
+        }
+    }
+    
     @IBOutlet private weak var assigneeView: AssigneeView!
     @IBOutlet private weak var labelsView: LabelsView!
     @IBOutlet private weak var milestoneView: MilestoneView!
     
-    private var issue: Issue?
-    private let fullView: CGFloat = 100
-//    private weak var delegate
-    private var partialView: CGFloat {
+//    private var dataSource: UICollectionViewDiffableDataSource<Section, Any>! = nil
+    private weak var delegate: IssueEditDelegate?
+    
+    let fullView: CGFloat = 100
+    var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
     }
     
-    init?(coder: NSCoder, issue: Issue) {
+    private var issue: Issue?
+    
+    init?(coder: NSCoder, issue: Issue, delegate: IssueEditDelegate) {
         self.issue = issue
+        self.delegate = delegate
         super.init(coder: coder)
     }
     
@@ -52,64 +76,76 @@ class IssueBottomSheetViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.animate(withDuration: 0.6, animations: { [weak self] in
+        UIView.animate(withDuration: 0.3, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
-            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height)
-            })
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
+        })
     }
     
-    @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        let translation = recognizer.translation(in: self.view)
-        let velocity = recognizer.velocity(in: self.view)
-
-        let y = self.view.frame.minY
-        if (y + translation.y >= fullView) && (y + translation.y <= partialView) {
-            self.view.frame = CGRect(x: 0, y: y + translation.y, width: view.frame.width, height: view.frame.height)
-            recognizer.setTranslation(CGPoint.zero, in: self.view)
-        }
-        
-        if recognizer.state == .ended {
-            var duration =  velocity.y < 0 ? Double((y - fullView) / -velocity.y) : Double((partialView - y) / velocity.y )
-            
-            duration = duration > 1.3 ? 1 : duration
-            
-            UIView.animate(withDuration: duration, delay: 0.0, options: [.allowUserInteraction], animations: {
-                if  velocity.y >= 0 {
-                    self.view.frame = CGRect(x: 0, y: self.partialView, width: self.view.frame.width, height: self.view.frame.height)
-                } else {
-                    self.view.frame = CGRect(x: 0, y: self.fullView, width: self.view.frame.width, height: self.view.frame.height)
-                }
-                
-                }, completion: { [weak self] _ in
-                    if ( velocity.y < 0 ) {
-//                        self?.tableView.isScrollEnabled = true
-                    }
-            })
-        }
+    @IBAction func touchedAssigneeEdit(_ sender: Any) {
+        delegate?.touchedEditButton(key: .assignee)
+    }
+    @IBAction func touchedLabelsEdit(_ sender: Any) {
+        delegate?.touchedEditButton(key: .label)
+    }
+    @IBAction func touchedMilestoneEdit(_ sender: Any) {
+        delegate?.touchedEditButton(key: .milestone)
     }
 }
 
-extension IssueBottomSheetViewController: UIGestureRecognizerDelegate {
 
-    // Solution
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        let gesture = (gestureRecognizer as! UIPanGestureRecognizer)
-        let direction = gesture.velocity(in: view).y
-
-        let y = view.frame.minY
-        if (y == fullView && direction > 0) || (y == partialView) {
-//            tableView.isScrollEnabled = false
-        } else {
-//            tableView.isScrollEnabled = true
+extension IssueBottomSheetViewController {
+    func createLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout {
+            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+            guard let layoutKind = Section(rawValue: sectionIndex) else { return nil }
+            
+            let columns = layoutKind.columnCount(for: layoutEnvironment.container.effectiveContentSize.width)
+            
+            let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.2),
+                                                  heightDimension: .fractionalHeight(1.0))
+            let item = NSCollectionLayoutItem(layoutSize: itemSize)
+            item.contentInsets = NSDirectionalEdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2)
+            
+            let groupHeight = layoutKind == .milestone ?
+                NSCollectionLayoutDimension.absolute(44) : NSCollectionLayoutDimension.fractionalWidth(0.2)
+            let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: groupHeight)
+            let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
+            
+            let section = NSCollectionLayoutSection(group: group)
+            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+            
+            
+            let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+                layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
+                                                   heightDimension: .estimated(44)),
+                elementKind: "IssueDetailHeader",
+                alignment: .top)
+            
+            sectionHeader.pinToVisibleBounds = false
+            sectionHeader.zIndex = 2
+            section.boundarySupplementaryItems = [sectionHeader]
+            
+            return section
         }
-        
-        return false
+        return layout
     }
     
+    func configureDataSource() {
+        let headerRegistration = UICollectionView.SupplementaryRegistration
+        <IssueSectionHeader>(elementKind: "IssueDetailHeader") { (supplementaryView, string, indexPath) in
+            switch Section(rawValue: indexPath.section) {
+            case .assignees:
+                supplementaryView.configure(key: .assignee)
+            case .labels:
+                supplementaryView.configure(key: .label)
+            case .milestone:
+                supplementaryView.configure(key: .milestone)
+            default:
+                return
+            }
+        }
+    }
 }
