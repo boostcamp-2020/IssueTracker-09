@@ -28,14 +28,15 @@ const getIssueByIdAPI = async (id) => {
   }
 };
 
-const updateAssigneesAPI = async (id, checked, unchecked) => {
+const updateAssigneeAPI = async (id, assigneeId, joined) => {
   try {
+    console.log(id, assigneeId, joined);
     await request({
       method: 'PUT',
-      params: `/issue/assignees/${id}`,
+      params: `/issue/assignee/${id}`,
       data: {
-        checked,
-        unchecked,
+        assigneeId,
+        joined,
       },
     });
 
@@ -61,14 +62,14 @@ const updateMilestoneAPI = async (id, milestoneId) => {
   }
 };
 
-const updateLabelsAPI = async (id, checked, unchecked) => {
+const updateLabelAPI = async (id, labelId, joined) => {
   try {
     await request({
       method: 'PUT',
-      params: `/issue/labels/${id}`,
+      params: `/issue/label/${id}`,
       data: {
-        checked,
-        unchecked,
+        labelId,
+        joined,
       },
     });
 
@@ -78,11 +79,13 @@ const updateLabelsAPI = async (id, checked, unchecked) => {
   }
 };
 
+const updateTitleAPI = async () => {};
+
 // export default getIssueByIdAPI;
 export {
   getListAPI,
   getIssueByIdAPI,
-  updateAssigneesAPI,
+  updateAssigneeAPI,
   updateMilestoneAPI,
-  updateLabelsAPI,
+  updateLabelAPI,
 };
