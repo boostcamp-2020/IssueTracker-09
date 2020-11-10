@@ -16,5 +16,5 @@ struct Comment: Codable {
     let content: String
     let timestamp: String
     let user_id: Int
-    let issue_id: Int
+    let issue_id: Int?
 }
