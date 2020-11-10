@@ -13,7 +13,7 @@ class AssigneeNetworkService: NetworkService {
         case users = "/user/users"
     }
     
-    func fetchAssignee(completion handler: @escaping (Result<Assignee, AFError>) -> Void) {
+    func fetchAssignee(completion handler: @escaping (Result<Assignees, AFError>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.users.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -25,7 +25,7 @@ class AssigneeNetworkService: NetworkService {
                    method: .get,
                    headers: headers)
             .validate()
-            .responseDecodable(of: Assignee.self) { response in
+            .responseDecodable(of: Assignees.self) { response in
                 handler(response.result)
             }
     }

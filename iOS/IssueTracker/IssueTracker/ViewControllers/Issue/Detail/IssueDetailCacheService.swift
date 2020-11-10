@@ -37,7 +37,7 @@ class IssueDetailCacheService: IssueDetailService {
             guard let self = self else { return }
             switch result {
             case .success( _):
-                if let assignee = try? result.get().assignee {
+                if let assignee = try? result.get().assignees {
                     self.delegate?.didAssigneeLoaded(assignee: assignee)
                 }
             case .failure(let error):

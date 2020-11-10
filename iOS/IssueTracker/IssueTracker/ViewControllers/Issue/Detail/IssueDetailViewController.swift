@@ -15,7 +15,7 @@ class IssueDetailViewController: UIViewController {
     var service: IssueDetailService?
     private var issue: Issue?
     private var comments: [Comment] = []
-    private var assignee: Assignee?
+    private var assignee: Assignees?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,7 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
     }
     
     func didAssigneeLoaded(assignee: [User]) {
-        self.assignee = Assignee(assignee: assignee)
+        self.assignee = Assignees(assignees: assignee)
         configureHierarchy()
         addBottomSheetView()
     }

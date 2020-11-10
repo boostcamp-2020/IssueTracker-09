@@ -42,7 +42,7 @@ class UserNetworkService: NetworkService {
         }
     }
     
-    func fetchAssignees(completion handler: @escaping (Result<Assignee, AFError>) -> Void) {
+    func fetchAssignees(completion handler: @escaping (Result<Assignees, AFError>) -> Void) {
         guard let url = url(endPoint: .users),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -54,7 +54,7 @@ class UserNetworkService: NetworkService {
                    method: .get,
                    headers: headers)
             .validate()
-            .responseDecodable(of: Assignee.self) { response in
+            .responseDecodable(of: Assignees.self) { response in
                 handler(response.result)
             }
     }
