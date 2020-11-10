@@ -20,7 +20,6 @@ class IssueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         service?.requestComments()
-        service?.requestUsers()
     }
 }
 
@@ -28,6 +27,8 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
     func didCommentsLoaded(comments: [Comment]) {
         issue = service?.issue
         self.comments = comments
+        
+        service?.requestUsers()
     }
     
     func didAssigneeLoaded(assignee: [User]) {
