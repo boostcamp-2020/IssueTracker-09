@@ -43,41 +43,43 @@ const ListHeader = ({ checkedHandler, checked }) => {
       </Div>
       <Div width="100%">
         {checked.length ? (
-           <Div padding="10px" width="150px">
-            {checked.length} selected
-          </Div>
-          <Div padding="10px"> {checked.length} selected</Div>
+          <>
+            <Div padding="10px" width="150px">
+              {checked.length} selected
+            </Div>
             <Div width="100%" align="flex-end">
               <Details>
                 <summary>Mark as</summary>
                 <Div position="absolute">
-                  <MarkAs checked={checked} />
+                  <MarkAs checked={checked} checkHandler={checkedHandler} />
                 </Div>
               </Details>
             </Div>
+          </>
         ) : (
-          <Div padding="10px 0px">
-            <Link to={makeSearch(`is:open`, search)}>
-              <Div margin="0 10px 0 0">
-                <IssueMark>!</IssueMark>
-                <Div>OPEN</Div>
-              </Div>
-            </Link>
-            <Link to={makeSearch(`is:close`, search)}>
-              <Div>
-                <FontAwesomeIcon icon={faCheck} size="1x" color="gray" />
-                <Div margin="0 0 0 5px">CLOSE</Div>
-              </Div>
-            </Link>
-          </Div>
+          <>
+            <Div padding="10px 0px">
+              <Link to={makeSearch(`is:open`, search)}>
+                <Div margin="0 10px 0 0">
+                  <IssueMark>!</IssueMark>
+                  <Div>OPEN</Div>
+                </Div>
+              </Link>
+              <Link to={makeSearch(`is:close`, search)}>
+                <Div>
+                  <FontAwesomeIcon icon={faCheck} size="1x" color="gray" />
+                  <Div margin="0 0 0 5px">CLOSE</Div>
+                </Div>
+              </Link>
+            </Div>
             <Div width="100%" align="flex-end">
               <DropDown title="Author" action={getUsersAPI} />
               <DropDown title="Label" action={getLabelsAPI} />
               <DropDown title="Milestone" action={getMilestonesAPI} />
               <DropDown title="Assignee" action={getUsersAPI} />
             </Div>
-          </Div>
-          )}
+          </>
+        )}
       </Div>
     </Container>
   );
