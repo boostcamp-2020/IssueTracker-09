@@ -26,6 +26,5 @@ class MilestoneView: UIView {
         } else {
             progress.progress = 100
         }
-        
     }
 }
