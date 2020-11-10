@@ -38,25 +38,27 @@ class IssueNetworkService: NetworkService {
         case assignees = "/assignees"
     }
     
-    func addIssue(issue: Issue, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
+    func addIssue(title: String, labelId: [Int]?, assigneeId: [Int]?, milestoneId: Int?, completion handler: ( (Result<Issue, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        // TODO 없는 경우에도 추가할 수 있도록 수정
-        guard let labelId = issue.labels?.compactMap({ $0.id }),
-              let assigneeId = issue.assignees?.compactMap({ $0.id }),
-              let milestoneId = issue.milestone?.id else {
-            return
+        var parameters = [
+            "title": title
+        ] as [String : Any]
+        
+        if let labelId = labelId {
+            parameters["labelId"] = labelId
         }
         
-        let parameters = [
-            "title": issue.title,
-            "labelId": labelId,
-            "assigneeId": assigneeId,
-            "milestoneId": milestoneId
-        ] as [String : Any]
+        if let assigneeId = assigneeId {
+            parameters["assigneeId"] = assigneeId
+        }
+        
+        if let milestoneId = milestoneId {
+            parameters["milestoneId"] = milestoneId
+        }
         
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
@@ -65,7 +67,7 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .response { response in
+            .responseDecodable(of: Issue.self) { response in
                 handler?(response.result)
             }
     }

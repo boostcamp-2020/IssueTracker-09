@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Assignees: Codable {
+struct Assignees: Model, Codable {
     let assignees: [User]
     
     enum CodingKeys: String, CodingKey {

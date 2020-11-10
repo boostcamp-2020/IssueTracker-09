@@ -11,14 +11,14 @@ struct Issues: Codable {
     var issues: [Issue]
 }
 
-struct Issue: Codable {
+struct Issue: Model, Codable {
     let id: Int
     let title: String
     let isOpened: Bool
     let timestamp: String
     let assignees: [User]?
     let milestone: Milestone?
-    let user: User
+    let user: User?
     let labels: [Label]?
     
     enum CodingKeys: String, CodingKey {

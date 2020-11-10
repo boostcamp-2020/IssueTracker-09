@@ -44,6 +44,7 @@ class IssueCoordinator: Coordinator {
             })
         
         issueViewController.service = IssueCacheService(delegate: issueViewController)
+        navigationController.navigationBar.prefersLargeTitles = true
         navigationController.pushViewController(issueViewController, animated: true)
         delegate?.setViewController(navigationController, name: .Issue)
     }

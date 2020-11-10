@@ -7,26 +7,19 @@
 
 import UIKit
 
-protocol SearchViewControllerDelegate: AnyObject {
-    func back()
-    func done()
-}
-
 class FilterSearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private weak var delegate: SearchViewControllerDelegate?
     private var searchController: SearchController? = nil
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
-    private var type: SearchType?
+    private var type: Filter.Element?
 
     enum Section: CaseIterable {
         case main
     }
 
-    init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: SearchType) {
-        self.delegate = delegate
+    init?(coder: NSCoder, type: Filter.Element) {
         searchController = SearchController(type: type)
         super.init(coder: coder)
         self.type = type
@@ -50,7 +43,8 @@ class FilterSearchViewController: UIViewController {
     }
 
     @IBAction func didDoneButtonTapped(_ sender: UIButton) {
-        // TODO 네트워크 연결해서 fetch 받아오는 기능 추가
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -147,10 +141,41 @@ extension FilterSearchViewController: UICollectionViewDelegate {
 
         var newData = data
         newData.checkable = !data.checkable
+        applyNewData(newData)
 
         var newSnapshot = dataSource.snapshot()
         newSnapshot.insertItems([newData], beforeItem: data)
         newSnapshot.deleteItems([data])
         dataSource.apply(newSnapshot)
+    }
+    
+    private func applyNewData(_ newData: SearchController.Element) {
+        if newData.checkable, let type = type {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = newData.rawModel as? User
+            case .label:
+                FilterContext.shared.label = newData.rawModel as? Label
+            case .milestone:
+                FilterContext.shared.milestone = newData.rawModel as? Milestone
+            case .writer:
+                FilterContext.shared.writer = newData.rawModel as? User
+            default:
+                break
+            }
+        } else {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = nil
+            case .label:
+                FilterContext.shared.label = nil
+            case .milestone:
+                FilterContext.shared.milestone = nil
+            case .writer:
+                FilterContext.shared.writer = nil
+            default:
+                break
+            }
+        }
     }
 }

@@ -71,4 +71,24 @@ class IssueNetworkServiceTests: XCTestCase {
             }
         }
     }
+    
+    func testModifyIssueStatus() throws {
+        let expectTimer = expectation(description: "testModifyIssueStatus")
+        let issue = Issue(id: 2, title: "", isOpened: true, timestamp: "", assignees: nil, milestone: nil, user: nil, labels: nil)
+
+        IssueNetworkService().modifyIssueStatus(of: issue) { result in
+            switch result {
+            case .success(_):
+                expectTimer.fulfill()
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        }
+        
+        waitForExpectations(timeout: asyncTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
 }
