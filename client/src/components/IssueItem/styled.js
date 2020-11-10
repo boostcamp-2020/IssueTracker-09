@@ -13,13 +13,13 @@ export const Item = styled.li`
 `;
 
 export const Issue = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
 `;
 export const Assignees = styled.div`
-  width: 20%;
+  width: 10%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,6 +33,13 @@ export const Assignee = styled.div`
   background-size: cover;
 `;
 
+export const DummyImage = styled.div`
+  width: 20px;
+  height: 20px;
+  border-radius: 10px;
+  background-color: gray;
+`;
+
 export const Closed = styled.div`
   width: 15px;
   height: 15px;
@@ -42,8 +49,8 @@ export const Closed = styled.div`
   align-items: center;
   font-size: 13px;
   font-weight: bold;
-  color: ${(props) => (!props.is_opened ? 'green' : 'red')};
-  border: 1.5px solid ${(props) => (!props.is_opened ? 'green' : 'red')};
+  color: ${(props) => (props.isOpened ? 'green' : 'red')};
+  border: 1.5px solid ${(props) => (props.isOpened ? 'green' : 'red')};
   border-radius: 8px;
 `;
 

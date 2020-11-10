@@ -7,6 +7,7 @@ module.exports = {
         useESModules: false,
       },
     ],
+    ['@babel/plugin-proposal-optional-chaining'],
   ],
   sourceType: 'unambiguous',
 };
