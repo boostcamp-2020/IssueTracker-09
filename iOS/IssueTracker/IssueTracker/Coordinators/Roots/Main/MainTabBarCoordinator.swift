@@ -35,12 +35,12 @@ class MainTabBarCoordinator: Coordinator {
     
     func prepareChileCoordiantors() {
         let issueCoordinator = IssueCoordinator(window: window, delegate: self)
-//        let milestoneCoordinator = IssueCoordinator(window: window, delegate: self)
+        let milestoneCoordinator = MilestoneCoordinator(window: window, delegate: self)
         
         childCoordinators[TabName.Issue.rawValue] = issueCoordinator
-//        childCoordinators[TabName.Milestone.rawValue] = milestoneCoordinator
+        childCoordinators[TabName.Milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
-//        milestoneCoordinator.start()
+        milestoneCoordinator.start()
     }
 }
 extension MainTabBarCoordinator: MainTabBarDelegate {
@@ -55,15 +55,3 @@ extension MainTabBarCoordinator: MainTabBarDelegate {
     }
 }
 
-//
-//        guard let milestoneViewController = UIStoryboard(name: StoryboardName.Milestone.rawValue, bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
-//            return
-//        }
-//        milestoneViewController.delegate = self
-//        milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
-//        milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
-//
-//        navigationController.viewControllers = [issueViewController]
-//        navigationController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
-//
-//        tabBarController.setViewControllers([navigationController, milestoneViewController], animated: true)
