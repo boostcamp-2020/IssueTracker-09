@@ -10,14 +10,15 @@ import {
   Icon,
   IconBackground,
 } from './styled';
+import { updateTitleAPI } from '../../apis/issue';
 
-const IssueHeader = ({ issue: { title, is_opened } }) => {
+const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
   const [inputValue, setInputValue] = useState(title || '');
   const [state, setState] = useState(false);
   const [issueTitle, setIssueTitle] = useState(title || '');
-  const saveTitleHandler = () => {
-    // API 호출부?
-    if (true) {
+  const saveTitleHandler = async () => {
+    const result = await updateTitleAPI(id, inputValue);
+    if (result) {
       setIssueTitle(inputValue);
     }
     setState(false);
@@ -61,7 +62,7 @@ const IssueHeader = ({ issue: { title, is_opened } }) => {
           <Icon>!</Icon>
           {is_opened ? 'open' : 'close'}
         </IconBackground>
-        <Div padding="5px">joojaewoo created this issue</Div>
+        <Div padding="5px">{User.name} created this issue</Div>
       </FlexDiv>
     </Container>
   );

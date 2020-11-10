@@ -14,14 +14,13 @@ const getCommentAPI = async (id) => {
   }
 };
 
-const createCommentAPI = async (content, userId, issueId) => {
+const createCommentAPI = async (content, issueId) => {
   try {
     await request({
       method: 'POST',
       params: '/comment',
       data: {
         content,
-        userId,
         issueId,
       },
     });
