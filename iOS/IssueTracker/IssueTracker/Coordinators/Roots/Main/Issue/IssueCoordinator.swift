@@ -51,13 +51,9 @@ class IssueCoordinator: Coordinator {
 
 extension IssueCoordinator: IssueNavigationDelegate {
     func navigationToIssueDetail(issue: Issue) {
-        if let issueDetailCoordinator = childCoordinators[ChildCoodinator.IssueDetail.rawValue] {
-            issueDetailCoordinator.start()
-        } else {
-            let child = IssueDetailCoordinator(window: window, parent: navigationController,issue: issue)
-            childCoordinators[ChildCoodinator.IssueDetail.rawValue] = child
-            child.start()
-        }
+        let child = IssueDetailCoordinator(window: window, parent: navigationController,issue: issue)
+        childCoordinators[ChildCoodinator.IssueDetail.rawValue] = child
+        child.start()
     }
 }
 
