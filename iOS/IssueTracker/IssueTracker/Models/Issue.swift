@@ -31,3 +31,16 @@ struct Issue: Codable {
         case labels = "Labels"
     }
 }
+
+extension Issue: Hashable {
+    static func == (rhs: Issue, lhs: Issue) -> Bool {
+        return rhs.id == lhs.id &&
+            rhs.title == lhs.title &&
+            rhs.isOpened == lhs.isOpened &&
+            rhs.timestamp == lhs.timestamp &&
+            rhs.assignees == lhs.assignees &&
+            rhs.milestone == lhs.milestone &&
+            rhs.user == lhs.user &&
+            rhs.labels == lhs.labels
+    }
+}

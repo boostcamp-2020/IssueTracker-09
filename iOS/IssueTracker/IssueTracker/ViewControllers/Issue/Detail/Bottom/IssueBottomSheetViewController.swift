@@ -7,24 +7,46 @@
 
 import UIKit
 
+//protocol Issue
+
 class IssueBottomSheetViewController: UIViewController {
-    let fullView: CGFloat = 100
-    var partialView: CGFloat {
+    @IBOutlet private weak var assigneeView: AssigneeView!
+    @IBOutlet private weak var labelsView: LabelsView!
+    @IBOutlet private weak var milestoneView: MilestoneView!
+    
+    private var issue: Issue?
+    private let fullView: CGFloat = 100
+//    private weak var delegate
+    private var partialView: CGFloat {
         return UIScreen.main.bounds.height - 150
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
-        
-        gesture.delegate = self
-        view.addGestureRecognizer(gesture)
+    
+    init?(coder: NSCoder, issue: Issue) {
+        self.issue = issue
+        super.init(coder: coder)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        prepareBackgroundView()
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
+        gesture.delegate = self
+        view.addGestureRecognizer(gesture)
+        
+        if let user = issue?.user {
+            assigneeView.configure(assignee: user)
+        }
+        
+        if let labels = issue?.labels {
+            labelsView.configure(labels: labels)
+        }
+        
+        if let milestone = issue?.milestone {
+            milestoneView.configure(milestone: milestone)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -33,7 +55,7 @@ class IssueBottomSheetViewController: UIViewController {
         UIView.animate(withDuration: 0.6, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
-            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
+            self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height)
             })
     }
 
@@ -43,7 +65,6 @@ class IssueBottomSheetViewController: UIViewController {
     }
     
     @objc func panGesture(_ recognizer: UIPanGestureRecognizer) {
-        
         let translation = recognizer.translation(in: self.view)
         let velocity = recognizer.velocity(in: self.view)
 
@@ -71,16 +92,6 @@ class IssueBottomSheetViewController: UIViewController {
                     }
             })
         }
-    }
-    
-    private func prepareBackgroundView(){
-        let blurEffect = UIBlurEffect.init(style: .dark)
-        let visualEffect = UIVisualEffectView.init(effect: blurEffect)
-        let bluredView = UIVisualEffectView.init(effect: blurEffect)
-        bluredView.contentView.addSubview(visualEffect)
-        visualEffect.frame = UIScreen.main.bounds
-        bluredView.frame = UIScreen.main.bounds
-        view.insertSubview(bluredView, at: 0)
     }
 }
 

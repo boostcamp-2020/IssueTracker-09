@@ -7,23 +7,30 @@
 
 import UIKit
 
-protocol IssueCoordinatorDelegate: AnyObject {
-    func presentToFilterView()
-}
-
 class IssueViewController: UIViewController {
-    @IBOutlet var tableView: IssueTableView!
-    var delegate: IssueCoordinatorDelegate?
-    var service: IssueService?
-    var checks: [Bool] = [] {
+    typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
+    @IBOutlet private var tableView: IssueTableView!
+    
+    private weak var delegate: IssueCoordinatorDelegate?
+    private let barButtonController = BarButtonController()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var checks: [Bool] = [] {
         didSet {
             if isEditing {
                 setLeftBarButton()
             }
         }
     }
-    let barButtonController = BarButtonController()
-    let searchController = UISearchController(searchResultsController: nil)
+    var service: IssueService?
+    
+    init?(coder: NSCoder, delegate: IssueCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     func setLeftBarButton() {
         let isAllTrue = checks.allSatisfy({ $0 == true })
@@ -89,7 +96,7 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
-        delegate?.presentToFilterView()
+        delegate?.presentToFilter()
     }
     
     @objc func touchedDeselectButton(_ sender: Any) {
@@ -104,6 +111,9 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.button.isSelected = true
         }
         checks = Array(repeating: true, count: service?.count(isFiltering: isFiltering) ?? 0)
+    }
+    @IBAction func touchedAppendButton(_ sender: Any) {
+        delegate?.presentToNew()
     }
 }
 
@@ -139,6 +149,10 @@ extension IssueViewController: UITableViewDataSource {
 extension IssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
+            return
+        }
+        delegate?.navigationToIssueDetail(issue: issue)
     }
 }
 

@@ -24,3 +24,15 @@ struct Milestone: Codable {
         case openCount, totalCount
     }
 }
+
+extension Milestone: Hashable {
+    static func == (rhs: Milestone, lhs: Milestone) -> Bool {
+        return rhs.id == lhs.id &&
+            rhs.title == lhs.title &&
+            rhs.content == lhs.content &&
+            rhs.deadline == lhs.deadline &&
+            rhs.isOpened == lhs.isOpened &&
+            rhs.openCount == lhs.openCount &&
+            rhs.totalCount == lhs.totalCount
+    }
+}

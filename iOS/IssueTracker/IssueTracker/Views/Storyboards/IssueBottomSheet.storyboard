@@ -11,7 +11,7 @@
         <!--Issue Bottom Sheet View Controller-->
         <scene sceneID="44b-bp-yT1">
             <objects>
-                <viewController id="vkS-bw-Ps3" customClass="IssueBottomSheetViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueBottomSheetViewController" id="vkS-bw-Ps3" customClass="IssueBottomSheetViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Vg9-Ks-Vzp">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -87,7 +87,7 @@
                                     <constraint firstAttribute="bottom" secondItem="5XD-BY-bAM" secondAttribute="bottom" constant="10" id="sqT-S2-7aj"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFL-56-RrU" userLabel="AsigneeView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFL-56-RrU" userLabel="AsigneeView" customClass="AssigneeView" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="96" width="414" height="133"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mf-oB-YVv">
@@ -154,8 +154,12 @@
                                     <constraint firstItem="3mf-oB-YVv" firstAttribute="leading" secondItem="yFL-56-RrU" secondAttribute="leading" id="vta-gd-4Tx"/>
                                     <constraint firstItem="vvs-Km-IfO" firstAttribute="top" secondItem="3mf-oB-YVv" secondAttribute="bottom" constant="1" id="zTl-Sc-ETU"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="image" destination="Edw-ZJ-M1E" id="UJ3-ek-WYB"/>
+                                    <outlet property="name" destination="Bvk-Ed-MBy" id="Yux-Bn-gro"/>
+                                </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-LF-ed9" userLabel="LabelView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-LF-ed9" userLabel="LabelView" customClass="LabelsView" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="239" width="414" height="91.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tao-4Q-SiB">
@@ -212,8 +216,11 @@
                                     <constraint firstAttribute="bottom" secondItem="WMC-uV-Z2N" secondAttribute="bottom" id="oSb-e0-okf"/>
                                     <constraint firstAttribute="trailing" secondItem="WMC-uV-Z2N" secondAttribute="trailing" id="zEv-Ce-Hsk"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="label" destination="crZ-7V-NUB" id="YZn-1k-xqn"/>
+                                </connections>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-CF-fiB" userLabel="MilestoneView">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-CF-fiB" userLabel="MilestoneView" customClass="MilestoneView" customModule="IssueTracker" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="340.5" width="414" height="155.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTK-nT-bcm">
@@ -306,6 +313,10 @@
                                     <constraint firstAttribute="trailing" secondItem="whC-Vp-R4V" secondAttribute="trailing" id="c2J-Mk-fX3"/>
                                     <constraint firstItem="whC-Vp-R4V" firstAttribute="top" secondItem="JTK-nT-bcm" secondAttribute="bottom" constant="1" id="xJ6-tm-N5R"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="name" destination="oD0-oJ-utj" id="Ss1-Tn-OYL"/>
+                                    <outlet property="progress" destination="6qd-JE-xoa" id="73G-rI-lIL"/>
+                                </connections>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FC5-Vb-QPA"/>
@@ -318,7 +329,6 @@
                             <constraint firstItem="yFL-56-RrU" firstAttribute="top" secondItem="8e7-xP-yO4" secondAttribute="bottom" id="Hvx-bc-SUV"/>
                             <constraint firstItem="fUH-CF-fiB" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="JKS-s9-unZ"/>
                             <constraint firstItem="dPm-LF-ed9" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="VVg-wK-cy7"/>
-                            <constraint firstItem="8e7-xP-yO4" firstAttribute="top" secondItem="FC5-Vb-QPA" secondAttribute="top" id="XH6-0j-7IY"/>
                             <constraint firstItem="8e7-xP-yO4" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="aGI-2r-bTM"/>
                             <constraint firstItem="dPm-LF-ed9" firstAttribute="trailing" secondItem="FC5-Vb-QPA" secondAttribute="trailing" id="ccS-6E-BVE"/>
                             <constraint firstItem="dPm-LF-ed9" firstAttribute="top" secondItem="yFL-56-RrU" secondAttribute="bottom" constant="10" id="hs2-2H-UGV"/>
@@ -326,12 +336,28 @@
                             <constraint firstItem="FC5-Vb-QPA" firstAttribute="trailing" secondItem="8e7-xP-yO4" secondAttribute="trailing" id="vhI-Nu-bW5"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="assigneeView" destination="yFL-56-RrU" id="arc-wb-Unc"/>
+                        <outlet property="labelsView" destination="dPm-LF-ed9" id="ltc-m0-hlj"/>
+                        <outlet property="milestoneView" destination="fUH-CF-fiB" id="MzH-rs-Xw8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Obp-0q-ven" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="142" y="137"/>
         </scene>
     </scenes>
+    <designables>
+        <designable name="5XD-BY-bAM">
+            <size key="intrinsicContentSize" width="56" height="30"/>
+        </designable>
+        <designable name="76e-JW-gVV">
+            <size key="intrinsicContentSize" width="37" height="32"/>
+        </designable>
+        <designable name="Nqc-dL-I1o">
+            <size key="intrinsicContentSize" width="37" height="32"/>
+        </designable>
+    </designables>
     <resources>
         <image name="arrow.down" catalog="system" width="120" height="128"/>
         <image name="arrow.up" catalog="system" width="120" height="128"/>

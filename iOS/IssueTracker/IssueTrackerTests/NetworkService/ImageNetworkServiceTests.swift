@@ -10,7 +10,7 @@ import XCTest
 
 class ImageNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 5
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0NTYwNjIxfQ.9ArX8vJLN6GuseS5tnDr3f_iH2Z925f6Iy68jHrijpo"
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTYwNDkzNDM2N30.ME-ENY-pPQmKVjpii2D65LMV1lV3FrwZuKq6hSheIAE"
     static var originalToken: String?
     
     override class func setUp() {

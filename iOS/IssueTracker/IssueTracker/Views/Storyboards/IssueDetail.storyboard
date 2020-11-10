@@ -12,7 +12,7 @@
         <!--Issue Detail View Controller-->
         <scene sceneID="09i-JC-3iv">
             <objects>
-                <viewController id="uh0-cp-Bqz" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueDetailViewController" id="uh0-cp-Bqz" customClass="IssueDetailViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="rkC-Q0-T95">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contentCell" id="ayp-Xh-6v4">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="contentCell" id="ayp-Xh-6v4" customClass="IssueContentCollectionViewCell" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="163"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="x2n-5c-qJl">
@@ -111,8 +111,15 @@
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <size key="customSize" width="414" height="163"/>
+                                        <connections>
+                                            <outlet property="content" destination="awM-oK-f82" id="6ei-SF-Pe4"/>
+                                            <outlet property="name" destination="3W7-TS-rwZ" id="Lhl-6e-u5C"/>
+                                            <outlet property="number" destination="d93-pH-OlO" id="WTC-I6-om1"/>
+                                            <outlet property="profile" destination="fdg-fQ-Pjx" id="Yv6-lw-ecf"/>
+                                            <outlet property="status" destination="A5I-tk-t0L" id="S8d-dl-eJg"/>
+                                        </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="commentCell" id="H1v-pC-JWe">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="commentCell" id="H1v-pC-JWe" customClass="IssueCommentCollectionViewCell" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="173" width="414" height="320"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Jnb-fr-a1s">
@@ -141,14 +148,17 @@
                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TvL-uh-kka">
                                                                     <rect key="frame" x="61.5" y="10" width="293.5" height="41.5"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" ambiguous="YES" text="BoostCamper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDI-Y4-yA9">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="20.5"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="BoostCamper" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iDI-Y4-yA9">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="293.5" height="27"/>
                                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" ambiguous="YES" text="2020년 11월 5일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wi9-sa-Ksp">
-                                                                            <rect key="frame" x="0.0" y="20.5" width="293.5" height="21"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="2020년 11월 5일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wi9-sa-Ksp">
+                                                                            <rect key="frame" x="0.0" y="27" width="293.5" height="14.5"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="14.5" id="W4x-vg-Cng"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" systemColor="systemGrayColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -212,12 +222,14 @@
                                             </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="comment" destination="g94-O0-Hyf" id="Afu-Ng-gFi"/>
+                                            <outlet property="date" destination="Wi9-sa-Ksp" id="32p-Nv-pYi"/>
+                                            <outlet property="name" destination="iDI-Y4-yA9" id="vbi-Q4-h3W"/>
+                                            <outlet property="profile" destination="zGz-2v-oIr" id="CQp-UR-Y3V"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
-                                <connections>
-                                    <outlet property="dataSource" destination="uh0-cp-Bqz" id="aWA-3I-Kb2"/>
-                                    <outlet property="delegate" destination="uh0-cp-Bqz" id="ZCZ-tX-yia"/>
-                                </connections>
                             </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="cIc-qU-YQN"/>
@@ -230,7 +242,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionView" destination="Yjx-av-H83" id="lKp-8V-B0e"/>
+                        <outlet property="collectionView" destination="Yjx-av-H83" id="hL0-HG-3t1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1Gg-np-Qtk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

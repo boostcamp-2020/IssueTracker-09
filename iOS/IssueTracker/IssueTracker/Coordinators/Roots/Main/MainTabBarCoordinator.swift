@@ -7,20 +7,19 @@
 
 import UIKit
 
+protocol MainTabBarDelegate: AnyObject {
+    func setViewController(_ viewController: UIViewController, name: TabName)
+}
+
+enum TabName: String {
+    case Issue, Milestone
+}
+
 class MainTabBarCoordinator: Coordinator {
-    private enum StoryboardName: String {
-        case Issue, Milestone
-    }
-    
-    private enum ChildName: String {
-        case Filter
-    }
-    
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String: ChildCoordinator] = [: ]
+    private(set) var childCoordinators: [String: Coordinator] = [: ]
     
     private let tabBarController = UITabBarController()
-    private let navigationController = UINavigationController()
     private weak var delegate: RootCoordinateControllerDelegate?
     
     init(window: UIWindow, delegate: RootCoordinateControllerDelegate) {
@@ -29,47 +28,42 @@ class MainTabBarCoordinator: Coordinator {
     }
     
     func start() {
-        makePage()
         window.rootViewController = tabBarController
+        prepareChileCoordiantors()
         window.makeKeyAndVisible()
     }
     
-    func makePage() {
-        guard let issueViewController = UIStoryboard(name: StoryboardName.Issue.rawValue, bundle: nil).instantiateInitialViewController() as? IssueViewController else {
-            return
-        }
-        issueViewController.delegate = self
-        issueViewController.service = IssueCacheService(delegate: issueViewController)
+    func prepareChileCoordiantors() {
+        let issueCoordinator = IssueCoordinator(window: window, delegate: self)
+//        let milestoneCoordinator = IssueCoordinator(window: window, delegate: self)
         
-        guard let milestoneViewController = UIStoryboard(name: StoryboardName.Milestone.rawValue, bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
-            return
+        childCoordinators[TabName.Issue.rawValue] = issueCoordinator
+//        childCoordinators[TabName.Milestone.rawValue] = milestoneCoordinator
+        issueCoordinator.start()
+//        milestoneCoordinator.start()
+    }
+}
+extension MainTabBarCoordinator: MainTabBarDelegate {
+    func setViewController(_ viewController: UIViewController, name: TabName) {
+        switch name {
+        case .Issue:
+            viewController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
+        case .Milestone:
+            viewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
         }
-        milestoneViewController.delegate = self
-        milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
-        milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
-        
-        navigationController.viewControllers = [issueViewController]
-        navigationController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
-
-        tabBarController.setViewControllers([navigationController, milestoneViewController], animated: true)
+        tabBarController.addChild(viewController)
     }
 }
 
-extension MainTabBarCoordinator: MilestoneViewControllerDelegate {
-    func moveToMilestone() {
-        
-    }
-}
-
-extension MainTabBarCoordinator: IssueCoordinatorDelegate {
-    func presentToFilterView() {
-        if let filterCoordinator = childCoordinators[ChildName.Filter.rawValue] {
-            filterCoordinator.start()
-        } else {
-            let child = FilterCoordinator(window: window, parent: navigationController)
-            childCoordinators[ChildName.Filter.rawValue] = child
-            child.start()
-        }
-    }
-}
-
+//
+//        guard let milestoneViewController = UIStoryboard(name: StoryboardName.Milestone.rawValue, bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
+//            return
+//        }
+//        milestoneViewController.delegate = self
+//        milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
+//        milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
+//
+//        navigationController.viewControllers = [issueViewController]
+//        navigationController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
+//
+//        tabBarController.setViewControllers([navigationController, milestoneViewController], animated: true)

@@ -20,22 +20,22 @@ class FilterSearchViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
     private var type: SearchType?
-    
+
     enum Section: CaseIterable {
         case main
     }
-    
+
     init?(coder: NSCoder, delegate: SearchViewControllerDelegate, type: SearchType) {
         self.delegate = delegate
         searchController = SearchController(type: type)
         super.init(coder: coder)
         self.type = type
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
@@ -44,15 +44,15 @@ class FilterSearchViewController: UIViewController {
             self?.performQuery(with: nil)
         }
     }
-    
+
     @IBAction func didBackButtonTapped(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
-    
+
     @IBAction func didDoneButtonTapped(_ sender: UIButton) {
         // TODO 네트워크 연결해서 fetch 받아오는 기능 추가
     }
-    
+
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
     }
@@ -70,14 +70,14 @@ extension FilterSearchViewController {
                 cell.accessories = []
             }
         }
-        
+
         dataSource = UICollectionViewDiffableDataSource<Section, SearchController.Element>(collectionView: collectionView) {
             (collectionView: UICollectionView, indexPath: IndexPath, identifier: SearchController.Element) -> UICollectionViewCell? in
             // Return the cell.
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
         }
     }
-    
+
     func performQuery(with filter: String?) {
         guard let elements = searchController?.filteredElements(with: filter)
                 .sorted(by: { $0.name < $1.name }) else {
@@ -94,7 +94,7 @@ extension FilterSearchViewController {
 extension FilterSearchViewController {
     func createLayout() -> UICollectionViewLayout {
         let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
+                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
 
             let contentSize = layoutEnvironment.container.effectiveContentSize
             let columns = contentSize.width > 800 ? 3 : 2
@@ -131,7 +131,7 @@ extension FilterSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         performQuery(with: searchText)
     }
-    
+
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
@@ -144,14 +144,13 @@ extension FilterSearchViewController: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
             return
         }
-        
+
         var newData = data
         newData.checkable = !data.checkable
-        
+
         var newSnapshot = dataSource.snapshot()
         newSnapshot.insertItems([newData], beforeItem: data)
         newSnapshot.deleteItems([data])
         dataSource.apply(newSnapshot)
     }
 }
-
