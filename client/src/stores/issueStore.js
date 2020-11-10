@@ -2,8 +2,6 @@ import React, { createContext, useReducer } from 'react';
 import PropTypes from 'prop-types';
 import { getListAPI } from '../apis/issue';
 
-import { createCommentAPI } from '../apis/comment';
-
 const initialState = {
   search: undefined,
   list: [],
@@ -37,7 +35,6 @@ const IssueProvider = ({ children }) => {
     getList: async (search, flag = false) => {
       if (issueState.search !== search || flag) {
         const { issues } = await getListAPI(search);
-        console.log(await createCommentAPI('hello', 2, 3));
         dispatch({ type: GET_LIST, issues, search });
       }
     },
