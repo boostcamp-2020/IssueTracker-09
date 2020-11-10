@@ -7,12 +7,16 @@ import { Container, Top, Bottom } from './styled';
 import { getIssueByIdAPI } from '../../apis/issue';
 
 const IssueDetail = () => {
-  const [issue, setIssue] = useState(null);
+  const [issue, setIssue] = useState({});
   const param = useParams();
 
-  useEffect(async () => {
+  const getIssue = async () => {
     const result = await getIssueByIdAPI(param.id);
     setIssue(result);
+  };
+
+  useEffect(async () => {
+    await getIssue();
   }, []);
 
   return (
@@ -21,7 +25,11 @@ const IssueDetail = () => {
         <IssueHeader issue={issue} id={param.id} />
       </Top>
       <Bottom>
-        <IssueComment id={param.id} />
+        <IssueComment
+          id={param.id}
+          getIssue={getIssue}
+          isOpen={issue?.is_opened}
+        />
         <IssueSidebar issue={issue} />
       </Bottom>
     </Container>
