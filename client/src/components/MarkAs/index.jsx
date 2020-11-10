@@ -1,19 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Div, ListItem, Name, Modal } from './styled';
 import closeOrOpen from '../../apis/open-close';
 import { IssueContext } from '../../stores/issueStore';
 
-const MarkAs = ({ checked }) => {
+const MarkAs = ({ checked, checkHandler }) => {
   const {
     issueState: { search },
-    issueAction: { getList }
+    issueAction: { getList },
   } = useContext(IssueContext);
 
   const clickHandler = async (isOpened) => {
     const result = await closeOrOpen(checked, isOpened);
-    
-    if( result ){
-        getList(search, true);
+
+    if (result) {
+      checkHandler([]);
+      getList(search, true);
     }
   };
 
