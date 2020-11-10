@@ -38,6 +38,7 @@ const updateAssigneesAPI = async (id, checked, unchecked) => {
         unchecked,
       },
     });
+
     return true;
   } catch (error) {
     return false;
@@ -53,10 +54,35 @@ const updateMilestoneAPI = async (id, milestoneId) => {
         milestoneId,
       },
     });
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
+const updateLabelsAPI = async (id, checked, unchecked) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/issue/labels/${id}`,
+      data: {
+        checked,
+        unchecked,
+      },
+    });
+
+    return true;
   } catch (error) {
     return false;
   }
 };
 
 // export default getIssueByIdAPI;
-export { getListAPI, getIssueByIdAPI, updateAssigneesAPI, updateMilestoneAPI };
+export {
+  getListAPI,
+  getIssueByIdAPI,
+  updateAssigneesAPI,
+  updateMilestoneAPI,
+  updateLabelsAPI,
+};
