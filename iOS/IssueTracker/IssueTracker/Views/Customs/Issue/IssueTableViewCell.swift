@@ -16,6 +16,8 @@ class IssueTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var badgeStackView: UIStackView!
     @IBOutlet weak var wrapperStackView: UIStackView!
+    @IBOutlet weak var openButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     weak var delegate: IssueCellDelegate?
     
     override func prepareForReuse() {
@@ -25,9 +27,18 @@ class IssueTableViewCell: UITableViewCell {
     
     func configure(issue: Issue, isCheck: Bool) {
         titleLabel.text = issue.title
-//        if let title = issue.milestoneID?.title {
-//            badgeStackView.addArrangedSubview(makeBadgeView(content: title, color: .systemGray))
-//        }
+        
+        if issue.isOpened {
+            openButton.isHidden = false
+            closeButton.isHidden = true
+        } else {
+            openButton.isHidden = true
+            closeButton.isHidden = false
+        }
+        
+        if let milestone = issue.milestone?.title {
+            badgeStackView.addArrangedSubview(makeBadgeView(content: milestone, color: .systemGray))
+        }
         
         issue.labels?.forEach { label in
             badgeStackView.addArrangedSubview(
