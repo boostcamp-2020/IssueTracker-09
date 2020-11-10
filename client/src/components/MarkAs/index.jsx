@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Div, ListItem, Name, Modal } from './styled';
-import closeOrOpen from '../../apis/open-close';
+import updateState from '../../apis/issue';
 import { IssueContext } from '../../stores/issueStore';
 
 const MarkAs = ({ checked, checkHandler }) => {
@@ -10,7 +10,7 @@ const MarkAs = ({ checked, checkHandler }) => {
   } = useContext(IssueContext);
 
   const clickHandler = async (isOpened) => {
-    const result = await closeOrOpen(checked, isOpened);
+    const result = await updateState(checked, isOpened);
 
     if (result) {
       checkHandler([]);
