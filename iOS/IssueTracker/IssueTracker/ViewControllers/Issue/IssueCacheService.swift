@@ -27,15 +27,29 @@ class IssueCacheService: IssueService {
     
     func changeStatus(at indexPath: IndexPath) {
         networkService.modifyIssueStatus(of: issues[indexPath.item]) { [weak self] result in
-            if let result = try? result.get(), result {
+            switch result {
+            case .success(let response):
+                guard response else {
+                    self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: "잠시후 다시 시도하세요", handler: nil)
+                    return
+                }
                 self?.delegate?.didDataLoaded(at: indexPath)
+            case .failure(let error):
+                self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: error.localizedDescription, handler: nil)
             }
         }
     }
     func reloadData() {
         networkService.fetchIssues { [weak self] result in
-            self?.issues = (try? result.get().issues) ?? []
-            self?.delegate?.didDataLoaded(at: nil)
+            switch result {
+            case .success(let issues):
+                self?.issues = issues.issues
+                self?.delegate?.didDataLoaded(at: nil)
+            case .failure(let error):
+                self?.delegate?.didErrorReceived(title: "이슈 목록 조회 실패", message: error.localizedDescription) {
+                    self?.reloadData()
+                }
+            }
         }
     }
     

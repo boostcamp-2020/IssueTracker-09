@@ -84,7 +84,8 @@ class IssueAppendViewController: UIViewController {
                 handler()
             case .failure(let error):
                 self?.activityIndicator.stopAnimating()
-                self?.presentErrorAlert(title: "댓글 추가 실패", message: error.localizedDescription)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "댓글 추가 실패", message: error.localizedDescription)
+                self?.present(alert, animated: true, completion: nil)
                 break
             }
         }
@@ -98,7 +99,8 @@ class IssueAppendViewController: UIViewController {
                 handler(issue)
             case .failure(let error):
                 self?.activityIndicator.stopAnimating()
-                self?.presentErrorAlert(title: "이슈 추가 실패", message: error.localizedDescription)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이슈 추가 실패", message: error.localizedDescription)
+                self?.present(alert, animated: true, completion: nil)
                 break
             }
         }

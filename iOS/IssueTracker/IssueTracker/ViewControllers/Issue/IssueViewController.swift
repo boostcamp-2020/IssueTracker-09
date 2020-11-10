@@ -178,6 +178,13 @@ extension IssueViewController: IssueServiceDelegate {
         
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
+    
+    func didErrorReceived(title: String, message: String, handler: (() -> Void)? = nil) {
+        let alert = AlertControllerFactory.shared.makeSimpleAlert(title: title, message: message) {_ in
+            handler?()
+        }
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension IssueViewController: UISearchResultsUpdating {
