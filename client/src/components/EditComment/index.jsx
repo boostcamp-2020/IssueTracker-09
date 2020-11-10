@@ -4,6 +4,7 @@ import { Textarea, WriteBox } from './styled';
 
 const EditComment = ({ comment, action, update }) => {
   const [inputValue, setInputvalue] = useState(comment);
+
   return (
     <WriteBox>
       <div>write</div>

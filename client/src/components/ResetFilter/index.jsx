@@ -7,6 +7,7 @@ const ResetFilter = () => {
   const {
     issueState: { search },
   } = useContext(IssueContext);
+
   return (
     <Container>
       {search !== 'is:open' ? (
