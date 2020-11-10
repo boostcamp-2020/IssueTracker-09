@@ -2,6 +2,7 @@
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -34,7 +35,9 @@ const Issues = ({ issue, checkedHandler, checked }) => {
       <Issue>
         <Top>
           <Closed isOpened={issue.is_opened}>!</Closed>
-          <Title>{issue.title}</Title>
+          <Link to={`/issues/${issue.id}`}>
+            <Title>{issue.title}</Title>
+          </Link>
           {issue.Labels.map((label, index) => (
             <Label key={`label${index}`} color={label.color}>
               {label.title}

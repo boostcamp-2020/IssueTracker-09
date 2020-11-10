@@ -47,7 +47,6 @@ const updateState = async (checked, state) => {
 
 const updateAssigneeAPI = async (id, assigneeId, joined) => {
   try {
-    console.log(id, assigneeId, joined);
     await request({
       method: 'PUT',
       params: `/issue/assignee/${id}`,
@@ -111,7 +110,6 @@ const updateTitleAPI = async (id, title) => {
   }
 };
 
-// export default getIssueByIdAPI;
 export {
   getListAPI,
   getIssueByIdAPI,
