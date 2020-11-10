@@ -79,7 +79,20 @@ const updateLabelAPI = async (id, labelId, joined) => {
   }
 };
 
-const updateTitleAPI = async () => {};
+const updateTitleAPI = async (id, title) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/issue/title/${id}`,
+      data: {
+        title,
+      },
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
 
 // export default getIssueByIdAPI;
 export {
@@ -88,4 +101,5 @@ export {
   updateAssigneeAPI,
   updateMilestoneAPI,
   updateLabelAPI,
+  updateTitleAPI,
 };

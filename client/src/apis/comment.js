@@ -15,5 +15,21 @@ const getCommentAPI = async (id) => {
   }
 };
 
+const updateCommentAPI = async (id, content) => {
+  try {
+    await request({
+      method: 'PUT',
+      params: `/comment/${id}`,
+      data: {
+        content,
+      },
+    });
+
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
+
 // export default getIssueByIdAPI;
-export default getCommentAPI;
+export { getCommentAPI, updateCommentAPI };
