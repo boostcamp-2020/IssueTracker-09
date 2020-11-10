@@ -158,22 +158,21 @@ module.exports = {
     return { error: 'Issue 상태 변경 실패' };
   },
 
-  updateAssignee: async ({ id, assigneeId } = {}) => {
-    if (!id || !assigneeId) {
+  updateAssignee: async ({ id, assigneeId, joined } = {}) => {
+    console.log(id, assigneeId);
+    if (!id || !assigneeId || joined === undefined) {
       return { error: '정보가 부족합니다' };
     }
     const issue = await Model.Issue.findOne({ where: { id } });
     if (!issue) {
       return { error: '이슈가 없습니다' };
     }
-
-    const [assignee] = await issue.getIssues({ where: { id: assigneeId } });
-
-    if (assignee) {
-      await issue.removeIssue(assigneeId);
+    if (joined) {
+      await issue.addAssignees(assigneeId);
       return { response: true };
     }
-    await issue.addIssue(assigneeId);
+
+    await issue.removeAssignees(assigneeId);
     return { response: true };
   },
 
@@ -219,7 +218,7 @@ module.exports = {
     }
   },
 
-  updateLabel: async ({ id, labelId } = {}) => {
+  updateLabel: async ({ id, labelId, joined } = {}) => {
     if (!id || !labelId) {
       return { error: '정보가 부족합니다' };
     }
@@ -227,14 +226,19 @@ module.exports = {
     if (!issue) {
       return { error: '이슈가 없습니다' };
     }
-
     const [label] = await issue.getLabels({ where: { id: labelId } });
+    if (label && joined) {
+      return { error: '라벨이 이미 등록되었습니다.' };
+    }
+    if (!label && !joined) {
+      return { error: '라벨이 존재하지 않습니다.' };
+    }
 
-    if (label) {
-      await issue.removeLabel(labelId);
+    if (joined) {
+      await issue.addLabel(labelId);
       return { response: true };
     }
-    await issue.addLabel(labelId);
+    await issue.removeLabel(labelId);
     return { response: true };
   },
 };
