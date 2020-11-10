@@ -10,8 +10,6 @@ router.get('/', issueController.read);
 
 router.get('/:id', issueController.readById);
 
-router.get('/comments');
-
 router.post('/', issueController.create);
 
 router.put('/title/:id', issueController.updateTitle);

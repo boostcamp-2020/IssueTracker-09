@@ -158,22 +158,21 @@ module.exports = {
     return { error: 'Issue 상태 변경 실패' };
   },
 
-  updateAssignee: async ({ id, assigneeId } = {}) => {
-    if (!id || !assigneeId) {
+  updateAssignee: async ({ id, assigneeId, joined } = {}) => {
+    console.log(id, assigneeId);
+    if (!id || !assigneeId || joined === undefined) {
       return { error: '정보가 부족합니다' };
     }
     const issue = await Model.Issue.findOne({ where: { id } });
     if (!issue) {
       return { error: '이슈가 없습니다' };
     }
-
-    const [assignee] = await issue.getIssues({ where: { id: assigneeId } });
-
-    if (assignee) {
-      await issue.removeIssue(assigneeId);
+    if (joined) {
+      await issue.addAssignees(assigneeId);
       return { response: true };
     }
-    await issue.addIssue(assigneeId);
+
+    await issue.removeAssignees(assigneeId);
     return { response: true };
   },
 
