@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { ListItem, Name } from './styled';
+import { Div, ListItem, Name, Modal } from './styled';
 import closeOrOpen from '../../apis/open-close';
 import { IssueContext } from '../../stores/issueStore';
 
@@ -15,12 +15,11 @@ const MarkAs = ({ checked }) => {
     if( result ){
         getList(search, true);
     }
-
   };
 
   return (
-    <>
-      <div
+    <Modal>
+      <Div
         onClick={() => {
           clickHandler(true);
         }}
@@ -28,8 +27,8 @@ const MarkAs = ({ checked }) => {
         <ListItem>
           <Name>open</Name>
         </ListItem>
-      </div>
-      <div
+      </Div>
+      <Div
         onClick={() => {
           clickHandler(false);
         }}
@@ -37,8 +36,8 @@ const MarkAs = ({ checked }) => {
         <ListItem>
           <Name>close</Name>
         </ListItem>
-      </div>
-    </>
+      </Div>
+    </Modal>
   );
 };
 
