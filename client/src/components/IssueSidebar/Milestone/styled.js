@@ -27,3 +27,12 @@ export const Span = styled.span`
   padding-left: 10px;
   color: gray;
 `;
+
+export const Delete = styled.span`
+  font-size: 11px;
+  padding-left: 10px;
+  cursor: pointer;
+  &:hover {
+    color: gray;
+  }
+`;
