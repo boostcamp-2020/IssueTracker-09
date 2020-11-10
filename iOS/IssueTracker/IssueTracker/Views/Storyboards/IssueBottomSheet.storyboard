@@ -17,10 +17,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8e7-xP-yO4" userLabel="ButtonBar">
-                                <rect key="frame" x="0.0" y="44" width="414" height="52"/>
+                                <rect key="frame" x="0.0" y="54" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5XD-BY-bAM" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="10" y="10" width="305" height="32"/>
+                                        <rect key="frame" x="10" y="10" width="305" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <state key="normal" title="댓글 달기"/>
                                         <userDefinedRuntimeAttributes>
@@ -33,7 +33,7 @@
                                         </userDefinedRuntimeAttributes>
                                     </button>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A5E-9d-9o1">
-                                        <rect key="frame" x="325" y="10" width="79" height="32"/>
+                                        <rect key="frame" x="325" y="8" width="79" height="32"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="76e-JW-gVV" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="37" height="32"/>
@@ -78,7 +78,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="A5E-9d-9o1" firstAttribute="top" secondItem="8e7-xP-yO4" secondAttribute="top" constant="10" id="5BK-s2-6QK"/>
                                     <constraint firstItem="A5E-9d-9o1" firstAttribute="leading" secondItem="5XD-BY-bAM" secondAttribute="trailing" constant="10" id="A9h-hE-5NO"/>
                                     <constraint firstItem="5XD-BY-bAM" firstAttribute="top" secondItem="8e7-xP-yO4" secondAttribute="top" constant="10" id="bGM-OB-eRL"/>
                                     <constraint firstAttribute="bottom" secondItem="A5E-9d-9o1" secondAttribute="bottom" constant="10" id="f1C-tK-XVm"/>
@@ -88,7 +87,7 @@
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yFL-56-RrU" userLabel="AsigneeView" customClass="AssigneeView" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="96" width="414" height="133"/>
+                                <rect key="frame" x="0.0" y="104" width="414" height="133"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3mf-oB-YVv">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -160,7 +159,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPm-LF-ed9" userLabel="LabelView" customClass="LabelsView" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="239" width="414" height="91.5"/>
+                                <rect key="frame" x="0.0" y="247" width="414" height="91.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tao-4Q-SiB">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -221,7 +220,7 @@
                                 </connections>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fUH-CF-fiB" userLabel="MilestoneView" customClass="MilestoneView" customModule="IssueTracker" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="340.5" width="414" height="155.5"/>
+                                <rect key="frame" x="0.0" y="348.5" width="414" height="155.5"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JTK-nT-bcm">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
@@ -322,12 +321,12 @@
                         <viewLayoutGuide key="safeArea" id="FC5-Vb-QPA"/>
                         <color key="backgroundColor" systemColor="systemGray5Color"/>
                         <constraints>
-                            <constraint firstItem="8e7-xP-yO4" firstAttribute="top" secondItem="FC5-Vb-QPA" secondAttribute="top" id="1QU-M5-59l"/>
                             <constraint firstItem="fUH-CF-fiB" firstAttribute="top" secondItem="dPm-LF-ed9" secondAttribute="bottom" constant="10" id="5Kr-7v-iqw"/>
                             <constraint firstItem="yFL-56-RrU" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="7xp-F2-u5h"/>
                             <constraint firstItem="FC5-Vb-QPA" firstAttribute="trailing" secondItem="yFL-56-RrU" secondAttribute="trailing" id="Gqx-Q1-ggG"/>
                             <constraint firstItem="yFL-56-RrU" firstAttribute="top" secondItem="8e7-xP-yO4" secondAttribute="bottom" id="Hvx-bc-SUV"/>
                             <constraint firstItem="fUH-CF-fiB" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="JKS-s9-unZ"/>
+                            <constraint firstItem="8e7-xP-yO4" firstAttribute="top" secondItem="FC5-Vb-QPA" secondAttribute="top" constant="10" id="MYz-VN-tgm"/>
                             <constraint firstItem="dPm-LF-ed9" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="VVg-wK-cy7"/>
                             <constraint firstItem="8e7-xP-yO4" firstAttribute="leading" secondItem="FC5-Vb-QPA" secondAttribute="leading" id="aGI-2r-bTM"/>
                             <constraint firstItem="dPm-LF-ed9" firstAttribute="trailing" secondItem="FC5-Vb-QPA" secondAttribute="trailing" id="ccS-6E-BVE"/>
