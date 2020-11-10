@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Assignee: Codable {
-    let assignee: [User]
+struct Assignees: Codable {
+    let assignees: [User]
+    
+    enum CodingKeys: String, CodingKey {
+        case assignees = "assignee"
+    }
     
     func find(id: Int) -> User? {
-        for user in assignee {
+        for user in assignees {
             if user.id == id {
                 return user
             }
