@@ -72,8 +72,8 @@ const SelectMenu = ({ title, data }) => {
                 {item.title ? <Name>{item.title}</Name> : ''}
               </ListItem>
             </Link>
-          );
-        })}
+          )}
+        )}
       </Div>
     </Modal>
   );

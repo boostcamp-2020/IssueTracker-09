@@ -1,3 +1,4 @@
+// eslint-disable-import/prefer-default-export
 import styled from 'styled-components';
 
 const Div = styled.div`
@@ -10,6 +11,12 @@ const Div = styled.div`
   border: ${(props) => props.border};
 `;
 
+const Details = styled.details`
+  padding: 10px;
+  summary::-webkit-details-marker {
+    display: none;
+  }
+`;
 
 const IssueMark = styled.div`
   width: 15px;
@@ -34,5 +41,4 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export { Div, Container, IssueMark };
-
+export { Div, Container, IssueMark, Details };

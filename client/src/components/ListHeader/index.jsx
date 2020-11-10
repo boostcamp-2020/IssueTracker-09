@@ -1,11 +1,14 @@
+/* eslint-disable import/named */
+/* eslint-disable import/no-named-as-default */
+/* eslint-disable import/no-named-as-default-member */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/self-closing-comp */
 import React, { useContext } from 'react';
-
 import { Link } from 'react-router-dom';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Div, IssueMark, Container } from './styled';
+import { Div, IssueMark, Container, Details } from './styled';
+import MarkAs from '../MarkAs';
 import { IssueContext } from '../../stores/issueStore';
 import DropDown from '../Dropdown';
 import { getUsersAPI } from '../../apis/user';
@@ -40,9 +43,18 @@ const ListHeader = ({ checkedHandler, checked }) => {
       </Div>
       <Div width="100%">
         {checked.length ? (
-          <Div padding="10px" width="150px">
+           <Div padding="10px" width="150px">
             {checked.length} selected
           </Div>
+          <Div padding="10px"> {checked.length} selected</Div>
+            <Div width="100%" align="flex-end">
+              <Details>
+                <summary>Mark as</summary>
+                <Div position="absolute">
+                  <MarkAs checked={checked} />
+                </Div>
+              </Details>
+            </Div>
         ) : (
           <Div padding="10px 0px">
             <Link to={makeSearch(`is:open`, search)}>
@@ -58,13 +70,14 @@ const ListHeader = ({ checkedHandler, checked }) => {
               </Div>
             </Link>
           </Div>
-        )}
-        <Div width="100%" align="flex-end">
-          <DropDown title="Author" action={getUsersAPI} />
-          <DropDown title="Label" action={getLabelsAPI} />
-          <DropDown title="Milestone" action={getMilestonesAPI} />
-          <DropDown title="Assignee" action={getUsersAPI} />
-        </Div>
+            <Div width="100%" align="flex-end">
+              <DropDown title="Author" action={getUsersAPI} />
+              <DropDown title="Label" action={getLabelsAPI} />
+              <DropDown title="Milestone" action={getMilestonesAPI} />
+              <DropDown title="Assignee" action={getUsersAPI} />
+            </Div>
+          </Div>
+          )}
       </Div>
     </Container>
   );

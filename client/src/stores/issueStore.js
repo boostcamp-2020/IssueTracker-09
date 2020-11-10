@@ -32,8 +32,8 @@ const IssueProvider = ({ children }) => {
   const [issueState, dispatch] = useReducer(IssueReducer, initialState);
 
   const issueAction = {
-    getList: async (search) => {
-      if (issueState.search !== search) {
+    getList: async (search, flag = false) => {
+      if (issueState.search !== search || flag) {
         const { issues } = await getListAPI(search);
         dispatch({ type: GET_LIST, issues, search });
       }
