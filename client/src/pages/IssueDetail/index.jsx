@@ -18,10 +18,10 @@ const IssueDetail = () => {
   return (
     <Container>
       <Top>
-        <IssueHeader />
+        <IssueHeader issue={issue} id={param.id} />
       </Top>
       <Bottom>
-        <IssueComment />
+        <IssueComment id={param.id} />
         <IssueSidebar issue={issue} />
       </Bottom>
     </Container>
