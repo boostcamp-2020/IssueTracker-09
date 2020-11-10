@@ -15,7 +15,7 @@ class IssueSectionHeader: UICollectionReusableView {
     func configure(key: EditKey) {
         self.key = key
         
-        switch self.key {
+        switch key {
         case .assignee:
             title.text = "담당자"
         case .label:

@@ -19,22 +19,18 @@ class IssueBottomSheetViewController: UIViewController {
             let wideMode = width > 800
             switch self {
             case .assignees:
-                return wideMode ? 10 : 5
-                
+                return wideMode ? 4 : 2
             case .labels:
                 return wideMode ? 6 : 3
-                
             case .milestone:
                 return wideMode ? 2 : 1
             }
         }
     }
     
-    @IBOutlet private weak var assigneeView: AssigneeView!
-    @IBOutlet private weak var labelsView: LabelsView!
-    @IBOutlet private weak var milestoneView: MilestoneView!
+    @IBOutlet weak var collectionView: UICollectionView!
     
-//    private var dataSource: UICollectionViewDiffableDataSource<Section, Any>! = nil
+    private var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
     private weak var delegate: IssueEditDelegate?
     
     let fullView: CGFloat = 100
@@ -60,17 +56,8 @@ class IssueBottomSheetViewController: UIViewController {
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
         
-        if let user = issue?.user {
-            assigneeView.configure(assignee: user)
-        }
-        
-        if let labels = issue?.labels {
-            labelsView.configure(labels: labels)
-        }
-        
-        if let milestone = issue?.milestone {
-            milestoneView.configure(milestone: milestone)
-        }
+        collectionView.collectionViewLayout = createLayout()
+        configureDataSource()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -115,13 +102,13 @@ extension IssueBottomSheetViewController {
             let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: columns)
             
             let section = NSCollectionLayoutSection(group: group)
-            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
+//            section.contentInsets = NSDirectionalEdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20)
             
             
             let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
                 layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                    heightDimension: .estimated(44)),
-                elementKind: "IssueDetailHeader",
+                elementKind: UICollectionView.elementKindSectionHeader,
                 alignment: .top)
             
             sectionHeader.pinToVisibleBounds = false
@@ -134,18 +121,61 @@ extension IssueBottomSheetViewController {
     }
     
     func configureDataSource() {
-        let headerRegistration = UICollectionView.SupplementaryRegistration
-        <IssueSectionHeader>(elementKind: "IssueDetailHeader") { (supplementaryView, string, indexPath) in
-            switch Section(rawValue: indexPath.section) {
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
+            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+            guard let section = Section(rawValue: indexPath.section) else { return nil }
+            
+            switch section {
             case .assignees:
-                supplementaryView.configure(key: .assignee)
+                guard let assignees = self.issue?.assignees,
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssigneeCell", for: indexPath) as? AssigneeCell else { return UICollectionViewCell() }
+                cell.configure(assignee: assignees[identifier])
+                return cell
             case .labels:
-                supplementaryView.configure(key: .label)
+                guard let labels = self.issue?.labels,
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCell", for: indexPath) as? LabelCell else { return UICollectionViewCell() }
+                cell.configure(label: labels[identifier])
+                return cell
             case .milestone:
-                supplementaryView.configure(key: .milestone)
-            default:
-                return
+                guard let milestone = self.issue?.milestone,
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MilestoneCell", for: indexPath) as? MilestoneCell else { return UICollectionViewCell() }
+                cell.configure(milestone: milestone)
+                return cell
             }
         }
+        
+        dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
+            guard let section = Section(rawValue: indexPath.section),
+                let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueSectionHeader", for: indexPath) as? IssueSectionHeader else {
+                return UICollectionReusableView()
+            }
+            
+            switch section {
+            case .assignees:
+                sectionHeader.configure(key: .assignee)
+            case .labels:
+                sectionHeader.configure(key: .label)
+            case .milestone:
+                sectionHeader.configure(key: .milestone)
+            }
+            return sectionHeader
+        }
+        
+        // initial data
+        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        Section.allCases.forEach {
+            snapshot.appendSections([$0])
+            var count = 0
+            switch $0 {
+            case .assignees:
+                count = issue?.assignees?.count ?? 0
+            case .labels:
+                count = issue?.labels?.count ?? 0
+            case .milestone:
+                count = issue?.milestone != nil ? 1 : 0
+            }
+            snapshot.appendItems(Array(0..<count))
+        }
+        dataSource.apply(snapshot, animatingDifferences: false)
     }
 }
