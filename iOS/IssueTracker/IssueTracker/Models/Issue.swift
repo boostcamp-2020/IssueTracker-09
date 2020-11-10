@@ -18,7 +18,7 @@ struct Issue: Codable {
     let timestamp: String
     let assignees: [User]?
     let milestone: Milestone?
-    let user: User
+    var user: User?
     let labels: [Label]?
     
     enum CodingKeys: String, CodingKey {
