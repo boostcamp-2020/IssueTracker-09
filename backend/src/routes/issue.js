@@ -8,6 +8,8 @@ const router = express.Router();
 
 router.get('/', issueController.read);
 
+router.get('/:id', issueController.readById);
+
 router.post('/', issueController.create);
 
 router.put('/title/:id', issueController.updateTitle);
