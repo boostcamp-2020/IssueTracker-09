@@ -15,7 +15,7 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
     
     func configure(user: User, comment: Comment) {
         if let url = user.image {
-            profile.fromURL(url: url)
+            profile.fromURL(url)
         }
         name.text = user.name
         date.text = comment.timestamp

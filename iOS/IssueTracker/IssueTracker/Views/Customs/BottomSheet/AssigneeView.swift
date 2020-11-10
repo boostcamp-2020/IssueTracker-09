@@ -13,7 +13,7 @@ class AssigneeView: UIView {
     
     func configure(assignee: User) {
         if let url = assignee.image {
-            image.fromURL(url: url)
+            image.fromURL(url)
         }
         name.text = assignee.name
     }

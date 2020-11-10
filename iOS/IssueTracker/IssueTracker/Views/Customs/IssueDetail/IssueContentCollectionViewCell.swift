@@ -16,7 +16,7 @@ class IssueContentCollectionViewCell: UICollectionViewCell {
     
     func configure(issue: Issue) {
         if let url = issue.user.image {
-            profile.fromURL(url: url)
+            profile.fromURL(url)
         }
         name.text = issue.user.name
         number.text = "#\(issue.id)"
