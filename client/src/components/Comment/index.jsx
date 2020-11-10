@@ -4,11 +4,12 @@ import EditComment from '../EditComment';
 import { FlexDiv, CommentContainer, Header, Body, Image } from './styled';
 import { updateCommentAPI } from '../../apis/comment';
 
-const Comment = ({ comment, id }) => {
+const Comment = ({ comment }) => {
   const [state, setState] = useState(false);
   const [commentInfo, setComment] = useState(comment);
+
   const updateComment = async (input) => {
-    const result = await updateCommentAPI(id, input);
+    const result = await updateCommentAPI(commentInfo.id, input);
     if (result) {
       const newComment = commentInfo;
       newComment.content = input;
@@ -16,6 +17,7 @@ const Comment = ({ comment, id }) => {
     }
     setState(false);
   };
+
   return (
     <FlexDiv>
       <Image image={commentInfo.User.image} />

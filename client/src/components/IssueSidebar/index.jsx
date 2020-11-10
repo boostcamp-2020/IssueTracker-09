@@ -5,7 +5,7 @@ import LabelContainer from './Label';
 import MilestoneContainer from './Milestone';
 
 const IssueSidebar = ({ issue }) => {
-  if (!issue) {
+  if (!issue.id) {
     return null;
   }
 
