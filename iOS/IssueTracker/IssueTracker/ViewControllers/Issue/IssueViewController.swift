@@ -170,9 +170,12 @@ extension IssueViewController: IssueCellDelegate {
 
 extension IssueViewController: IssueServiceDelegate {
     func didDataLoaded(at indexPath: IndexPath?) {
-        // TODO: - indexPath에 따른 처리 필요
-        tableView.reloadData()
-        // 데이터가 바뀌었을 때는 어떻게 해야 할까?
+        if let indexPath = indexPath {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        } else {
+            tableView.reloadData()
+        }
+        
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
 }
