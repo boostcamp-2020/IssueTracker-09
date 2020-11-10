@@ -1,3 +1,4 @@
+/* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
 import EditComment from '../EditComment';
 import { FlexDiv, CommentContainer, Header, Body, Image } from './styled';
@@ -13,7 +14,7 @@ const Comment = ({ comment }) => {
   };
   return (
     <FlexDiv>
-      <Image image="https://avatars2.githubusercontent.com/u/46195613?v=4" />
+      <Image image={commentInfo.User.image} />
       {state ? (
         <EditComment
           comment={comment.content}
@@ -24,7 +25,7 @@ const Comment = ({ comment }) => {
         <CommentContainer>
           <Header>
             <div>
-              <span>{comment.user_id}</span>
+              <span>{commentInfo.User.name}</span>
               <span>{comment.timestamp}</span>
             </div>
             <div>
