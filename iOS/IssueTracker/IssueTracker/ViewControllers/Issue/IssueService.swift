@@ -17,4 +17,5 @@ protocol IssueService {
 
 protocol IssueServiceDelegate: AnyObject {
     func didDataLoaded(at indexPath: IndexPath?)
+    func didErrorReceived(title: String, message: String, handler: (() -> Void)?)
 }

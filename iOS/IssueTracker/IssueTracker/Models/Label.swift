@@ -11,7 +11,7 @@ struct Labels: Codable {
     let labels: [Label]
 }
 
-struct Label: Codable, Hashable {
+struct Label: Model, Codable, Hashable {
     let id: Int
     let color: String
     let title: String

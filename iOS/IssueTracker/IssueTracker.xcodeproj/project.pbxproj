@@ -26,6 +26,7 @@
 		F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F38325500247004E8CF0 /* ImageNetworkService.swift */; };
 		F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */; };
 		F40541CC2550524A001EAF52 /* DataRequest+responseBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40541CB2550524A001EAF52 /* DataRequest+responseBool.swift */; };
+		F41014A0255ADB570032EEF6 /* FilterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410149F255ADB570032EEF6 /* FilterContext.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
@@ -38,8 +39,11 @@
 		F44851872549835600A84527 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44851862549835600A84527 /* Coordinator.swift */; };
 		F497BA012558D625009952BB /* UIImage+gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA002558D625009952BB /* UIImage+gif.swift */; };
 		F497BA112558E678009952BB /* UserNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497BA102558E678009952BB /* UserNetworkServiceTests.swift */; };
+		F497C397255AE86F0018D0FB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497C396255AE86F0018D0FB /* Model.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
+		F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */; };
+		F4C327F8255AD2E7005E778F /* AssigneeNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C327F7255AD2E7005E778F /* AssigneeNetworkServiceTests.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
 		F4E3B4B02553C4C000E8430D /* UIStackView+clear.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */; };
 		F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */; };
@@ -151,6 +155,7 @@
 		F403F38325500247004E8CF0 /* ImageNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkService.swift; sourceTree = "<group>"; };
 		F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F40541CB2550524A001EAF52 /* DataRequest+responseBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+responseBool.swift"; sourceTree = "<group>"; };
+		F410149F255ADB570032EEF6 /* FilterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterContext.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -163,9 +168,12 @@
 		F44851862549835600A84527 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F497BA002558D625009952BB /* UIImage+gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+gif.swift"; sourceTree = "<group>"; };
 		F497BA102558E678009952BB /* UserNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserNetworkServiceTests.swift; sourceTree = "<group>"; };
+		F497C396255AE86F0018D0FB /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
+		F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerFactory.swift; sourceTree = "<group>"; };
+		F4C327F7255AD2E7005E778F /* AssigneeNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
 		F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+clear.swift"; sourceTree = "<group>"; };
 		F4E3B4BA2553D17C00E8430D /* IssueNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueNetworkServiceTests.swift; sourceTree = "<group>"; };
@@ -331,6 +339,15 @@
 			path = Xibs;
 			sourceTree = "<group>";
 		};
+		F41014AD255ADC7A0032EEF6 /* Filter */ = {
+			isa = PBXGroup;
+			children = (
+				FC631A82254FF82F00DFE242 /* Filter.swift */,
+				F410149F255ADB570032EEF6 /* FilterContext.swift */,
+			);
+			path = Filter;
+			sourceTree = "<group>";
+		};
 		F448517D2549833700A84527 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
@@ -404,6 +421,7 @@
 				F4E3B4BF2553D33B00E8430D /* MilestoneNetworkServiceTests.swift */,
 				F4E3B4C42553D53000E8430D /* CommentNetworkServiceTests.swift */,
 				F497BA102558E678009952BB /* UserNetworkServiceTests.swift */,
+				F4C327F7255AD2E7005E778F /* AssigneeNetworkServiceTests.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -428,6 +446,7 @@
 			children = (
 				FC5CAE7A254FD6320086EA13 /* PersistenceManager.swift */,
 				F4E3B4AF2553C4C000E8430D /* UIStackView+clear.swift */,
+				F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -435,7 +454,6 @@
 		FC631A79254FF78400DFE242 /* Filter */ = {
 			isa = PBXGroup;
 			children = (
-				FC631A82254FF82F00DFE242 /* Filter.swift */,
 				FC631A7A254FF7A400DFE242 /* FilterViewController.swift */,
 				FCF5EFAF255112AB001A44B3 /* FilterSearchViewController.swift */,
 				FCF5EFBC25513330001A44B3 /* SearchController.swift */,
@@ -645,6 +663,8 @@
 		FCF197172547BC9F00AED031 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F41014AD255ADC7A0032EEF6 /* Filter */,
+				F497C396255AE86F0018D0FB /* Model.swift */,
 				FCF197202547BDAB00AED031 /* User.swift */,
 				FCBC1D2B2559534400423B8E /* Assignees.swift */,
 				F44851732549721F00A84527 /* Issue.swift */,
@@ -932,6 +952,7 @@
 				FC808DBF25542909001BCA58 /* IssueBottomSheetViewController.swift in Sources */,
 				FCBC1D272559528100423B8E /* AssigneeNetworkService.swift in Sources */,
 				F4012A592550277C0047CE91 /* MilestoneCollectionViewCell.swift in Sources */,
+				F41014A0255ADB570032EEF6 /* FilterContext.swift in Sources */,
 				FCBC1D2C2559534400423B8E /* Assignees.swift in Sources */,
 				F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */,
 				FCEFA481255B118100A37867 /* AssigneeCell.swift in Sources */,
@@ -981,6 +1002,7 @@
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
 				FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */,
+				F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
@@ -992,6 +1014,7 @@
 				FCF5EFBD25513330001A44B3 /* SearchController.swift in Sources */,
 				F497BA012558D625009952BB /* UIImage+gif.swift in Sources */,
 				F448517F2549834F00A84527 /* MainTabBarCoordinator.swift in Sources */,
+				F497C397255AE86F0018D0FB /* Model.swift in Sources */,
 				FCF5EFA8255110BD001A44B3 /* FilterCoordinator.swift in Sources */,
 				F4012A50255027460047CE91 /* MilestoneViewController.swift in Sources */,
 				F4EAFF712553EFF1009372E2 /* EditableTextViewDelegate.swift in Sources */,
@@ -1010,6 +1033,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */,
+				F4C327F8255AD2E7005E778F /* AssigneeNetworkServiceTests.swift in Sources */,
 				F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */,
 				F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */,
 				F4E3B4C52553D53000E8430D /* CommentNetworkServiceTests.swift in Sources */,

@@ -35,7 +35,7 @@ class IssueDetailCacheService: IssueDetailService {
     }
     
     func requestUsers() {
-        assigneeNetworkService.fetchAssignee { [weak self] result in
+        assigneeNetworkService.fetchAssignees { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):

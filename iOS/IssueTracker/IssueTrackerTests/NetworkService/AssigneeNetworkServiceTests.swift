@@ -1,16 +1,14 @@
 //
-//  UserNetworkServiceTests.swift
+//  AssigneeNetworkServiceTests.swift
 //  IssueTrackerTests
 //
-//  Created by 현기엽 on 2020/11/09.
+//  Created by 현기엽 on 2020/11/10.
 //
-
-import Foundation
 
 import XCTest
 @testable import IssueTracker
 
-class UserNetworkServiceTests: XCTestCase {
+class AssigneeNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 5
     static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTYwNDkzNDM2N30.ME-ENY-pPQmKVjpii2D65LMV1lV3FrwZuKq6hSheIAE"
     static var originalToken: String?
@@ -30,6 +28,24 @@ class UserNetworkServiceTests: XCTestCase {
         // 복원
         if let token = originalToken {
             PersistenceManager.shared.save(token, forKey: .token)
+        }
+    }
+    
+    func testFetchAssignees() throws {
+        let expectTimer = expectation(description: "testFetchAssignees")
+        AssigneeNetworkService().fetchAssignees { result in
+            switch result {
+            case .success(_):
+                expectTimer.fulfill()
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        }
+        
+        waitForExpectations(timeout: asyncTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
         }
     }
 }

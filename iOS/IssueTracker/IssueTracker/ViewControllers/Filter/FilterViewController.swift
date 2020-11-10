@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoveToSearchPage: AnyObject {
-    func move(to type: SearchType)
+    func move(to type: Filter.Element)
 }
 
 class FilterViewController: UIViewController {
@@ -51,14 +51,14 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func touchedCancelButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        // 화면을 내려서 닫을 때에도 필터 내용을 초기화하기
+        FilterContext.shared.clear()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func touchedDoneButton(_ sender: Any) {
-        print(dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
-            if item.filter.category == .condition && item.filter.checkable { return true }
-            return false
-        }))
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
     }
 }
 
@@ -135,16 +135,18 @@ extension FilterViewController: UICollectionViewDelegate {
             
             var newData = data
             newData.filter.checkable = !data.filter.checkable
+            if newData.filter.checkable {
+                FilterContext.shared.condition = indexPath.item
+            } else {
+                FilterContext.shared.condition = nil
+            }
             newSnapshot.insertItems([newData], beforeItem: data)
             newSnapshot.deleteItems([data])
             dataSource.apply(newSnapshot)
             
         } else if data.filter.category == .detail {
             collectionView.deselectItem(at: indexPath, animated: true)
-            guard let type = data.filter.type else {
-                return
-            }
-            delegate?.move(to: type)
+            delegate?.move(to: data.filter.element)
         }
     }
 }

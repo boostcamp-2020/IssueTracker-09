@@ -13,7 +13,7 @@ class CommentNetworkService: NetworkService {
         case comment = "/comment"
     }
     
-    func addComment(issue: Issue, content: String, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
+    func addComment(issue: Issue, content: String, completion handler: ( (Result<Comment, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.comment.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -31,7 +31,7 @@ class CommentNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .response { response in
+            .responseDecodable(of: Comment.self) { response in
                 handler?(response.result)
             }
     }
