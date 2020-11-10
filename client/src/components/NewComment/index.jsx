@@ -18,6 +18,7 @@ const NewComment = ({ addEvent }) => {
             addEvent(inputValue);
             setInputvalue('');
           }}
+          disabled={!inputValue}
         >
           Comment
         </button>

@@ -13,7 +13,9 @@ const EditComment = ({ comment, action, update }) => {
       />
       <div>
         <button onClick={() => action(false)}>CANCEL</button>
-        <button onClick={() => update(inputValue)}>Update comment</button>
+        <button onClick={() => update(inputValue)} disabled={!inputValue}>
+          Update comment
+        </button>
       </div>
     </WriteBox>
   );
