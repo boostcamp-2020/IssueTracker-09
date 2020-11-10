@@ -14,6 +14,16 @@ class IssueAppendViewController: UIViewController {
     var markdownView: MarkdownView?
     @IBOutlet weak var titleField: UITextField!
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     enum SegmentTitle: Int {
         case markdown = 0
         case preview
@@ -22,6 +32,7 @@ class IssueAppendViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureTextViewDelegate()
+        view.addSubview(activityIndicator)
     }
     
     private func configureTextViewDelegate() {
@@ -72,6 +83,7 @@ class IssueAppendViewController: UIViewController {
             case .success(_):
                 handler()
             case .failure(let error):
+                self?.activityIndicator.stopAnimating()
                 self?.presentErrorAlert(title: "댓글 추가 실패", message: error.localizedDescription)
                 break
             }
@@ -85,6 +97,7 @@ class IssueAppendViewController: UIViewController {
             case .success(let issue):
                 handler(issue)
             case .failure(let error):
+                self?.activityIndicator.stopAnimating()
                 self?.presentErrorAlert(title: "이슈 추가 실패", message: error.localizedDescription)
                 break
             }
@@ -100,8 +113,10 @@ class IssueAppendViewController: UIViewController {
             return
         }
         
+        activityIndicator.startAnimating()
         requestAddIssue(title: title) { [weak self] issue in
             self?.requestAddComment(issue: issue, content: content) {
+                self?.activityIndicator.stopAnimating()
                 self?.dismiss(animated: true, completion: nil)
             }
         }
