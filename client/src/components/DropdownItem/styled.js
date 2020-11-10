@@ -52,3 +52,8 @@ export const Image = styled.div`
   width: 20px;
   height: 20px;
 `;
+
+export const Input = styled.input`
+  margin: 0 auto;
+  width: 90%;
+`;

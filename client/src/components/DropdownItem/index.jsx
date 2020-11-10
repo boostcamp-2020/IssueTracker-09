@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Modal,
   Title,
@@ -7,17 +7,38 @@ import {
   Name,
   Image,
   Color,
+  Input,
 } from './styled';
 
 const DropdownItem = ({ title, data, changeState, serverData }) => {
   const clickHandler = (item) => {
     changeState(item);
   };
+  const [inputValue, setInputValue] = useState('');
+
+  const checkItem = (item) => {
+    if (
+      (item.title && item.title.includes(inputValue)) ||
+      (item.name && item.name.includes(inputValue)) ||
+      inputValue === ''
+    ) {
+      return true;
+    }
+    return false;
+  };
 
   return (
     <Modal>
       <Title>{title}</Title>
+      <Input
+        placeholder={`Filter ${title}`}
+        value={inputValue}
+        onChange={(e) => setInputValue(e.target.value)}
+      />
       {data?.map((item, index) => {
+        if (!checkItem(item)) {
+          return null;
+        }
         return (
           <ListItem key={index} onClick={() => clickHandler(item)}>
             {item.image === '' ? (
