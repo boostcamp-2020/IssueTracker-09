@@ -149,6 +149,7 @@ extension IssueViewController: UITableViewDataSource {
 extension IssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
         guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
             return
         }
