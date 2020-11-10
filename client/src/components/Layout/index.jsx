@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 
 import { faBook } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -17,7 +18,9 @@ const Layout = () => {
   return (
     <Header>
       <FontAwesomeIcon icon={faBook} size="2x" color="white" />
-      <Issue>Issues</Issue>
+      <Link to="/">
+        <Issue>Issues</Issue>
+      </Link>
     </Header>
   );
 };
