@@ -7,20 +7,15 @@
 
 import Foundation
 
-enum SearchType {
-    case User
-    case Label
-    case Milestone
-}
-
 class SearchController {
     private var elements = [Element]()
     private let type: Filter.Element
     
     struct Element: Hashable {
         let name: String
-        let type: SearchType
+        let type: Filter.ModelType
         let id: Int
+        let rawModel: Model
         var checkable: Bool = false
         
         static func == (lhs: Element, rhs: Element) -> Bool {
@@ -28,6 +23,13 @@ class SearchController {
                 lhs.type == rhs.type &&
                 lhs.id == rhs.id &&
                 lhs.checkable == rhs.checkable
+        }
+        
+        func hash(into hasher: inout Hasher) {
+            hasher.combine(name)
+            hasher.combine(type)
+            hasher.combine(id)
+            hasher.combine(checkable)
         }
     }
     
@@ -67,7 +69,7 @@ class SearchController {
                 return
             }
             
-            self?.elements = assignees.map { Element(name: $0.name, type: .User, id: $0.id) }
+            self?.elements = assignees.map { Element(name: $0.name, type: .user, id: $0.id, rawModel: $0) }
             completion()
         }
     }
@@ -78,7 +80,7 @@ class SearchController {
                 return
             }
             
-            self?.elements = labels.map { Element(name: $0.title, type: .User, id: $0.id) }
+            self?.elements = labels.map { Element(name: $0.title, type: .label, id: $0.id, rawModel: $0) }
             completion()
         }
     }
@@ -89,7 +91,7 @@ class SearchController {
                 return
             }
             
-            self?.elements = milestones.map { Element(name: $0.title, type: .User, id: $0.id) }
+            self?.elements = milestones.map { Element(name: $0.title, type: .milestone, id: $0.id, rawModel: $0) }
             completion()
         }
     }

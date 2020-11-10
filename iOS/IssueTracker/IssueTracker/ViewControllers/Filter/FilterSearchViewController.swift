@@ -140,10 +140,41 @@ extension FilterSearchViewController: UICollectionViewDelegate {
 
         var newData = data
         newData.checkable = !data.checkable
+        applyNewData(newData)
 
         var newSnapshot = dataSource.snapshot()
         newSnapshot.insertItems([newData], beforeItem: data)
         newSnapshot.deleteItems([data])
         dataSource.apply(newSnapshot)
+    }
+    
+    private func applyNewData(_ newData: SearchController.Element) {
+        if newData.checkable, let type = type {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = newData.rawModel as? User
+            case .label:
+                FilterContext.shared.label = newData.rawModel as? Label
+            case .milestone:
+                FilterContext.shared.milestone = newData.rawModel as? Milestone
+            case .writer:
+                FilterContext.shared.writer = newData.rawModel as? User
+            default:
+                break
+            }
+        } else {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = nil
+            case .label:
+                FilterContext.shared.label = nil
+            case .milestone:
+                FilterContext.shared.milestone = nil
+            case .writer:
+                FilterContext.shared.writer = nil
+            default:
+                break
+            }
+        }
     }
 }

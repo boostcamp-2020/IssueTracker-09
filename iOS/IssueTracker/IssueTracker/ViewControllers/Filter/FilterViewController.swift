@@ -135,6 +135,11 @@ extension FilterViewController: UICollectionViewDelegate {
             
             var newData = data
             newData.filter.checkable = !data.filter.checkable
+            if newData.filter.checkable {
+                FilterContext.shared.condition = indexPath.item
+            } else {
+                FilterContext.shared.condition = nil
+            }
             newSnapshot.insertItems([newData], beforeItem: data)
             newSnapshot.deleteItems([data])
             dataSource.apply(newSnapshot)
