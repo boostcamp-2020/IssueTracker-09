@@ -14,9 +14,9 @@ class MilestoneView: UIView {
     func configure(milestone: Milestone) {
         name.text = milestone.title
         
-        if let open = milestone.openCount,
-           let total = milestone.totalCount {
-            let percent = open / total * 100
+        if let openCount = milestone.openCount,
+           let totalCount = milestone.totalCount {
+            let percent = openCount / totalCount * 100
             progress.progress = Float(percent)
             return
         }
