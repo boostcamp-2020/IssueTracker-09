@@ -6,7 +6,7 @@ const Modal = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   display: flex;
   padding: 6px 3px;
   width: 150px;
@@ -52,7 +52,6 @@ const Image = styled.div`
   display: block;
   width: 20px;
   height: 20px;
-  margin-right: 10px;
 `;
 
 const DummyImage = styled.div`
@@ -69,6 +68,12 @@ const Color = styled.div`
   height: 20px;
   border-radius: 10px;
 `;
+
+const Input = styled.input`
+  margin: 0 auto;
+  width: 90%;
+`;
+
 export {
   Div,
   Modal,
@@ -79,4 +84,5 @@ export {
   Name,
   DummyImage,
   Color,
+  Input,
 };

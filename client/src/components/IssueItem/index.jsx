@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable react/forbid-prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -18,15 +19,15 @@ import {
   Label,
   Milestone,
   Bottom,
+  DummyImage,
 } from './styled';
 
-// eslint-disable-next-line react/prop-types
 const Issues = ({ issue, checkedHandler, checked }) => {
   return (
     <Item>
       <Checkbox
+        data-testid="checkbox"
         type="checkbox"
-        // eslint-disable-next-line react/prop-types
         checked={checked.includes(issue.id) ? 'checked' : ''}
         onChange={() => checkedHandler(issue.id)}
       />
@@ -47,14 +48,24 @@ const Issues = ({ issue, checkedHandler, checked }) => {
               ? `opened yesterday by ${issue.User.name}`
               : `closed by ${issue.User.name} yesterday`}
           </Text>
-          <FontAwesomeIcon icon={faFlag} />
-          <Milestone>{issue.Milestone ? issue.Milestone.title : ''}</Milestone>
+          {issue.Milestone ? (
+            <>
+              <FontAwesomeIcon icon={faFlag} />
+              <Milestone>{issue.Milestone.title}</Milestone>
+            </>
+          ) : (
+            ''
+          )}
         </Bottom>
       </Issue>
       <Assignees>
-        {issue.Assignees.map((assignee, index) => (
-          <Assignee src={assignee.image} key={`assignee${index}`} />
-        ))}
+        {issue.Assignees.map((assignee, index) =>
+          assignee.image ? (
+            <Assignee src={assignee.image} key={`assignee${index}`} />
+          ) : (
+            <DummyImage key={`assignee${index}`} />
+          )
+        )}
       </Assignees>
     </Item>
   );
