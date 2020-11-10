@@ -1,6 +1,8 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import IssueList from '../../components/IssueList';
 import ListHeader from '../../components/ListHeader';
+import ResetFilter from '../../components/ResetFilter';
 import SearchBox from '../../components/SearchBox';
 
 const Issues = () => {
@@ -16,9 +18,18 @@ const Issues = () => {
     setChecked(ids);
   };
 
+  const overlay = document.getElementById('overlay');
+  overlay.addEventListener('click', () => {
+    const details = Object.entries(document.getElementsByTagName('details'));
+    details.forEach(([_, detail]) => {
+      detail.toggleAttribute('open', false);
+    });
+    overlay.hidden = true;
+  });
   return (
     <>
       <SearchBox />
+      <ResetFilter />
       <ListHeader checkedHandler={allCheckedHandler} checked={checked} />
       <IssueList checkedHandler={checkedHandler} checked={checked} />
     </>

@@ -10,6 +10,21 @@ const Div = styled.div`
   border: ${(props) => props.border};
 `;
 
+
+const IssueMark = styled.div`
+  width: 15px;
+  height: 15px;
+  display: flex;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+  font-size: 13px;
+  font-weight: bold;
+  color: black;
+  border: 1.5px solid gray;
+  border-radius: 8px;
+`;
+
 const Container = styled.div`
   width: 60%;
   margin: 0 auto;
@@ -19,4 +34,5 @@ const Container = styled.div`
   align-items: center;
 `;
 
-export { Div, Container };
+export { Div, Container, IssueMark };
+

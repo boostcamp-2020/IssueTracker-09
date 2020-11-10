@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React from 'react';
 import ReactDom from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
@@ -11,15 +10,6 @@ import App from './App';
 import { UserProvider } from './stores/userStore';
 import { IssueProvider } from './stores/issueStore';
 
-window.addEventListener('click', (e) => {
-  const details = Object.entries(document.getElementsByTagName('details'));
-
-  details.forEach(([_, detail]) => {
-    if (!detail.contains(e.target)) {
-      detail.toggleAttribute('open', false);
-    }
-  });
-});
 ReactDom.render(
   <BrowserRouter>
     <UserProvider>

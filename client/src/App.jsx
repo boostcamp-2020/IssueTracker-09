@@ -11,11 +11,13 @@ import {
   Milestones,
 } from './pages';
 import Layout from './components/Layout';
+import Overlay from './components/Overlay';
 import PrivateRoute from './lib/PrivateRoute';
 
 const App = () => {
   return (
     <>
+      <Overlay />
       <Layout />
       <Switch>
         <Route path="/callback" component={Callback} />
