@@ -90,9 +90,6 @@
 		FCBC1D2C2559534400423B8E /* Assignees.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D2B2559534400423B8E /* Assignees.swift */; };
 		FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D3525595B4200423B8E /* IssueCoordinator.swift */; };
 		FCBC1D3F25595B6000423B8E /* IssueDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D3E25595B5F00423B8E /* IssueDetailCoordinator.swift */; };
-		FCBC1D542559A10600423B8E /* AssigneeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D532559A10600423B8E /* AssigneeView.swift */; };
-		FCBC1D592559A1B100423B8E /* LabelsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D582559A1B100423B8E /* LabelsView.swift */; };
-		FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC1D5D2559A26300423B8E /* MilestoneView.swift */; };
 		FCEFA481255B118100A37867 /* AssigneeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEFA480255B118100A37867 /* AssigneeCell.swift */; };
 		FCEFA48C255B11B300A37867 /* LabelCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEFA48B255B11B300A37867 /* LabelCell.swift */; };
 		FCEFA491255B11C700A37867 /* MilestoneCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEFA490255B11C700A37867 /* MilestoneCell.swift */; };
@@ -221,9 +218,6 @@
 		FCBC1D2B2559534400423B8E /* Assignees.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assignees.swift; sourceTree = "<group>"; };
 		FCBC1D3525595B4200423B8E /* IssueCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCoordinator.swift; sourceTree = "<group>"; };
 		FCBC1D3E25595B5F00423B8E /* IssueDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueDetailCoordinator.swift; sourceTree = "<group>"; };
-		FCBC1D532559A10600423B8E /* AssigneeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeView.swift; sourceTree = "<group>"; };
-		FCBC1D582559A1B100423B8E /* LabelsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelsView.swift; sourceTree = "<group>"; };
-		FCBC1D5D2559A26300423B8E /* MilestoneView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneView.swift; sourceTree = "<group>"; };
 		FCEFA480255B118100A37867 /* AssigneeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeCell.swift; sourceTree = "<group>"; };
 		FCEFA48B255B11B300A37867 /* LabelCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCell.swift; sourceTree = "<group>"; };
 		FCEFA490255B11C700A37867 /* MilestoneCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneCell.swift; sourceTree = "<group>"; };
@@ -582,9 +576,6 @@
 			isa = PBXGroup;
 			children = (
 				FCEFA47F255B117000A37867 /* Cells */,
-				FCBC1D532559A10600423B8E /* AssigneeView.swift */,
-				FCBC1D582559A1B100423B8E /* LabelsView.swift */,
-				FCBC1D5D2559A26300423B8E /* MilestoneView.swift */,
 			);
 			path = BottomSheet;
 			sourceTree = "<group>";
@@ -957,7 +948,6 @@
 				F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */,
 				FCEFA481255B118100A37867 /* AssigneeCell.swift in Sources */,
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
-				FCBC1D542559A10600423B8E /* AssigneeView.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
 				F4EFB7A22552847600328C61 /* IssueDetailViewController.swift in Sources */,
 				F4EAFF762553F2BE009372E2 /* IssueAppendViewController.swift in Sources */,
@@ -1001,12 +991,10 @@
 				FCF196E72547AED000AED031 /* SceneDelegate.swift in Sources */,
 				FCF197342547FAB100AED031 /* SignCoordinator.swift in Sources */,
 				FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */,
-				FCBC1D5E2559A26300423B8E /* MilestoneView.swift in Sources */,
 				F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */,
 				FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */,
 				FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
-				FCBC1D592559A1B100423B8E /* LabelsView.swift in Sources */,
 				FC863BB82552661400000B19 /* SelectButton.swift in Sources */,
 				FCBC1CEE2559104500423B8E /* IssueEditService.swift in Sources */,
 				FCEFA49E255B147700A37867 /* IssueBottomSheetViewController+PanGesture.swift in Sources */,
