@@ -24,4 +24,36 @@ class FilterContext {
         milestone = nil
         assignee = nil
     }
+    
+    var query: IssueFilterQuery {
+        var isOpen: Bool? = nil
+        var author: String? = nil
+        var assignee: String? = nil
+        if let condition = FilterContext.shared.condition,
+           let element = Filter.Element.condition(rawValue: condition),
+           let name = PersistenceManager.shared.load(forKey: .name) {
+            switch element {
+            case .openIssues:
+                isOpen = true
+            case .closedIssues:
+                isOpen = false
+            case .selfWrite:
+                author = name
+            case .selfAssignee:
+                assignee = name
+            default:
+                break
+            }
+        }
+        
+        if let writer = self.writer {
+            author = writer.name
+        }
+        
+        if let selfAssignee = self.assignee {
+            assignee = selfAssignee.name
+        }
+        
+        return IssueFilterQuery(isOpen: isOpen, author: author, assignee: assignee)
+    }
 }

@@ -10,8 +10,8 @@ import Alamofire
 
 struct IssueFilterQuery {
     let isOpen: Bool?
-    let author: User?
-    let assignee: User?
+    let author: String?
+    let assignee: String?
     
     var rawValue: String? {
         var query = [String]()
@@ -19,10 +19,10 @@ struct IssueFilterQuery {
             query += ["is:\(isOpen ? "open" : "close")"]
         }
         if let author = author {
-            query += ["author:\(author.name)"]
+            query += ["author:\(author)"]
         }
         if let assignee = assignee {
-            query += ["assignee:\(assignee.name)"]
+            query += ["assignee:\(assignee)"]
         }
         return query.isEmpty ? nil : "?q=" + query.joined(separator: " ")
     }

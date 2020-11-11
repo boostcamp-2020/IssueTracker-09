@@ -12,7 +12,7 @@ protocol IssueService {
     func count(isFiltering: Bool) -> Int
     func reloadData()
     func changeStatus(at indexPath: IndexPath)
-    func filter(_ text: String)
+    func filter(_ text: String?)
 }
 
 protocol IssueServiceDelegate: AnyObject {
