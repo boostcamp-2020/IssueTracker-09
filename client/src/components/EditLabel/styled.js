@@ -1,0 +1,37 @@
+import styled from 'styled-components';
+
+export const FlexDiv = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const LabelIcon = styled.div`
+  padding: 7px;
+  border-radius: 15px;
+  color: white;
+  background-color: ${(props) => props.color};
+`;
+export const Div = styled.div`
+  padding: 3px;
+  margin: 3px;
+`;
+
+export const Input = styled.input`
+  margin: 5px 0;
+  padding: 5px;
+`;
+
+export const ColorInput = styled.input`
+  display: inline;
+  margin: 5px;
+  padding: 5px;
+`;
+
+export const Container = styled.div`
+  border-bottom: 1px solid #dddddd;
+`;
+
+export const Refresh = styled.div`
+  background-color: ${(props) => props.color};
+  width: 20px;
+`;
