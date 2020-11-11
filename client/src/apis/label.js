@@ -1,6 +1,6 @@
 import request from '../lib/axios';
 
-export const createeLabelAPI = async (data) => {
+export const createLabelAPI = async (data) => {
   try {
     await request({ method: 'post', params: `/label`, data });
     return true;
