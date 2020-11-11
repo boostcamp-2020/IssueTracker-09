@@ -7,34 +7,109 @@
 
 import UIKit
 
+protocol IssueDetailCoordinatorDelegate: AnyObject {
+    func presentToAssigneeEdit(assignees: Assignees)
+    func presentToLabelEdit(labels: Labels)
+    func presentToMilestoneEdit(milstones: Milestones)
+}
+
 class IssueDetailViewController: UIViewController {
     private enum Section: CaseIterable {
         case content, comment
     }
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
+    
     var service: IssueDetailService?
-    private var issue: Issue?
+    private weak var delegate: IssueDetailCoordinatorDelegate?
+    private let dispatchGroup = DispatchGroup()
+    private var issue: Issue? {
+        return service?.issue
+    }
     private var comments: [Comment] = []
     private var assignee: Assignees?
+    private var milestones: Milestones?
+    private var labels: Labels?
+    
+    
+    init?(coder: NSCoder, delegate: IssueDetailCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        request()
+        
+    }
+    
+    private func request() {
+        dispatchGroup.enter()
         service?.requestComments()
+        
+        dispatchGroup.enter()
+        service?.requestUsers()
+        
+        dispatchGroup.enter()
+        service?.requestLabels()
+        
+        dispatchGroup.enter()
+        service?.requestMilestones()
+        
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.configureHierarchy()
+            self.addBottomSheetView()
+        }
     }
 }
 
 extension IssueDetailViewController: IssueDetailServiceDelegate {
-    func didCommentsLoaded(comments: [Comment]) {
-        issue = service?.issue
-        self.comments = comments
-        
-        service?.requestUsers()
+    func didCommentsLoaded(comments: [Comment]?) {
+        if let comments = comments  {
+            self.comments = comments
+        }
+        dispatchGroup.leave()
     }
     
-    func didAssigneeLoaded(assignee: [User]) {
-        self.assignee = Assignees(assignees: assignee)
-        configureHierarchy()
-        addBottomSheetView()
+    func didAssigneesLoaded(assignee: [User]?) {
+        if let assignee = assignee {
+            self.assignee = Assignees(assignees: assignee)
+        }
+        dispatchGroup.leave()
+    }
+    
+    func didLabelsLoaded(labels: [Label]?) {
+        if let labels = labels {
+            self.labels = Labels(labels: labels)
+        }
+        dispatchGroup.leave()
+    }
+    
+    func didMilestonesLoaded(milestones: [Milestone]?) {
+        if let milestones = milestones {
+            self.milestones = Milestones(milestones: milestones)
+        }
+        dispatchGroup.leave()
+    }
+}
+
+extension IssueDetailViewController: IssueEditDelegate {
+    func touchedEditButton(key: EditKey) {
+        switch key {
+        case .assignee:
+            guard let assignee = assignee else { return }
+            delegate?.presentToAssigneeEdit(assignees: assignee)
+        case .label:
+            guard let labels = labels else { return }
+            delegate?.presentToLabelEdit(labels: labels)
+        case .milestone:
+            guard let milestones = milestones else { return }
+            delegate?.presentToMilestoneEdit(milstones: milestones)
+        }
     }
 }
 
@@ -49,8 +124,9 @@ extension IssueDetailViewController {
             identifier: "IssueBottomSheetViewController",
             creator: {
                 coder in
-                return IssueBottomSheetViewController(coder: coder, issue: issue)
+                return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
+        
         self.addChild(bottomSheetViewController)
         self.view.addSubview(bottomSheetViewController.view)
         bottomSheetViewController.didMove(toParent: self)

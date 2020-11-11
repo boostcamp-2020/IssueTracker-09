@@ -1,19 +1,19 @@
 //
-//  AssigneeView.swift
+//  File.swift
 //  IssueTracker
 //
-//  Created by Seungeon Kim on 2020/11/10.
+//  Created by Seungeon Kim on 2020/11/11.
 //
 
 import UIKit
 
-class AssigneeView: UIView {
+class AssigneeCell: UICollectionViewCell {
+    @IBOutlet private weak var profile: UIImageView!
     @IBOutlet private weak var name: UILabel!
-    @IBOutlet private weak var image: UIImageView!
     
     func configure(assignee: User) {
         if let url = assignee.image {
-            image.fromURL(url)
+            profile.fromURL(url)
         }
         name.text = assignee.name
     }

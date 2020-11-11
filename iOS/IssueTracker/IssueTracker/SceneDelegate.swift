@@ -21,10 +21,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinatorController = RootCoordinateController(window: window)
         
         // user 정보 없을 시,
-//        coordinatorController?.root(name: .Sign)
+        coordinatorController?.root(name: .Sign)
         
         // user 정보 존재 시,
-        coordinatorController?.root(name: .Issue)
+//        coordinatorController?.root(name: .Issue)
     }
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데

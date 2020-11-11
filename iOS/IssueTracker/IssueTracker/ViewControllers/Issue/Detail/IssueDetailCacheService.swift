@@ -9,8 +9,10 @@ import Foundation
 
 class IssueDetailCacheService: IssueDetailService {
     var issue: Issue
-    private var commentNetrworkService = CommentNetworkService()
-    private var assigneeNetworkService = AssigneeNetworkService()
+    private let commentNetrworkService = CommentNetworkService()
+    private let assigneeNetworkService = AssigneeNetworkService()
+    private let labelsNetworkService = LabelNetworkService()
+    private let milestoneNetworkService = MilestoneNetworkService()
     private weak var delegate: IssueDetailServiceDelegate?
     
     init(issue: Issue, delegate: IssueDetailServiceDelegate?) {
@@ -22,13 +24,13 @@ class IssueDetailCacheService: IssueDetailService {
         commentNetrworkService.fetchComments(issue: issue) { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success( _):
-                if let comments = try? result.get().comments {
-                    self.delegate?.didCommentsLoaded(comments: comments)
-                }
-            case .failure(let error):
-                print(error.errorDescription ?? "")
+            case .success(let data):
+                let comments = data.comments
+                self.delegate?.didCommentsLoaded(comments: comments)
+            case .failure( _):
+                self.delegate?.didCommentsLoaded(comments: nil)
             }
+            
         }
     }
     
@@ -36,13 +38,39 @@ class IssueDetailCacheService: IssueDetailService {
         assigneeNetworkService.fetchAssignees { [weak self] result in
             guard let self = self else { return }
             switch result {
-            case .success( _):
-                if let assignee = try? result.get().assignees {
-                    self.delegate?.didAssigneeLoaded(assignee: assignee)
-                }
-            case .failure(let error):
-                print(error.errorDescription ?? "")
+            case .success(let data):
+                let assignee = data.assignees
+                self.delegate?.didAssigneesLoaded(assignee: assignee)
+            case .failure( _):
+                self.delegate?.didAssigneesLoaded(assignee: nil)
             }
         }
     }
+    
+    func requestLabels() {
+        labelsNetworkService.fetchLabels { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                let labels = data.labels
+                self.delegate?.didLabelsLoaded(labels: labels)
+            case .failure( _):
+                self.delegate?.didLabelsLoaded(labels: nil)
+            }
+        }
+    }
+    
+    func requestMilestones() {
+        milestoneNetworkService.fetchMilestones { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let data):
+                let milestones = data.milestones
+                self.delegate?.didMilestonesLoaded(milestones: milestones)
+            case .failure( _):
+                self.delegate?.didMilestonesLoaded(milestones: nil)
+            }
+        }
+    }
+    
 }

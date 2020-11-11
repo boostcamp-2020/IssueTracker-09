@@ -20,7 +20,7 @@ struct Issue: Model, Codable {
     let milestone: Milestone?
     let user: User?
     let labels: [Label]?
-    
+
     enum CodingKeys: String, CodingKey {
         case id, title
         case isOpened = "is_opened"

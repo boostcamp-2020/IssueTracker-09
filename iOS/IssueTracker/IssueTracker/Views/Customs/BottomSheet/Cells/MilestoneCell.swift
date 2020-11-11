@@ -1,15 +1,15 @@
 //
-//  MilestoneView.swift
+//  MilestoneCell.swift
 //  IssueTracker
 //
-//  Created by Seungeon Kim on 2020/11/10.
+//  Created by Seungeon Kim on 2020/11/11.
 //
 
 import UIKit
 
-class MilestoneView: UIView {
-    @IBOutlet private weak var name: UILabel!
-    @IBOutlet private weak var progress: UIProgressView!
+class MilestoneCell: UICollectionViewCell {
+    @IBOutlet weak var name: UILabel!
+    @IBOutlet weak var progress: UIProgressView!
     
     func configure(milestone: Milestone) {
         name.text = milestone.title
@@ -26,6 +26,5 @@ class MilestoneView: UIView {
         } else {
             progress.progress = 100
         }
-        
     }
 }

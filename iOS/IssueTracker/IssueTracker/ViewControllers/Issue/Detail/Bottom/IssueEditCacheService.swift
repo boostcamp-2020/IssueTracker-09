@@ -20,7 +20,6 @@ class IssueEditCacheService: IssueEditService {
     func willEditAssignee(old: [User], new: [User]) {
         let uncheckedUsers = Array(Set(old).subtracting(new))
         let checkedUsers = Array(Set(new).subtracting(old))
-        
         networkService.modifyIssueAssignee(of: issue.id, checked: checkedUsers, unchecked: uncheckedUsers) { [weak self] result in
             switch result {
             case .success(let response):
