@@ -24,6 +24,9 @@ import {
 } from './styled';
 
 const Issues = ({ issue, checkedHandler, checked }) => {
+  if (!issue) {
+    return null;
+  }
   return (
     <Item>
       <Checkbox

@@ -1,5 +1,5 @@
 import React from 'react';
-import LabelList from '../../components/LabelList';
+import LabelList from './LabelList';
 
 const Labels = () => {
   return <LabelList />;
