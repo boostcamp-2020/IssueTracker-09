@@ -8,26 +8,24 @@ const getCommentAPI = async (id) => {
       method: 'get',
       params: `/comment/${id}`,
     });
-
-    return { comments };
+    return comments;
   } catch (error) {
     return false;
   }
 };
 
-const createCommentAPI = async (content, userId, issueId) => {
+const createCommentAPI = async (content, issueId) => {
   try {
-    await request({
+    const { data } = await request({
       method: 'POST',
       params: '/comment',
       data: {
         content,
-        userId,
         issueId,
       },
     });
 
-    return true;
+    return data;
   } catch (error) {
     return false;
   }

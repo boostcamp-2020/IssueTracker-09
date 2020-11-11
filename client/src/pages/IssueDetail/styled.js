@@ -6,7 +6,7 @@ export const Container = styled.div`
 
 export const Top = styled.div`
   margin: 0 auto;
-  margin-top: 80px;
+  margin-top: 30px;
   width: 60%;
 `;
 

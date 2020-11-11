@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-// eslint-disable-next-line import/no-named-as-default-member
+import { useLocation } from 'react-router-dom';
 import IssueItem from '../IssueItem';
-
 import { List } from './styled';
 import { IssueContext } from '../../stores/issueStore';
 
@@ -11,9 +10,11 @@ const IssueList = ({ checkedHandler, checked }) => {
     issueAction: { getList },
   } = useContext(IssueContext);
 
+  const { search } = useLocation();
+
   const getListHandler = async () => {
-    const newSearch = window.location.search.substring(3)
-      ? window.location.search.substring(3).replace(/(%20)/g, ' ')
+    const newSearch = search.substring(3)
+      ? search.substring(3).replace(/(%20)/g, ' ')
       : 'is:open';
     await getList(newSearch);
   };

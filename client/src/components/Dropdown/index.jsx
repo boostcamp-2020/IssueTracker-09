@@ -1,9 +1,6 @@
-/* eslint-disable import/no-named-as-default */
-/* eslint-disable import/no-named-as-default-member */
-/* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { Details, Div } from './styled';
+import { Details, Div, Summary } from './styled';
 
 import SelectMenu from '../SelectMenu';
 import DropdownItem from '../DropdownItem';
@@ -18,16 +15,18 @@ const Dropdown = ({ title, action, changeState = null, serverData = null }) => {
       setState(result);
     }
   };
+
   const overlay = document.getElementById('overlay');
+
   return (
     <Details onClick={clickHandler}>
-      <summary
+      <Summary
         onClick={() => {
           overlay.hidden = false;
         }}
       >
         {title}
-      </summary>
+      </Summary>
       <Div position="absolute">
         {param.id ? (
           <DropdownItem
