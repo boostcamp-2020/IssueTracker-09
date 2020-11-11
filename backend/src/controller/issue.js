@@ -81,7 +81,6 @@ module.exports = {
   updateState: async (req, res) => {
     const { status, result } = await control(issueService.updateState, {
       ...req.body,
-      ...req.params,
     });
 
     return res.status(status).json(result);
