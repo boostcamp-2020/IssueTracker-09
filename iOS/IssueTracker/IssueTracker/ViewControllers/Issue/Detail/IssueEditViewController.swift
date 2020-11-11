@@ -20,10 +20,12 @@ class IssueEditViewController: UIViewController {
     private var key: EditKey?
     private var issueEditController: IssueEditController?
     private var dataSource: UICollectionViewDiffableDataSource<Section, EditItem>!
+    private var service: IssueEditCacheService?
     
-    init?(coder: NSCoder, key: EditKey, data: Data) {
+    init?(coder: NSCoder, key: EditKey, data: Data, service: IssueEditCacheService) {
         self.key = key
         self.issueEditController = IssueEditController(key: key, data: data)
+        self.service = service
         super.init(coder: coder)
     }
     
@@ -36,6 +38,46 @@ class IssueEditViewController: UIViewController {
         configureHierarchy()
         configureDataSource()
         applyInitialSnapshots()
+    }
+    
+    @IBAction func touchedCancelButton(_ sender: Any) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func touchedDoneButton(_ sender: Any) {
+        guard let key = key else {
+            return self.dismiss(animated: true, completion: nil)
+        }
+        
+        switch key {
+        case .assignee:
+            guard let prev = issueEditController?.DeserializedAssignees()?.assignees else { return }
+            let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
+                return item.checkable
+            }).map { item -> User in
+                return User(id: item.id, name: "", image: nil, userCode: nil)
+            }
+            service?.willEditAssignee(old: prev, new: new)
+        case .label:
+            guard let prev = issueEditController?.DeserializedLabels()?.labels else { return }
+            let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
+                return item.checkable
+            }).map { item -> Label in
+                return Label(id: item.id, color: "", title: "", content: "")
+            }
+            service?.willEditLabels(old: prev, new: new)
+        case .milestone:
+            let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
+                return item.checkable
+            }).map { item -> Milestone in
+                return Milestone(id: item.id, title: "", content: "", deadline: "", isOpened: true, openCount: nil, totalCount: nil)
+            }
+            if let milestone = new.first {
+                service?.willEditMilestone(new: milestone)
+            }
+        }
+        
+        self.dismiss(animated: true, completion: nil)
     }
 }
 
