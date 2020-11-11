@@ -37,7 +37,7 @@ class CommentNetworkService: NetworkService {
     }
     
     func fetchComments(issue:Issue, completion handler: @escaping (Result<Comments, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "?issueId=\(issue.id)"),
+        guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "/\(issue.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }

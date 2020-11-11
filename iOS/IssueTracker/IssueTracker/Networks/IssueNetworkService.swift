@@ -125,20 +125,28 @@ class IssueNetworkService: NetworkService {
     }
     
     func modifyIssueStatus(of issue: Issue, completion handler: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue + "/\(issue.id)"),
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        let parameters = ["isOpened": !issue.isOpened]
+        let parameters = ["isOpened": !issue.isOpened, "id": issue.id] as [String : Any]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
                    parameters: parameters,
                    headers: headers)
-            .validate()
-            .responseBool(completionHandler: handler)
+            .validate({ (request, response, data) -> DataRequest.ValidationResult in
+                let statusCode = response.statusCode
+                if (200..<300) ~= statusCode || 400 == statusCode {
+                    return .success(())
+                }
+                return .failure(NetworkError.response)
+            })
+            .response { response in
+                handler(.success(true))
+            }
     }
     
     func modifyIssueLabels(of id: Int, checked: [Label], unchecked: [Label], completion handler: @escaping (Result<Bool, Error>) -> Void) {

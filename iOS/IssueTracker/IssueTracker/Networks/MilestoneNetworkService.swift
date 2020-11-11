@@ -13,7 +13,7 @@ class MilestoneNetworkService: NetworkService {
         case milestone = "/milestone"
     }
     
-    func addMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func addMilestone(_ milestone: Milestone, completion handler: @escaping (Result<Milestone, AFError>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.milestone.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -32,7 +32,9 @@ class MilestoneNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseBool(completionHandler: handler)
+            .responseDecodable(of: Milestone.self) { response in
+                handler(response.result)
+            }
     }
     
     func fetchMilestones(completion handler: @escaping (Result<Milestones, AFError>) -> Void) {
