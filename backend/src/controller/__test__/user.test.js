@@ -20,6 +20,7 @@ beforeEach(() => {
 describe('gitHubLogin user Controller 테스트', () => {
   const resulted = { token: 'token', image: 'image', name: 'name' };
   const code = { code: 'g12345' };
+  const newUser = { id: 1, image: '', name: 'name' };
   beforeEach(() => {
     req.data = newUser;
   });
@@ -32,7 +33,7 @@ describe('gitHubLogin user Controller 테스트', () => {
   it('service에 newuser가 들어가는가', async () => {
     userService.gitHubLogin.mockReturnValue(resulted);
     await userController.gitHubLogin(req, res);
-    expect(userService.gitHubLogin).toBeCalledWith(code);
+    expect(userService.gitHubLogin).toBeCalledWith(newUser);
   });
 
   it('성공 시 200응답이 오는가', async () => {
