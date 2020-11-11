@@ -38,6 +38,8 @@ export const NewButton = styled.button`
 `;
 
 export const NewBox = styled.div`
+  width: 60%;
+  margin: 0 auto;
   margin-top: 15px;
   border: 1px;
   display: ${(props) => props.display};

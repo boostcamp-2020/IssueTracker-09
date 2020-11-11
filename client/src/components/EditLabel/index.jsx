@@ -13,7 +13,14 @@ import {
   Refresh,
 } from './styled';
 
-const EditLabel = ({ updateEvent, action, deleteEvent, label }) => {
+const EditLabel = ({
+  updateEvent,
+  action,
+  deleteEvent,
+  createEvent,
+  label,
+  type = null,
+}) => {
   const [nameValue, setNameValue] = useState(label.title);
   const [colorValue, setColorValue] = useState(label.color);
   const desValue = useRef(null);
@@ -75,18 +82,33 @@ const EditLabel = ({ updateEvent, action, deleteEvent, label }) => {
         </Div>
         <div>
           <button onClick={() => action(false)}>cancel</button>
-          <button
-            disabled={isDisabled || isValid()}
-            onClick={() =>
-              updateEvent({
-                title: nameValue,
-                color: colorValue,
-                content: desValue.current.value,
-              })
-            }
-          >
-            Save changes
-          </button>
+          {type ? (
+            <button
+              disabled={isDisabled || isValid()}
+              onClick={() =>
+                createEvent({
+                  title: nameValue,
+                  color: colorValue,
+                  content: desValue.current.value,
+                })
+              }
+            >
+              Create label
+            </button>
+          ) : (
+            <button
+              disabled={isDisabled || isValid()}
+              onClick={() =>
+                updateEvent({
+                  title: nameValue,
+                  color: colorValue,
+                  content: desValue.current.value,
+                })
+              }
+            >
+              Save changes
+            </button>
+          )}
         </div>
       </FlexDiv>
     </Container>
