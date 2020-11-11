@@ -7,12 +7,12 @@ export const FlexDiv = styled.div`
   padding: 5px;
 `;
 
-export const LabelIcon = styled.div`
-  padding: 7px;
-  border-radius: 15px;
+export const LabelIcon = styled.span`
+  padding: 5px 12px;
+  border-radius: 10px;
+  margin-left: 10px;
   color: white;
   background-color: ${(props) => props.color};
-  margin: 4px 2px;
 `;
 
 export const Description = styled.div`
@@ -29,4 +29,11 @@ export const ButtonDiv = styled.div`
 `;
 export const Span = styled.span`
   margin: 0 5px;
+  cursor: pointer;
+`;
+
+export const IconContainer = styled.div`
+  width: 15%;
+  display: flex;
+  align-items: center;
 `;

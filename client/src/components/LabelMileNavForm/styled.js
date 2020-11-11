@@ -16,11 +16,14 @@ export const LinkName = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 10px;
-  font-size: 14px;
-  border: 1px solid lightgray;
+  padding: 7px 15px;
+  font-size: 15px;
+  font-weight: bold;
+  border: 1px solid ${(props) => (props.path ? '#6495ED' : 'lightgray')};
   border-radius: 5px;
   cursor: pointer;
+  background-color: ${(props) => (props.path ? '#6495ED' : 'white')};
+  color: ${(props) => (props.path ? 'white' : 'black')};
   &:hover {
     background-color: lightgray;
   }
@@ -38,6 +41,8 @@ export const NewButton = styled.button`
 `;
 
 export const NewBox = styled.div`
+  width: 60%;
+  margin: 0 auto;
   margin-top: 15px;
   border: 1px;
   display: ${(props) => props.display};
