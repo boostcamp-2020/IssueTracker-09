@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { IssueContext } from '../../stores/issueStore';
+import { IssueContext } from '../../../stores/issueStore';
 import { Container, CloseMark, FlexDiv } from './styled';
 
 const ResetFilter = () => {

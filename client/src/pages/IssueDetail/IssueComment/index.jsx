@@ -1,10 +1,10 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { UserContext } from '../../stores/userStore';
+import { UserContext } from '../../../stores/userStore';
 import { Container, FlexDiv, Image } from './styled';
 import NewComment from '../NewComment';
 import Comment from '../Comment';
-import { getCommentAPI, createCommentAPI } from '../../apis/comment';
-import { updateState } from '../../apis/issue';
+import { getCommentAPI, createCommentAPI } from '../../../apis/comment';
+import { updateState } from '../../../apis/issue';
 
 const IssueComment = ({ id, getIssue, isOpen }) => {
   const {
@@ -31,7 +31,7 @@ const IssueComment = ({ id, getIssue, isOpen }) => {
   };
 
   const updateIssueHandler = async () => {
-    await updateState(id, !isOpen);
+    await updateState([id], !isOpen);
     getIssue();
   };
 

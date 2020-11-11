@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import EditComment from '../EditComment';
 import { FlexDiv, CommentContainer, Header, Body, Image } from './styled';
-import { updateCommentAPI } from '../../apis/comment';
+import { updateCommentAPI } from '../../../apis/comment';
 
 const Comment = ({ comment }) => {
   const [state, setState] = useState(false);

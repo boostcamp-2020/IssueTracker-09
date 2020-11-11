@@ -9,12 +9,12 @@ import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Div, IssueMark, Container, Details } from './styled';
 import MarkAs from '../MarkAs';
-import { IssueContext } from '../../stores/issueStore';
-import DropDown from '../Dropdown';
-import { getUsersAPI } from '../../apis/user';
-import { getLabelsAPI } from '../../apis/label';
-import { getMilestonesAPI } from '../../apis/milestone';
-import makeSearch from '../../lib/make-search';
+import { IssueContext } from '../../../stores/issueStore';
+import DropDown from '../../../components/Dropdown';
+import { getUsersAPI } from '../../../apis/user';
+import { getLabelsAPI } from '../../../apis/label';
+import { getMilestonesAPI } from '../../../apis/milestone';
+import makeSearch from '../../../lib/make-search';
 
 const ListHeader = ({ checkedHandler, checked }) => {
   const {

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import IssueHeader from '../../components/IssueHeader';
-import IssueComment from '../../components/IssueComment';
-import IssueSidebar from '../../components/IssueSidebar';
+import IssueHeader from './IssueHeader';
+import IssueComment from './IssueComment';
+import IssueSidebar from '../../components/Sidebar';
 import { Container, Top, Bottom } from './styled';
 import { getIssueByIdAPI } from '../../apis/issue';
 

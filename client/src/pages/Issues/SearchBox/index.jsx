@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { faTag, faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, useHistory } from 'react-router-dom';
@@ -14,9 +14,9 @@ import {
   Dropdown,
   Form,
 } from './styled';
-import makeSearch from '../../lib/make-search';
-import { IssueContext } from '../../stores/issueStore';
-import { UserContext } from '../../stores/userStore';
+import makeSearch from '../../../lib/make-search';
+import { IssueContext } from '../../../stores/issueStore';
+import { UserContext } from '../../../stores/userStore';
 
 const SearchBox = () => {
   const {
@@ -25,7 +25,7 @@ const SearchBox = () => {
   const {
     userState: { name },
   } = useContext(UserContext);
-  const [inputValue, setInputValue] = useState(search || 'is:open');
+  const inputValue = useRef(null);
   const history = useHistory();
 
   const dropdown = [
@@ -38,11 +38,11 @@ const SearchBox = () => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    history.push(`/?q=${inputValue}`);
+    history.push(`/?q=${inputValue.current.value}`);
   };
 
   useEffect(() => {
-    setInputValue(search || 'is:open');
+    inputValue.current.value = search;
   }, [search]);
 
   return (
@@ -61,10 +61,7 @@ const SearchBox = () => {
           </Dropdown>
         </FilterBox>
         <Form onSubmit={submitHandler}>
-          <Input
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-          />
+          <Input ref={inputValue} defaultValue={search || 'is:open'} />
         </Form>
       </SearchContainer>
       <OtherButton>
