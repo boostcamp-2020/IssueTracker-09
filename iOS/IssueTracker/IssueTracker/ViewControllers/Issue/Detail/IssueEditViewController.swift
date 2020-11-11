@@ -51,7 +51,7 @@ class IssueEditViewController: UIViewController {
         
         switch key {
         case .assignee:
-            guard let prev = issueEditController?.DeserializedAssignees()?.assignees else { return }
+            let prev: [User] = issueEditController?.DeserializedAssignees()?.assignees ?? []
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
             }).map { item -> User in
@@ -59,7 +59,7 @@ class IssueEditViewController: UIViewController {
             }
             service?.willEditAssignee(old: prev, new: new)
         case .label:
-            guard let prev = issueEditController?.DeserializedLabels()?.labels else { return }
+            let prev: [Label] = issueEditController?.DeserializedLabels()?.labels ?? []
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
             }).map { item -> Label in
