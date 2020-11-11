@@ -12,10 +12,29 @@ class MilestoneAppendViewController: UIViewController {
     @IBOutlet weak var deadlineInputField: InputField!
     @IBOutlet weak var descriptionInputField: InputField!
     
+    var milestone: Milestone?
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTitle()
         addKeyboardObserver()
+    }
+    
+    func config(milestone: Milestone) {
+        self.milestone = milestone
+        titleInputField.setText(milestone.title)
+        deadlineInputField.setText(milestone.deadline)
+        descriptionInputField.setText(milestone.content)
     }
     
     private func setupTitle() {
@@ -40,7 +59,44 @@ class MilestoneAppendViewController: UIViewController {
     }
     
     @IBAction func didSaveButtonTapped(_ sender: UIButton) {
-        //TODO
+        guard let title = titleInputField.textField.text, title != "",
+              let deadline = deadlineInputField.textField.text, deadline != "",
+              let description = descriptionInputField.textField.text, description != "" else {
+            let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 실패", message: "모든 항목을 채워주세요")
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
+        activityIndicator.startAnimating()
+        if var milestone = milestone {
+            milestone.title = title
+            milestone.deadline = deadline
+            milestone.content = description
+            MilestoneNetworkService().modifyMilestone(milestone) { [weak self] result in
+                self?.activityIndicator.stopAnimating()
+                switch result {
+                case .success(_):
+                    NotificationCenter.default.post(name: .didMilestoneChangedNotification, object: self)
+                    self?.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러", message: error.localizedDescription)
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        } else {
+            let milestone = Milestone(id: 0, title: title, content: description, deadline: deadline, isOpened: true, openCount: nil, totalCount: nil)
+            MilestoneNetworkService().addMilestone(milestone) { [weak self] result in
+                self?.activityIndicator.stopAnimating()
+                switch result {
+                case .success(_):
+                    NotificationCenter.default.post(name: .didMilestoneChangedNotification, object: self)
+                    self?.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러", message: error.localizedDescription)
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
