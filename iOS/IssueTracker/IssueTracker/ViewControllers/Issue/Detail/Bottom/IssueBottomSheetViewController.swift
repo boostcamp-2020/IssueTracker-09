@@ -28,6 +28,7 @@ class IssueBottomSheetViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var statusButton: RoundButton!
     @IBOutlet weak var collectionView: UICollectionView!
     
     private var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
@@ -68,6 +69,37 @@ class IssueBottomSheetViewController: UIViewController {
             let yComponent = self?.partialView
             self?.view.frame = CGRect(x: 0, y: yComponent!, width: frame!.width, height: frame!.height - 100)
         })
+    }
+    
+    private func statusDidChange() {
+        guard let issue = self.issue else { return }
+        
+        if issue.isOpened {
+            statusButton.setTitle("Open", for: .normal)
+        } else {
+            statusButton.setTitle("Close", for: .normal)
+        }
+        
+    }
+    
+    @IBAction func touchedCommentButton(_ sender: Any) {
+    }
+    
+    @IBAction func touchedStatusButton(_ sender: Any) {
+        guard let issue = self.issue else { return }
+        let service = IssueNetworkService()
+        service.modifyIssueStatus(of: issue) { [weak self] (result) in
+            switch result {
+            case .success(let isSuccess):
+                print("무슨 처리를 해줘야하징..")
+                if isSuccess {
+                    self?.statusDidChange()
+                }
+            case .failure(let error):
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker", message: error.localizedDescription)
+                self?.present(alert, animated: false, completion: nil)
+            }
+        }
     }
 }
 

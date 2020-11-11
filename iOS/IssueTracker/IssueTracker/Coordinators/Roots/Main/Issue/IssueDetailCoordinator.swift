@@ -61,14 +61,31 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
     }
     
     private func presentToEdit(key: EditKey, data: Data) {
+        let serive = IssueEditCacheService(issue: issue, delegate: self)
         let storyBoard = UIStoryboard(name: StoryboardName.IssueEdit.rawValue, bundle: nil)
         let issueEditViewController = storyBoard.instantiateViewController(
             identifier: "IssueEditViewController",
             creator: {
                 coder in
-                return IssueEditViewController(coder: coder, key: key, data: data)
+                return IssueEditViewController(coder: coder, key: key, data: data, service: serive)
             })
         
         parent?.present(issueEditViewController, animated: true, completion: nil)
     }
+}
+
+extension IssueDetailCoordinator: IssueEditServiceDelegate {
+    func didAssigneeLoaded(isSuccess: Bool) {
+        
+    }
+    
+    func didLabelsLoaded(isSuccess: Bool) {
+        
+    }
+    
+    func didMilestoneLoaded(isSuccess: Bool) {
+        
+    }
+    
+    
 }
