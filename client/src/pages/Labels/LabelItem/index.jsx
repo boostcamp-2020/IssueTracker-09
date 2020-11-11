@@ -1,7 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import EditLabel from '../../../components/EditLabel';
-import { FlexDiv, LabelIcon, Description, ButtonDiv, Span } from './styled';
+import {
+  FlexDiv,
+  LabelIcon,
+  Description,
+  ButtonDiv,
+  Span,
+  IconContainer,
+} from './styled';
 import { updateLabelAPI, deleteLabelAPI } from '../../../apis/label';
 
 const LabelItem = ({ label }) => {
@@ -38,7 +45,9 @@ const LabelItem = ({ label }) => {
         />
       ) : (
         <FlexDiv>
-          <LabelIcon color={labelInfo.color}>{labelInfo.title}</LabelIcon>
+          <IconContainer>
+            <LabelIcon color={labelInfo.color}>{labelInfo.title}</LabelIcon>
+          </IconContainer>
           <Description>{labelInfo.content}</Description>
           <ButtonDiv>
             <Span onClick={() => setState(true)}>Edit</Span>

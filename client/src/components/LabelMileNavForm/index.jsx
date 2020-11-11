@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { faTag, faFlag } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, LinkButtons, LinkName, NewButton, NewBox } from './styled';
 import EditLabel from '../EditLabel';
@@ -8,6 +8,7 @@ import { createLabelAPI } from '../../apis/label';
 
 const LabelMileNavForm = ({ title, getLabels }) => {
   const [state, setState] = useState(false);
+  const location = useLocation();
 
   const handleClick = () => {
     setState(!state);
@@ -25,13 +26,13 @@ const LabelMileNavForm = ({ title, getLabels }) => {
     <>
       <Container>
         <LinkButtons>
-          <LinkName>
+          <LinkName path={location.pathname === '/labels'}>
             <Link to="/labels">
               <FontAwesomeIcon icon={faTag} />
               Labels
             </Link>
           </LinkName>
-          <LinkName>
+          <LinkName path={location.pathname === '/milestones'}>
             <Link to="/milestones">
               <FontAwesomeIcon icon={faFlag} />
               Milestones
