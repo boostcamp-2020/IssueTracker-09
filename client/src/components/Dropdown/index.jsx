@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Details, Div, Summary } from './styled';
-
+import { overlayElement } from '../Overlay';
 import SelectMenu from '../SelectMenu';
 import DropdownItem from '../DropdownItem';
 
@@ -16,13 +16,11 @@ const Dropdown = ({ title, action, changeState = null, serverData = null }) => {
     }
   };
 
-  const overlay = document.getElementById('overlay');
-
   return (
     <Details onClick={clickHandler}>
       <Summary
         onClick={() => {
-          overlay.hidden = false;
+          overlayElement.current.hidden = false;
         }}
       >
         {title}

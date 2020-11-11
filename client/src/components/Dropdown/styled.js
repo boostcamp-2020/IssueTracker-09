@@ -19,6 +19,7 @@ const Details = styled.details`
 
 const Summary = styled.summary`
   outline: none;
+  cursor: pointer;
 `;
 
 export { Div, Details, Summary };
