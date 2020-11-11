@@ -4,13 +4,16 @@
  * 다른 테이블과의 관계를 수정하는 것(getLabel 등)을 제외하고 작성
  */
 const issueService = require('../issue');
-const Issue = require('../../model').Issue;
+const Model = require('../../model');
+const Issue = Model.Issue;
 
 Issue.findAll = jest.fn();
 Issue.create = jest.fn();
 Issue.destroy = jest.fn();
 Issue.update = jest.fn();
 issueService.makeObj = jest.fn();
+Model.sequelize.transaction = jest.fn();
+const rollback = jest.fn();
 
 describe('read issue Service 테스트', () => {
   const newIssue = [
@@ -85,6 +88,7 @@ describe('create issue Service 테스트', () => {
 
   it('rollback이 되는가', async () => {
     Issue.create.mockReturnValue(newIssue);
+    Model.sequelize.transaction.mockReturnValue({ rollback });
     const result = await issueService.create(requestInfo);
     expect(typeof result).toBe('object');
   });
