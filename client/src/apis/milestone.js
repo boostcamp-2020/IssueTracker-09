@@ -61,3 +61,15 @@ export const updateMilestoneStateAPI = async (id, isOpened) => {
     return false;
   }
 };
+
+export const removeMilestoneAPI = async (id) => {
+  try {
+    await request({
+      method: 'delete',
+      params: `/milestone/${id}`,
+    });
+    return true;
+  } catch (error) {
+    return false;
+  }
+};
