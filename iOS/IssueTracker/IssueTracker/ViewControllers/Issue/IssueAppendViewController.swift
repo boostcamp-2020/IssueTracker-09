@@ -24,6 +24,8 @@ class IssueAppendViewController: UIViewController {
         return activityIndicator
     }()
     
+    let pickerController = UIImagePickerController()
+    
     enum SegmentTitle: Int {
         case markdown = 0
         case preview
@@ -33,11 +35,12 @@ class IssueAppendViewController: UIViewController {
         super.viewDidLoad()
         configureTextViewDelegate()
         view.addSubview(activityIndicator)
+        pickerController.delegate = self
     }
     
     private func configureTextViewDelegate() {
-        textViewDelegate = EditableTextViewDelegate()
-        textViewDelegate?.setPlaceholder(textView: textView)
+        textViewDelegate = EditableTextViewDelegate(delegate: self)
+        textViewDelegate?.setPlaceholder(to: true, textView: textView)
         textView.delegate = textViewDelegate
     }
     
@@ -122,5 +125,59 @@ class IssueAppendViewController: UIViewController {
                 self?.dismiss(animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension IssueAppendViewController: ImagepickerDelegate {
+    func didInsertImageTapped() {
+        let alert =  UIAlertController(title: "원하는 타이틀", message: "원하는 메세지", preferredStyle: .actionSheet)
+        
+        let library =  UIAlertAction(title: "사진앨범", style: .default) { [weak self] action in
+            self?.openLibrary()
+        }
+        alert.addAction(library)
+        
+        let camera =  UIAlertAction(title: "카메라", style: .default) { [weak self] action in
+            self?.openCamera()
+        }
+        alert.addAction(camera)
+        
+        let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    func openLibrary(){
+        pickerController.sourceType = .photoLibrary
+        present(pickerController, animated: false, completion: nil)
+    }
+    
+    func openCamera(){
+        if UIImagePickerController .isSourceTypeAvailable(.camera) {
+            pickerController.sourceType = .camera
+            present(pickerController, animated: false, completion: nil)
+        }
+        else {
+            print("Camera not available")
+        }
+    }
+}
+
+extension IssueAppendViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        activityIndicator.startAnimating()
+        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            ImageNetworkService().uploadImage(image, name: "image.jpg") { [weak self] result in
+                self?.activityIndicator.stopAnimating()
+                switch result {
+                case .success(let url):
+                    let link = "![image](\(url.absoluteString))"
+                    self?.textView.text.append(link)
+                case .failure(let error):
+                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이미지 추가 실패", message: error.localizedDescription)
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

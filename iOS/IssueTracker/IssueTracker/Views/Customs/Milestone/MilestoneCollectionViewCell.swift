@@ -50,12 +50,12 @@ class MilestoneCollectionViewCell: UICollectionViewCell {
         openIssues.text = "\(openCount) open"
         closeIssues.text = "\(closeCount) close"
         
-        guard totalCount != 0, openCount <= totalCount else {
+        guard totalCount > 0, openCount > 0 else {
             percentageLabel.isHidden = true
             progressBar.isHidden = true
             return
         }
-        let percentage = Float(openCount / totalCount)
+        let percentage = Float(closeCount / totalCount) * 100
         progressBar.progress = percentage
         percentageLabel.text = "\(percentage)%"
     }
