@@ -2,8 +2,16 @@ import React from 'react';
 import MilestoneBox from '../../components/MilestoneBox';
 
 import { Container, Header, H2 } from './styled';
+import { createMilestoneAPI } from '../../apis/milestone'
 
 const MilestoneNew = () => {
+  const createHandler = async ({ title, content, deadline }) => {
+    const result = await createMilestoneAPI(title, content, deadline);
+    if(result){
+      window.location.href = 'http://localhost:4000/milestones';
+    }
+  }
+
   return (
     <Container>
       <Header>
@@ -13,7 +21,7 @@ const MilestoneNew = () => {
           Learn more about milestones and issues.
         </div>
       </Header>
-      <MilestoneBox />
+      <MilestoneBox type="create" createEvent={createHandler} />
     </Container>
   );
 };
