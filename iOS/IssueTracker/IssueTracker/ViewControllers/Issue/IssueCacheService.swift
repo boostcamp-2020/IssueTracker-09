@@ -34,10 +34,11 @@ class IssueCacheService: IssueService {
         networkService.modifyIssueStatus(of: issues[indexPath.item]) { [weak self] result in
             switch result {
             case .success(let response):
-                guard response else {
+                guard response, let isOpened = self?.issues[indexPath.item].isOpened else {
                     self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: "잠시후 다시 시도하세요", handler: nil)
                     return
                 }
+                self?.issues[indexPath.item].isOpened = !isOpened
                 self?.delegate?.didDataLoaded(at: indexPath)
             case .failure(let error):
                 self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: error.localizedDescription, handler: nil)

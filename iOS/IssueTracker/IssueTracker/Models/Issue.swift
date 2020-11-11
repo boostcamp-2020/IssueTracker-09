@@ -14,7 +14,7 @@ struct Issues: Codable {
 struct Issue: Model, Codable {
     let id: Int
     let title: String
-    let isOpened: Bool
+    var isOpened: Bool
     let timestamp: String
     let assignees: [User]?
     let milestone: Milestone?

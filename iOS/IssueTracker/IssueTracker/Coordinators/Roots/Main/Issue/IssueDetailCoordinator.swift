@@ -34,7 +34,9 @@ class IssueDetailCoordinator: Coordinator {
         
         issueDeatailViewController.service = IssueDetailCacheService(issue: issue, delegate: issueDeatailViewController)
         
-        (parent as? UINavigationController)?.pushViewController(issueDeatailViewController, animated: true)
+        let navigationController = parent as? UINavigationController
+        issueDeatailViewController.title = "이슈 상세"
+        navigationController?.pushViewController(issueDeatailViewController, animated: true)
     }
 }
 
