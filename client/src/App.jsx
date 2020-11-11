@@ -9,6 +9,7 @@ import {
   IssueDetail,
   MilestoneNew,
   Milestones,
+  Labels,
 } from './pages';
 import Layout from './components/Layout';
 import Overlay from './components/Overlay';
@@ -28,7 +29,7 @@ const App = () => {
         <PrivateRoute path="/milestones" component={Milestones} />
         <PrivateRoute path="/milestone/new" component={MilestoneNew} />
         <PrivateRoute path="/milestone/:id/edit" component={MilestoneNew} />
-        <PrivateRoute path="/labels" component={Login} />
+        <PrivateRoute path="/labels" component={Labels} />
       </Switch>
     </>
   );

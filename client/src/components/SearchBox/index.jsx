@@ -69,12 +69,16 @@ const SearchBox = () => {
       </SearchContainer>
       <OtherButton>
         <LinkName>
-          <FontAwesomeIcon icon={faTag} />
-          Labels
+          <Link to="/labels">
+            <FontAwesomeIcon icon={faTag} />
+            Labels
+          </Link>
         </LinkName>
         <LinkName>
-          <FontAwesomeIcon icon={faFlag} />
-          Milestones
+          <Link to="/milestones">
+            <FontAwesomeIcon icon={faFlag} />
+            Milestones
+          </Link>
         </LinkName>
       </OtherButton>
       <Button>

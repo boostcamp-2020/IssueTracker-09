@@ -1,7 +1,8 @@
 import React from 'react';
+import LabelList from '../../components/LabelList';
 
 const Labels = () => {
-  return <div>hello</div>;
+  return <LabelList />;
 };
 
 export default Labels;
