@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Div, ListItem, Name, Modal } from './styled';
-import updateState from '../../apis/issue';
+import { updateState } from '../../apis/issue';
 import { IssueContext } from '../../stores/issueStore';
 
 const MarkAs = ({ checked, checkHandler }) => {
