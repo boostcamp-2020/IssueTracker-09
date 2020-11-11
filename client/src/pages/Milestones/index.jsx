@@ -1,5 +1,5 @@
 import React from 'react';
-import LabelMileNavForm from '../../components/LabelMileNavForm'
+import LabelMileNavForm from '../../components/LabelMileNavForm';
 
 const Milestones = () => {
   return (
