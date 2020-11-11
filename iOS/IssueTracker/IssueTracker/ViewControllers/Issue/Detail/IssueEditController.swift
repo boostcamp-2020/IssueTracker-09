@@ -42,7 +42,7 @@ class IssueEditController {
         return EditItems(items: result)
     }
     
-    private func DeserializedAssignees() -> Assignees? {
+    func DeserializedAssignees() -> Assignees? {
         let decoder = JSONDecoder()
         do {
             let result = try decoder.decode(Assignees.self, from: data)
@@ -52,7 +52,7 @@ class IssueEditController {
         }
     }
     
-    private func DeserializedLabels() -> Labels? {
+    func DeserializedLabels() -> Labels? {
         let decoder = JSONDecoder()
         do {
             let result = try decoder.decode(Labels.self, from: data)
@@ -62,7 +62,7 @@ class IssueEditController {
         }
     }
     
-    private func DeserializedMilestones() -> Milestones? {
+    func DeserializedMilestones() -> Milestones? {
         let decoder = JSONDecoder()
         do {
             let result = try decoder.decode(Milestones.self, from: data)
