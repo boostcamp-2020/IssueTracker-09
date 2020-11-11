@@ -12,7 +12,9 @@ export const Top = styled.div`
 
 export const Bottom = styled.div`
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid lightgray;
   width: 60%;
   display: flex;
   justify-content: space-between;
