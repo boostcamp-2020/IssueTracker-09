@@ -116,7 +116,6 @@ class IssueNetworkService: NetworkService {
         
         let parameters = ["milestoneId": milestone.id]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        
         AF.request(url,
                    method: .put,
                    parameters: parameters,
@@ -132,7 +131,6 @@ class IssueNetworkService: NetworkService {
         }
         
         let parameters = ["isOpened": !issue.isOpened]
-
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
@@ -149,12 +147,14 @@ class IssueNetworkService: NetworkService {
             return
         }
         
+        let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
         let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
                    parameters: parameters,
+                   encoder: encoder,
                    headers: headers)
             .validate()
             .responseBool(completionHandler: handler)
@@ -166,14 +166,18 @@ class IssueNetworkService: NetworkService {
             return
         }
         
+        let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
         let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        
+    
         AF.request(url,
                    method: .put,
                    parameters: parameters,
+                   encoder: encoder,
                    headers: headers)
             .validate()
-            .responseBool(completionHandler: handler)
+            .responseBool(completionHandler: { result in
+                handler(result)
+            })
     }
 }

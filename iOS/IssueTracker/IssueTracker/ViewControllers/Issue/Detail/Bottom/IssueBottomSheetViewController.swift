@@ -92,6 +92,7 @@ class IssueBottomSheetViewController: UIViewController {
             switch result {
             case .success(let isSuccess):
                 print("무슨 처리를 해줘야하징..")
+                print("\(isSuccess)")
                 if isSuccess {
                     self?.statusDidChange()
                 }
@@ -123,7 +124,7 @@ extension IssueBottomSheetViewController {
                 case .labels:
                     return NSCollectionLayoutDimension.fractionalWidth(0.15)
                 case .milestone:
-                    return NSCollectionLayoutDimension.absolute(44)
+                    return NSCollectionLayoutDimension.fractionalWidth(0.2)
                 }
             }
             
@@ -194,6 +195,7 @@ extension IssueBottomSheetViewController {
         Section.allCases.forEach {
             snapshot.appendSections([$0])
             var count = 0
+
             switch $0 {
             case .assignees:
                 count = issue?.assignees?.count ?? 0
@@ -202,6 +204,7 @@ extension IssueBottomSheetViewController {
             case .milestone:
                 count = issue?.milestone != nil ? 1 : 0
             }
+            
             snapshot.appendItems(Array(0..<count))
         }
         dataSource.apply(snapshot, animatingDifferences: false)
