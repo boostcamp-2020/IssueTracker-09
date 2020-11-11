@@ -10,7 +10,7 @@ import {
   Icon,
   IconBackground,
 } from './styled';
-import { updateTitleAPI } from '../../apis/issue';
+import { updateTitleAPI } from '../../../apis/issue';
 
 const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
   if (!title) {
