@@ -163,7 +163,6 @@ module.exports = {
   },
 
   updateAssignee: async ({ id, assigneeId, joined } = {}) => {
-    console.log(id, assigneeId);
     if (!id || !assigneeId || joined === undefined) {
       return { error: '정보가 부족합니다' };
     }

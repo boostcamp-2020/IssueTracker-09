@@ -33,10 +33,10 @@ jobs:
         run: npm run test
         env:
           PORT: 3000
-          DB_NAME: test
-          DB_HOST: test
-          DB_USER: test
-          DB_PASSWORD: 1234
+          DB_NAME: ${{ secrets.DB_NAME }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_USER: ${{ secrets.DB_USER }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           DB_PORT: 3306
           DB_DIALECT: mysql
           GITHUB_ID: test
