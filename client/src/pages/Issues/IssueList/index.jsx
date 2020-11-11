@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import IssueItem from '../IssueItem';
 import { List } from './styled';
-import { IssueContext } from '../../stores/issueStore';
+import { IssueContext } from '../../../stores/issueStore';
 
 const IssueList = ({ checkedHandler, checked }) => {
   const {

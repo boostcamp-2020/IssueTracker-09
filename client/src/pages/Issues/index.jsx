@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import IssueList from '../../components/IssueList';
-import ListHeader from '../../components/ListHeader';
-import ResetFilter from '../../components/ResetFilter';
-import SearchBox from '../../components/SearchBox';
+import IssueList from './IssueList';
+import ListHeader from './ListHeader';
+import ResetFilter from './ResetFilter';
+import SearchBox from './SearchBox';
 
 const Issues = () => {
   const [checked, setChecked] = useState([]);

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import EditLabel from '../EditLabel';
 import { FlexDiv, LabelIcon, Description, ButtonDiv, Span } from './styled';

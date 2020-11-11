@@ -1,10 +1,10 @@
 import React from 'react';
 import { Button, Div, Image } from './styled';
-import config from '../../config';
+import { CALLBACK_URL } from '../../config';
 
 const Login = () => {
   const loginHandler = () => {
-    window.location.href = config.CALLBACK_URL;
+    window.location.href = CALLBACK_URL;
   };
 
   return (

@@ -24,9 +24,6 @@ import {
 } from './styled';
 
 const Issues = ({ issue, checkedHandler, checked }) => {
-  if (!issue) {
-    return null;
-  }
   return (
     <Item>
       <Checkbox
@@ -51,8 +48,8 @@ const Issues = ({ issue, checkedHandler, checked }) => {
           <Id>#{issue.id}</Id>
           <Text>
             {issue.is_opened
-              ? `opened yesterday by ${issue.User.name}`
-              : `closed by ${issue.User.name} yesterday`}
+              ? `opened yesterday by ${issue.User?.name}`
+              : `closed by ${issue.User?.name} yesterday`}
           </Text>
           {issue.Milestone ? (
             <>
