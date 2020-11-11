@@ -35,7 +35,6 @@ const IssueMark = styled.div`
 const Container = styled.div`
   width: 60%;
   margin: 0 auto;
-  margin-top: 30px;
   border: 1px solid lightGray;
   display: flex;
   align-items: center;
