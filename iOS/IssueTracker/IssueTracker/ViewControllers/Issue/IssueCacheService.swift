@@ -9,7 +9,6 @@ import Foundation
 
 extension Notification.Name {
     static let didFilterChangedNotification = Notification.Name(rawValue: "IssueCacheService.didFilterChangedNotification")
-    
 }
 
 class IssueCacheService: IssueService {
