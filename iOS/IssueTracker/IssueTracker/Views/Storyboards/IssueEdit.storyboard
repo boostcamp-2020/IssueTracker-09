@@ -22,10 +22,16 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MEv-dh-Bkr">
                                         <rect key="frame" x="10" y="10" width="48" height="30"/>
                                         <state key="normal" title="Cancel"/>
+                                        <connections>
+                                            <action selector="touchedCancelButton:" destination="iLJ-Zc-Tnv" eventType="touchUpInside" id="cyb-zp-prF"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abT-Ch-LEh">
                                         <rect key="frame" x="367" y="10" width="37" height="30"/>
                                         <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="touchedDoneButton:" destination="iLJ-Zc-Tnv" eventType="touchUpInside" id="NJx-KR-UtL"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

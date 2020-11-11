@@ -32,6 +32,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="touchedCommentButton:" destination="jps-EB-Ai1" eventType="touchUpInside" id="uJt-1K-dW4"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8uo-na-ybl" userLabel="OPEN" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="212" y="10" width="192" height="30"/>
@@ -45,6 +48,9 @@
                                                 <real key="value" value="1"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="touchedStatusButton:" destination="jps-EB-Ai1" eventType="touchUpInside" id="QUI-er-g6J"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -262,6 +268,7 @@
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="S8V-oG-sD8" id="Kdt-Nx-u8E"/>
+                        <outlet property="statusButton" destination="8uo-na-ybl" id="wbQ-9F-Znw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gxW-yY-yIa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
