@@ -34,9 +34,9 @@ class IssueBottomSheetViewController: UIViewController {
     private var dataSource: UICollectionViewDiffableDataSource<Section, Int>! = nil
     private weak var delegate: IssueEditDelegate?
     
-    let fullView: CGFloat = 100
+    let fullView: CGFloat = 140
     var partialView: CGFloat {
-        return UIScreen.main.bounds.height - 150
+        return UIScreen.main.bounds.height - 140
     }
     
     private var issue: Issue?

@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="jps-EB-Ai1">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SXG-a4-JYl" userLabel="ButtonBar">
-                                <rect key="frame" x="0.0" y="14" width="414" height="50"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NDE-Cl-ypj" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="10" y="10" width="192" height="30"/>
@@ -66,7 +66,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="S8V-oG-sD8">
-                                <rect key="frame" x="0.0" y="64" width="414" height="798"/>
+                                <rect key="frame" x="0.0" y="94" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="cgO-Nj-HT6">
                                     <size key="itemSize" width="229" height="62"/>
@@ -261,7 +261,7 @@
                             <constraint firstItem="S8V-oG-sD8" firstAttribute="leading" secondItem="Rx1-xP-bic" secondAttribute="leading" id="MiT-4c-XCn"/>
                             <constraint firstItem="SXG-a4-JYl" firstAttribute="trailing" secondItem="Rx1-xP-bic" secondAttribute="trailing" id="a5c-XZ-Vs6"/>
                             <constraint firstItem="Rx1-xP-bic" firstAttribute="bottom" secondItem="S8V-oG-sD8" secondAttribute="bottom" id="bvP-YM-caS"/>
-                            <constraint firstItem="SXG-a4-JYl" firstAttribute="top" secondItem="Rx1-xP-bic" secondAttribute="top" constant="-30" id="mrf-Fs-YuL"/>
+                            <constraint firstItem="SXG-a4-JYl" firstAttribute="top" secondItem="Rx1-xP-bic" secondAttribute="top" id="mrf-Fs-YuL"/>
                             <constraint firstItem="Rx1-xP-bic" firstAttribute="trailing" secondItem="S8V-oG-sD8" secondAttribute="trailing" id="rNq-Yu-TbU"/>
                             <constraint firstItem="SXG-a4-JYl" firstAttribute="leading" secondItem="Rx1-xP-bic" secondAttribute="leading" id="weF-QQ-ZOM"/>
                         </constraints>

@@ -127,13 +127,13 @@ extension IssueDetailViewController {
                 return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
-        self.addChild(bottomSheetViewController)
-        self.view.addSubview(bottomSheetViewController.view)
-        bottomSheetViewController.didMove(toParent: self)
-        
         let height = view.frame.height
         let width  = view.frame.width
         bottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+        bottomSheetViewController.didMove(toParent: self)
+        self.addChild(bottomSheetViewController)
+        self.view.addSubview(bottomSheetViewController.view)
+        
     }
 }
 
