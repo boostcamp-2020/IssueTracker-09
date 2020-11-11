@@ -28,12 +28,13 @@ const getIssueByIdAPI = async (id) => {
   }
 };
 
-const updateState = async (id, state) => {
+const updateState = async (checked, state) => {
   try {
     await request({
       method: 'put',
-      params: `/issue/state/${id}`,
+      params: '/issue/state',
       data: {
+        id: checked,
         isOpened: state,
       },
     });
