@@ -28,7 +28,13 @@ const LabelMileNavForm = ({ title }) => {
             </Link>
           </LinkName>
         </LinkButtons>
-        <NewButton onClick={handleClick}>New {title}</NewButton>
+        {title === 'Label' ? (
+          <NewButton onClick={handleClick}>New {title}</NewButton>
+        ) : (
+          <Link to="/milestone/new">
+            <NewButton>New {title}</NewButton>
+          </Link>
+        )}
       </Container>
       {state ? <NewBox>test</NewBox> : ''}
     </>
