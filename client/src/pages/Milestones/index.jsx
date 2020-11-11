@@ -1,7 +1,12 @@
 import React from 'react';
+import LabelMileNavForm from '../../components/LabelMileNavForm'
 
 const Milestones = () => {
-  return <div>hello</div>;
+  return (
+    <>
+      <LabelMileNavForm title="Milestone" />
+    </>
+  );
 };
 
 export default Milestones;
