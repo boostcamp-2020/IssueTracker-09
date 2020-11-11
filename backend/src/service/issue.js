@@ -28,6 +28,10 @@ module.exports = {
 
   read: async ({ q } = {}) => {
     const query = q ? makeObj(q) : {};
+    if (query.error) {
+      return [];
+    }
+
     const issues = await Model.Issue.findAll({
       include: [
         {
@@ -247,8 +251,20 @@ const makeObj = (query) => {
   const querys = query.split(' ');
   querys.forEach((item) => {
     const temp = item.toLowerCase().split(':');
+
+    if (!temp[1]) {
+      obj['error'] = true;
+      return obj;
+    }
+
     if (temp[0] === 'is') {
-      obj[temp[0]] = { is_opened: temp[1].includes('close') ? 0 : 1 };
+      obj[temp[0]] = {
+        is_opened: temp[1].includes('close')
+          ? 0
+          : temp[1].includes('open')
+          ? 1
+          : (obj['error'] = true),
+      };
     } else if (temp[0] === 'author' || temp[0] === 'assignee') {
       obj[temp[0]] = { name: temp[1] };
     } else if (temp[0] === 'label' || temp[0] === 'milestone') {
@@ -259,6 +275,8 @@ const makeObj = (query) => {
           [Model.Sequelize.Op.like]: '%' + temp[1] + '%',
         },
       };
+    } else {
+      obj['error'] = true;
     }
   });
   return obj;
