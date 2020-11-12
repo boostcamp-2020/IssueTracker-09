@@ -122,6 +122,7 @@ class IssueAppendViewController: UIViewController {
         requestAddIssue(title: title) { [weak self] issue in
             self?.requestAddComment(issue: issue, content: content) {
                 self?.activityIndicator.stopAnimating()
+                NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
                 self?.dismiss(animated: true, completion: nil)
             }
         }
