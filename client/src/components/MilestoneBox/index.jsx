@@ -50,7 +50,7 @@ const MilestoneBox = ({ createEvent, type = null }) => {
             Create milestone
           </Button>
         ) : (
-          console.log()
+          ''
         )}
       </ButtonBox>
     </Container>

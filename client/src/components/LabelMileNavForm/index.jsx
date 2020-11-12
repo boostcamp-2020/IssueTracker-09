@@ -53,6 +53,7 @@ const LabelMileNavForm = ({ title, getLabels }) => {
             label={{ title: '', color: '' }}
             type="create"
             createEvent={createHandler}
+            action={handleClick}
           />
         </NewBox>
       ) : (

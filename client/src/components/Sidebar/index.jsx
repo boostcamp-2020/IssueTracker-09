@@ -9,7 +9,6 @@ const IssueSidebar = ({ issue = { id: 1000 }, type }) => {
     return null;
   }
 
-  console.log('!!');
   return (
     <Container>
       <DropdownContainer>

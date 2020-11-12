@@ -18,6 +18,8 @@ export const LabelIcon = styled.span`
 export const Description = styled.div`
   width: 50%;
   padding: 7px;
+  font-size: 15px;
+  color: gray;
   margin: 4px 2px;
 `;
 export const ButtonDiv = styled.div`
@@ -29,6 +31,8 @@ export const ButtonDiv = styled.div`
 `;
 export const Span = styled.span`
   margin: 0 5px;
+  color: gray;
+  font-size: 13px;
   cursor: pointer;
 `;
 
