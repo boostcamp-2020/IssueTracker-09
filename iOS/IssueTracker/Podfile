@@ -10,6 +10,7 @@ pod 'Alamofire', '~> 5.2'
 pod 'KeychainSwift', '~> 19.0'
 pod 'AlamofireImage', '~> 4.1'
 pod "MarkdownView"
+pod 'SwiftLint'
 
   target 'IssueTrackerTests' do
     inherit! :search_paths
