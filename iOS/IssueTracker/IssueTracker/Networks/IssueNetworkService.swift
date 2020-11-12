@@ -124,7 +124,7 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueStatus(of issue: Issue, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueStatus(of issue: Issue, to: Bool, completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
