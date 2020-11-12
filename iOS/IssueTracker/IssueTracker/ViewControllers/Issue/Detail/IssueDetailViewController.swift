@@ -12,6 +12,7 @@ protocol IssueDetailCoordinatorDelegate: AnyObject {
     func presentToLabelEdit(labels: Labels)
     func presentToMilestoneEdit(milstones: Milestones)
     func presentToComment()
+    func resumeView()
 }
 
 class IssueDetailViewController: UIViewController {
@@ -135,8 +136,12 @@ extension IssueDetailViewController: IssueEditDelegate {
         }
     }
     
-    func touchedCommentBotton() {
+    func touchedCommentButton() {
         delegate?.presentToComment()
+    }
+    
+    func didChangeStatus() {
+        delegate?.resumeView()
     }
 }
 
