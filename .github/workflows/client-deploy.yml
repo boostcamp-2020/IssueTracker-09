@@ -10,12 +10,12 @@ jobs:
     runs-on: [ubuntu-latest]
     if: github.event.pull_request.merged
     steps:
-      - name: executing client server
+      - name: executing remote ssh commands using password
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST}}
+          host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           password: ${{ secrets.PASSWORD }}
-          key: ${{ secrets.KEY }}
+          port: ${{ secrets.PORT }}
           script: |
             bash deploy.sh
