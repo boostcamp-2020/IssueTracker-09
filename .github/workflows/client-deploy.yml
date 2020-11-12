@@ -1,17 +1,14 @@
 name: frontend
 
 on:
-  pull_request:
-    type: [closed]
+  push:
     branches: [FE/dev]
 
 jobs:
   build:
     runs-on: [ubuntu-latest]
-    if: github.event.pull_request.merged
     steps:
       - name: executing remote ssh commands using password
-        if: github.event_name == 'pull_request'
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
