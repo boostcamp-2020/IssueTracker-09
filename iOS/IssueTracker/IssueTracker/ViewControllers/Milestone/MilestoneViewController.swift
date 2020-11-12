@@ -19,6 +19,7 @@ class MilestoneViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     var service: MilestoneService?
+    private var refreshControl: UIRefreshControl?
     weak var delegate: MilestoneViewControllerDelegate?
     
     override func viewDidLoad() {
@@ -27,6 +28,7 @@ class MilestoneViewController: UIViewController {
         service?.reloadData()
         configRightItem()
         NotificationCenter.default.addObserver(self, selector: #selector(didMilestoneAppend), name: .didMilestoneAppend, object: nil)
+        configRefreshControl()
     }
     
     func configRightItem() {
@@ -34,6 +36,13 @@ class MilestoneViewController: UIViewController {
         barButtonItem.target = self
         barButtonItem.action = #selector(didAddButtonTapped)
         navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
     }
     
     @objc func didAddButtonTapped(_ sender: UIBarButtonItem) {
@@ -88,6 +97,10 @@ extension MilestoneViewController {
         }
         return layout
     }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        service?.reloadData()
+    }
 }
 
 extension MilestoneViewController: UICollectionViewDelegate {
@@ -122,6 +135,7 @@ extension MilestoneViewController: UICollectionViewDataSource {
 
 extension MilestoneViewController: MileStoneServiceDelegate {
     func didDataLoaded() {
+        refreshControl?.endRefreshing()
         collectionView.reloadData()
     }
 }
