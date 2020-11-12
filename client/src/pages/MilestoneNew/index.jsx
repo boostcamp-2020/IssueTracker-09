@@ -3,16 +3,16 @@ import { useHistory } from 'react-router-dom';
 import MilestoneBox from '../../components/MilestoneBox';
 
 import { Container, Header, H2 } from './styled';
-import { createMilestoneAPI } from '../../apis/milestone'
+import { createMilestoneAPI } from '../../apis/milestone';
 
 const MilestoneNew = () => {
   const history = useHistory();
   const createHandler = async ({ title, content, deadline }) => {
     const result = await createMilestoneAPI(title, content, deadline);
-    if(result){
+    if (result) {
       history.push('/milestones');
     }
-  }
+  };
 
   return (
     <Container>
