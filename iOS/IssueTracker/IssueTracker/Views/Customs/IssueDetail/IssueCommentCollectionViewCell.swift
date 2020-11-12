@@ -11,7 +11,8 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var profile: UIImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var date: UILabel!
-    @IBOutlet weak var comment: UILabel!
+    @IBOutlet weak var content: UILabel!
+    
     
     func configure(user: User, comment: Comment) {
         if let url = user.image {
@@ -19,6 +20,16 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
         }
         name.text = user.name
         date.text = comment.timestamp
-        self.comment.text = comment.content
+        content.text = comment.content
+        //        markdown.subviews.forEach { view in
+        //            view.removeFromSuperview()
+        //        }
+        //        markdown.load(markdown: comment.content)
+        //        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        //        // called when rendering finished
+        //        markdown.onRendered = { [weak self] height in
+        //            self?.contentView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        //            self?.setNeedsLayout()
+        //        }
     }
 }
