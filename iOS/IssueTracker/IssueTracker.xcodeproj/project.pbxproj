@@ -71,6 +71,7 @@
 		FC631A73254FF4B500DFE242 /* Filter.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC631A72254FF4B500DFE242 /* Filter.storyboard */; };
 		FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A7A254FF7A400DFE242 /* FilterViewController.swift */; };
 		FC631A83254FF82F00DFE242 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A82254FF82F00DFE242 /* Filter.swift */; };
+		FC6331B3255D24C10041C4E7 /* IssueCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331B2255D24C10041C4E7 /* IssueCommentViewController.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
 		FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7851A22548A13300E60957 /* GithubSignService.swift */; };
 		FC808DBF25542909001BCA58 /* IssueBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC808DBE25542909001BCA58 /* IssueBottomSheetViewController.swift */; };
@@ -201,6 +202,7 @@
 		FC631A72254FF4B500DFE242 /* Filter.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Filter.storyboard; sourceTree = "<group>"; };
 		FC631A7A254FF7A400DFE242 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC631A82254FF82F00DFE242 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		FC6331B2255D24C10041C4E7 /* IssueCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentViewController.swift; sourceTree = "<group>"; };
 		FC78518E2548996400E60957 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		FC7851A22548A13300E60957 /* GithubSignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSignService.swift; sourceTree = "<group>"; };
 		FC808DBE25542909001BCA58 /* IssueBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 				FC0C82C9255A72F400C11C9D /* IssueEditViewController.swift */,
 				FC0C82D3255A87B900C11C9D /* IssueEditController.swift */,
 				FC0C82CE255A841000C11C9D /* EditItems.swift */,
+				FC6331B2255D24C10041C4E7 /* IssueCommentViewController.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -1004,6 +1007,7 @@
 				FCBC1D3625595B4200423B8E /* IssueCoordinator.swift in Sources */,
 				FC5CAE5F254FA1CA0086EA13 /* UserNetworkService.swift in Sources */,
 				FC863BB82552661400000B19 /* SelectButton.swift in Sources */,
+				FC6331B3255D24C10041C4E7 /* IssueCommentViewController.swift in Sources */,
 				FCBC1CEE2559104500423B8E /* IssueEditService.swift in Sources */,
 				FCEFA49E255B147700A37867 /* IssueBottomSheetViewController+PanGesture.swift in Sources */,
 				FCBC1D0C255925A100423B8E /* IssueDetailCacheService.swift in Sources */,
