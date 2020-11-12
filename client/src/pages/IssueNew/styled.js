@@ -19,11 +19,9 @@ const Image = styled.div`
 
 const CommentContainer = styled.div`
   width: 65%;
+  height: 230px;
   display: flex;
+  padding-right: 20px;
 `;
 
-const SideBarConatiner = styled.div`
-  width: 30%;
-`;
-
-export { Container, CommentContainer, SideBarConatiner, Image };
+export { Container, CommentContainer, Image };
