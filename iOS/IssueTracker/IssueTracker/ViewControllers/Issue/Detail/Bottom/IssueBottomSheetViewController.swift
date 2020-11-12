@@ -63,9 +63,11 @@ class IssueBottomSheetViewController: UIViewController {
         let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
+        
+        addNotification()
+        statusDidChange()
         collectionView.collectionViewLayout = createLayout()
         configureDataSource()
-        addNotification()
     }
     
     override func viewDidAppear(_ animated: Bool) {

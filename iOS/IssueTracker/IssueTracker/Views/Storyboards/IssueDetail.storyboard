@@ -143,6 +143,9 @@
                                                                     <color key="tintColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                                                                     <state key="normal" image="ellipsis" catalog="system"/>
+                                                                    <connections>
+                                                                        <action selector="touchedMoreButton:" destination="H1v-pC-JWe" eventType="touchUpInside" id="eMh-RB-De9"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="249" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="TvL-uh-kka">
                                                                     <rect key="frame" x="61.5" y="10" width="293.5" height="41.5"/>

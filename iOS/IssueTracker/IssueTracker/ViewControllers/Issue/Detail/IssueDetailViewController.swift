@@ -178,7 +178,6 @@ extension IssueDetailViewController {
     
     private func configureHierarchy() {
         collectionView.collectionViewLayout = createLayout()
-        collectionView.delegate = self
         collectionView.dataSource = self
     }
 }
@@ -215,11 +214,11 @@ extension IssueDetailViewController: UICollectionViewDataSource {
             }
             
             commentCell.configure(user: user, comment: comments[indexPath.item])
+            commentCell.handler = { [weak self] in
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: "아직 기능이 없어요 ㅠ_ㅠ")
+                self?.present(alert, animated: true, completion: nil)
+            }
             return commentCell
         }
     }
-}
-
-extension IssueDetailViewController: UICollectionViewDelegate {
-    
 }
