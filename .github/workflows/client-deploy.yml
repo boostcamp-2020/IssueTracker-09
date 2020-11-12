@@ -1,15 +1,17 @@
 name: frontend
 
 on:
-  push:
+  pull_request:
+    types: [closed] # when PR closed
     branches: [FE/dev]
 
 jobs:
   build:
     runs-on: [ubuntu-latest]
+    if: github.event.pull_request.merged
     steps:
       - name: executing client server
-        uses: shellboy/ssh-action@master
+        uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST}}
           username: ${{ secrets.USERNAME }}
