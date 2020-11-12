@@ -17,8 +17,5 @@ protocol IssueEditService {
 }
 
 protocol IssueEditServiceDelegate: AnyObject {
-    func didCommentAdded(isSuccess: Bool)
-    func didAssigneeLoaded(isSuccess: Bool)
-    func didLabelsLoaded(isSuccess: Bool)
-    func didMilestoneLoaded(isSuccess: Bool)
+    func willUpdateIssue(isSuccess: Bool)
 }
