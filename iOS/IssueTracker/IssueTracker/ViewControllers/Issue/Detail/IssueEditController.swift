@@ -31,7 +31,7 @@ class IssueEditController {
                 guard let id = assignee.id else {
                     return nil
                 }
-                return EditItem(id: id , content: assignee.name, checkable: false)
+                return EditItem(id: id, content: assignee.name, checkable: false)
             } ?? []
         case .label:
             let labels = DeserializedLabels()

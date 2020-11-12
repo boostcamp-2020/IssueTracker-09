@@ -14,7 +14,6 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var content: UILabel!
     var handler: (() -> Void)?
     
-    
     func configure(user: User, comment: Comment) {
         if let url = user.image {
             profile.fromURL(url)
@@ -22,12 +21,10 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
         name.text = user.name
         date.text = self.date(comment.timestamp)
         content.text = comment.content
-        
     }
     
-    
     private func date(_ dateString: String) -> String {
-        let dateString:String = "2018-05-13 15:05:40"
+        let dateString: String = "2018-05-13 15:05:40"
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         

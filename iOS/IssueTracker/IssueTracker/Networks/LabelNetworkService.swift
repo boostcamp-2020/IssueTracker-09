@@ -13,7 +13,10 @@ class LabelNetworkService: NetworkService {
         case label = "/label"
     }
     
-    func addLabel(color: UIColor, title: String, content: String, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
+    func addLabel(color: UIColor,
+                  title: String,
+                  content: String,
+                  completion handler: ( (Result<Data?, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.label.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return

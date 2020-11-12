@@ -18,19 +18,22 @@ class MilestoneCoordinator: Coordinator {
     }
     
     func start() {
-        guard let milestoneViewController = UIStoryboard(name: "Milestone", bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
+        guard let milestoneViewController = UIStoryboard(name: "Milestone", bundle: nil)
+                .instantiateInitialViewController() as? MilestoneViewController else {
             return
         }
         milestoneViewController.delegate = self
         milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
-        milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
+        milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone",
+                                                          image: UIImage(systemName: "calendar.circle"),
+                                                          selectedImage: UIImage(systemName: "calendar.circle.fill"))
         milestoneViewController.title = "마일스톤"
         
         let navigationController = UINavigationController()
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([milestoneViewController], animated: false)
         
-        delegate?.setViewController(navigationController, name: .Milestone)
+        delegate?.setViewController(navigationController, name: .milestone)
     }
 }
 

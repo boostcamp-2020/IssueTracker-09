@@ -10,7 +10,7 @@ import UIKit
 protocol IssueDetailCoordinatorDelegate: AnyObject {
     func presentToAssigneeEdit(assignees: Assignees)
     func presentToLabelEdit(labels: Labels)
-    func presentToMilestoneEdit(milstones: Milestones)
+    func presentToMilestoneEdit(milestones: Milestones)
     func presentToComment()
     func resumeView()
 }
@@ -57,7 +57,6 @@ class IssueDetailViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
@@ -95,7 +94,7 @@ class IssueDetailViewController: UIViewController {
         }
     }
     
-    private func asyncNotify(compltion handler: @escaping () -> ()) {
+    private func asyncNotify(compltion handler: @escaping () -> Void) {
         dispatchGroup.notify(queue: DispatchQueue.main) {
             handler()
         }
@@ -109,7 +108,7 @@ class IssueDetailViewController: UIViewController {
 
 extension IssueDetailViewController: IssueDetailServiceDelegate {
     func didCommentsLoaded(comments: [Comment]?) {
-        if let comments = comments  {
+        if let comments = comments {
             self.comments = comments
         }
         dispatchGroup.leave()
@@ -153,7 +152,7 @@ extension IssueDetailViewController: IssueEditDelegate {
             delegate?.presentToLabelEdit(labels: labels)
         case .milestone:
             guard let milestones = milestones else { return }
-            delegate?.presentToMilestoneEdit(milstones: milestones)
+            delegate?.presentToMilestoneEdit(milestones: milestones)
         }
     }
     
@@ -175,8 +174,7 @@ extension IssueDetailViewController {
         let storyBoard = UIStoryboard(name: "IssueBottomSheet", bundle: nil)
         bottomSheetViewController = storyBoard.instantiateViewController(
             identifier: "IssueBottomSheetViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
@@ -217,11 +215,14 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
             guard let issue = issue,
-                  let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as? IssueContentCollectionViewCell else {
+                  let contentCell =
+                    collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath)
+                    as? IssueContentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
@@ -230,7 +231,9 @@ extension IssueDetailViewController: UICollectionViewDataSource {
             
         default:
             guard let user = assignee?.find(id: comments[indexPath.item].user_id),
-                  let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as? IssueCommentCollectionViewCell else {
+                  let commentCell =
+                    collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath)
+                    as? IssueCommentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             

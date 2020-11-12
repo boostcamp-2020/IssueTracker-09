@@ -29,8 +29,8 @@ class ShadowView: UIView {
     }
     
     @IBInspectable
-    var shadowColor : UIColor{
-        get{ return UIColor.init(cgColor: layer.shadowColor!) }
+    var shadowColor: UIColor {
+        get { return UIColor.init(cgColor: layer.shadowColor!) }
         set { layer.shadowColor = newValue.cgColor }
     }
     

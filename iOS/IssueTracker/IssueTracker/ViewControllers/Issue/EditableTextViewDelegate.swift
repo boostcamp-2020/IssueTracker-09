@@ -17,7 +17,9 @@ class EditableTextViewDelegate: NSObject, UITextViewDelegate {
     private lazy var networkService = ImageNetworkService()
     private weak var delegate: ImagepickerDelegate?
     
-    init(delegate: ImagepickerDelegate, placeholder: String = "코멘트는 여기에 작성하세요", placeholderColor: UIColor = .systemGray) {
+    init(delegate: ImagepickerDelegate,
+         placeholder: String = "코멘트는 여기에 작성하세요",
+         placeholderColor: UIColor = .systemGray) {
         self.placeholder = placeholder
         self.placeholderColor = placeholderColor
     }

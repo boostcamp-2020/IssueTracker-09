@@ -15,10 +15,8 @@ struct Assignees: Model, Codable {
     }
     
     func find(id: Int) -> User? {
-        for user in assignees {
-            if user.id == id {
-                return user
-            }
+        for user in assignees where user.id == id {
+            return user
         }
         return nil
     }

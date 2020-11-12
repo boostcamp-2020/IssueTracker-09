@@ -9,10 +9,14 @@ import UIKit
 
 class IssueDetailCoordinator: Coordinator {
     private enum StoryboardName: String {
-        case IssueDetail, IssueBottomSheet, IssueEdit, Comment
+        case issueDetail = "IssueDetail"
+        case issueBottomSheet = "IssueBottomSheet"
+        case issueEdit = "IssueEdit"
+        case comment = "Comment"
     }
+    
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String : Coordinator] = [:]
+    private(set) var childCoordinators: [String: Coordinator] = [:]
     private var issueDetailViewController: IssueDetailViewController?
     private weak var parent: UIViewController?
     
@@ -25,11 +29,10 @@ class IssueDetailCoordinator: Coordinator {
     }
     
     func start() {
-        let storyBoard = UIStoryboard(name: StoryboardName.IssueDetail.rawValue, bundle: nil)
+        let storyBoard = UIStoryboard(name: StoryboardName.issueDetail.rawValue, bundle: nil)
         issueDetailViewController = storyBoard.instantiateViewController(
             identifier: "IssueDetailViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return IssueDetailViewController(coder: coder, delegate: self)
             })
         
@@ -44,13 +47,12 @@ class IssueDetailCoordinator: Coordinator {
 
 extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
     func presentToComment() {
-        let storyBoard = UIStoryboard(name: StoryboardName.Comment.rawValue, bundle: nil)
+        let storyBoard = UIStoryboard(name: StoryboardName.comment.rawValue, bundle: nil)
         let serive = IssueEditCacheService(issue: issue, delegate: self)
         
         let commentViewController = storyBoard.instantiateViewController(
             identifier: "IssueCommentViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return IssueCommentViewController(coder: coder, service: serive)
             })
         
@@ -59,21 +61,27 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
     
     func presentToAssigneeEdit(assignees: Assignees) {
         let encoder = JSONEncoder()
-        let data = try! encoder.encode(assignees)
+        guard let data = try? encoder.encode(assignees) else {
+            return
+        }
         
         presentToEdit(key: .assignee, data: data)
     }
     
     func presentToLabelEdit(labels: Labels) {
         let encoder = JSONEncoder()
-        let data = try! encoder.encode(labels)
+        guard let data = try? encoder.encode(labels) else {
+            return
+        }
         
         presentToEdit(key: .label, data: data)
     }
     
-    func presentToMilestoneEdit(milstones: Milestones) {
+    func presentToMilestoneEdit(milestones: Milestones) {
         let encoder = JSONEncoder()
-        let data = try! encoder.encode(milstones)
+        guard let data = try? encoder.encode(milestones) else {
+            return
+        }
         
         presentToEdit(key: .milestone, data: data)
     }
@@ -84,11 +92,10 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
     
     private func presentToEdit(key: EditKey, data: Data) {
         let serive = IssueEditCacheService(issue: issue, delegate: self)
-        let storyBoard = UIStoryboard(name: StoryboardName.IssueEdit.rawValue, bundle: nil)
+        let storyBoard = UIStoryboard(name: StoryboardName.issueEdit.rawValue, bundle: nil)
         let issueEditViewController = storyBoard.instantiateViewController(
             identifier: "IssueEditViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return IssueEditViewController(coder: coder, key: key, data: data, service: serive)
             })
         
@@ -106,7 +113,8 @@ extension IssueDetailCoordinator: IssueEditServiceDelegate {
             NotificationCenter.default.post(name: .resumeIssueList, object: nil)
             updateIssue()
         } else {
-            let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: "Failed Data Load")
+            let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09",
+                                                                      message: "Failed Data Load")
             parent?.present(alert, animated: true, completion: nil)
         }
     }
@@ -118,7 +126,7 @@ extension IssueDetailCoordinator: IssueEditServiceDelegate {
             case .success(let data):
                 self?.issue = data
                 self?.issueDetailViewController?.issue = self?.issue
-            case .failure( _):
+            case .failure(_):
                 break
             }
             self?.issueDetailViewController?.refreshControl?.endRefreshing()
@@ -129,4 +137,3 @@ extension IssueDetailCoordinator: IssueEditServiceDelegate {
 extension Notification.Name {
     static let resumeIssueList = Notification.Name(rawValue: "resumeIssueList")
 }
-

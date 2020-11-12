@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         coordinatorController = RootCoordinateController(window: window)
         
         // user 정보 없을 시,
-        coordinatorController?.root(name: .Sign)
+        coordinatorController?.root(name: .sign)
         
         // user 정보 존재 시,
 //        coordinatorController?.root(name: .Issue)
@@ -66,7 +66,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
-    
 }
-

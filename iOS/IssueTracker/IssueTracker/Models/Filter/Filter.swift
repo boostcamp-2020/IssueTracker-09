@@ -105,5 +105,3 @@ extension Filter.Category: CustomStringConvertible {
         }
     }
 }
-
-

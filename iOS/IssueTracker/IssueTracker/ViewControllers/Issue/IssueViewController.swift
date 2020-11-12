@@ -167,7 +167,6 @@ class IssueViewController: UIViewController {
     }
 }
 
-
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         service?.count(isFiltering: isFiltering) ?? 0
@@ -192,8 +191,7 @@ extension IssueViewController: UITableViewDataSource {
         let isOpened = issue?.isOpened
         
         let close = UIContextualAction(style: .normal,
-                                       title: (isOpened ?? true) ? "Close" : "Open") {
-            [weak self] action, view, completion in
+                                       title: (isOpened ?? true) ? "Close" : "Open") { [weak self] _, _, completion in
             self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
@@ -217,7 +215,6 @@ extension IssueViewController: UITableViewDelegate {
         }
     }
 }
-
 
 extension IssueViewController: IssueCellDelegate {
     func checked(_ cell: IssueTableViewCell) {
@@ -263,7 +260,10 @@ extension IssueViewController: UISearchResultsUpdating {
 
 extension IssueViewController {
     func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willResumeView), name: .resumeIssueList, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willResumeView),
+                                               name: .resumeIssueList,
+                                               object: nil)
     }
     
     @objc func willResumeView() {

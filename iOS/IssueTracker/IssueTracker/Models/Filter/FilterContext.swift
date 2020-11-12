@@ -11,11 +11,11 @@ class FilterContext {
     static var shared = FilterContext()
     private init() {}
     
-    var condition: Int? = nil
-    var writer: User? = nil
-    var label: Label? = nil
-    var milestone: Milestone? = nil
-    var assignee: User? = nil
+    var condition: Int?
+    var writer: User?
+    var label: Label?
+    var milestone: Milestone?
+    var assignee: User?
     
     func clear() {
         condition = nil
@@ -26,9 +26,9 @@ class FilterContext {
     }
     
     var query: IssueFilterQuery {
-        var isOpen: Bool? = nil
-        var author: String? = nil
-        var assignee: String? = nil
+        var isOpen: Bool?
+        var author: String?
+        var assignee: String?
         if let condition = FilterContext.shared.condition,
            let element = Filter.Element.condition(rawValue: condition),
            let name = PersistenceManager.shared.load(forKey: .name) {

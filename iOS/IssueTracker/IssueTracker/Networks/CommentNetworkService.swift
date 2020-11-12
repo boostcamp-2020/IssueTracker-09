@@ -22,7 +22,7 @@ class CommentNetworkService: NetworkService {
         let parameters = [
             "content": content,
             "issueId": issue.id
-        ] as [String : Any]
+        ] as [String: Any]
         
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
@@ -31,12 +31,12 @@ class CommentNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .response { response in
+            .response { _ in
                 handler?(.success(true))
             }
     }
     
-    func fetchComments(issue:Issue, completion handler: @escaping (Result<Comments, AFError>) -> Void) {
+    func fetchComments(issue: Issue, completion handler: @escaping (Result<Comments, AFError>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "/\(issue.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return

@@ -8,8 +8,8 @@
 import UIKit
 
 enum RootCoordinatorName {
-    case Sign
-    case Issue
+    case sign
+    case issue
 }
 
 protocol RootCoordinateControllerDelegate: AnyObject {
@@ -26,9 +26,9 @@ class RootCoordinateController {
     
     private func make(name: RootCoordinatorName) -> Coordinator {
         switch name {
-        case .Sign:
+        case .sign:
             return SignCoordinator(window: window, delegate: self)
-        case .Issue:
+        case .issue:
             return MainTabBarCoordinator(window: window, delegate: self)
         }
     }

@@ -60,7 +60,8 @@ class IssueBottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gesture = UIPanGestureRecognizer.init(target: self, action: #selector(IssueBottomSheetViewController.panGesture))
+        let gesture = UIPanGestureRecognizer.init(target: self,
+                                                  action: #selector(IssueBottomSheetViewController.panGesture))
         gesture.delegate = self
         view.addGestureRecognizer(gesture)
         
@@ -101,7 +102,8 @@ class IssueBottomSheetViewController: UIViewController {
             case .success( _):
                 self?.delegate?.didChangeStatus()
             case .failure(let error):
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: error.localizedDescription)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09",
+                                                                          message: error.localizedDescription)
                 self?.present(alert, animated: true, completion: nil)
             }
         }
@@ -110,8 +112,7 @@ class IssueBottomSheetViewController: UIViewController {
 
 extension IssueBottomSheetViewController {
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout {
-            (sectionIndex: Int, layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection? in
+        let layout = UICollectionViewCompositionalLayout { sectionIndex, layoutEnvironment in
             guard let layoutKind = Section(rawValue: sectionIndex) else { return nil }
             
             let columns = layoutKind.columnCount(for: layoutEnvironment.container.effectiveContentSize.width)
@@ -154,26 +155,36 @@ extension IssueBottomSheetViewController {
     }
     
     func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Section, Int>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Int) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, Int>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, identifier -> UICollectionViewCell? in
             guard let section = Section(rawValue: indexPath.section) else { return nil }
             
             switch section {
             case .assignees:
                 guard let assignees = self.issue?.assignees,
-                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssigneeCell", for: indexPath) as? AssigneeCell else { return UICollectionViewCell() }
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "AssigneeCell",
+                                                                    for: indexPath) as? AssigneeCell else {
+                    return UICollectionViewCell()
+                }
                 cell.configure(assignee: assignees[identifier])
                 return cell
             case .labels:
                 guard let labels = self.issue?.labels,
-                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCell", for: indexPath) as? LabelCell else { return UICollectionViewCell() }
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCell",
+                                                                    for: indexPath) as? LabelCell else {
+                    return UICollectionViewCell()
+                }
                 
                 let index = identifier - (self.issue?.assignees?.count ?? 0)
                 cell.configure(label: labels[index])
                 return cell
             case .milestone:
                 guard let milestone = self.issue?.milestone,
-                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MilestoneCell", for: indexPath) as? MilestoneCell else { return UICollectionViewCell() }
+                      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MilestoneCell",
+                                                                    for: indexPath) as? MilestoneCell else {
+                    return UICollectionViewCell()
+                }
                 
                 cell.configure(milestone: milestone)
                 return cell
@@ -182,7 +193,10 @@ extension IssueBottomSheetViewController {
         
         dataSource.supplementaryViewProvider = { (collectionView, kind, indexPath) in
             guard let section = Section(rawValue: indexPath.section),
-                  let sectionHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "IssueSectionHeader", for: indexPath) as? IssueSectionHeader else {
+                  let sectionHeader =
+                    collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                    withReuseIdentifier: "IssueSectionHeader",
+                                                                    for: indexPath) as? IssueSectionHeader else {
                 return UICollectionReusableView()
             }
             
@@ -226,7 +240,9 @@ extension IssueBottomSheetViewController {
 
 extension IssueBottomSheetViewController {
     func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didTouchEditButton), name: .touchedEditKey, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didTouchEditButton),
+                                               name: .touchedEditKey, object: nil)
     }
     
     @objc func didTouchEditButton(notification: NSNotification) {
@@ -236,4 +252,3 @@ extension IssueBottomSheetViewController {
         delegate?.touchedEditButton(key: key)
     }
 }
-

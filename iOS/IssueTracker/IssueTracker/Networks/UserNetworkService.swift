@@ -21,7 +21,10 @@ class UserNetworkService: NetworkService {
         return URL(string: base)
     }
     
-    func login(endPoint: Endpoint, code: String, name: String, image: String = "https://avatars2.githubusercontent.com/u/46195613?v=4") {
+    func login(endPoint: Endpoint,
+               code: String,
+               name: String,
+               image: String = "https://avatars2.githubusercontent.com/u/46195613?v=4") {
         guard let url = url(endPoint: endPoint) else { return }
         let params: [String: String] = [ "code": code,
                                          "name": name,
@@ -61,4 +64,3 @@ class UserNetworkService: NetworkService {
             }
     }
 }
-

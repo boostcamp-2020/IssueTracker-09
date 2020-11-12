@@ -12,7 +12,8 @@ protocol MainTabBarDelegate: AnyObject {
 }
 
 enum TabName: String {
-    case Issue, Milestone
+    case issue = "Issue"
+    case milestone = "Milestone"
 }
 
 class MainTabBarCoordinator: Coordinator {
@@ -37,8 +38,8 @@ class MainTabBarCoordinator: Coordinator {
         let issueCoordinator = IssueCoordinator(window: window, delegate: self)
         let milestoneCoordinator = MilestoneCoordinator(window: window, delegate: self)
         
-        childCoordinators[TabName.Issue.rawValue] = issueCoordinator
-        childCoordinators[TabName.Milestone.rawValue] = milestoneCoordinator
+        childCoordinators[TabName.issue.rawValue] = issueCoordinator
+        childCoordinators[TabName.milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
         milestoneCoordinator.start()
     }
@@ -46,12 +47,15 @@ class MainTabBarCoordinator: Coordinator {
 extension MainTabBarCoordinator: MainTabBarDelegate {
     func setViewController(_ viewController: UIViewController, name: TabName) {
         switch name {
-        case .Issue:
-            viewController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
-        case .Milestone:
-            viewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
+        case .issue:
+            viewController.tabBarItem = UITabBarItem(title: "Issue",
+                                                     image: UIImage(systemName: "bell.circle"),
+                                                     selectedImage: UIImage(systemName: "bell.circle.fill"))
+        case .milestone:
+            viewController.tabBarItem = UITabBarItem(title: "Milestone",
+                                                     image: UIImage(systemName: "calendar.circle"),
+                                                     selectedImage: UIImage(systemName: "calendar.circle.fill"))
         }
         tabBarController.addChild(viewController)
     }
 }
-
