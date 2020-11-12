@@ -11,7 +11,7 @@ jobs:
     if: github.event.pull_request.merged
     steps:
       - name: executing remote ssh commands using password
-      if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request'
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.HOST }}
