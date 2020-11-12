@@ -34,6 +34,7 @@ class UserNetworkService: NetworkService {
                 guard let dic = value as? [String: Any],
                       let token = dic["token"] as? String else { return }
                 
+                PersistenceManager.shared.save(name, forKey: .name)
                 NotificationCenter.default.post(name: .succeededBySign, object: nil, userInfo: ["token": token])
             //통신실패
             case .failure(let error):

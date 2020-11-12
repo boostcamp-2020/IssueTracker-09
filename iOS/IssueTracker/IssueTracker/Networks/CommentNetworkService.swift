@@ -13,7 +13,7 @@ class CommentNetworkService: NetworkService {
         case comment = "/comment"
     }
     
-    func addComment(issue: Issue, content: String, completion handler: ( (Result<Comment, AFError>) -> Void)?) {
+    func addComment(issue: Issue, content: String, completion handler: ( (Result<Bool, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.comment.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -31,13 +31,13 @@ class CommentNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .responseDecodable(of: Comment.self) { response in
-                handler?(response.result)
+            .response { response in
+                handler?(.success(true))
             }
     }
     
     func fetchComments(issue:Issue, completion handler: @escaping (Result<Comments, AFError>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "?issueId=\(issue.id)"),
+        guard let url = URL(string: baseURL + Endpoint.comment.rawValue + "/\(issue.id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }

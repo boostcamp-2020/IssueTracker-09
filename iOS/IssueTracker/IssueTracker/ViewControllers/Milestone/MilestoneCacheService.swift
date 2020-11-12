@@ -7,6 +7,11 @@
 
 import Foundation
 
+
+extension Notification.Name {
+    static let didMilestoneChangedNotification = Notification.Name(rawValue: "MilestoneCacheService.didMilestoneChangedNotification")
+}
+
 class MilestoneCacheService: MilestoneService {
     private var milestones = [Milestone]()
     private var networkService = MilestoneNetworkService()
@@ -14,7 +19,7 @@ class MilestoneCacheService: MilestoneService {
 
     init(delegate: MileStoneServiceDelegate?) {
         self.delegate = delegate
-//        reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(didMilestoneChanged), name: .didMilestoneChangedNotification, object: nil)
     }
 
     subscript(at indexPath: IndexPath) -> Milestone {
@@ -30,5 +35,9 @@ class MilestoneCacheService: MilestoneService {
             self?.milestones = (try? result.get().milestones) ?? []
             self?.delegate?.didDataLoaded()
         }
+    }
+    
+    @objc func didMilestoneChanged() {
+        reloadData()
     }
 }

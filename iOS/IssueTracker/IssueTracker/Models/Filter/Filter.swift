@@ -53,6 +53,14 @@ struct Filter: Hashable {
                 return nil
             }
         }
+        
+        static func condition(rawValue: Int) -> Element? {
+            let conditions: [Element] = [.openIssues, .selfWrite, .selfAssignee, .selfComment, .closedIssues]
+            guard conditions.count > rawValue else {
+                return nil
+            }
+            return conditions[rawValue]
+        }
     }
     
     let element: Element

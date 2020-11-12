@@ -42,6 +42,7 @@
 		F497C397255AE86F0018D0FB /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = F497C396255AE86F0018D0FB /* Model.swift */; };
 		F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */; };
 		F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */; };
+		F4BBC96F255BE3220004F011 /* ShadowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BBC96E255BE3220004F011 /* ShadowView.swift */; };
 		F4C327F3255ACBEE005E778F /* AlertControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */; };
 		F4C327F8255AD2E7005E778F /* AssigneeNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C327F7255AD2E7005E778F /* AssigneeNetworkServiceTests.swift */; };
 		F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */; };
@@ -170,6 +171,7 @@
 		F4AF30472547D21C006D7D0A /* IssueTracker.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = IssueTracker.entitlements; sourceTree = "<group>"; };
 		F4B4AD5E2551902F00428C68 /* MilestoneAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MilestoneAppendViewController.swift; sourceTree = "<group>"; };
 		F4B4AD632551904700428C68 /* MilestoneAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MilestoneAppend.storyboard; sourceTree = "<group>"; };
+		F4BBC96E255BE3220004F011 /* ShadowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowView.swift; sourceTree = "<group>"; };
 		F4C327F2255ACBEE005E778F /* AlertControllerFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerFactory.swift; sourceTree = "<group>"; };
 		F4C327F7255AD2E7005E778F /* AssigneeNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssigneeNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F4E1085C254951ED0086F453 /* IssueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueTableViewCell.swift; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 			children = (
 				FC863BB2255265F800000B19 /* ElementView.swift */,
 				FC78518E2548996400E60957 /* RoundButton.swift */,
+				F4BBC96E255BE3220004F011 /* ShadowView.swift */,
 				F4012A57255027660047CE91 /* Milestone */,
 				FCBC1D4F2559A0D100423B8E /* BottomSheet */,
 				FCBC1D1025593BC400423B8E /* IssueDetail */,
@@ -976,6 +979,7 @@
 				F4012A6B255028AD0047CE91 /* MilestoneCacheService.swift in Sources */,
 				F4383EF3254946A4003FB09D /* CheckBox.swift in Sources */,
 				F4FF1AB5254FE46100635360 /* LabelNetworkService.swift in Sources */,
+				F4BBC96F255BE3220004F011 /* ShadowView.swift in Sources */,
 				FC889ACB254ABDA300E335CF /* BarButtonController.swift in Sources */,
 				F4B4AD5F2551902F00428C68 /* MilestoneAppendViewController.swift in Sources */,
 				F4EB412425515FEC007E56E1 /* InputField.swift in Sources */,
