@@ -10,6 +10,7 @@ import UIKit
 class IssueViewController: UIViewController {
     typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
     @IBOutlet private var tableView: IssueTableView!
+    private var bottomView: UIView?
     
     private weak var delegate: IssueCoordinatorDelegate?
     private let barButtonController = BarButtonController()
@@ -49,6 +50,29 @@ class IssueViewController: UIViewController {
     
         self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
         configSearchController()
+        configBottomButton()
+    }
+    
+    func configBottomButton() {
+        guard let tabbar = tabBarController?.tabBar else {
+            return
+        }
+        let bottomView = UIView(frame: tabbar.frame)
+        bottomView.backgroundColor = .systemGray6
+        let button = UIButton()
+        button.setTitle("선택 이슈 닫기", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(didCloseButtonTapped), for: .touchUpInside)
+        bottomView.addSubview(button)
+        bottomView.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
+            button.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -15)
+        ])
+        
+        view.addSubview(bottomView)
+        self.bottomView = bottomView
     }
     
     func configSearchController() {
@@ -75,6 +99,8 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.isHidden = !editing
         }
         
+        tabBarController?.tabBar.isHidden = editing
+        bottomView?.isHidden = !editing
         if editing {
             setLeftBarButton()
         } else {
@@ -116,6 +142,16 @@ class IssueViewController: UIViewController {
     @IBAction func touchedAppendButton(_ sender: Any) {
         delegate?.presentToNew()
     }
+    
+    @objc func didCloseButtonTapped(_ sender: UIButton) {
+        let checked = checks
+            .enumerated()
+            .filter { $0.element }
+            .compactMap {
+                $0.offset
+            }
+        service?.changeStatus(at: checked, to: false)
+    }
 }
 
 
@@ -139,7 +175,7 @@ extension IssueViewController: UITableViewDataSource {
     // https://zetal.tistory.com/entry/UIContextualAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
-            self?.service?.changeStatus(at: indexPath)
+            self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
         
@@ -150,11 +186,16 @@ extension IssueViewController: UITableViewDataSource {
 extension IssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
-            return
+        if isEditing {
+            checks[indexPath.item].toggle()
+            let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell
+            cell?.checkBoxWrapper.button.isSelected.toggle()
+        } else {
+            guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
+                return
+            }
+            delegate?.navigationToIssueDetail(issue: issue)
         }
-        delegate?.navigationToIssueDetail(issue: issue)
     }
 }
 
