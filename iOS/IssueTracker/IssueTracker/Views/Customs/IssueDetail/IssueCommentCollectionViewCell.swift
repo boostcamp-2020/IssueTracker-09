@@ -12,6 +12,7 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var date: UILabel!
     @IBOutlet weak var content: UILabel!
+    var handler: (() -> Void)?
     
     
     func configure(user: User, comment: Comment) {
@@ -19,17 +20,27 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
             profile.fromURL(url)
         }
         name.text = user.name
-        date.text = comment.timestamp
+        date.text = self.date(comment.timestamp)
         content.text = comment.content
-        //        markdown.subviews.forEach { view in
-        //            view.removeFromSuperview()
-        //        }
-        //        markdown.load(markdown: comment.content)
-        //        self.contentView.translatesAutoresizingMaskIntoConstraints = false
-        //        // called when rendering finished
-        //        markdown.onRendered = { [weak self] height in
-        //            self?.contentView.heightAnchor.constraint(equalToConstant: height).isActive = true
-        //            self?.setNeedsLayout()
-        //        }
+        
+    }
+    
+    
+    private func date(_ dateString: String) -> String {
+        let dateString:String = "2018-05-13 15:05:40"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
+        guard let date = dateFormatter.date(from: dateString) else {
+            return dateString
+        }
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        return dateFormatter.string(from: date)
+    }
+    
+    @IBAction func touchedMoreButton(_ sender: Any) {
+        guard let handler = handler else { return }
+        handler()
     }
 }
