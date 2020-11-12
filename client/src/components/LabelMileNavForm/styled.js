@@ -32,7 +32,7 @@ export const LinkName = styled.div`
 export const NewButton = styled.button`
   background-color: white;
   border: none;
-  padding: 0 10px;
+  padding: 10px 10px;
   color: white;
   background-color: ${(props) => props.theme.greenColor};
   font-weight: bold;
