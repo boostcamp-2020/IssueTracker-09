@@ -25,18 +25,18 @@ class CheckBox: UIButton {
     }
     
     private func design() {
-        let sizeOfOneSide = min(frame.width, frame.height)
-        layer.cornerRadius = sizeOfOneSide / 2
-
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.systemGray.cgColor
         tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        let blueCheckmark = UIImage(systemName: "checkmark")?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let blueCheckmark = UIImage(systemName: "checkmark.circle")?.withTintColor(.blue, renderingMode: .alwaysOriginal)
         self.setBackgroundImage(blueCheckmark, for: .selected)
+        let circle = UIImage(systemName: "circle")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        self.setBackgroundImage(circle, for: .normal)
     }
     
     @objc private func didChecked(sender: UIButton) {
         isSelected = !isSelected
-        // TODO: - 체크버튼 애니메이션 넣기
+        alpha = 0
+        UIView.animate(withDuration: 0.3) {
+            self.alpha = 1
+        }
     }
 }
