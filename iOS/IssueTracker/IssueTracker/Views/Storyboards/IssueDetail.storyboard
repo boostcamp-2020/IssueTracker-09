@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -18,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Yjx-av-H83">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
                                 <color key="backgroundColor" systemColor="systemGray6Color"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Yo9-vi-6bt">
                                     <size key="itemSize" width="414" height="320"/>
@@ -75,12 +76,10 @@
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A5I-tk-t0L">
                                                                     <rect key="frame" x="5" y="5" width="87" height="41"/>
-                                                                    <color key="backgroundColor" red="0.79607843137254897" green="1" blue="0.90196078431372551" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
-                                                                    <color key="tintColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
                                                                     <state key="normal" title=" Open" image="exclamationmark.circle" catalog="system">
-                                                                        <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                        <color key="titleColor" name="AccentColor"/>
                                                                     </state>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -223,7 +222,7 @@
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="comment" destination="g94-O0-Hyf" id="Afu-Ng-gFi"/>
+                                            <outlet property="content" destination="g94-O0-Hyf" id="Nc5-BI-IRt"/>
                                             <outlet property="date" destination="Wi9-sa-Ksp" id="32p-Nv-pYi"/>
                                             <outlet property="name" destination="iDI-Y4-yA9" id="vbi-Q4-h3W"/>
                                             <outlet property="profile" destination="zGz-2v-oIr" id="CQp-UR-Y3V"/>
@@ -238,7 +237,7 @@
                             <constraint firstItem="Yjx-av-H83" firstAttribute="leading" secondItem="cIc-qU-YQN" secondAttribute="leading" id="0FI-JM-Edo"/>
                             <constraint firstItem="cIc-qU-YQN" firstAttribute="trailing" secondItem="Yjx-av-H83" secondAttribute="trailing" id="619-Vb-PSj"/>
                             <constraint firstItem="Yjx-av-H83" firstAttribute="top" secondItem="cIc-qU-YQN" secondAttribute="top" id="Ij5-fU-9fk"/>
-                            <constraint firstItem="cIc-qU-YQN" firstAttribute="bottom" secondItem="Yjx-av-H83" secondAttribute="bottom" id="RcA-oZ-lE3"/>
+                            <constraint firstItem="cIc-qU-YQN" firstAttribute="bottom" secondItem="Yjx-av-H83" secondAttribute="bottom" constant="50" id="RcA-oZ-lE3"/>
                         </constraints>
                     </view>
                     <connections>
@@ -254,6 +253,9 @@
         <image name="ellipsis" catalog="system" width="128" height="37"/>
         <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="github" width="25" height="25"/>
+        <namedColor name="AccentColor">
+            <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

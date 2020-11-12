@@ -9,6 +9,8 @@ import UIKit
 
 protocol IssueEditDelegate: AnyObject {
     func touchedEditButton(key: EditKey)
+    func touchedCommentButton()
+    func didChangeStatus()
 }
 
 class IssueBottomSheetViewController: UIViewController {
@@ -39,7 +41,12 @@ class IssueBottomSheetViewController: UIViewController {
         return UIScreen.main.bounds.height - 140
     }
     
-    private var issue: Issue?
+    var issue: Issue? {
+        didSet {
+            applySnapshot()
+            statusDidChange()
+        }
+    }
     
     init?(coder: NSCoder, issue: Issue, delegate: IssueEditDelegate) {
         self.issue = issue
@@ -63,7 +70,6 @@ class IssueBottomSheetViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        statusDidChange()
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
@@ -75,27 +81,26 @@ class IssueBottomSheetViewController: UIViewController {
         guard let issue = self.issue else { return }
         
         if issue.isOpened {
-            statusButton.setTitle("Open", for: .normal)
-        } else {
             statusButton.setTitle("Close", for: .normal)
+        } else {
+            statusButton.setTitle("Open", for: .normal)
         }
     }
     
     @IBAction func touchedCommentButton(_ sender: Any) {
+        delegate?.touchedCommentButton()
     }
     
     @IBAction func touchedStatusButton(_ sender: Any) {
-        guard let issue = self.issue else { return }
+        guard let issue = issue else { return }
         let service = IssueNetworkService()
         service.modifyIssueStatus(of: issue, to: !issue.isOpened) { [weak self] (result) in
             switch result {
-            case .success(let isSuccess):
-                if isSuccess {
-                    self?.statusDidChange()
-                }
+            case .success( _):
+                self?.delegate?.didChangeStatus()
             case .failure(let error):
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker", message: error.localizedDescription)
-                self?.present(alert, animated: false, completion: nil)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: error.localizedDescription)
+                self?.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -190,7 +195,10 @@ extension IssueBottomSheetViewController {
             return sectionHeader
         }
         
-        // initial data
+        applySnapshot()
+    }
+    
+    private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         var temp = 0
         Section.allCases.forEach {

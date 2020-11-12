@@ -12,12 +12,10 @@ protocol IssueEditService {
     func willEditAssignee(old: [User], new: [User])
     func willEditLabels(old: [Label], new: [Label])
     func willEditMilestone(new: Milestone)
-    
+    func willAddComment(content: String) 
     // func willChangeStatus() 
 }
 
 protocol IssueEditServiceDelegate: AnyObject {
-    func didAssigneeLoaded(isSuccess: Bool)
-    func didLabelsLoaded(isSuccess: Bool)
-    func didMilestoneLoaded(isSuccess: Bool)
+    func willUpdateIssue(isSuccess: Bool)
 }

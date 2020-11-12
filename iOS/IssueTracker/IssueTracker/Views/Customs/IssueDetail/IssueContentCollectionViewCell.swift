@@ -21,10 +21,19 @@ class IssueContentCollectionViewCell: UICollectionViewCell {
         name.text = issue.user?.name
         number.text = "#\(issue.id)"
         content.text = issue.title
+        
+        status.layer.borderWidth = 1
         if issue.isOpened {
-            status.setTitle("Open", for: .normal)
+            status.setTitle("  Open", for: .normal)
+            status.setTitleColor(UIColor.systemBlue, for: .normal)
+            status.layer.borderColor = UIColor.systemBlue.cgColor
+            status.imageView?.tintColor = UIColor.systemBlue
+            
         } else {
-            status.setTitle("Close", for: .normal)
+            status.setTitle("  Close", for: .normal)
+            status.setTitleColor(UIColor.systemRed, for: .normal)
+            status.layer.borderColor = UIColor.systemRed.cgColor
+            status.imageView?.tintColor = UIColor.systemRed
         }
     }
 }

@@ -38,6 +38,22 @@ class IssueNetworkService: NetworkService {
         case assignees = "/assignees"
     }
     
+    func issue(id: Int, completion handler: @escaping (Result<Issue, AFError>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
+            return
+        }
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate()
+            .responseDecodable(of: Issue.self) { response in
+                handler(response.result)
+            }
+    }
+    
     func addIssue(title: String, labelId: [Int]?, assigneeId: [Int]?, milestoneId: Int?, completion handler: ( (Result<Issue, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {

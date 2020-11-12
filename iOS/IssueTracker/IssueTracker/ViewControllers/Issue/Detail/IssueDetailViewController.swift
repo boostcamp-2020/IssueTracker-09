@@ -11,6 +11,8 @@ protocol IssueDetailCoordinatorDelegate: AnyObject {
     func presentToAssigneeEdit(assignees: Assignees)
     func presentToLabelEdit(labels: Labels)
     func presentToMilestoneEdit(milstones: Milestones)
+    func presentToComment()
+    func resumeView()
 }
 
 class IssueDetailViewController: UIViewController {
@@ -20,16 +22,26 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     var service: IssueDetailService?
+    var issue: Issue? {
+        didSet {
+            bottomSheetViewController?.issue = issue
+            dispatchGroup.enter()
+            service?.requestComments()
+            asyncNotify { [weak self] in
+                self?.collectionView.reloadData()
+            }
+        }
+    }
+    
     private weak var delegate: IssueDetailCoordinatorDelegate?
     private let dispatchGroup = DispatchGroup()
-    private var issue: Issue? {
-        return service?.issue
-    }
+    
     private var comments: [Comment] = []
     private var assignee: Assignees?
     private var milestones: Milestones?
     private var labels: Labels?
     
+    private var bottomSheetViewController: IssueBottomSheetViewController?
     
     init?(coder: NSCoder, delegate: IssueDetailCoordinatorDelegate) {
         self.delegate = delegate
@@ -39,7 +51,7 @@ class IssueDetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,10 +72,22 @@ class IssueDetailViewController: UIViewController {
         dispatchGroup.enter()
         service?.requestMilestones()
         
-        dispatchGroup.notify(queue: DispatchQueue.main) {
+        asyncNotify {
+            self.issue = self.service?.issue
             self.configureHierarchy()
             self.addBottomSheetView()
         }
+    }
+    
+    private func asyncNotify(compltion handler: @escaping () -> ()) {
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            handler()
+        }
+    }
+    
+    private func updateComments() {
+        dispatchGroup.enter()
+        service?.requestComments()
     }
 }
 
@@ -111,6 +135,14 @@ extension IssueDetailViewController: IssueEditDelegate {
             delegate?.presentToMilestoneEdit(milstones: milestones)
         }
     }
+    
+    func touchedCommentButton() {
+        delegate?.presentToComment()
+    }
+    
+    func didChangeStatus() {
+        delegate?.resumeView()
+    }
 }
 
 extension IssueDetailViewController {
@@ -120,20 +152,20 @@ extension IssueDetailViewController {
         }
         
         let storyBoard = UIStoryboard(name: "IssueBottomSheet", bundle: nil)
-        let bottomSheetViewController = storyBoard.instantiateViewController(
+        bottomSheetViewController = storyBoard.instantiateViewController(
             identifier: "IssueBottomSheetViewController",
             creator: {
                 coder in
                 return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
+        guard let viewController = bottomSheetViewController else { return }
         let height = view.frame.height
         let width  = view.frame.width
-        bottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
-        bottomSheetViewController.didMove(toParent: self)
-        self.addChild(bottomSheetViewController)
-        self.view.addSubview(bottomSheetViewController.view)
-        
+        viewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+        viewController.didMove(toParent: self)
+        self.addChild(viewController)
+        self.view.addSubview(viewController.view)
     }
 }
 
