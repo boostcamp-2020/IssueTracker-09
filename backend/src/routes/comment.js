@@ -10,6 +10,8 @@ router.post('/', comment.create);
 
 router.get('/', comment.read);
 
+router.get('/:id', comment.readById);
+
 router.delete('/:id', comment.remove);
 
 router.put('/:id', comment.update);
