@@ -1,6 +1,6 @@
 import React, { createContext, useState } from 'react';
 
-export const CreateInfoContext = createContext();
+const CreateInfoContext = createContext();
 
 const CreateInfoProvider = ({ children }) => {
   const [createInfo, setCreateInfo] = useState({
@@ -27,4 +27,4 @@ const CreateInfoProvider = ({ children }) => {
   );
 };
 
-export default CreateInfoProvider;
+export { CreateInfoProvider, CreateInfoContext };
