@@ -37,7 +37,11 @@ class IssueDetailViewController: UIViewController {
     private weak var delegate: IssueDetailCoordinatorDelegate?
     private let dispatchGroup = DispatchGroup()
     
-    private var comments: [Comment] = []
+    private var comments: [Comment] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     private var assignee: Assignees?
     private var milestones: Milestones?
     private var labels: Labels?
@@ -130,6 +134,11 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
             self.milestones = Milestones(milestones: milestones)
         }
         dispatchGroup.leave()
+    }
+    
+    func didReceivedError(description: String) {
+        let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이슈 상세 화면", message: description)
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -227,8 +236,21 @@ extension IssueDetailViewController: UICollectionViewDataSource {
             
             commentCell.configure(user: user, comment: comments[indexPath.item])
             commentCell.handler = { [weak self] in
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: "아직 기능이 없어요 ㅠ_ㅠ")
-                self?.present(alert, animated: true, completion: nil)
+                let sheet = UIAlertController(title: "댓글 수정", message: nil, preferredStyle: .actionSheet)
+                let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                sheet.addAction(cancel)
+                let delete = UIAlertAction(title: "제거", style: .destructive) { _ in
+                    guard let comment = self?.comments[indexPath.item] else {
+                        return
+                    }
+                    
+                    self?.dispatchGroup.enter()
+                    let userName = self?.assignee?.find(id: comment.user_id)?.name
+                    self?.service?.deleteComment(comment,
+                                                 userName: userName)
+                }
+                sheet.addAction(delete)
+                self?.present(sheet, animated: true, completion: nil)
             }
             return commentCell
         }
