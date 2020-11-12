@@ -1,19 +1,30 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Dropdown from '../../Dropdown';
 import { getUsersAPI } from '../../../apis/user';
 import { Item, Image, DummyImage, Name, Span } from './styled';
 import { updateAssigneeAPI } from '../../../apis/issue';
+import { CreateInfoContext } from '../../../stores/createInfoStore';
 
-const AssigneeContainer = ({ assignees, issueId }) => {
+const AssigneeContainer = ({ assignees, issueId, type }) => {
   const [state, setState] = useState(assignees || []);
+  const { changeInfo } = useContext(CreateInfoContext);
 
   const changeState = async (item) => {
     const index = state.findIndex((s) => s.id === item.id);
     if (index !== -1) {
-      await updateAssigneeAPI(issueId, state[index].id, false);
+      if (type === 'modify') {
+        await updateAssigneeAPI(issueId, state[index].id, false);
+      }
+      changeInfo(
+        'assignee',
+        state.filter((s, i) => i !== index)
+      );
       return setState(state.filter((s, i) => i !== index));
     }
-    await updateAssigneeAPI(issueId, item.id, true);
+    if (type === 'modify') {
+      await updateAssigneeAPI(issueId, item.id, true);
+    }
+    changeInfo('assignee', [...state, item]);
     return setState([...state, item]);
   };
 

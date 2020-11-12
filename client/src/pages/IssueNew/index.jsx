@@ -1,10 +1,12 @@
 import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import NewComment from '../../components/NewComment';
+import Sidebar from '../../components/Sidebar';
 import { UserContext } from '../../stores/userStore';
 import { createIssueAPI } from '../../apis/issue';
 import { createCommentAPI } from '../../apis/comment';
 import { Container, CommentContainer, SideBarConatiner, Image } from './styled';
+import CreateInfoProvider from '../../stores/createInfoStore';
 
 const IssueNew = () => {
   const {
@@ -30,13 +32,17 @@ const IssueNew = () => {
   };
 
   return (
-    <Container>
-      <CommentContainer>
-        <Image image={image} />
-        <NewComment submitEvent={submitHandler} />
-      </CommentContainer>
-      <SideBarConatiner>123</SideBarConatiner>
-    </Container>
+    <CreateInfoProvider>
+      <Container>
+        <CommentContainer>
+          <Image image={image} />
+          <NewComment submitEvent={submitHandler} />
+        </CommentContainer>
+        <SideBarConatiner>
+          <Sidebar type="create" />
+        </SideBarConatiner>
+      </Container>
+    </CreateInfoProvider>
   );
 };
 

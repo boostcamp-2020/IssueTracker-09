@@ -11,6 +11,8 @@ import {
   Input,
   ColorInput,
   Refresh,
+  Cancel,
+  Submit,
 } from './styled';
 
 const EditLabel = ({
@@ -51,7 +53,7 @@ const EditLabel = ({
     <Container>
       <FlexDiv>
         <LabelIcon color={colorValue}>{nameValue || 'Label preview'}</LabelIcon>
-        <div onClick={() => deleteEvent()}>Delete</div>
+        {!type ? <div onClick={() => deleteEvent()}>Delete</div> : ''}
       </FlexDiv>
       <FlexDiv>
         <Div>
@@ -81,9 +83,9 @@ const EditLabel = ({
           </FlexDiv>
         </Div>
         <div>
-          <button onClick={() => action(false)}>cancel</button>
+          <Cancel onClick={() => action(false)}>Cancel</Cancel>
           {type ? (
-            <button
+            <Submit
               disabled={isDisabled || isValid()}
               onClick={() =>
                 createEvent({
@@ -94,9 +96,9 @@ const EditLabel = ({
               }
             >
               Create label
-            </button>
+            </Submit>
           ) : (
-            <button
+            <Submit
               disabled={isDisabled || isValid()}
               onClick={() =>
                 updateEvent({
@@ -107,7 +109,7 @@ const EditLabel = ({
               }
             >
               Save changes
-            </button>
+            </Submit>
           )}
         </div>
       </FlexDiv>

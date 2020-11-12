@@ -4,7 +4,7 @@ import AssigneeContainer from './Assignee';
 import LabelContainer from './Label';
 import MilestoneContainer from './Milestone';
 
-const IssueSidebar = ({ issue }) => {
+const IssueSidebar = ({ issue = { id: 1000 }, type }) => {
   if (!issue.id) {
     return null;
   }
@@ -12,13 +12,21 @@ const IssueSidebar = ({ issue }) => {
   return (
     <Container>
       <DropdownContainer>
-        <AssigneeContainer assignees={issue.Assignees} issueId={issue.id} />
+        <AssigneeContainer
+          assignees={issue.Assignees}
+          issueId={issue.id}
+          type={type}
+        />
       </DropdownContainer>
       <DropdownContainer>
-        <LabelContainer labels={issue.Labels} issueId={issue.id} />
+        <LabelContainer labels={issue.Labels} issueId={issue.id} type={type} />
       </DropdownContainer>
       <DropdownContainer>
-        <MilestoneContainer milestone={issue.Milestone} issueId={issue.id} />
+        <MilestoneContainer
+          milestone={issue.Milestone}
+          issueId={issue.id}
+          type={type}
+        />
       </DropdownContainer>
     </Container>
   );

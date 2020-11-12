@@ -30,7 +30,7 @@ const IssueDetail = () => {
           getIssue={getIssue}
           isOpen={issue?.is_opened}
         />
-        <IssueSidebar issue={issue} />
+        <IssueSidebar issue={issue} type="modify" />
       </Bottom>
     </Container>
   );
