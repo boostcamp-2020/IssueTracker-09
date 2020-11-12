@@ -1,8 +1,7 @@
 name: frontend
 
 on:
-  pull_request:
-    types: [closed] # when PR closed
+  push:
     branches: [FE/dev]
 
 jobs:
