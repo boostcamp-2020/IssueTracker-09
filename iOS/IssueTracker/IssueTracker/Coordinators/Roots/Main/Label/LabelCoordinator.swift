@@ -18,6 +18,7 @@ class LabelCoordinator: Coordinator {
     init(window: UIWindow, delegate: MainTabBarDelegate) {
         self.window = window
         self.delegate = delegate
+        addNotification()
         createLabelViewController()
     }
     
@@ -40,15 +41,27 @@ class LabelCoordinator: Coordinator {
         
         delegate?.setViewController(navigationController, name: .Label)
     }
+    
+    private func presentToIssueAppend(label: Label?) {
+        let storyBoard = UIStoryboard(name: "LabelAppend", bundle: nil)
+        let labelAppendViewcontroller = storyBoard.instantiateViewController(
+            identifier: "LabelAppendViewController",
+            creator: {
+                coder in
+                return LabelAppendViewController(coder: coder, label: label)
+            })
+        
+        navigationController.present(labelAppendViewcontroller, animated: true, completion: nil)
+    }
 }
 
 extension LabelCoordinator: LabelCoordinatorDelegate {
     func presentAddLabel() {
-        <#code#>
+        presentToIssueAppend(label: nil)
     }
     
-    func presentEditLabel() {
-        <#code#>
+    func presentEditLabel(label: Label) {
+        presentToIssueAppend(label: label)
     }
     
     func willRequestLabels() {
@@ -62,5 +75,15 @@ extension LabelCoordinator: LabelCoordinatorDelegate {
                 self?.navigationController.present(alert, animated: true, completion: nil)
             }
         }
+    }
+}
+
+extension LabelCoordinator {
+    private func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(viewWillResuem), name: .viewWillResume, object: nil)
+    }
+    
+    @objc func viewWillResuem() {
+        willRequestLabels()
     }
 }
