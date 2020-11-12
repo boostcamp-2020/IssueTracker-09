@@ -186,8 +186,14 @@ extension IssueViewController: UITableViewDataSource {
     }
     
     // https://zetal.tistory.com/entry/UIContextualAction
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let issue = service?.issue(at: indexPath, isFiltering: isFiltering)
+        let isOpened = issue?.isOpened
+        
+        let close = UIContextualAction(style: .normal,
+                                       title: (isOpened ?? true) ? "Close" : "Open") {
+            [weak self] action, view, completion in
             self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
