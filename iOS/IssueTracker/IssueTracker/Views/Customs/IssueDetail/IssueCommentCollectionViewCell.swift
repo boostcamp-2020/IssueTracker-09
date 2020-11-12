@@ -25,7 +25,6 @@ class IssueCommentCollectionViewCell: UICollectionViewCell {
         
     }
     
-    
     private func date(_ dateString: String) -> String {
         let dateString:String = "2018-05-13 15:05:40"
         let dateFormatter = DateFormatter()
