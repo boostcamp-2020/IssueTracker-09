@@ -1,0 +1,18 @@
+name: backend-deploy
+
+on:
+  push:
+    branches: [BE/dev]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.BE_HOST }}
+          username: ${{ secrets.BE_USERNAME }}
+          password: ${{ secrets.BE_PASSWORD }}
+          script: |
+            bash deploy.sh
