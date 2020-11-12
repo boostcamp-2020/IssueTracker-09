@@ -12,7 +12,7 @@ import {
   Labels,
 } from './pages';
 import Layout from './components/Layout';
-import Overlay from './components/Overlay';
+import { Overlay } from './components/Overlay';
 import PrivateRoute from './lib/PrivateRoute';
 
 const App = () => {

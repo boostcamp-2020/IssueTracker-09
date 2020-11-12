@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   width: 60%;
-  margin: 0 auto;
+  margin: 10px auto;
 `;
 const CloseMark = styled.div`
   width: 17px;

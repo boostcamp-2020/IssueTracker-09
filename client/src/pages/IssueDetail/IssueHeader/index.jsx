@@ -9,6 +9,9 @@ import {
   Span,
   Icon,
   IconBackground,
+  Button,
+  Id,
+  Text,
 } from './styled';
 import { updateTitleAPI } from '../../../apis/issue';
 
@@ -37,30 +40,33 @@ const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
   return (
     <Container>
       <FlexDiv align="space-between">
-        <Div width="80%">
+        <Div width="100%">
           {state ? (
             <InputBox
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
             />
           ) : (
-            <Span>{inputValue}</Span>
+            <>
+              <Span>{inputValue}</Span>
+              <Id>#{id}</Id>
+            </>
           )}
         </Div>
         <Div>
           {state ? (
             <>
-              <button onClick={cancelTitleHandler}>CANCEL</button>
-              <button onClick={saveTitleHandler}>SAVE</button>
+              <Button onClick={cancelTitleHandler}>CANCEL</Button>
+              <Button onClick={saveTitleHandler}>SAVE</Button>
             </>
           ) : (
-            <button
+            <Button
               onClick={() => {
                 setState(true);
               }}
             >
-              edit
-            </button>
+              Edit
+            </Button>
           )}
         </Div>
       </FlexDiv>
@@ -69,7 +75,7 @@ const IssueHeader = ({ id, issue: { title, is_opened, User } }) => {
           <Icon>!</Icon>
           {is_opened ? 'open' : 'close'}
         </IconBackground>
-        <Div padding="5px">{User?.name} created this issue</Div>
+        <Text>{User?.name} created this issue</Text>
       </FlexDiv>
     </Container>
   );

@@ -1,26 +1,38 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
-import { Textarea, WriteBox } from './styled';
+import {
+  Textarea,
+  WriteBox,
+  Header,
+  Square,
+  IsOpened,
+  Submit,
+  ButtonContainer,
+} from './styled';
 
 const NewComment = ({ addEvent, updateStateEvent, isOpen }) => {
   const [inputValue, setInputvalue] = useState('');
 
   return (
     <WriteBox>
-      <div>write</div>
+      <Header>
+        Write
+        <Square />
+      </Header>
       <Textarea
+        placeholder="Leave a comment"
         value={inputValue}
         onChange={(e) => setInputvalue(e.target.value)}
       />
-      <div>
-        <button
+      <ButtonContainer>
+        <IsOpened
           onClick={() => {
             updateStateEvent();
           }}
         >
           {isOpen ? 'close' : 'Reopen issue'}
-        </button>
-        <button
+        </IsOpened>
+        <Submit
           onClick={() => {
             addEvent(inputValue);
             setInputvalue('');
@@ -28,8 +40,8 @@ const NewComment = ({ addEvent, updateStateEvent, isOpen }) => {
           disabled={!inputValue}
         >
           Comment
-        </button>
-      </div>
+        </Submit>
+      </ButtonContainer>
     </WriteBox>
   );
 };

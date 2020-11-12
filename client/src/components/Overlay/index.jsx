@@ -1,21 +1,19 @@
 /* eslint-disable no-unused-vars */
-import React, { useEffect } from 'react';
+import React, { createRef } from 'react';
 
 import Div from './styled';
 
-const Overlay = () => {
-  useEffect(() => {
-    const overlay = document.getElementById('overlay');
-    overlay.addEventListener('click', () => {
-      const details = Object.entries(document.getElementsByTagName('details'));
-      details.forEach(([_, detail]) => {
-        detail.toggleAttribute('open', false);
-      });
-      overlay.hidden = true;
-    });
-  }, []);
+const overlayElement = createRef();
 
-  return <Div />;
+const Overlay = () => {
+  const clickHandler = (e) => {
+    const details = Object.entries(document.getElementsByTagName('details'));
+    details.forEach(([_, detail]) => {
+      detail.toggleAttribute('open', false);
+    });
+    e.target.hidden = true;
+  };
+  return <Div onClick={(e) => clickHandler(e)} ref={overlayElement} />;
 };
 
-export default Overlay;
+export { Overlay, overlayElement };
