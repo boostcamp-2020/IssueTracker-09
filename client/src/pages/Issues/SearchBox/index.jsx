@@ -13,10 +13,12 @@ import {
   DropdownItem,
   Dropdown,
   Form,
+  Summary,
 } from './styled';
 import makeSearch from '../../../lib/make-search';
 import { IssueContext } from '../../../stores/issueStore';
 import { UserContext } from '../../../stores/userStore';
+import { overlayElement } from '../../../components/Overlay';
 
 const SearchBox = () => {
   const {
@@ -49,7 +51,13 @@ const SearchBox = () => {
     <Container>
       <SearchContainer>
         <FilterBox>
-          <summary>Filters</summary>
+          <Summary
+            onClick={() => {
+              overlayElement.current.hidden = false;
+            }}
+          >
+            Filters
+          </Summary>
           <Dropdown>
             {dropdown.map((item, index) => (
               <DropdownItem key={index}>

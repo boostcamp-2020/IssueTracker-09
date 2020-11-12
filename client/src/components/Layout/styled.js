@@ -14,4 +14,5 @@ export const Issue = styled.h1`
   color: ${(props) => props.theme.whiteColor};
   font-size: 30px;
   font-weight: bold;
+  cursor: pointer;
 `;

@@ -87,3 +87,8 @@ export const Dropdown = styled.div`
   border: 1px solid black;
   border-radius: 5px;
 `;
+
+export const Summary = styled.summary`
+  outline: none;
+  cursor: pointer;
+`;
