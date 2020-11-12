@@ -15,6 +15,23 @@
 ![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
 ![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 
+<p align="center">
+<img src="https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif" alt="github-icon" width="200" height="200" />
+</p>
+
+## 배포 주소
+
+[Issuetracker-09](http://101.101.218.244/)
+
+## 기술 스택
+
+![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
+![Xcode](https://img.shields.io/badge/xcode-v12.1-blue?logo=xcode)
+
+![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)
+![react](https://img.shields.io/badge/react-0.0-9cf?logo=react)
+![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
+![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
 
 ## 그룹 인원 🧑🏻‍💻
 
@@ -24,7 +41,7 @@
 
 ## 주간 계획 📒
 
-1주차 : 설계, 기능 개발 
+1주차 : 설계, 기능 개발
 
 2주차 : 기능 개발, 테스트
 
@@ -32,9 +49,9 @@
 
 ## 팀 그라운드 룰 🙆
 
-[공통](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---%EA%B3%B5%ED%86%B5)  | 
-[iOS](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---iOS)  | 
-[JS](https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)-%EC%9B%B9)
+[공통](<https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---%EA%B3%B5%ED%86%B5>) |
+[iOS](<https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)---iOS>) |
+[JS](<https://github.com/boostcamp-2020/IssueTracker-09/wiki/(%ED%8C%80%EA%B7%B8%EB%9D%BC%EC%9A%B4%EB%93%9C%EB%A3%B0)-%EC%9B%B9>)
 
 ## 기능 요구사항 (Notion) 🛠
 
@@ -68,3 +85,4 @@
 [데모 앱](https://boostcamp-2020.github.io/IssueTracker-09/)
 
 <img src="https://user-images.githubusercontent.com/16751025/98316504-d97e3700-201d-11eb-8e6a-aa387ce53e07.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316513-dedb8180-201d-11eb-9919-c09bf2de6597.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316523-e0a54500-201d-11eb-94dd-7dfe19920d61.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316533-e4d16280-201d-11eb-8c84-ab27e06d2600.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316537-e69b2600-201d-11eb-805a-1e0b7bbaf160.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316540-e7cc5300-201d-11eb-8e8b-89bd6c3f0f0d.gif" width=200px />
+

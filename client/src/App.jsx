@@ -8,14 +8,18 @@ import {
   IssueNew,
   IssueDetail,
   MilestoneNew,
+  MilestoneEdit,
   Milestones,
+  Labels,
 } from './pages';
 import Layout from './components/Layout';
+import { Overlay } from './components/Overlay';
 import PrivateRoute from './lib/PrivateRoute';
 
 const App = () => {
   return (
     <>
+      <Overlay />
       <Layout />
       <Switch>
         <Route path="/callback" component={Callback} />
@@ -25,8 +29,8 @@ const App = () => {
         <PrivateRoute path="/issues/:id" component={IssueDetail} />
         <PrivateRoute path="/milestones" component={Milestones} />
         <PrivateRoute path="/milestone/new" component={MilestoneNew} />
-        <PrivateRoute path="/milestone/:id/edit" component={MilestoneNew} />
-        <PrivateRoute path="/labels" component={Login} />
+        <PrivateRoute path="/milestone/:id/edit" component={MilestoneEdit} />
+        <PrivateRoute path="/labels" component={Labels} />
       </Switch>
     </>
   );

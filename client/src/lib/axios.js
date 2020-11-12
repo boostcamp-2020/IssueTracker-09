@@ -1,6 +1,8 @@
-const axios = require('axios');
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
+import axios from 'axios';
+import { SERVER_URL } from '../config';
+
+axios.defaults.baseURL = `${SERVER_URL}/api`;
 const request = async ({ method, params = '', data = '' }) => {
   const token = localStorage.getItem('jwt_token');
 

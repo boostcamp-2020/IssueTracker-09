@@ -27,3 +27,13 @@ export const getUserAPI = async () => {
     return false;
   }
 };
+export const getUsersAPI = async () => {
+  try {
+    const {
+      data: { assignee },
+    } = await request({ method: 'get', params: '/user/users' });
+    return assignee;
+  } catch (error) {
+    return false;
+  }
+};

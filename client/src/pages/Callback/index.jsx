@@ -3,6 +3,7 @@ import React, { useEffect, useContext } from 'react';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import qs from 'qs';
 import { UserContext } from '../../stores/userStore';
+import Image from './styled';
 
 const Callback = ({ history, location }) => {
   const {
@@ -17,7 +18,7 @@ const Callback = ({ history, location }) => {
     return history.push('/');
   }, []);
 
-  return <div>hello</div>;
+  return <Image />;
 };
 
 export default Callback;
