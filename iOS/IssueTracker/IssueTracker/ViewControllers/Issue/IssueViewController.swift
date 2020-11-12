@@ -11,6 +11,7 @@ class IssueViewController: UIViewController {
     typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
     @IBOutlet private var tableView: IssueTableView!
     private var bottomView: UIView?
+    private var refreshControl: UIRefreshControl?
     
     private weak var delegate: IssueCoordinatorDelegate?
     private let barButtonController = BarButtonController()
@@ -51,6 +52,14 @@ class IssueViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
         configSearchController()
         configBottomButton()
+        configRefreshControl()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
     }
     
     func configBottomButton() {
@@ -152,6 +161,10 @@ class IssueViewController: UIViewController {
             }
         service?.changeStatus(at: checked, to: false)
     }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        service?.reloadData()
+    }
 }
 
 
@@ -217,6 +230,8 @@ extension IssueViewController: IssueServiceDelegate {
         } else {
             tableView.reloadData()
         }
+        
+        refreshControl?.endRefreshing()
         
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
