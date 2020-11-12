@@ -1,5 +1,18 @@
 import request from '../lib/axios';
 
+const createIssueAPI = async (data) => {
+  try {
+    const result = await request({
+      method: 'post',
+      params: `/issue`,
+      data,
+    });
+
+    return result.data;
+  } catch (error) {
+    return false;
+  }
+};
 const getListAPI = async (search) => {
   try {
     const {
@@ -111,6 +124,7 @@ const updateTitleAPI = async (id, title) => {
 };
 
 export {
+  createIssueAPI,
   getListAPI,
   getIssueByIdAPI,
   updateAssigneeAPI,
