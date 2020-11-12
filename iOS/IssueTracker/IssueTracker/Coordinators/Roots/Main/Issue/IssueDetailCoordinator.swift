@@ -9,7 +9,7 @@ import UIKit
 
 class IssueDetailCoordinator: Coordinator {
     private enum StoryboardName: String {
-        case IssueDetail, IssueBottomSheet, IssueEdit
+        case IssueDetail, IssueBottomSheet, IssueEdit, Comment
     }
     private(set) var window: UIWindow
     private(set) var childCoordinators: [String : Coordinator] = [:]
@@ -32,10 +32,10 @@ class IssueDetailCoordinator: Coordinator {
                 coder in
                 return IssueDetailViewController(coder: coder, delegate: self)
             })
-        guard  let viewController = issueDetailViewController else { return }
         
+        guard let viewController = issueDetailViewController else { return }
         viewController.service = IssueDetailCacheService(issue: issue, delegate: viewController)
-        
+
         let navigationController = parent as? UINavigationController
         viewController.title = "이슈 상세"
         navigationController?.pushViewController(viewController, animated: true)
@@ -43,6 +43,20 @@ class IssueDetailCoordinator: Coordinator {
 }
 
 extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
+    func presentToComment() {
+        let storyBoard = UIStoryboard(name: StoryboardName.Comment.rawValue, bundle: nil)
+        let serive = IssueEditCacheService(issue: issue, delegate: self)
+        
+        let commentViewController = storyBoard.instantiateViewController(
+            identifier: "IssueCommentViewController",
+            creator: {
+                coder in
+                return IssueCommentViewController(coder: coder, service: serive)
+            }) 
+        
+        parent?.present(commentViewController, animated: true, completion: nil)        
+    }
+    
     func presentToAssigneeEdit(assignees: Assignees) {
         let encoder = JSONEncoder()
         let data = try! encoder.encode(assignees)
@@ -79,23 +93,30 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
 }
 
 extension IssueDetailCoordinator: IssueEditServiceDelegate {
+    func didCommentAdded(isSuccess: Bool) {
+        refreshView(isSuccess: isSuccess)
+    }
+    
     func didAssigneeLoaded(isSuccess: Bool) {
-        updateIssue()
-        refreshView()
+        refreshView(isSuccess: isSuccess)
     }
     
     func didLabelsLoaded(isSuccess: Bool) {
-        updateIssue()
-        refreshView()
+        refreshView(isSuccess: isSuccess)
     }
     
     func didMilestoneLoaded(isSuccess: Bool) {
-        updateIssue()
-        refreshView()
+        refreshView(isSuccess: isSuccess)
     }
     
-    private func refreshView() {
-        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
+    private func refreshView(isSuccess: Bool) {
+        if isSuccess {
+            NotificationCenter.default.post(name: .resumeIssueList, object: nil)
+            updateIssue()
+        } else {
+            let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: "Failed Data Load")
+            parent?.present(alert, animated: true, completion: nil)
+        }
     }
     
     private func updateIssue() {
