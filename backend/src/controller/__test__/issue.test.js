@@ -70,7 +70,7 @@ describe('create issue Controller 테스트', () => {
 
   it('service에 newIssue가 들어가는가', async () => {
     await issueController.create(req, res);
-    expect(issueService.create).toBeCalledWith(issue1);
+    expect(issueService.create).toBeCalledWith(issue);
   });
 
   it('성공 시 201응답이 오는가', async () => {
