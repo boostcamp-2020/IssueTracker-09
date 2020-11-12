@@ -9,6 +9,7 @@ import UIKit
 
 protocol IssueEditDelegate: AnyObject {
     func touchedEditButton(key: EditKey)
+    func touchedCommentBotton()
 }
 
 class IssueBottomSheetViewController: UIViewController {
@@ -87,6 +88,7 @@ class IssueBottomSheetViewController: UIViewController {
     }
     
     @IBAction func touchedCommentButton(_ sender: Any) {
+        delegate?.touchedCommentBotton()
     }
     
     @IBAction func touchedStatusButton(_ sender: Any) {
