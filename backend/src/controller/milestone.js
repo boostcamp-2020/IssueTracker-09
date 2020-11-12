@@ -18,6 +18,15 @@ module.exports = {
     return res.status(status).json(result);
   },
 
+  readById: async (req, res) => {
+    const { status, result } = await control(
+      milestoneService.readById,
+      req.params
+    );
+
+    return res.status(status).json(result);
+  },
+
   update: async (req, res) => {
     const { status, result } = await control(milestoneService.update, {
       ...req.body,

@@ -33,6 +33,17 @@ module.exports = {
     return { milestones: milestone };
   },
 
+  readById: async ({ id }) => {
+    if (!id) {
+      return { error: '정보가 부족합니다.' };
+    }
+    const milestone = await Milestone.findOne({
+      where: { id },
+    });
+
+    return milestone;
+  },
+
   update: async ({ id, title, deadline, content } = {}) => {
     if (!id) {
       return { error: '정보가 부족합니다' };
