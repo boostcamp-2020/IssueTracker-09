@@ -11,7 +11,8 @@ protocol IssueService {
     func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue
     func count(isFiltering: Bool) -> Int
     func reloadData()
-    func changeStatus(at indexPath: IndexPath)
+    func changeStatus(at index: Int)
+    func changeStatus(at indices: [Int], to: Bool)
     func filter(_ text: String?)
 }
 

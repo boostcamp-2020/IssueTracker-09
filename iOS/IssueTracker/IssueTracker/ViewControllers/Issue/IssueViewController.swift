@@ -139,7 +139,7 @@ extension IssueViewController: UITableViewDataSource {
     // https://zetal.tistory.com/entry/UIContextualAction
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
-            self?.service?.changeStatus(at: indexPath)
+            self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
         
