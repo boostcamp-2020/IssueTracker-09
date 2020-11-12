@@ -223,7 +223,7 @@
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
-                                            <outlet property="comment" destination="g94-O0-Hyf" id="Afu-Ng-gFi"/>
+                                            <outlet property="content" destination="g94-O0-Hyf" id="Nc5-BI-IRt"/>
                                             <outlet property="date" destination="Wi9-sa-Ksp" id="32p-Nv-pYi"/>
                                             <outlet property="name" destination="iDI-Y4-yA9" id="vbi-Q4-h3W"/>
                                             <outlet property="profile" destination="zGz-2v-oIr" id="CQp-UR-Y3V"/>
