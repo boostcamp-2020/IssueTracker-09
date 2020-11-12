@@ -27,6 +27,7 @@
 		F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */; };
 		F40541CC2550524A001EAF52 /* DataRequest+responseBool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40541CB2550524A001EAF52 /* DataRequest+responseBool.swift */; };
 		F41014A0255ADB570032EEF6 /* FilterContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410149F255ADB570032EEF6 /* FilterContext.swift */; };
+		F41C39A5255CD29F00486AE4 /* ColorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41C39A4255CD29F00486AE4 /* ColorTests.swift */; };
 		F4383EC525493016003FB09D /* SignIn.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC225493016003FB09D /* SignIn.storyboard */; };
 		F4383EC625493016003FB09D /* Issue.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC325493016003FB09D /* Issue.storyboard */; };
 		F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4383EC425493016003FB09D /* LaunchScreen.storyboard */; };
@@ -155,6 +156,7 @@
 		F403F388255005DA004E8CF0 /* ImageNetworkServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageNetworkServiceTests.swift; sourceTree = "<group>"; };
 		F40541CB2550524A001EAF52 /* DataRequest+responseBool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DataRequest+responseBool.swift"; sourceTree = "<group>"; };
 		F410149F255ADB570032EEF6 /* FilterContext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterContext.swift; sourceTree = "<group>"; };
+		F41C39A4255CD29F00486AE4 /* ColorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorTests.swift; sourceTree = "<group>"; };
 		F4383EC225493016003FB09D /* SignIn.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = SignIn.storyboard; sourceTree = "<group>"; };
 		F4383EC325493016003FB09D /* Issue.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Issue.storyboard; sourceTree = "<group>"; };
 		F4383EC425493016003FB09D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -644,6 +646,7 @@
 			children = (
 				F4E3B4C92553D9F300E8430D /* NetworkService */,
 				FCF196FD2547AED200AED031 /* Info.plist */,
+				F41C39A4255CD29F00486AE4 /* ColorTests.swift */,
 			);
 			path = IssueTrackerTests;
 			sourceTree = "<group>";
@@ -1029,6 +1032,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F403F389255005DA004E8CF0 /* ImageNetworkServiceTests.swift in Sources */,
+				F41C39A5255CD29F00486AE4 /* ColorTests.swift in Sources */,
 				F4C327F8255AD2E7005E778F /* AssigneeNetworkServiceTests.swift in Sources */,
 				F403F363254FEE5A004E8CF0 /* LabelNetworkServiceTests.swift in Sources */,
 				F4E3B4BB2553D17C00E8430D /* IssueNetworkServiceTests.swift in Sources */,
