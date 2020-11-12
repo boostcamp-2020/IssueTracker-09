@@ -20,6 +20,7 @@ class IssueDetailViewController: UIViewController {
         case content, comment
     }
     @IBOutlet private weak var collectionView: UICollectionView!
+    var refreshControl: UIRefreshControl?
     
     var service: IssueDetailService?
     var issue: Issue? {
@@ -56,7 +57,18 @@ class IssueDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        
+        configRefreshControl()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func didRefreshChanged() {
+        delegate?.resumeView()
     }
     
     private func request() {

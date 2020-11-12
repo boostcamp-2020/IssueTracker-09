@@ -121,6 +121,7 @@ extension IssueDetailCoordinator: IssueEditServiceDelegate {
             case .failure( _):
                 break
             }
+            self?.issueDetailViewController?.refreshControl?.endRefreshing()
         }
     }
 }
