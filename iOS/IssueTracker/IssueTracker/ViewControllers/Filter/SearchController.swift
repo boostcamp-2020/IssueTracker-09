@@ -69,7 +69,12 @@ class SearchController {
                 return
             }
             
-            self?.elements = assignees.map { Element(name: $0.name, type: .user, id: $0.id, rawModel: $0) }
+            self?.elements = assignees.compactMap { assignee in
+                guard let id = assignee.id else {
+                    return nil
+                }
+                return Element(name: assignee.name, type: .user, id: id, rawModel: assignee)
+            }
             completion()
         }
     }

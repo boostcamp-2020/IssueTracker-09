@@ -8,7 +8,7 @@
 import Foundation
 
 struct User: Model, Codable, Hashable {
-    let id: Int
+    let id: Int?
     let name: String
     let image: String?
     let userCode: String?

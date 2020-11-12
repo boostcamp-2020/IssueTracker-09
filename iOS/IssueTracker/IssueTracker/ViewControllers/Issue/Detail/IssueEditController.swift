@@ -27,8 +27,11 @@ class IssueEditController {
         switch key {
         case .assignee:
             let assignees = DeserializedAssignees()
-            result = assignees?.assignees.map { assignee -> EditItem in
-                return EditItem(id: assignee.id , content: assignee.name, checkable: false)
+            result = assignees?.assignees.compactMap { assignee -> EditItem? in
+                guard let id = assignee.id else {
+                    return nil
+                }
+                return EditItem(id: id , content: assignee.name, checkable: false)
             } ?? []
         case .label:
             let labels = DeserializedLabels()
@@ -49,8 +52,11 @@ class IssueEditController {
         var items = items
         switch key {
         case .assignee:
-            issue?.assignees?.forEach({ assignees in
-                items.checkItem(id: assignees.id)
+            issue?.assignees?.forEach({ assignee in
+                guard let id = assignee.id else {
+                    return
+                }
+                items.checkItem(id: id)
             })
         case .label:
             issue?.labels?.forEach({ label in
