@@ -43,11 +43,13 @@ export const ButtonBox = styled.div`
 
 export const Button = styled.button`
   background-color: white;
-  border: none;
+  border-color: #1b1f2326;
+  margin-left: 3px;
   padding: 10px 10px;
   color: white;
-  background-color: ${(props) => props.theme.greenColor};
+  background-color: ${(props) => props.backgroundColor};
   font-weight: bold;
+  color: ${(props) => props.color};
   border-radius: 7px;
   cursor: pointer;
 `;

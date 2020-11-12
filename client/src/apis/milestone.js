@@ -11,6 +11,19 @@ export const getMilestonesAPI = async () => {
   }
 };
 
+export const getMilestonesByIdAPI = async (id) => {
+  try {
+    const { data } = await request({
+      method: 'get',
+      params: `/milestone/${id}`,
+    });
+
+    return data;
+  } catch (error) {
+    return false;
+  }
+};
+
 export const createMilestoneAPI = async (title, content, deadline) => {
   try {
     await request({
