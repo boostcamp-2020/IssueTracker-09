@@ -22,9 +22,9 @@ class IssueEditCacheService: IssueEditService {
         commentNetworkService.addComment(issue: issue, content: content) { [weak self] result in
             switch result {
             case .success(let isSuccess):
-                self?.delegate?.didCommentAdded(isSuccess: isSuccess)
+                self?.delegate?.willUpdateIssue(isSuccess: isSuccess)
             case .failure( _):
-                self?.delegate?.didCommentAdded(isSuccess: false)
+                self?.delegate?.willUpdateIssue(isSuccess: false)
             }
         }
     }
@@ -36,7 +36,7 @@ class IssueEditCacheService: IssueEditService {
         issueNetworkService.modifyIssueAssignee(of: issue.id, checked: checkedUsers, unchecked: uncheckedUsers) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.delegate?.didAssigneeLoaded(isSuccess: response)
+                self?.delegate?.willUpdateIssue(isSuccess: response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -50,7 +50,7 @@ class IssueEditCacheService: IssueEditService {
         issueNetworkService.modifyIssueLabels(of: issue.id, checked: checkedLabels, unchecked: uncheckedLabels) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.delegate?.didLabelsLoaded(isSuccess: response)
+                self?.delegate?.willUpdateIssue(isSuccess: response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -61,7 +61,7 @@ class IssueEditCacheService: IssueEditService {
         issueNetworkService.modifyIssueMilestone(of: issue.id, to: new) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.delegate?.didMilestoneLoaded(isSuccess: response)
+                self?.delegate?.willUpdateIssue(isSuccess: response)
             case .failure(let error):
                 print(error.localizedDescription)
             }
