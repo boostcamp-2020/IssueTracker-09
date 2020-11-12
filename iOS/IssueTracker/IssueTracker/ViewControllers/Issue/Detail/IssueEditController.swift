@@ -10,13 +10,16 @@ import Foundation
 class IssueEditController {
     private let key: EditKey
     private let data: Data
-    var items: [EditItem] {
-        return marshalling(key: key).items
+    private var issue: Issue?
+    var items: EditItems {
+        let editItems = marshalling(key: key)
+        return checkItem(items: editItems)
     }
     
-    init (key: EditKey, data: Data) {
+    init (issue: Issue?, key: EditKey, data: Data) {
         self.key = key
         self.data = data
+        self.issue = issue
     }
     
     private func marshalling(key: EditKey) -> EditItems {
@@ -40,6 +43,24 @@ class IssueEditController {
         }
         
         return EditItems(items: result)
+    }
+    
+    private func checkItem(items: EditItems) -> EditItems {
+        var items = items
+        switch key {
+        case .assignee:
+            issue?.assignees?.forEach({ assignees in
+                items.checkItem(id: assignees.id)
+            })
+        case .label:
+            issue?.labels?.forEach({ label in
+                items.checkItem(id: label.id)
+            })
+        case .milestone:
+            guard let id = issue?.milestone?.id else { return items }
+            items.checkItem(id: id)
+        }
+        return items
     }
     
     func DeserializedAssignees() -> Assignees? {
