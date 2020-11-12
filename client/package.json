@@ -4,6 +4,7 @@
   "description": "<p align=\"center\"> <img src=\"https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif\" alt=\"github-icon\" width=\"200\" height=\"200\" /> </p>",
   "main": "index.js",
   "scripts": {
+    "build": "webpack --build",
     "dev": "webpack-dev-server",
     "test": "jest"
   },

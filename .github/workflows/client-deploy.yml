@@ -1,0 +1,27 @@
+name: frontend
+
+on:
+  pull_request:
+    branches: [FE/dev]
+
+jobs:
+  build:
+    if: github.event.pull_request.merged == 'true'
+    runs-on: [ubuntu-latest]
+
+    strategy:
+      matrix:
+        node-version: [12.x]
+    defaults:
+      run:
+        working-directory: ./client
+
+    steps:
+      - name: executing client server
+        uses: shellboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST}}
+          username: ${{ secrets.USERNAME }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            bash deploy.sh
