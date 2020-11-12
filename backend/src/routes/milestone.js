@@ -10,6 +10,8 @@ router.post('/', milestoneController.create);
 
 router.get('/', milestoneController.read);
 
+router.get('/:id', milestoneController.readById);
+
 router.put('/:id', milestoneController.update);
 
 router.put('/state/:id', milestoneController.updateState);
