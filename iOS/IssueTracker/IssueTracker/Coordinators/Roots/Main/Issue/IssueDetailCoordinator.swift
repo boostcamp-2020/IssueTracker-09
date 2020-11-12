@@ -13,6 +13,7 @@ class IssueDetailCoordinator: Coordinator {
     }
     private(set) var window: UIWindow
     private(set) var childCoordinators: [String : Coordinator] = [:]
+    private var issueDetailViewController: IssueDetailViewController?
     private weak var parent: UIViewController?
     
     private var issue: Issue
@@ -25,18 +26,19 @@ class IssueDetailCoordinator: Coordinator {
     
     func start() {
         let storyBoard = UIStoryboard(name: StoryboardName.IssueDetail.rawValue, bundle: nil)
-        let issueDeatailViewController = storyBoard.instantiateViewController(
+        issueDetailViewController = storyBoard.instantiateViewController(
             identifier: "IssueDetailViewController",
             creator: {
                 coder in
                 return IssueDetailViewController(coder: coder, delegate: self)
             })
+        guard  let viewController = issueDetailViewController else { return }
         
-        issueDeatailViewController.service = IssueDetailCacheService(issue: issue, delegate: issueDeatailViewController)
+        viewController.service = IssueDetailCacheService(issue: issue, delegate: viewController)
         
         let navigationController = parent as? UINavigationController
-        issueDeatailViewController.title = "이슈 상세"
-        navigationController?.pushViewController(issueDeatailViewController, animated: true)
+        viewController.title = "이슈 상세"
+        navigationController?.pushViewController(viewController, animated: true)
     }
 }
 
@@ -78,15 +80,35 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
 
 extension IssueDetailCoordinator: IssueEditServiceDelegate {
     func didAssigneeLoaded(isSuccess: Bool) {
-        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
+        updateIssue()
+        refreshView()
     }
     
     func didLabelsLoaded(isSuccess: Bool) {
-        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
+        updateIssue()
+        refreshView()
     }
     
     func didMilestoneLoaded(isSuccess: Bool) {
+        updateIssue()
+        refreshView()
+    }
+    
+    private func refreshView() {
         NotificationCenter.default.post(name: .resumeIssueList, object: nil)
+    }
+    
+    private func updateIssue() {
+        let networkService = IssueNetworkService()
+        networkService.issue(id: issue.id) { [weak self] result in
+            switch result {
+            case .success(let data):
+                self?.issue = data
+                self?.issueDetailViewController?.issue = self?.issue
+            case .failure( _):
+                break
+            }
+        }
     }
 }
 
