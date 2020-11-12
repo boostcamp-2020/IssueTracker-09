@@ -13,12 +13,12 @@ export const getMilestonesAPI = async () => {
 
 export const getMilestonesByIdAPI = async (id) => {
   try {
-    const milestone = await request({
+    const { data } = await request({
       method: 'get',
       params: `/milestone/${id}`,
     });
 
-    return milestone;
+    return data;
   } catch (error) {
     return false;
   }

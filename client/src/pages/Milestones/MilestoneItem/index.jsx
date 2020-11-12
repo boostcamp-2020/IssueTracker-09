@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Container, Status, Div, Title, Span, PointSpan } from './styled';
@@ -7,6 +8,8 @@ const MilestoneItem = ({ milestone, state, updateEvent, deleteEvent }) => {
   if (milestone?.is_opened !== state) {
     return null;
   }
+
+  const history = useHistory();
 
   return (
     <Container>
@@ -39,7 +42,12 @@ const MilestoneItem = ({ milestone, state, updateEvent, deleteEvent }) => {
           <Span>{milestone.totalCount - milestone.openCount} close</Span>
         </Div>
         <Div>
-          <PointSpan color="blue">Edit</PointSpan>
+          <PointSpan
+            color="blue"
+            onClick={() => history.push(`/milestone/${milestone.id}/edit`)}
+          >
+            Edit
+          </PointSpan>
           <PointSpan
             color="blue"
             padding="0 10px"

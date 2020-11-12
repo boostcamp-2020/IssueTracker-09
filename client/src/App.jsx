@@ -8,6 +8,7 @@ import {
   IssueNew,
   IssueDetail,
   MilestoneNew,
+  MilestoneEdit,
   Milestones,
   Labels,
 } from './pages';
@@ -28,7 +29,7 @@ const App = () => {
         <PrivateRoute path="/issues/:id" component={IssueDetail} />
         <PrivateRoute path="/milestones" component={Milestones} />
         <PrivateRoute path="/milestone/new" component={MilestoneNew} />
-        <PrivateRoute path="/milestone/:id/edit" component={MilestoneNew} />
+        <PrivateRoute path="/milestone/:id/edit" component={MilestoneEdit} />
         <PrivateRoute path="/labels" component={Labels} />
       </Switch>
     </>
