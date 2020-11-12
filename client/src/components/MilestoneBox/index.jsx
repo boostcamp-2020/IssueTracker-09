@@ -1,5 +1,6 @@
+/* eslint-disable react/jsx-curly-newline */
 /* eslint-disable react/button-has-type */
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import {
   Container,
   ContentsBox,
@@ -10,10 +11,10 @@ import {
   Button,
 } from './styled';
 
-const MilestoneBox = ({ createEvent, type = null }) => {
-  const [titleValue, settitleValue] = useState(null);
-  const [dateValue, setDateValue] = useState(null);
-  const [descValue, setdescValue] = useState(null);
+const MilestoneBox = ({ createEvent, milestone = {}, type = undefined }) => {
+  const titleValue = useRef(null);
+  const dateValue = useRef(null);
+  const descValue = useRef(null);
 
   return (
     <Container>
@@ -21,29 +22,31 @@ const MilestoneBox = ({ createEvent, type = null }) => {
         <Title>Title</Title>
         <TitleInput
           placeholder="Title"
-          type="input"
-          onChange={(e) => settitleValue(e.target.value)}
+          type="text"
+          defaultValue={milestone.title || ''}
+          ref={titleValue}
         />
       </ContentsBox>
       <ContentsBox>
         <Title>Due date (optional)</Title>
         <TitleInput
           type="date"
-          onChange={(e) => setDateValue(e.target.value)}
+          defaultValue={milestone.date || ''}
+          ref={dateValue}
         />
       </ContentsBox>
       <ContentsBox>
         <Title>Description</Title>
-        <DescriptionInput onChange={(e) => setdescValue(e.target.value)} />
+        <DescriptionInput defaultValue={milestone.desc || ''} ref={descValue} />
       </ContentsBox>
       <ButtonBox>
         {type === 'create' ? (
           <Button
             onClick={() =>
               createEvent({
-                title: titleValue,
-                content: descValue,
-                deadline: dateValue,
+                title: titleValue.current.value,
+                content: descValue.current.value,
+                deadline: dateValue.current.value,
               })
             }
           >

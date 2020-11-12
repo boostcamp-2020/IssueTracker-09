@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { UserContext } from '../../../stores/userStore';
 import { Container, FlexDiv, Image } from './styled';
-import NewComment from '../NewComment';
+import NewComment from '../../../components/NewComment';
 import Comment from '../Comment';
 import { getCommentAPI, createCommentAPI } from '../../../apis/comment';
 import { updateState } from '../../../apis/issue';
