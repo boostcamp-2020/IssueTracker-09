@@ -39,7 +39,12 @@ class IssueBottomSheetViewController: UIViewController {
         return UIScreen.main.bounds.height - 140
     }
     
-    private var issue: Issue?
+    var issue: Issue? {
+        didSet {
+            print("changed issue")
+            applySnapshot()
+        }
+    }
     
     init?(coder: NSCoder, issue: Issue, delegate: IssueEditDelegate) {
         self.issue = issue
@@ -190,7 +195,10 @@ extension IssueBottomSheetViewController {
             return sectionHeader
         }
         
-        // initial data
+        applySnapshot()
+    }
+    
+    private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
         var temp = 0
         Section.allCases.forEach {

@@ -20,16 +20,22 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     
     var service: IssueDetailService?
+    var issue: Issue? {
+        didSet {
+            bottomSheetViewController?.issue = issue
+            collectionView.reloadData()
+        }
+    }
+    
     private weak var delegate: IssueDetailCoordinatorDelegate?
     private let dispatchGroup = DispatchGroup()
-    private var issue: Issue? {
-        return service?.issue
-    }
+    
     private var comments: [Comment] = []
     private var assignee: Assignees?
     private var milestones: Milestones?
     private var labels: Labels?
     
+    private var bottomSheetViewController: IssueBottomSheetViewController?
     
     init?(coder: NSCoder, delegate: IssueDetailCoordinatorDelegate) {
         self.delegate = delegate
@@ -61,6 +67,7 @@ class IssueDetailViewController: UIViewController {
         service?.requestMilestones()
         
         dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.issue = self.service?.issue
             self.configureHierarchy()
             self.addBottomSheetView()
         }
@@ -120,20 +127,20 @@ extension IssueDetailViewController {
         }
         
         let storyBoard = UIStoryboard(name: "IssueBottomSheet", bundle: nil)
-        let bottomSheetViewController = storyBoard.instantiateViewController(
+        bottomSheetViewController = storyBoard.instantiateViewController(
             identifier: "IssueBottomSheetViewController",
             creator: {
                 coder in
                 return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
+        guard let viewController = bottomSheetViewController else { return }
         let height = view.frame.height
         let width  = view.frame.width
-        bottomSheetViewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
-        bottomSheetViewController.didMove(toParent: self)
-        self.addChild(bottomSheetViewController)
-        self.view.addSubview(bottomSheetViewController.view)
-        
+        viewController.view.frame = CGRect(x: 0, y: self.view.frame.maxY, width: width, height: height)
+        viewController.didMove(toParent: self)
+        self.addChild(viewController)
+        self.view.addSubview(viewController.view)
     }
 }
 
