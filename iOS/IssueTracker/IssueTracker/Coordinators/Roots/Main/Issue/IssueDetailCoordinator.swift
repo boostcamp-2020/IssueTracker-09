@@ -35,7 +35,7 @@ class IssueDetailCoordinator: Coordinator {
         
         guard let viewController = issueDetailViewController else { return }
         viewController.service = IssueDetailCacheService(issue: issue, delegate: viewController)
-
+        
         let navigationController = parent as? UINavigationController
         viewController.title = "이슈 상세"
         navigationController?.pushViewController(viewController, animated: true)
@@ -52,7 +52,7 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
             creator: {
                 coder in
                 return IssueCommentViewController(coder: coder, service: serive)
-            }) 
+            })
         
         parent?.present(commentViewController, animated: true, completion: nil)        
     }
@@ -78,6 +78,10 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
         presentToEdit(key: .milestone, data: data)
     }
     
+    func resumeView() {
+        updateIssue()
+    }
+    
     private func presentToEdit(key: EditKey, data: Data) {
         let serive = IssueEditCacheService(issue: issue, delegate: self)
         let storyBoard = UIStoryboard(name: StoryboardName.IssueEdit.rawValue, bundle: nil)
@@ -93,19 +97,7 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
 }
 
 extension IssueDetailCoordinator: IssueEditServiceDelegate {
-    func didCommentAdded(isSuccess: Bool) {
-        refreshView(isSuccess: isSuccess)
-    }
-    
-    func didAssigneeLoaded(isSuccess: Bool) {
-        refreshView(isSuccess: isSuccess)
-    }
-    
-    func didLabelsLoaded(isSuccess: Bool) {
-        refreshView(isSuccess: isSuccess)
-    }
-    
-    func didMilestoneLoaded(isSuccess: Bool) {
+    func willUpdateIssue(isSuccess: Bool) {
         refreshView(isSuccess: isSuccess)
     }
     
