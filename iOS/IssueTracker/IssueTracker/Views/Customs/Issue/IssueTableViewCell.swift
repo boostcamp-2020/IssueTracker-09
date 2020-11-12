@@ -37,12 +37,12 @@ class IssueTableViewCell: UITableViewCell {
         }
         
         if let milestone = issue.milestone?.title {
-            badgeStackView.addArrangedSubview(makeBadgeView(content: milestone, color: .systemGray))
+            badgeStackView.addArrangedSubview(makeBadgeView(content: milestone, color: .systemGray, isMilestone: true))
         }
         
         issue.labels?.forEach { label in
             badgeStackView.addArrangedSubview(
-                makeBadgeView(content: label.title, color: UIColor(red: 32, green: 156, blue: 128))
+                makeBadgeView(content: label.title, color: UIColor(hexString: label.color) ?? .green)
             )
         }
         checkBoxWrapper.button.isSelected = isCheck
@@ -52,13 +52,17 @@ class IssueTableViewCell: UITableViewCell {
         delegate?.checked(self)
     }
     
-    func makeBadgeView(content: String, color: UIColor) -> BadgeView {
+    func makeBadgeView(content: String, color: UIColor, isMilestone: Bool = false) -> BadgeView {
         let view = BadgeView()
         view.borderColor = color
-        view.backgroundColor = color
         view.borderWidth = 1
         view.cornerRadius = 5
+        view.textColor = color
         view.text = content
+        if isMilestone {
+            view.textColor = .black
+            view.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.3)
+        }
         return view
     }
 }

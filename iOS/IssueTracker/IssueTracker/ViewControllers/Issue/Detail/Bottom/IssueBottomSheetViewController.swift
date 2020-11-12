@@ -87,7 +87,7 @@ class IssueBottomSheetViewController: UIViewController {
     @IBAction func touchedStatusButton(_ sender: Any) {
         guard let issue = self.issue else { return }
         let service = IssueNetworkService()
-        service.modifyIssueStatus(of: issue) { [weak self] (result) in
+        service.modifyIssueStatus(of: issue, to: !issue.isOpened) { [weak self] (result) in
             switch result {
             case .success(let isSuccess):
                 if isSuccess {

@@ -30,20 +30,31 @@ class IssueCacheService: IssueService {
         return isFiltering ? filteredIssues.count : issues.count
     }
     
-    func changeStatus(at indexPath: IndexPath) {
-        networkService.modifyIssueStatus(of: issues[indexPath.item]) { [weak self] result in
+    func changeStatus(at index: Int) {
+        changeStatus(at: index, to: !issues[index].isOpened)
+    }
+    
+    func changeStatus(at index: Int, to status: Bool) {
+        let issue = issues[index]
+        networkService.modifyIssueStatus(of: issue, to: status) { [weak self] result in
             switch result {
             case .success(let response):
-                guard response, let isOpened = self?.issues[indexPath.item].isOpened else {
+                guard response else {
                     self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: "잠시후 다시 시도하세요", handler: nil)
                     return
                 }
-                self?.issues[indexPath.item].isOpened = !isOpened
-                self?.delegate?.didDataLoaded(at: indexPath)
+                self?.issues[index].isOpened.toggle()
+                self?.delegate?.didDataLoaded(at: nil)
             case .failure(let error):
                 self?.delegate?.didErrorReceived(title: "상태 변경 실패", message: error.localizedDescription, handler: nil)
             }
         }
+    }
+    
+    func changeStatus(at indices: [Int], to status: Bool) {
+        indices
+            .filter { self.issues[$0].isOpened }
+            .forEach { changeStatus(at: $0, to: status) }
     }
     
     func reloadData() {
