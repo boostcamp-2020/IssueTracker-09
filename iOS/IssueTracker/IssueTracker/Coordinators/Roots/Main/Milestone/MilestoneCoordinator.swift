@@ -24,8 +24,13 @@ class MilestoneCoordinator: Coordinator {
         milestoneViewController.delegate = self
         milestoneViewController.service = MilestoneCacheService(delegate: milestoneViewController)
         milestoneViewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
+        milestoneViewController.title = "마일스톤"
         
-        delegate?.setViewController(milestoneViewController, name: .Milestone)
+        let navigationController = UINavigationController()
+        navigationController.navigationBar.prefersLargeTitles = true
+        navigationController.setViewControllers([milestoneViewController], animated: false)
+        
+        delegate?.setViewController(navigationController, name: .Milestone)
     }
 }
 

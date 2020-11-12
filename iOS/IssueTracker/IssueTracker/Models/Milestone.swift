@@ -13,7 +13,7 @@ struct Milestones: Codable {
 
 struct Milestone: Model, Codable {
     let id: Int
-    let title, content, deadline: String
+    var title, content, deadline: String
     let isOpened: Bool
     let openCount: Int?
     let totalCount: Int?

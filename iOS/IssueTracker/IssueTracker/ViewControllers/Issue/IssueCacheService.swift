@@ -45,8 +45,9 @@ class IssueCacheService: IssueService {
             }
         }
     }
+    
     func reloadData() {
-        networkService.fetchIssues { [weak self] result in
+        networkService.fetchIssues(query: FilterContext.shared.query) { [weak self] result in
             switch result {
             case .success(let issues):
                 self?.issues = issues.issues
@@ -59,13 +60,15 @@ class IssueCacheService: IssueService {
         }
     }
     
-    func filter(_ text: String) {
-        filteredIssues = issues.filter { issue in
-            return issue.title.lowercased().contains(text.lowercased())
+    func filter(_ text: String? = nil) {
+        if let text = text {
+            filteredIssues = issues.filter { issue in
+                return issue.title.lowercased().contains(text.lowercased())
+            }
         }
     }
     
     @objc func didFilterChanged(_ notification: Notification) {
-        // FilterContext를 이용하여 내용 필터링 하기
+        reloadData()
     }
 }

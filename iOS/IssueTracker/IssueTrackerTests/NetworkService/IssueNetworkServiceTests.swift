@@ -12,7 +12,7 @@ import XCTest
 
 class IssueNetworkServiceTests: XCTestCase {
     let asyncTimeout: TimeInterval = 5
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsImlhdCI6MTYwNDkzNDM2N30.ME-ENY-pPQmKVjpii2D65LMV1lV3FrwZuKq6hSheIAE"
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1MTAzMzU3fQ.4m_c_41zyez5KugqZlY2Xnt50zzcHDGGgbAfgBJOqxM"
     static var originalToken: String?
     
     override class func setUp() {
@@ -54,8 +54,7 @@ class IssueNetworkServiceTests: XCTestCase {
     
     func testFetchIssuesByCondition() throws {
         let expectTimer = expectation(description: "testFetchIssuesByCondition")
-        let joojaewoo = User(id: 0, name: "joojaewoo", image: "", userCode: nil)
-        let query = IssueFilterQuery(isOpen: false, author: joojaewoo, assignee: joojaewoo)
+        let query = IssueFilterQuery(isOpen: false, author: "joojaewoo", assignee: "joojaewoo")
         IssueNetworkService().fetchIssues(query: query) { result in
             switch result {
             case .success(_):

@@ -38,4 +38,8 @@ class InputField: UIView {
     func setTitle(_ title: String) {
         titleLabel.text = title
     }
+    
+    func setText(_ text: String) {
+        textField.text = text
+    }
 }
