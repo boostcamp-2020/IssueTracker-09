@@ -79,7 +79,7 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
     }
     
     func resumeView() {
-        updateIssue()
+        refreshView(isSuccess: true)
     }
     
     private func presentToEdit(key: EditKey, data: Data) {

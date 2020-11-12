@@ -12,5 +12,8 @@ class LabelCell: UICollectionViewCell {
     
     func configure(label: Label) {
         self.label.text = label.title
+        let color = UIColor(hexString: label.color)
+        self.label.layer.borderColor = color?.cgColor
+        self.label.textColor = color
     }
 }
