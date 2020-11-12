@@ -1,14 +1,16 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 import MilestoneBox from '../../components/MilestoneBox';
 
 import { Container, Header, H2 } from './styled';
 import { createMilestoneAPI } from '../../apis/milestone'
 
 const MilestoneNew = () => {
+  const history = useHistory();
   const createHandler = async ({ title, content, deadline }) => {
     const result = await createMilestoneAPI(title, content, deadline);
     if(result){
-      window.location.href = 'http://localhost:4000/milestones';
+      history.push('/milestones');
     }
   }
 
