@@ -78,16 +78,19 @@ extension IssueDetailCoordinator: IssueDetailCoordinatorDelegate {
 
 extension IssueDetailCoordinator: IssueEditServiceDelegate {
     func didAssigneeLoaded(isSuccess: Bool) {
-        
+        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
     }
     
     func didLabelsLoaded(isSuccess: Bool) {
-        
+        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
     }
     
     func didMilestoneLoaded(isSuccess: Bool) {
-        
+        NotificationCenter.default.post(name: .resumeIssueList, object: nil)
     }
-    
-    
 }
+
+extension Notification.Name {
+    static let resumeIssueList = Notification.Name(rawValue: "resumeIssueList")
+}
+
