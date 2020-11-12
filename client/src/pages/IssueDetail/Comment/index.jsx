@@ -1,8 +1,20 @@
 /* eslint-disable react/button-has-type */
 import React, { useState } from 'react';
+import Markdown from 'markdown-to-jsx';
 import EditComment from '../EditComment';
-import { FlexDiv, CommentContainer, Header, Body, Image } from './styled';
+import {
+  FlexDiv,
+  CommentContainer,
+  Header,
+  Body,
+  Image,
+  Button,
+  Date,
+  Title,
+  Square,
+} from './styled';
 import { updateCommentAPI } from '../../../apis/comment';
+import calculateTime from '../../../lib/calculate-time';
 
 const Comment = ({ comment }) => {
   const [state, setState] = useState(false);
@@ -31,14 +43,17 @@ const Comment = ({ comment }) => {
         <CommentContainer>
           <Header>
             <div>
-              <span>{commentInfo.User.name}</span>
-              <span>{comment.timestamp}</span>
+              <Title>{commentInfo.User.name}</Title>
+              <Date> commented {calculateTime(comment.timestamp)} ago</Date>
             </div>
             <div>
-              <button onClick={() => setState(true)}>edit</button>
+              <Button onClick={() => setState(true)}>Edit</Button>
             </div>
+            <Square />
           </Header>
-          <Body>{comment.content}</Body>
+          <Body>
+            <Markdown>{comment.content}</Markdown>
+          </Body>
         </CommentContainer>
       )}
     </FlexDiv>
