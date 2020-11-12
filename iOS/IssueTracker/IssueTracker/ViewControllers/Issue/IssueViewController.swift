@@ -39,6 +39,7 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNotification()
         service?.reloadData()
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
         
@@ -195,5 +196,15 @@ extension IssueViewController: UISearchResultsUpdating {
         
         service?.filter(text)
         tableView.reloadData()
+    }
+}
+
+extension IssueViewController {
+    func addNotification() {
+        NotificationCenter.default.addObserver(self, selector: #selector(willResumeView), name: .resumeIssueList, object: nil)
+    }
+    
+    @objc func willResumeView() {
+        service?.reloadData()
     }
 }

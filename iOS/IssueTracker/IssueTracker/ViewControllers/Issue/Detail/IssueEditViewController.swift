@@ -24,8 +24,8 @@ class IssueEditViewController: UIViewController {
     
     init?(coder: NSCoder, key: EditKey, data: Data, service: IssueEditCacheService) {
         self.key = key
-        self.issueEditController = IssueEditController(key: key, data: data)
         self.service = service
+        self.issueEditController = IssueEditController(issue: self.service?.issue, key: key, data: data)
         super.init(coder: coder)
     }
     
@@ -51,21 +51,23 @@ class IssueEditViewController: UIViewController {
         
         switch key {
         case .assignee:
-            let prev: [User] = issueEditController?.DeserializedAssignees()?.assignees ?? []
+            let prev: [User] = service?.issue.assignees ?? []
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
             }).map { item -> User in
                 return User(id: item.id, name: "", image: nil, userCode: nil)
             }
             service?.willEditAssignee(old: prev, new: new)
+        
         case .label:
-            let prev: [Label] = issueEditController?.DeserializedLabels()?.labels ?? []
+            let prev: [Label] = service?.issue.labels ?? []
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
             }).map { item -> Label in
                 return Label(id: item.id, color: "", title: "", content: "")
             }
             service?.willEditLabels(old: prev, new: new)
+        
         case .milestone:
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
@@ -117,8 +119,9 @@ extension IssueEditViewController {
     
     private func applyInitialSnapshots() {
         guard let items = issueEditController?.items else { return }
+        
         var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<EditItem>()
-        sectionSnapshot.append(items)
+        sectionSnapshot.append(items.items)
         dataSource.apply(sectionSnapshot, to: Section.Edit, animatingDifferences: false)
     }
 }

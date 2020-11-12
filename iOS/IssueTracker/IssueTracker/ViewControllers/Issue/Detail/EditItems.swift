@@ -8,7 +8,22 @@
 import Foundation
 
 struct EditItems {
-    let items: [EditItem]
+    var items: [EditItem]
+    
+    private func indexOf(id: Int) -> Int? {
+        var index = 0
+        
+        for item in items {
+            if item.id == id { return index }
+            index += 1
+        }
+        return nil
+    }
+    
+    mutating func checkItem(id: Int) {
+        guard let index = self.indexOf(id: id) else { return }
+        items[index].checkable = true
+    }
 }
 
 struct EditItem: Hashable {

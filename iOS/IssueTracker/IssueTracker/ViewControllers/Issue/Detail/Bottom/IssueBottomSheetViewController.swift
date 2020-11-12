@@ -21,7 +21,7 @@ class IssueBottomSheetViewController: UIViewController {
             case .assignees:
                 return wideMode ? 4 : 2
             case .labels:
-                return wideMode ? 8 : 4
+                return wideMode ? 10 : 5
             case .milestone:
                 return wideMode ? 2 : 1
             }
@@ -63,7 +63,7 @@ class IssueBottomSheetViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+        statusDidChange()
         UIView.animate(withDuration: 0.3, animations: { [weak self] in
             let frame = self?.view.frame
             let yComponent = self?.partialView
@@ -79,7 +79,6 @@ class IssueBottomSheetViewController: UIViewController {
         } else {
             statusButton.setTitle("Close", for: .normal)
         }
-        
     }
     
     @IBAction func touchedCommentButton(_ sender: Any) {
@@ -91,8 +90,6 @@ class IssueBottomSheetViewController: UIViewController {
         service.modifyIssueStatus(of: issue) { [weak self] (result) in
             switch result {
             case .success(let isSuccess):
-                print("무슨 처리를 해줘야하징..")
-                print("\(isSuccess)")
                 if isSuccess {
                     self?.statusDidChange()
                 }
@@ -163,11 +160,14 @@ extension IssueBottomSheetViewController {
             case .labels:
                 guard let labels = self.issue?.labels,
                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCell", for: indexPath) as? LabelCell else { return UICollectionViewCell() }
-                cell.configure(label: labels[identifier])
+                
+                let index = identifier - (self.issue?.assignees?.count ?? 0)
+                cell.configure(label: labels[index])
                 return cell
             case .milestone:
                 guard let milestone = self.issue?.milestone,
                       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MilestoneCell", for: indexPath) as? MilestoneCell else { return UICollectionViewCell() }
+                
                 cell.configure(milestone: milestone)
                 return cell
             }
@@ -192,10 +192,11 @@ extension IssueBottomSheetViewController {
         
         // initial data
         var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+        var temp = 0
         Section.allCases.forEach {
             snapshot.appendSections([$0])
             var count = 0
-
+            // rawvalue 0, 1, 2
             switch $0 {
             case .assignees:
                 count = issue?.assignees?.count ?? 0
@@ -205,7 +206,9 @@ extension IssueBottomSheetViewController {
                 count = issue?.milestone != nil ? 1 : 0
             }
             
-            snapshot.appendItems(Array(0..<count))
+            let items = Array(temp..<temp+count)
+            snapshot.appendItems(items)
+            temp += count
         }
         dataSource.apply(snapshot, animatingDifferences: false)
     }
@@ -213,10 +216,10 @@ extension IssueBottomSheetViewController {
 
 extension IssueBottomSheetViewController {
     func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didTokenRecieved), name: .touchedEditKey, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didTouchEditButton), name: .touchedEditKey, object: nil)
     }
     
-    @objc func didTokenRecieved(notification: NSNotification) {
+    @objc func didTouchEditButton(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let key = userInfo["editKey"] as? EditKey else { return }
         
