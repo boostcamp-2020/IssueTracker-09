@@ -9,7 +9,8 @@ import Foundation
 
 class IssueEditCacheService: IssueEditService {
     var issue: Issue
-    private var networkService = IssueNetworkService()
+    private var issueNetworkService = IssueNetworkService()
+    private var commentNetworkService = CommentNetworkService()
     private weak var delegate: IssueEditServiceDelegate?
     
     init(issue: Issue, delegate: IssueEditServiceDelegate?) {
@@ -17,11 +18,22 @@ class IssueEditCacheService: IssueEditService {
         self.delegate = delegate
     }
     
+    func willAddComment(content: String) {
+        commentNetworkService.addComment(issue: issue, content: content) { [weak self] result in
+            switch result {
+            case .success(let isSuccess):
+                self?.delegate?.didCommentAdded(isSuccess: isSuccess)
+            case .failure( _):
+                self?.delegate?.didCommentAdded(isSuccess: false)
+            }
+        }
+    }
+    
     func willEditAssignee(old: [User], new: [User]) {
         let uncheckedUsers = Array(Set(old).subtracting(new))
         let checkedUsers = Array(Set(new).subtracting(old))
-
-        networkService.modifyIssueAssignee(of: issue.id, checked: checkedUsers, unchecked: uncheckedUsers) { [weak self] result in
+        
+        issueNetworkService.modifyIssueAssignee(of: issue.id, checked: checkedUsers, unchecked: uncheckedUsers) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.delegate?.didAssigneeLoaded(isSuccess: response)
@@ -35,7 +47,7 @@ class IssueEditCacheService: IssueEditService {
         let uncheckedLabels = Array(Set(old).subtracting(new))
         let checkedLabels = Array(Set(new).subtracting(old))
         
-        networkService.modifyIssueLabels(of: issue.id, checked: checkedLabels, unchecked: uncheckedLabels) { [weak self] result in
+        issueNetworkService.modifyIssueLabels(of: issue.id, checked: checkedLabels, unchecked: uncheckedLabels) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.delegate?.didLabelsLoaded(isSuccess: response)
@@ -46,7 +58,7 @@ class IssueEditCacheService: IssueEditService {
     }
     
     func willEditMilestone(new: Milestone) {
-        networkService.modifyIssueMilestone(of: issue.id, to: new) { [weak self] result in
+        issueNetworkService.modifyIssueMilestone(of: issue.id, to: new) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.delegate?.didMilestoneLoaded(isSuccess: response)
