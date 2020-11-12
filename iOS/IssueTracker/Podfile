@@ -1,0 +1,22 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'IssueTracker' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for IssueTracker
+pod 'Alamofire', '~> 5.2'
+pod 'KeychainSwift', '~> 19.0'
+
+
+  target 'IssueTrackerTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'IssueTrackerUITests' do
+    # Pods for testing
+  end
+
+end

@@ -27,7 +27,6 @@ export const getUserAPI = async () => {
     return false;
   }
 };
-
 export const getUsersAPI = async () => {
   try {
     const {
