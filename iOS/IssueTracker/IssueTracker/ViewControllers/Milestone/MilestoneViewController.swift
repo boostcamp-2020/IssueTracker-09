@@ -7,6 +7,9 @@
 
 import UIKit
 
+extension Notification.Name {
+    static let didMilestoneAppend = Notification.Name(rawValue: "MilestoneViewController.didMilestoneAppend")
+}
 
 protocol MilestoneViewControllerDelegate: AnyObject {
     func moveToMilestone()
@@ -22,6 +25,42 @@ class MilestoneViewController: UIViewController {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
         service?.reloadData()
+        configRightItem()
+        NotificationCenter.default.addObserver(self, selector: #selector(didMilestoneAppend), name: .didMilestoneAppend, object: nil)
+    }
+    
+    func configRightItem() {
+        let barButtonItem = UIBarButtonItem(systemItem: .add)
+        barButtonItem.target = self
+        barButtonItem.action = #selector(didAddButtonTapped)
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    @objc func didAddButtonTapped(_ sender: UIBarButtonItem) {
+        guard let viewController = UIStoryboard(name: "MilestoneAppend", bundle: nil).instantiateInitialViewController() as? MilestoneAppendViewController else {
+            return
+        }
+        
+        present(viewController, animated: true, completion: nil)
+    }
+    
+    @objc func didMilestoneAppend(_ notification: Notification) {
+        service?.reloadData()
+        scrollToLast()
+    }
+    
+    // https://stackoverflow.com/a/47036507
+    func scrollToLast() {
+        let numberOfSections = collectionView.numberOfSections
+        let numberOfItems = collectionView.numberOfItems(inSection: numberOfSections - 1)
+        let lastItemIndexPath = IndexPath(item: numberOfItems - 1,
+                                          section: numberOfSections - 1)
+        
+        guard numberOfSections > 0, numberOfItems > 0 else {
+            return
+        }
+        
+        collectionView.scrollToItem(at: lastItemIndexPath, at: .bottom, animated: true)
     }
 }
 

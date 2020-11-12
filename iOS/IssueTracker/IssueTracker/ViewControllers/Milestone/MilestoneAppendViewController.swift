@@ -67,6 +67,15 @@ class MilestoneAppendViewController: UIViewController {
             return
         }
         
+        let dateFormatterGet = DateFormatter()
+        dateFormatterGet.dateFormat = "yyyy-MM-dd"
+        
+        guard dateFormatterGet.date(from: deadline) != nil else {
+            let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 실패", message: "날짜 형식이 올바르지 않습니다")
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        
         activityIndicator.startAnimating()
         if var milestone = milestone {
             milestone.title = title
@@ -89,7 +98,7 @@ class MilestoneAppendViewController: UIViewController {
                 self?.activityIndicator.stopAnimating()
                 switch result {
                 case .success(_):
-                    NotificationCenter.default.post(name: .didMilestoneChangedNotification, object: self)
+                    NotificationCenter.default.post(name: .didMilestoneAppend, object: self)
                     self?.dismiss(animated: true, completion: nil)
                 case .failure(let error):
                     let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러", message: error.localizedDescription)
