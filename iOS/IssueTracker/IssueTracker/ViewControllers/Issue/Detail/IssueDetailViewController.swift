@@ -11,6 +11,7 @@ protocol IssueDetailCoordinatorDelegate: AnyObject {
     func presentToAssigneeEdit(assignees: Assignees)
     func presentToLabelEdit(labels: Labels)
     func presentToMilestoneEdit(milstones: Milestones)
+    func presentToComment()
 }
 
 class IssueDetailViewController: UIViewController {
@@ -23,7 +24,11 @@ class IssueDetailViewController: UIViewController {
     var issue: Issue? {
         didSet {
             bottomSheetViewController?.issue = issue
-            collectionView.reloadData()
+            dispatchGroup.enter()
+            service?.requestComments()
+            asyncNotify { [weak self] in
+                self?.collectionView.reloadData()
+            }
         }
     }
     
@@ -45,7 +50,7 @@ class IssueDetailViewController: UIViewController {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,11 +71,22 @@ class IssueDetailViewController: UIViewController {
         dispatchGroup.enter()
         service?.requestMilestones()
         
-        dispatchGroup.notify(queue: DispatchQueue.main) {
+        asyncNotify {
             self.issue = self.service?.issue
             self.configureHierarchy()
             self.addBottomSheetView()
         }
+    }
+    
+    private func asyncNotify(compltion handler: @escaping () -> ()) {
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            handler()
+        }
+    }
+    
+    private func updateComments() {
+        dispatchGroup.enter()
+        service?.requestComments()
     }
 }
 
@@ -117,6 +133,10 @@ extension IssueDetailViewController: IssueEditDelegate {
             guard let milestones = milestones else { return }
             delegate?.presentToMilestoneEdit(milstones: milestones)
         }
+    }
+    
+    func touchedCommentBotton() {
+        delegate?.presentToComment()
     }
 }
 
