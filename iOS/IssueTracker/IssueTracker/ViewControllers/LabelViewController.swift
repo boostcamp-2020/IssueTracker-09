@@ -10,7 +10,7 @@ import UIKit
 protocol LabelCoordinatorDelegate: AnyObject {
     func willRequestLabels()
     func presentAddLabel()
-    func presentEditLabel()
+    func presentEditLabel(label: Label)
 }
 
 class LabelViewController: UIViewController {
@@ -36,6 +36,7 @@ class LabelViewController: UIViewController {
         super.viewDidLoad()
         configRightItem()
         collectionView.collectionViewLayout = createLayout()
+        collectionView.delegate = self
         delegate?.willRequestLabels()
         configureDataSource()
     }
@@ -55,10 +56,7 @@ extension LabelViewController {
     
     
     @objc func didAddButtonTapped(_ sender: UIBarButtonItem) {
-        guard let viewController = UIStoryboard(name: "MilestoneAppend", bundle: nil).instantiateInitialViewController() as? MilestoneAppendViewController else {
-            return
-        }
-        present(viewController, animated: true, completion: nil)
+        delegate?.presentAddLabel()
     }
 }
 extension LabelViewController {
@@ -85,5 +83,12 @@ extension LabelViewController {
         snapshot.appendSections([0])
         snapshot.appendItems(labels)
         dataSource.apply(snapshot, animatingDifferences: false)
+    }
+}
+
+extension LabelViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let label = labels?.labels[indexPath.item] else { return }
+        delegate?.presentEditLabel(label: label)
     }
 }
