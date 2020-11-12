@@ -53,7 +53,7 @@ export const Date = styled.span`
 `;
 
 export const Title = styled.span`
-  margin-left: 5px;
+  padding: 5px;
 `;
 
 export const Square = styled.div`

@@ -32,5 +32,5 @@ export const Image = styled.div`
   display: block;
   width: 30px;
   height: 30px;
-  margin-right: 5px;
+  margin-right: 10px;
 `;
