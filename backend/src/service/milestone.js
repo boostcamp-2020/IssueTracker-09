@@ -3,13 +3,14 @@ const Issue = require('../model').Issue;
 
 module.exports = {
   create: async ({ title, content, deadline } = {}) => {
-    if (!title || !content || !deadline) {
+    if (!title) {
       return { error: '정보가 부족합니다' };
     }
+
     const milestone = await Milestone.create({
       title,
       content,
-      deadline,
+      deadline: deadline ? deadline : null,
       is_opened: true,
     });
     return milestone;
