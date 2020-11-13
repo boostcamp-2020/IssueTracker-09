@@ -101,6 +101,16 @@ module.exports = {
       where: { id },
     });
 
+    const milestone = await Model.Milestone.findOne({
+      include: [Model.Issue],
+      where: { id: issue.Milestone.id },
+    });
+
+    const open = milestone.Issues.filter((issue) => issue.is_opened).length;
+    const total = milestone.Issues.length;
+    issue.Milestone.dataValues.openCount = open;
+    issue.Milestone.dataValues.totalCount = total;
+
     return issue;
   },
 
