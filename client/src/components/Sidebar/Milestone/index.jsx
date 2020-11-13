@@ -43,7 +43,11 @@ const MilestoneContainer = ({ milestone, issueId, type }) => {
         <>
           <Delete onClick={deleteHandler}>X Clear this milestone</Delete>
           <Bar>
-            <Status percentage={(state.openCount / state.totalCount) * 100} />
+            <Status
+              percentage={
+                (1 - Math.ceil(state.openCount / state.totalCount)) * 100
+              }
+            />
           </Bar>
           <MileName>{state.title}</MileName>
         </>
