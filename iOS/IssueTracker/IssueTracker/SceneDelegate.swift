@@ -8,7 +8,7 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-//    var window: UIWindow?
+    //    var window: UIWindow?
     var coordinatorController: RootCoordinateController?
     
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -18,13 +18,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let scene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: scene)
+        
         coordinatorController = RootCoordinateController(window: window)
-        
-        // user 정보 없을 시,
-        coordinatorController?.root(name: .sign)
-        
-        // user 정보 존재 시,
-//        coordinatorController?.root(name: .Issue)
+        if PersistenceManager.shared.load(forKey: .token) != nil {
+            // user 정보 존재 시,
+            coordinatorController?.root(name: .issue)
+        } else {
+            // user 정보 없을 시,
+            coordinatorController?.root(name: .sign)
+        }
     }
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데

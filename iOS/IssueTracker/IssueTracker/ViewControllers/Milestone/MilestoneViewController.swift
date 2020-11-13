@@ -10,17 +10,10 @@ import UIKit
 extension Notification.Name {
     static let didMilestoneAppend = Notification.Name(rawValue: "MilestoneViewController.didMilestoneAppend")
 }
-
-protocol MilestoneViewControllerDelegate: AnyObject {
-    func moveToMilestone()
-}
-
 class MilestoneViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
-    
     var service: MilestoneService?
     private var refreshControl: UIRefreshControl?
-    weak var delegate: MilestoneViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +47,6 @@ class MilestoneViewController: UIViewController {
                 as? MilestoneAppendViewController else {
             return
         }
-        
         present(viewController, animated: true, completion: nil)
     }
     

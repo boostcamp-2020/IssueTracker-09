@@ -14,6 +14,7 @@ protocol MainTabBarDelegate: AnyObject {
 enum TabName: String {
     case issue = "Issue"
     case milestone = "Milestone"
+    case label = "Label"
 }
 
 class MainTabBarCoordinator: Coordinator {
@@ -30,18 +31,20 @@ class MainTabBarCoordinator: Coordinator {
     
     func start() {
         window.rootViewController = tabBarController
-        prepareChileCoordiantors()
+        prepareChildCoordiantors()
         window.makeKeyAndVisible()
     }
     
-    func prepareChileCoordiantors() {
+    func prepareChildCoordiantors() {
         let issueCoordinator = IssueCoordinator(window: window, delegate: self)
         let milestoneCoordinator = MilestoneCoordinator(window: window, delegate: self)
+        let labelCootdinator = LabelCoordinator(window: window, delegate: self)
         
         childCoordinators[TabName.issue.rawValue] = issueCoordinator
         childCoordinators[TabName.milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
         milestoneCoordinator.start()
+        labelCootdinator.start()
     }
 }
 extension MainTabBarCoordinator: MainTabBarDelegate {
@@ -55,6 +58,10 @@ extension MainTabBarCoordinator: MainTabBarDelegate {
             viewController.tabBarItem = UITabBarItem(title: "Milestone",
                                                      image: UIImage(systemName: "calendar.circle"),
                                                      selectedImage: UIImage(systemName: "calendar.circle.fill"))
+        case .label:
+            viewController.tabBarItem = UITabBarItem(title: "Label",
+                                                     image: UIImage(systemName: "bookmark.circle"),
+                                                     selectedImage: UIImage(systemName: "bookmark.circle.fill"))
         }
         tabBarController.addChild(viewController)
     }

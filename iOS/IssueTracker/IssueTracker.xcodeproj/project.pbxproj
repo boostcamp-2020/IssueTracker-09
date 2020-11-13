@@ -74,6 +74,12 @@
 		FC631A7B254FF7A400DFE242 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A7A254FF7A400DFE242 /* FilterViewController.swift */; };
 		FC631A83254FF82F00DFE242 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC631A82254FF82F00DFE242 /* Filter.swift */; };
 		FC6331B3255D24C10041C4E7 /* IssueCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331B2255D24C10041C4E7 /* IssueCommentViewController.swift */; };
+		FC6331C2255D46C50041C4E7 /* Label.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC6331C1255D46C50041C4E7 /* Label.storyboard */; };
+		FC6331C8255D7FB40041C4E7 /* LabelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331C7255D7FB40041C4E7 /* LabelCollectionViewCell.swift */; };
+		FC6331CE255D809B0041C4E7 /* LabelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331CD255D809B0041C4E7 /* LabelViewController.swift */; };
+		FC6331D4255D80ED0041C4E7 /* LabelCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331D3255D80ED0041C4E7 /* LabelCoordinator.swift */; };
+		FC6331DC255D8EB90041C4E7 /* LabelAppend.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FC6331DB255D8EB90041C4E7 /* LabelAppend.storyboard */; };
+		FC6331E1255D92DD0041C4E7 /* LabelAppendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC6331E0255D92DD0041C4E7 /* LabelAppendViewController.swift */; };
 		FC78518F2548996400E60957 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78518E2548996400E60957 /* RoundButton.swift */; };
 		FC7851A32548A13300E60957 /* GithubSignService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7851A22548A13300E60957 /* GithubSignService.swift */; };
 		FC808DBF25542909001BCA58 /* IssueBottomSheetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC808DBE25542909001BCA58 /* IssueBottomSheetViewController.swift */; };
@@ -207,6 +213,12 @@
 		FC631A7A254FF7A400DFE242 /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		FC631A82254FF82F00DFE242 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		FC6331B2255D24C10041C4E7 /* IssueCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueCommentViewController.swift; sourceTree = "<group>"; };
+		FC6331C1255D46C50041C4E7 /* Label.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Label.storyboard; sourceTree = "<group>"; };
+		FC6331C7255D7FB40041C4E7 /* LabelCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCollectionViewCell.swift; sourceTree = "<group>"; };
+		FC6331CD255D809B0041C4E7 /* LabelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelViewController.swift; sourceTree = "<group>"; };
+		FC6331D3255D80ED0041C4E7 /* LabelCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelCoordinator.swift; sourceTree = "<group>"; };
+		FC6331DB255D8EB90041C4E7 /* LabelAppend.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LabelAppend.storyboard; sourceTree = "<group>"; };
+		FC6331E0255D92DD0041C4E7 /* LabelAppendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelAppendViewController.swift; sourceTree = "<group>"; };
 		FC78518E2548996400E60957 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		FC7851A22548A13300E60957 /* GithubSignService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GithubSignService.swift; sourceTree = "<group>"; };
 		FC808DBE25542909001BCA58 /* IssueBottomSheetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IssueBottomSheetViewController.swift; sourceTree = "<group>"; };
@@ -387,6 +399,8 @@
 				F4FD809B2553EC1E00B997C5 /* IssueAppend.storyboard */,
 				FC0C82C4255A724F00C11C9D /* IssueEdit.storyboard */,
 				FCE6DAEB255BDA670073433D /* Comment.storyboard */,
+				FC6331C1255D46C50041C4E7 /* Label.storyboard */,
+				FC6331DB255D8EB90041C4E7 /* LabelAppend.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -407,6 +421,7 @@
 		F4E10861254951F30086F453 /* Customs */ = {
 			isa = PBXGroup;
 			children = (
+				FC6331C6255D7F9F0041C4E7 /* label */,
 				FC863BB2255265F800000B19 /* ElementView.swift */,
 				FC78518E2548996400E60957 /* RoundButton.swift */,
 				F4BBC96E255BE3220004F011 /* ShadowView.swift */,
@@ -467,6 +482,31 @@
 			path = Filter;
 			sourceTree = "<group>";
 		};
+		FC6331C6255D7F9F0041C4E7 /* label */ = {
+			isa = PBXGroup;
+			children = (
+				FC6331C7255D7FB40041C4E7 /* LabelCollectionViewCell.swift */,
+			);
+			path = label;
+			sourceTree = "<group>";
+		};
+		FC6331CC255D80890041C4E7 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				FC6331CD255D809B0041C4E7 /* LabelViewController.swift */,
+				FC6331E0255D92DD0041C4E7 /* LabelAppendViewController.swift */,
+			);
+			name = Label;
+			sourceTree = "<group>";
+		};
+		FC6331D2255D80D20041C4E7 /* Label */ = {
+			isa = PBXGroup;
+			children = (
+				FC6331D3255D80ED0041C4E7 /* LabelCoordinator.swift */,
+			);
+			path = Label;
+			sourceTree = "<group>";
+		};
 		FC78518D2548992900E60957 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
@@ -520,6 +560,7 @@
 				F448517E2549834F00A84527 /* MainTabBarCoordinator.swift */,
 				FCBC1D3325595B1C00423B8E /* Issue */,
 				FCBC1D3425595B2900423B8E /* Milestone */,
+				FC6331D2255D80D20041C4E7 /* Label */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -684,6 +725,7 @@
 		FCF197182547BCA500AED031 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FC6331CC255D80890041C4E7 /* Label */,
 				FC631A79254FF78400DFE242 /* Filter */,
 				F4012A4E255027340047CE91 /* Milestone */,
 				F4D544982549132600D9F4B9 /* Issue */,
@@ -813,10 +855,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4B6082C255D69120014D73B /* .swiftlint.yml in Resources */,
+				FC6331C2255D46C50041C4E7 /* Label.storyboard in Resources */,
 				F4383EC525493016003FB09D /* SignIn.storyboard in Resources */,
 				F4B4AD642551904700428C68 /* MilestoneAppend.storyboard in Resources */,
 				F4383EC725493016003FB09D /* LaunchScreen.storyboard in Resources */,
 				F4EFB79D25527A9000328C61 /* IssueDetail.storyboard in Resources */,
+				FC6331DC255D8EB90041C4E7 /* LabelAppend.storyboard in Resources */,
 				FC0C82C5255A724F00C11C9D /* IssueEdit.storyboard in Resources */,
 				FCF5EFB525511BA2001A44B3 /* Search.storyboard in Resources */,
 				FC631A73254FF4B500DFE242 /* Filter.storyboard in Resources */,
@@ -978,6 +1022,7 @@
 				FC808DBF25542909001BCA58 /* IssueBottomSheetViewController.swift in Sources */,
 				FCBC1D272559528100423B8E /* AssigneeNetworkService.swift in Sources */,
 				F4012A592550277C0047CE91 /* MilestoneCollectionViewCell.swift in Sources */,
+				FC6331E1255D92DD0041C4E7 /* LabelAppendViewController.swift in Sources */,
 				F41014A0255ADB570032EEF6 /* FilterContext.swift in Sources */,
 				FCBC1D2C2559534400423B8E /* Assignees.swift in Sources */,
 				F4012A66255028A50047CE91 /* MilestoneService.swift in Sources */,
@@ -985,6 +1030,7 @@
 				F4FE9C0F254908F30054DAAD /* IssueViewController.swift in Sources */,
 				F44851742549721F00A84527 /* Issue.swift in Sources */,
 				F4EFB7A22552847600328C61 /* IssueDetailViewController.swift in Sources */,
+				FC6331CE255D809B0041C4E7 /* LabelViewController.swift in Sources */,
 				F4EAFF762553F2BE009372E2 /* IssueAppendViewController.swift in Sources */,
 				F403F38425500247004E8CF0 /* ImageNetworkService.swift in Sources */,
 				F403F37F2550006E004E8CF0 /* MilestoneNetworkService.swift in Sources */,
@@ -993,6 +1039,7 @@
 				FC0C82B7255A2B5900C11C9D /* MilestoneCoordinator.swift in Sources */,
 				F403F375254FFDC4004E8CF0 /* CommentNetworkService.swift in Sources */,
 				F4EFB7AF2552881200328C61 /* IssueDetailContentCollectionViewCell.swift in Sources */,
+				FC6331D4255D80ED0041C4E7 /* LabelCoordinator.swift in Sources */,
 				FCF197212547BDAB00AED031 /* User.swift in Sources */,
 				FC5CAE7B254FD6320086EA13 /* PersistenceManager.swift in Sources */,
 				FC0C82D4255A87B900C11C9D /* IssueEditController.swift in Sources */,
@@ -1002,6 +1049,7 @@
 				FCBC1D3F25595B6000423B8E /* IssueDetailCoordinator.swift in Sources */,
 				FC5CAE67254FA6CC0086EA13 /* NetworkService.swift in Sources */,
 				FCF196E92547AED000AED031 /* SignViewController.swift in Sources */,
+				FC6331C8255D7FB40041C4E7 /* LabelCollectionViewCell.swift in Sources */,
 				F4E1085D254951ED0086F453 /* IssueTableViewCell.swift in Sources */,
 				F44851792549736900A84527 /* IssueCacheService.swift in Sources */,
 				F4012A6B255028AD0047CE91 /* MilestoneCacheService.swift in Sources */,
