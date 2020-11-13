@@ -24,6 +24,10 @@ class MainTabBarCoordinator: Coordinator {
     private let tabBarController = UITabBarController()
     private weak var delegate: RootCoordinateControllerDelegate?
     
+    var issueCoordinator: IssueCoordinator?
+    var milestoneCoordinator: MilestoneCoordinator?
+    var labelCoordinator: LabelCoordinator?
+    
     init(window: UIWindow, delegate: RootCoordinateControllerDelegate) {
         self.window = window
         self.delegate = delegate
@@ -38,13 +42,17 @@ class MainTabBarCoordinator: Coordinator {
     func prepareChildCoordiantors() {
         let issueCoordinator = IssueCoordinator(window: window, delegate: self)
         let milestoneCoordinator = MilestoneCoordinator(window: window, delegate: self)
-        let labelCootdinator = LabelCoordinator(window: window, delegate: self)
+        let labelCoordinator = LabelCoordinator(window: window, delegate: self)
         
         childCoordinators[TabName.issue.rawValue] = issueCoordinator
         childCoordinators[TabName.milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
         milestoneCoordinator.start()
-        labelCootdinator.start()
+        labelCoordinator.start()
+        
+        self.issueCoordinator = issueCoordinator
+        self.milestoneCoordinator = milestoneCoordinator
+        self.labelCoordinator = labelCoordinator
     }
 }
 extension MainTabBarCoordinator: MainTabBarDelegate {
