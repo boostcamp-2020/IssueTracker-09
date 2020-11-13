@@ -29,7 +29,7 @@ describe('User모델 테스트', () => {
       },
       image: {
         type: DataTypes.STRING(255),
-        defaultValue: null,
+        defaultValue: '',
       },
     });
   });
