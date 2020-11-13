@@ -17,6 +17,16 @@ class LabelViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     private var refreshControl: UIRefreshControl?
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     private weak var delegate: LabelCoordinatorDelegate?
     private var labels: Labels? {
         didSet {
@@ -39,6 +49,8 @@ class LabelViewController: UIViewController {
         configRightItem()
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         delegate?.willRequestLabels()
         configureDataSource()
         configRefreshControl()
@@ -47,6 +59,7 @@ class LabelViewController: UIViewController {
     func didResponseLabels(_ labels: Labels) {
         self.labels = labels
         refreshControl?.endRefreshing()
+        activityIndicator.stopAnimating()
     }
     
     func configRefreshControl() {
