@@ -6,13 +6,6 @@ const Container = styled.div`
   border-bottom: 1px solid #dddddd;
 `;
 
-const Status = styled.div`
-  width: ${(props) => props.percentage}%;
-  height: 10px;
-  border-radius: 4px;
-  background-color: green;
-`;
-
 const Div = styled.div`
   width: ${(props) => props.width};
   padding: 5px;
@@ -34,4 +27,19 @@ const PointSpan = styled.span`
   cursor: pointer;
 `;
 
-export { Container, Status, Div, Title, Span, PointSpan };
+const Status = styled.div`
+  width: ${(props) => props.percentage}%;
+  height: 10px;
+  border-radius: 4px;
+  background-color: green;
+`;
+
+const Bar = styled.div`
+  width: calc(100% - 20px);
+  height: 10px;
+  border-radius: 4px;
+  background-color: lightgray;
+  margin: 0 auto;
+`;
+
+export { Container, Status, Div, Title, Span, PointSpan, Bar };

@@ -2,7 +2,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Container, Status, Div, Title, Span, PointSpan } from './styled';
+import { Container, Status, Div, Title, Span, PointSpan, Bar } from './styled';
 
 const MilestoneItem = ({ milestone, state, updateEvent, deleteEvent }) => {
   if (milestone?.is_opened !== state) {
@@ -23,11 +23,13 @@ const MilestoneItem = ({ milestone, state, updateEvent, deleteEvent }) => {
       </Div>
       <Div width="50%">
         <Div>
-          <Status
-            percentage={Math.ceil(
-              (1 - milestone.openCount / milestone.totalCount) * 100
-            )}
-          />
+          <Bar>
+            <Status
+              percentage={Math.ceil(
+                (1 - milestone.openCount / milestone.totalCount) * 100
+              )}
+            />
+          </Bar>
         </Div>
         <Div>
           <Span>
