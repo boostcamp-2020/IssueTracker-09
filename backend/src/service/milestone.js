@@ -6,6 +6,7 @@ module.exports = {
     if (!title) {
       return { error: '정보가 부족합니다' };
     }
+
     const milestone = await Milestone.create({
       title,
       content,
