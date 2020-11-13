@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { faFlag } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import calculateTime from '../../../lib/calculate-time';
 
 import {
   Checkbox,
@@ -48,8 +49,12 @@ const Issues = ({ issue, checkedHandler, checked }) => {
           <Id>#{issue.id}</Id>
           <Text>
             {issue.is_opened
-              ? `opened yesterday by ${issue.User?.name}`
-              : `closed by ${issue.User?.name} yesterday`}
+              ? `opened ${calculateTime(issue.timestamp)} by ${
+                  issue.User?.name
+                }`
+              : `closed by ${issue.User?.name} ${calculateTime(
+                  issue.timestamp
+                )}`}
           </Text>
           {issue.Milestone ? (
             <>

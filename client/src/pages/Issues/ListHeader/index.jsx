@@ -15,6 +15,7 @@ import { getUsersAPI } from '../../../apis/user';
 import { getLabelsAPI } from '../../../apis/label';
 import { getMilestonesAPI } from '../../../apis/milestone';
 import makeSearch from '../../../lib/make-search';
+import { overlayElement } from '../../../components/Overlay';
 
 const ListHeader = ({ checkedHandler, checked }) => {
   const {
@@ -49,7 +50,13 @@ const ListHeader = ({ checkedHandler, checked }) => {
             </Div>
             <Div width="100%" align="flex-end">
               <Details>
-                <summary>Mark as</summary>
+                <summary
+                  onClick={() => {
+                    overlayElement.current.hidden = false;
+                  }}
+                >
+                  Mark as
+                </summary>
                 <Div position="absolute">
                   <MarkAs checked={checked} checkHandler={checkedHandler} />
                 </Div>
