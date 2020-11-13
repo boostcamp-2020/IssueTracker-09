@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     image: {
       type: DataTypes.STRING(255),
-      defaultValue: null,
+      defaultValue: '',
     },
   });
   User.associate = (db) => {
