@@ -15,6 +15,8 @@ protocol LabelCoordinatorDelegate: AnyObject {
 
 class LabelViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    private var refreshControl: UIRefreshControl?
+    
     private weak var delegate: LabelCoordinatorDelegate?
     private var labels: Labels? {
         didSet {
@@ -39,10 +41,23 @@ class LabelViewController: UIViewController {
         collectionView.delegate = self
         delegate?.willRequestLabels()
         configureDataSource()
+        configRefreshControl()
     }
     
     func didResponseLabels(_ labels: Labels) {
         self.labels = labels
+        refreshControl?.endRefreshing()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        delegate?.willRequestLabels()
     }
 }
 
