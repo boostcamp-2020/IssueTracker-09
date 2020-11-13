@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol Coordinator : AnyObject {
+protocol Coordinator: AnyObject {
     var window: UIWindow { get }
     var childCoordinators: [String: Coordinator] { get }
 

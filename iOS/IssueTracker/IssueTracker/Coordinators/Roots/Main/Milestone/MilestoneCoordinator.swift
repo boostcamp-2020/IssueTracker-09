@@ -18,7 +18,8 @@ class MilestoneCoordinator: Coordinator {
     }
     
     func start() {
-        guard let milestoneViewController = UIStoryboard(name: "Milestone", bundle: nil).instantiateInitialViewController() as? MilestoneViewController else {
+        guard let milestoneViewController = UIStoryboard(name: "Milestone", bundle: nil)
+                .instantiateInitialViewController() as? MilestoneViewController else {
             return
         }
         
@@ -29,6 +30,6 @@ class MilestoneCoordinator: Coordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([milestoneViewController], animated: false)
         
-        delegate?.setViewController(navigationController, name: .Milestone)
+        delegate?.setViewController(navigationController, name: .milestone)
     }
 }

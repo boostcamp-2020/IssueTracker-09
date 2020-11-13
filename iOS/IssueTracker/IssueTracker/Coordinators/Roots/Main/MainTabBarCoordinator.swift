@@ -12,7 +12,9 @@ protocol MainTabBarDelegate: AnyObject {
 }
 
 enum TabName: String {
-    case Issue, Milestone, Label
+    case issue = "Issue"
+    case milestone = "Milestone"
+    case label = "Label"
 }
 
 class MainTabBarCoordinator: Coordinator {
@@ -21,6 +23,10 @@ class MainTabBarCoordinator: Coordinator {
     
     private let tabBarController = UITabBarController()
     private weak var delegate: RootCoordinateControllerDelegate?
+    
+    var issueCoordinator: IssueCoordinator?
+    var milestoneCoordinator: MilestoneCoordinator?
+    var labelCoordinator: LabelCoordinator?
     
     init(window: UIWindow, delegate: RootCoordinateControllerDelegate) {
         self.window = window
@@ -36,29 +42,35 @@ class MainTabBarCoordinator: Coordinator {
     func prepareChildCoordiantors() {
         let issueCoordinator = IssueCoordinator(window: window, delegate: self)
         let milestoneCoordinator = MilestoneCoordinator(window: window, delegate: self)
-        let labelCootdinator = LabelCoordinator(window: window, delegate: self)
+        let labelCoordinator = LabelCoordinator(window: window, delegate: self)
         
-        childCoordinators[TabName.Issue.rawValue] = issueCoordinator
-        childCoordinators[TabName.Milestone.rawValue] = milestoneCoordinator
-        childCoordinators[TabName.Label.rawValue] = labelCootdinator
+        childCoordinators[TabName.issue.rawValue] = issueCoordinator
+        childCoordinators[TabName.milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
+        labelCoordinator.start()
         milestoneCoordinator.start()
-        labelCootdinator.start()
+        
+        self.issueCoordinator = issueCoordinator
+        self.milestoneCoordinator = milestoneCoordinator
+        self.labelCoordinator = labelCoordinator
     }
 }
 extension MainTabBarCoordinator: MainTabBarDelegate {
     func setViewController(_ viewController: UIViewController, name: TabName) {
         switch name {
-        case .Issue:
-            viewController.title = "이슈"
-            viewController.tabBarItem = UITabBarItem(title: "Issue", image: UIImage(systemName: "bell.circle"), selectedImage: UIImage(systemName: "bell.circle.fill"))
-        case .Milestone:
-            viewController.tabBarItem = UITabBarItem(title: "Milestone", image: UIImage(systemName: "calendar.circle"), selectedImage: UIImage(systemName: "calendar.circle.fill"))
-        case .Label:
-            viewController.tabBarItem = UITabBarItem(title: "Label", image: UIImage(systemName: "bookmark"), selectedImage: UIImage(systemName: "bookmark.fill"))
-            viewController.title = "레이블"
+        case .issue:
+            viewController.tabBarItem = UITabBarItem(title: "Issue",
+                                                     image: UIImage(systemName: "bell.circle"),
+                                                     selectedImage: UIImage(systemName: "bell.circle.fill"))
+        case .milestone:
+            viewController.tabBarItem = UITabBarItem(title: "Milestone",
+                                                     image: UIImage(systemName: "calendar.circle"),
+                                                     selectedImage: UIImage(systemName: "calendar.circle.fill"))
+        case .label:
+            viewController.tabBarItem = UITabBarItem(title: "Label",
+                                                     image: UIImage(systemName: "bookmark.circle"),
+                                                     selectedImage: UIImage(systemName: "bookmark.circle.fill"))
         }
         tabBarController.addChild(viewController)
     }
 }
-

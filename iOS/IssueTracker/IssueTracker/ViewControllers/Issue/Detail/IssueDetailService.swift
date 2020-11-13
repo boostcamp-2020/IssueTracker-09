@@ -13,6 +13,7 @@ protocol IssueDetailService {
     func requestLabels()
     func requestMilestones()
     func requestUsers()
+    func deleteComment(_ comment: Comment, userName: String?)
 }
 
 protocol IssueDetailServiceDelegate: AnyObject {
@@ -20,4 +21,5 @@ protocol IssueDetailServiceDelegate: AnyObject {
     func didLabelsLoaded(labels: [Label]?)
     func didMilestonesLoaded(milestones: [Milestone]?)
     func didAssigneesLoaded(assignee: [User]?)
+    func didReceivedError(description: String)
 }

@@ -9,12 +9,12 @@ import UIKit
 
 class FilterCoordinator: Coordinator {
     private enum StoryboardName: String {
-        case Filter
-        case Search
+        case filter = "Filter"
+        case search = "Search"
     }
     
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String : Coordinator] = [: ]
+    private(set) var childCoordinators: [String: Coordinator] = [: ]
     
     private weak var parent: UIViewController?
     private let navigationController = UINavigationController()
@@ -25,11 +25,10 @@ class FilterCoordinator: Coordinator {
     }
     
     func start() {
-        let storyBoard = UIStoryboard(name: StoryboardName.Filter.rawValue, bundle: nil)
+        let storyBoard = UIStoryboard(name: StoryboardName.filter.rawValue, bundle: nil)
         let viewController = storyBoard.instantiateViewController(
             identifier: "FilterViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return FilterViewController(coder: coder, delegate: self)
             })
         
@@ -41,11 +40,10 @@ class FilterCoordinator: Coordinator {
 
 extension FilterCoordinator: MoveToSearchPage {
     func move(to type: Filter.Element) {
-        let storyBoard = UIStoryboard(name: StoryboardName.Search.rawValue, bundle: nil)
+        let storyBoard = UIStoryboard(name: StoryboardName.search.rawValue, bundle: nil)
         let viewController = storyBoard.instantiateViewController(
             identifier: "FilterSearchViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return FilterSearchViewController(coder: coder, type: type)
             })
         navigationController.pushViewController(viewController, animated: true)

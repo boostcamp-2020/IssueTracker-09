@@ -44,8 +44,14 @@ class MilestoneAppendViewController: UIViewController {
     }
     
     private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willKeyboardShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willKeyboardHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     @IBAction func didCloseButtonTapped(_ sender: UIButton) {
@@ -56,6 +62,50 @@ class MilestoneAppendViewController: UIViewController {
         titleInputField.clear()
         deadlineInputField.clear()
         descriptionInputField.clear()
+    }
+    
+    private func modifyMilestone(milestone: Milestone,
+                                 title: String,
+                                 deadline: String,
+                                 description: String) {
+        var milestone = milestone
+        milestone.title = title
+        milestone.deadline = deadline
+        milestone.content = description
+        MilestoneNetworkService().modifyMilestone(milestone) { [weak self] result in
+            self?.activityIndicator.stopAnimating()
+            switch result {
+            case .success(_):
+                NotificationCenter.default.post(name: .didMilestoneChangedNotification, object: self)
+                self?.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러",
+                                                                          message: error.localizedDescription)
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    private func addMilestone(_ title: String, _ description: String, _ deadline: String) {
+        let milestone = Milestone(id: 0,
+                                  title: title,
+                                  content: description,
+                                  deadline: deadline,
+                                  isOpened: true,
+                                  openCount: nil,
+                                  totalCount: nil)
+        MilestoneNetworkService().addMilestone(milestone) { [weak self] result in
+            self?.activityIndicator.stopAnimating()
+            switch result {
+            case .success(_):
+                NotificationCenter.default.post(name: .didMilestoneAppend, object: self)
+                self?.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러",
+                                                                          message: error.localizedDescription)
+                self?.present(alert, animated: true, completion: nil)
+            }
+        }
     }
     
     @IBAction func didSaveButtonTapped(_ sender: UIButton) {
@@ -77,34 +127,10 @@ class MilestoneAppendViewController: UIViewController {
         }
         
         activityIndicator.startAnimating()
-        if var milestone = milestone {
-            milestone.title = title
-            milestone.deadline = deadline
-            milestone.content = description
-            MilestoneNetworkService().modifyMilestone(milestone) { [weak self] result in
-                self?.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    NotificationCenter.default.post(name: .didMilestoneChangedNotification, object: self)
-                    self?.dismiss(animated: true, completion: nil)
-                case .failure(let error):
-                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러", message: error.localizedDescription)
-                    self?.present(alert, animated: true, completion: nil)
-                }
-            }
+        if let milestone = milestone {
+            modifyMilestone(milestone: milestone, title: title, deadline: deadline, description: description)
         } else {
-            let milestone = Milestone(id: 0, title: title, content: description, deadline: deadline, isOpened: true, openCount: nil, totalCount: nil)
-            MilestoneNetworkService().addMilestone(milestone) { [weak self] result in
-                self?.activityIndicator.stopAnimating()
-                switch result {
-                case .success(_):
-                    NotificationCenter.default.post(name: .didMilestoneAppend, object: self)
-                    self?.dismiss(animated: true, completion: nil)
-                case .failure(let error):
-                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "마일스톤 수정 에러", message: error.localizedDescription)
-                    self?.present(alert, animated: true, completion: nil)
-                }
-            }
+            addMilestone(title, description, deadline)
         }
     }
     
@@ -113,7 +139,8 @@ class MilestoneAppendViewController: UIViewController {
     }
     
     @objc func willKeyboardShow(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        let keyboardFrameEndUserInfoKey = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)
+        if let keyboardSize = keyboardFrameEndUserInfoKey?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height / 2)
             })

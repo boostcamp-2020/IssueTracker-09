@@ -10,7 +10,7 @@ import UIKit
 class IssueSectionHeader: UICollectionReusableView {
     @IBOutlet private weak var title: UILabel!
     
-    private var key:EditKey?
+    private var key: EditKey?
     
     func configure(key: EditKey) {
         self.key = key

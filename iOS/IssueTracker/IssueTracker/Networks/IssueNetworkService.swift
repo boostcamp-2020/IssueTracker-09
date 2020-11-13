@@ -54,7 +54,11 @@ class IssueNetworkService: NetworkService {
             }
     }
     
-    func addIssue(title: String, labelId: [Int]?, assigneeId: [Int]?, milestoneId: Int?, completion handler: ( (Result<Issue, AFError>) -> Void)?) {
+    func addIssue(title: String,
+                  labelId: [Int]?,
+                  assigneeId: [Int]?,
+                  milestoneId: Int?,
+                  completion handler: ( (Result<Issue, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -62,7 +66,7 @@ class IssueNetworkService: NetworkService {
         
         var parameters = [
             "title": title
-        ] as [String : Any]
+        ] as [String: Any]
         
         if let labelId = labelId {
             parameters["labelId"] = labelId
@@ -124,7 +128,9 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueMilestone(of id: Int, to milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueMilestone(of id: Int,
+                              to milestone: Milestone,
+                              completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.milestone.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -146,26 +152,29 @@ class IssueNetworkService: NetworkService {
             return
         }
         
-        let parameters = ["isOpened": !issue.isOpened, "id": issue.id] as [String : Any]
+        let parameters = ["isOpened": !issue.isOpened, "id": issue.id] as [String: Any]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
                    parameters: parameters,
                    headers: headers)
-            .validate({ (request, response, data) -> DataRequest.ValidationResult in
+            .validate({ (_, response, _) -> DataRequest.ValidationResult in
                 let statusCode = response.statusCode
                 if (200..<300) ~= statusCode || 400 == statusCode {
                     return .success(())
                 }
                 return .failure(NetworkError.response)
             })
-            .response { response in
+            .response { _ in
                 handler(.success(true))
             }
     }
     
-    func modifyIssueLabels(of id: Int, checked: [Label], unchecked: [Label], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueLabels(of id: Int,
+                           checked: [Label],
+                           unchecked: [Label],
+                           completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.labels.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -184,7 +193,10 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueAssignee(of id: Int, checked: [User], unchecked: [User], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueAssignee(of id: Int,
+                             checked: [User],
+                             unchecked: [User],
+                             completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.assignees.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return

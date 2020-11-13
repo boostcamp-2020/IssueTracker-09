@@ -72,7 +72,13 @@ class IssueEditViewController: UIViewController {
             let new = dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
                 return item.checkable
             }).map { item -> Milestone in
-                return Milestone(id: item.id, title: "", content: "", deadline: "", isOpened: true, openCount: nil, totalCount: nil)
+                return Milestone(id: item.id,
+                                 title: "",
+                                 content: "",
+                                 deadline: "",
+                                 isOpened: true,
+                                 openCount: nil,
+                                 totalCount: nil)
             }
             if let milestone = new.first {
                 service?.willEditMilestone(new: milestone)
@@ -98,7 +104,8 @@ extension IssueEditViewController {
     
     private func configureDataSource() {
         // list cell
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, EditItem> { (cell, indexPath, item) in
+        let cellRegistration =
+            UICollectionView.CellRegistration<UICollectionViewListCell, EditItem> { (cell, _, item) in
             var contentConfiguration = UIListContentConfiguration.valueCell()
             contentConfiguration.text = item.content
             cell.contentConfiguration = contentConfiguration
@@ -111,8 +118,9 @@ extension IssueEditViewController {
         }
         
         // data source
-        dataSource = UICollectionViewDiffableDataSource<Section, EditItem>(collectionView: collectionView) {
-            (collectionView, indexPath, item) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, EditItem>(
+            collectionView: collectionView
+        ) { (collectionView, indexPath, item) -> UICollectionViewCell? in
             return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item)
         }
     }
@@ -125,7 +133,6 @@ extension IssueEditViewController {
         dataSource.apply(sectionSnapshot, to: Section.Edit, animatingDifferences: false)
     }
 }
-
 
 extension IssueEditViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -142,4 +149,3 @@ extension IssueEditViewController: UICollectionViewDelegate {
         dataSource.apply(newSnapshot)
     }
 }
-

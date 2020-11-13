@@ -75,7 +75,7 @@ class IssueNetworkServiceTests: XCTestCase {
         let expectTimer = expectation(description: "testModifyIssueStatus")
         let issue = Issue(id: 2, title: "", isOpened: true, timestamp: "", assignees: nil, milestone: nil, user: nil, labels: nil)
 
-        IssueNetworkService().modifyIssueStatus(of: issue) { result in
+        IssueNetworkService().modifyIssueStatus(of: issue, to: false) { result in
             switch result {
             case .success(_):
                 expectTimer.fulfill()

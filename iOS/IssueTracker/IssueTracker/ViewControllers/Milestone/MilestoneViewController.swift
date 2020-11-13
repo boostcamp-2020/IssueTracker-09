@@ -13,13 +13,29 @@ extension Notification.Name {
 class MilestoneViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var service: MilestoneService?
+    private var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         service?.reloadData()
         configRightItem()
-        NotificationCenter.default.addObserver(self, selector: #selector(didMilestoneAppend), name: .didMilestoneAppend, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didMilestoneAppend),
+                                               name: .didMilestoneAppend,
+                                               object: nil)
+        configRefreshControl()
     }
     
     func configRightItem() {
@@ -29,8 +45,17 @@ class MilestoneViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButtonItem
     }
     
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
     @objc func didAddButtonTapped(_ sender: UIBarButtonItem) {
-        guard let viewController = UIStoryboard(name: "MilestoneAppend", bundle: nil).instantiateInitialViewController() as? MilestoneAppendViewController else {
+        guard let viewController =
+                UIStoryboard(name: "MilestoneAppend", bundle: nil).instantiateInitialViewController()
+                as? MilestoneAppendViewController else {
             return
         }
         present(viewController, animated: true, completion: nil)
@@ -58,9 +83,7 @@ class MilestoneViewController: UIViewController {
 
 extension MilestoneViewController {
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
-
+        let layout = UICollectionViewCompositionalLayout { _, _ -> NSCollectionLayoutSection in
             let spacing = CGFloat(10)
 
             let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
@@ -80,12 +103,17 @@ extension MilestoneViewController {
         }
         return layout
     }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        service?.reloadData()
+    }
 }
 
 extension MilestoneViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let storyBoard = UIStoryboard(name: "MilestoneAppend", bundle: nil)
-        guard let milestoneAppendViewController = storyBoard.instantiateInitialViewController() as? MilestoneAppendViewController else {
+        guard let milestoneAppendViewController =
+                storyBoard.instantiateInitialViewController() as? MilestoneAppendViewController else {
             return
         }
         
@@ -102,8 +130,10 @@ extension MilestoneViewController: UICollectionViewDataSource {
         service?.count ?? 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? MilestoneCollectionViewCell,
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell",
+                                                            for: indexPath) as? MilestoneCollectionViewCell,
               let milestone = service?[at: indexPath] else {
             return UICollectionViewCell()
         }
@@ -114,6 +144,8 @@ extension MilestoneViewController: UICollectionViewDataSource {
 
 extension MilestoneViewController: MileStoneServiceDelegate {
     func didDataLoaded() {
+        activityIndicator.stopAnimating()
+        refreshControl?.endRefreshing()
         collectionView.reloadData()
     }
 }

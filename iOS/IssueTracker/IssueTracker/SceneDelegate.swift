@@ -20,12 +20,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         coordinatorController = RootCoordinateController(window: window)
-        if nil != PersistenceManager.shared.load(forKey: .token) {
-            //             user 정보 존재 시,
-            coordinatorController?.root(name: .Issue)
+        if PersistenceManager.shared.load(forKey: .token) != nil {
+            // user 정보 존재 시,
+            coordinatorController?.root(name: .issue)
         } else {
             // user 정보 없을 시,
-            coordinatorController?.root(name: .Sign)
+            coordinatorController?.root(name: .sign)
         }
     }
     
@@ -68,7 +68,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to save data, release shared resources, and store enough scene-specific state information
         // to restore the scene back to its current state.
     }
-    
-    
 }
-

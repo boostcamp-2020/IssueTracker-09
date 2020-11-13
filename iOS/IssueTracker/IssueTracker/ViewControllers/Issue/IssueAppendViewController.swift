@@ -10,7 +10,6 @@ import MarkdownView
 
 class IssueAppendViewController: UIViewController {
     @IBOutlet weak var textView: UITextView!
-    var textViewDelegate: EditableTextViewDelegate?
     var markdownView: MarkdownView?
     @IBOutlet weak var titleField: UITextField!
     
@@ -39,9 +38,9 @@ class IssueAppendViewController: UIViewController {
     }
     
     private func configureTextViewDelegate() {
-        textViewDelegate = EditableTextViewDelegate(delegate: self)
-        textViewDelegate?.setPlaceholder(to: true, textView: textView)
-        textView.delegate = textViewDelegate
+        let delegate = EditableTextViewDelegate(delegate: self)
+        delegate.setPlaceholder(to: true, textView: textView)
+        textView.delegate = delegate
     }
     
     private func configureMarkdownView() {
@@ -87,9 +86,9 @@ class IssueAppendViewController: UIViewController {
                 handler()
             case .failure(let error):
                 self?.activityIndicator.stopAnimating()
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "댓글 추가 실패", message: error.localizedDescription)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "댓글 추가 실패",
+                                                                          message: error.localizedDescription)
                 self?.present(alert, animated: true, completion: nil)
-                break
             }
         }
     }
@@ -102,9 +101,9 @@ class IssueAppendViewController: UIViewController {
                 handler(issue)
             case .failure(let error):
                 self?.activityIndicator.stopAnimating()
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이슈 추가 실패", message: error.localizedDescription)
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이슈 추가 실패",
+                                                                          message: error.localizedDescription)
                 self?.present(alert, animated: true, completion: nil)
-                break
             }
         }
     }
@@ -131,14 +130,14 @@ class IssueAppendViewController: UIViewController {
 
 extension IssueAppendViewController: ImagepickerDelegate {
     func didInsertImageTapped() {
-        let alert =  UIAlertController(title: "원하는 타이틀", message: "원하는 메세지", preferredStyle: .actionSheet)
+        let alert = UIAlertController(title: "사진 선택", message: nil, preferredStyle: .actionSheet)
         
-        let library =  UIAlertAction(title: "사진앨범", style: .default) { [weak self] action in
+        let library = UIAlertAction(title: "사진앨범", style: .default) { [weak self] _ in
             self?.openLibrary()
         }
         alert.addAction(library)
         
-        let camera =  UIAlertAction(title: "카메라", style: .default) { [weak self] action in
+        let camera = UIAlertAction(title: "카메라", style: .default) { [weak self] _ in
             self?.openCamera()
         }
         alert.addAction(camera)
@@ -147,24 +146,25 @@ extension IssueAppendViewController: ImagepickerDelegate {
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
-    func openLibrary(){
+    
+    func openLibrary() {
         pickerController.sourceType = .photoLibrary
         present(pickerController, animated: false, completion: nil)
     }
     
-    func openCamera(){
+    func openCamera() {
         if UIImagePickerController .isSourceTypeAvailable(.camera) {
             pickerController.sourceType = .camera
             present(pickerController, animated: false, completion: nil)
-        }
-        else {
+        } else {
             print("Camera not available")
         }
     }
 }
 
 extension IssueAppendViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController,
+                               didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         activityIndicator.startAnimating()
         if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             ImageNetworkService().uploadImage(image, name: "image.jpg") { [weak self] result in
@@ -174,7 +174,8 @@ extension IssueAppendViewController: UIImagePickerControllerDelegate, UINavigati
                     let link = "![image](\(url.absoluteString))"
                     self?.textView.text.append(link)
                 case .failure(let error):
-                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이미지 추가 실패", message: error.localizedDescription)
+                    let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이미지 추가 실패",
+                                                                              message: error.localizedDescription)
                     self?.present(alert, animated: true, completion: nil)
                 }
             }

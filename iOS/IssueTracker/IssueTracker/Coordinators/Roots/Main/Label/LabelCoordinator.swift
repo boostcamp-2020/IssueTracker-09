@@ -26,8 +26,7 @@ class LabelCoordinator: Coordinator {
         let storyBoard = UIStoryboard(name: "Label", bundle: nil)
         labelViewController = storyBoard.instantiateViewController(
             identifier: "LabelViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return LabelViewController(coder: coder, delegate: self)
             })
     }
@@ -39,15 +38,14 @@ class LabelCoordinator: Coordinator {
         navigationController.navigationBar.prefersLargeTitles = true
         navigationController.setViewControllers([viewController], animated: false)
         
-        delegate?.setViewController(navigationController, name: .Label)
+        delegate?.setViewController(navigationController, name: .label)
     }
     
     private func presentToIssueAppend(label: Label?) {
         let storyBoard = UIStoryboard(name: "LabelAppend", bundle: nil)
         let labelAppendViewcontroller = storyBoard.instantiateViewController(
             identifier: "LabelAppendViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return LabelAppendViewController(coder: coder, label: label)
             })
         
@@ -70,7 +68,8 @@ extension LabelCoordinator: LabelCoordinatorDelegate {
             case .success(let labels):
                 self?.labelViewController?.didResponseLabels(labels)
             case .failure(let error):
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: error.localizedDescription
+                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09",
+                                                                          message: error.localizedDescription
                 )
                 self?.navigationController.present(alert, animated: true, completion: nil)
             }
@@ -80,10 +79,13 @@ extension LabelCoordinator: LabelCoordinatorDelegate {
 
 extension LabelCoordinator {
     private func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(viewWillResuem), name: .viewWillResume, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(viewWillResume),
+                                               name: .viewWillResume,
+                                               object: nil)
     }
     
-    @objc func viewWillResuem() {
+    @objc func viewWillResume() {
         willRequestLabels()
     }
 }

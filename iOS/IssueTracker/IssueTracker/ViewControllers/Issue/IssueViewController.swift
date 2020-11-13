@@ -11,6 +11,16 @@ class IssueViewController: UIViewController {
     typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
     @IBOutlet private var tableView: IssueTableView!
     private var bottomView: UIView?
+    private var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
     
     private weak var delegate: IssueCoordinatorDelegate?
     private let barButtonController = BarButtonController()
@@ -41,6 +51,8 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         service?.reloadData()
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
         
@@ -51,6 +63,14 @@ class IssueViewController: UIViewController {
         self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
         configSearchController()
         configBottomButton()
+        configRefreshControl()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
     }
     
     func configBottomButton() {
@@ -152,8 +172,11 @@ class IssueViewController: UIViewController {
             }
         service?.changeStatus(at: checked, to: false)
     }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        service?.reloadData()
+    }
 }
-
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -173,8 +196,13 @@ extension IssueViewController: UITableViewDataSource {
     }
     
     // https://zetal.tistory.com/entry/UIContextualAction
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let issue = service?.issue(at: indexPath, isFiltering: isFiltering)
+        let isOpened = issue?.isOpened
+        
+        let close = UIContextualAction(style: .normal,
+                                       title: (isOpened ?? true) ? "Close" : "Open") { [weak self] _, _, completion in
             self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
@@ -199,7 +227,6 @@ extension IssueViewController: UITableViewDelegate {
     }
 }
 
-
 extension IssueViewController: IssueCellDelegate {
     func checked(_ cell: IssueTableViewCell) {
         guard let index = self.tableView.indexPath(for: cell) else {
@@ -217,6 +244,9 @@ extension IssueViewController: IssueServiceDelegate {
         } else {
             tableView.reloadData()
         }
+        
+        activityIndicator.stopAnimating()
+        refreshControl?.endRefreshing()
         
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
@@ -242,7 +272,10 @@ extension IssueViewController: UISearchResultsUpdating {
 
 extension IssueViewController {
     func addNotification() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willResumeView), name: .resumeIssueList, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willResumeView),
+                                               name: .resumeIssueList,
+                                               object: nil)
     }
     
     @objc func willResumeView() {

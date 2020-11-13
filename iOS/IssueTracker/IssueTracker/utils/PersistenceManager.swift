@@ -8,7 +8,6 @@
 import Foundation
 import KeychainSwift
 
-
 enum Keys: String {
     case token
     case name

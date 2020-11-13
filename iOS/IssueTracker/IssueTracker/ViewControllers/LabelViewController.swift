@@ -15,6 +15,18 @@ protocol LabelCoordinatorDelegate: AnyObject {
 
 class LabelViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
+    private var refreshControl: UIRefreshControl?
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     private weak var delegate: LabelCoordinatorDelegate?
     private var labels: Labels? {
         didSet {
@@ -37,12 +49,28 @@ class LabelViewController: UIViewController {
         configRightItem()
         collectionView.collectionViewLayout = createLayout()
         collectionView.delegate = self
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         delegate?.willRequestLabels()
         configureDataSource()
+        configRefreshControl()
     }
     
     func didResponseLabels(_ labels: Labels) {
         self.labels = labels
+        refreshControl?.endRefreshing()
+        activityIndicator.stopAnimating()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        delegate?.willRequestLabels()
     }
 }
 
@@ -53,7 +81,6 @@ extension LabelViewController {
         barButtonItem.action = #selector(didAddButtonTapped)
         navigationItem.rightBarButtonItem = barButtonItem
     }
-    
     
     @objc func didAddButtonTapped(_ sender: UIBarButtonItem) {
         delegate?.presentAddLabel()
@@ -66,9 +93,13 @@ extension LabelViewController {
     }
     
     func configureDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, Label>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: Label) -> UICollectionViewCell? in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LabelCollectionViewCell", for: indexPath) as? LabelCollectionViewCell else { return nil }
+        dataSource = UICollectionViewDiffableDataSource<Int, Label>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, identifier in
+            guard let cell = collectionView
+                    .dequeueReusableCell(withReuseIdentifier: "LabelCollectionViewCell", for: indexPath)
+                    as? LabelCollectionViewCell
+            else { return nil }
             
             cell.configure(label: identifier)
             return cell

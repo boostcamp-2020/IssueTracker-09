@@ -77,7 +77,8 @@ extension FilterViewController {
     
     private func configureDataSource() {
         // list cell
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { (cell, indexPath, filter) in
+        let cellRegistration =
+            UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { cell, _, filter in
             var contentConfiguration = UIListContentConfiguration.valueCell()
             contentConfiguration.text = filter.text
             cell.contentConfiguration = contentConfiguration
@@ -95,9 +96,12 @@ extension FilterViewController {
         }
         
         // data source
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
-            (collectionView, indexPath, item) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item.filter)
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: item.filter)
         }
     }
     
@@ -150,4 +154,3 @@ extension FilterViewController: UICollectionViewDelegate {
         }
     }
 }
-

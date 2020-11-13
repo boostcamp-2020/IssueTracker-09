@@ -10,7 +10,7 @@ import UIKit
 protocol IssueDetailCoordinatorDelegate: AnyObject {
     func presentToAssigneeEdit(assignees: Assignees)
     func presentToLabelEdit(labels: Labels)
-    func presentToMilestoneEdit(milstones: Milestones)
+    func presentToMilestoneEdit(milestones: Milestones)
     func presentToComment()
     func resumeView()
 }
@@ -20,6 +20,17 @@ class IssueDetailViewController: UIViewController {
         case content, comment
     }
     @IBOutlet private weak var collectionView: UICollectionView!
+    var refreshControl: UIRefreshControl?
+    
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
     
     var service: IssueDetailService?
     var issue: Issue? {
@@ -36,7 +47,11 @@ class IssueDetailViewController: UIViewController {
     private weak var delegate: IssueDetailCoordinatorDelegate?
     private let dispatchGroup = DispatchGroup()
     
-    private var comments: [Comment] = []
+    private var comments: [Comment] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
     private var assignee: Assignees?
     private var milestones: Milestones?
     private var labels: Labels?
@@ -52,11 +67,23 @@ class IssueDetailViewController: UIViewController {
         super.init(coder: coder)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         request()
-        
+        configRefreshControl()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        collectionView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
+    @objc func didRefreshChanged() {
+        delegate?.resumeView()
     }
     
     private func request() {
@@ -73,13 +100,14 @@ class IssueDetailViewController: UIViewController {
         service?.requestMilestones()
         
         asyncNotify {
+            self.activityIndicator.stopAnimating()
             self.issue = self.service?.issue
             self.configureHierarchy()
             self.addBottomSheetView()
         }
     }
     
-    private func asyncNotify(compltion handler: @escaping () -> ()) {
+    private func asyncNotify(compltion handler: @escaping () -> Void) {
         dispatchGroup.notify(queue: DispatchQueue.main) {
             handler()
         }
@@ -93,7 +121,7 @@ class IssueDetailViewController: UIViewController {
 
 extension IssueDetailViewController: IssueDetailServiceDelegate {
     func didCommentsLoaded(comments: [Comment]?) {
-        if let comments = comments  {
+        if let comments = comments {
             self.comments = comments
         }
         dispatchGroup.leave()
@@ -119,6 +147,11 @@ extension IssueDetailViewController: IssueDetailServiceDelegate {
         }
         dispatchGroup.leave()
     }
+    
+    func didReceivedError(description: String) {
+        let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "이슈 상세 화면", message: description)
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension IssueDetailViewController: IssueEditDelegate {
@@ -132,7 +165,7 @@ extension IssueDetailViewController: IssueEditDelegate {
             delegate?.presentToLabelEdit(labels: labels)
         case .milestone:
             guard let milestones = milestones else { return }
-            delegate?.presentToMilestoneEdit(milstones: milestones)
+            delegate?.presentToMilestoneEdit(milestones: milestones)
         }
     }
     
@@ -154,8 +187,7 @@ extension IssueDetailViewController {
         let storyBoard = UIStoryboard(name: "IssueBottomSheet", bundle: nil)
         bottomSheetViewController = storyBoard.instantiateViewController(
             identifier: "IssueBottomSheetViewController",
-            creator: {
-                coder in
+            creator: { coder in
                 return IssueBottomSheetViewController(coder: coder, issue: issue, delegate: self)
             })
         
@@ -196,11 +228,14 @@ extension IssueDetailViewController: UICollectionViewDataSource {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section {
         case 0:
             guard let issue = issue,
-                  let contentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath) as? IssueContentCollectionViewCell else {
+                  let contentCell =
+                    collectionView.dequeueReusableCell(withReuseIdentifier: "contentCell", for: indexPath)
+                    as? IssueContentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
@@ -209,14 +244,29 @@ extension IssueDetailViewController: UICollectionViewDataSource {
             
         default:
             guard let user = assignee?.find(id: comments[indexPath.item].user_id),
-                  let commentCell = collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath) as? IssueCommentCollectionViewCell else {
+                  let commentCell =
+                    collectionView.dequeueReusableCell(withReuseIdentifier: "commentCell", for: indexPath)
+                    as? IssueCommentCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
             commentCell.configure(user: user, comment: comments[indexPath.item])
             commentCell.handler = { [weak self] in
-                let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: "아직 기능이 없어요 ㅠ_ㅠ")
-                self?.present(alert, animated: true, completion: nil)
+                let sheet = UIAlertController(title: "댓글 수정", message: nil, preferredStyle: .actionSheet)
+                let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
+                sheet.addAction(cancel)
+                let delete = UIAlertAction(title: "제거", style: .destructive) { _ in
+                    guard let comment = self?.comments[indexPath.item] else {
+                        return
+                    }
+                    
+                    self?.dispatchGroup.enter()
+                    let userName = self?.assignee?.find(id: comment.user_id)?.name
+                    self?.service?.deleteComment(comment,
+                                                 userName: userName)
+                }
+                sheet.addAction(delete)
+                self?.present(sheet, animated: true, completion: nil)
             }
             return commentCell
         }

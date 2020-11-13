@@ -7,9 +7,9 @@
 
 import Foundation
 
-
 extension Notification.Name {
-    static let didMilestoneChangedNotification = Notification.Name(rawValue: "MilestoneCacheService.didMilestoneChangedNotification")
+    static let didMilestoneChangedNotification =
+        Notification.Name(rawValue: "MilestoneCacheService.didMilestoneChangedNotification")
 }
 
 class MilestoneCacheService: MilestoneService {
@@ -19,7 +19,10 @@ class MilestoneCacheService: MilestoneService {
 
     init(delegate: MileStoneServiceDelegate?) {
         self.delegate = delegate
-        NotificationCenter.default.addObserver(self, selector: #selector(didMilestoneChanged), name: .didMilestoneChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didMilestoneChanged),
+                                               name: .didMilestoneChangedNotification,
+                                               object: nil)
     }
 
     subscript(at indexPath: IndexPath) -> Milestone {

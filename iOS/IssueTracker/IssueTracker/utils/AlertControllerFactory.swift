@@ -11,7 +11,9 @@ class AlertControllerFactory {
     static var shared = AlertControllerFactory()
     private init() {}
     
-    func makeSimpleAlert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
+    func makeSimpleAlert(title: String,
+                         message: String,
+                         handler: ((UIAlertAction) -> Void)? = nil) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: handler)
         alert.addAction(okAction)

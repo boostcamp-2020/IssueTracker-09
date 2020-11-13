@@ -1,0 +1,6 @@
+disabled_rules:
+  - identifier_name
+  - trailing_whitespace
+  - empty_enum_arguments
+excluded:
+  - Pods

@@ -15,7 +15,11 @@ extension DataRequest {
                       emptyRequestMethods: Set<HTTPMethod> = JSONResponseSerializer.defaultEmptyRequestMethods,
                       options: JSONSerialization.ReadingOptions = .allowFragments,
                       completionHandler: @escaping (Result<Bool, Error>) -> Void) -> Self {
-        responseJSON (queue: queue, dataPreprocessor: dataPreprocessor, emptyResponseCodes: emptyResponseCodes, emptyRequestMethods: emptyRequestMethods, options: options){ response in
+        responseJSON(queue: queue,
+                      dataPreprocessor: dataPreprocessor,
+                      emptyResponseCodes: emptyResponseCodes,
+                      emptyRequestMethods: emptyRequestMethods,
+                      options: options) { response in
             switch response.result {
             case .success(let value):
                 guard let value = value as? [String: Any],

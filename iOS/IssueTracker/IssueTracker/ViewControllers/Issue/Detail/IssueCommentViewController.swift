@@ -38,12 +38,19 @@ class IssueCommentViewController: UIViewController {
 
 extension IssueCommentViewController {
     private func addKeyboardObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(willKeyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(willKeyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willKeyboardShow),
+                                               name: UIResponder.keyboardWillShowNotification,
+                                               object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willKeyboardHide),
+                                               name: UIResponder.keyboardWillHideNotification,
+                                               object: nil)
     }
     
     @objc func willKeyboardShow(_ notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+        let keyboardFrameEndUserInfoKey = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)
+        if let keyboardSize = keyboardFrameEndUserInfoKey?.cgRectValue {
             UIView.animate(withDuration: 0.3, animations: {
                 self.view.transform = CGAffineTransform(translationX: 0, y: -keyboardSize.height / 2)
             })

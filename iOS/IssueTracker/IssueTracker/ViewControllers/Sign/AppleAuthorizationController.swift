@@ -14,7 +14,7 @@ class AppleAuthorizationController: NSObject {
     init(window: UIWindow?) {
         if let window = window {
             self.window = window
-        } else  {
+        } else {
             self.window = UIWindow()
             self.window.makeKeyAndVisible()
         }
@@ -22,7 +22,8 @@ class AppleAuthorizationController: NSObject {
 }
 
 extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let id = appleIDCredential.user

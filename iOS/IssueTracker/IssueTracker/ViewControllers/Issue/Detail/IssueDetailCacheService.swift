@@ -9,10 +9,11 @@ import Foundation
 
 class IssueDetailCacheService: IssueDetailService {
     var issue: Issue
-    private let commentNetrworkService = CommentNetworkService()
+    private let commentNetworkService = CommentNetworkService()
     private let assigneeNetworkService = AssigneeNetworkService()
     private let labelsNetworkService = LabelNetworkService()
     private let milestoneNetworkService = MilestoneNetworkService()
+    private let userNetworkService = UserNetworkService()
     private weak var delegate: IssueDetailServiceDelegate?
     
     init(issue: Issue, delegate: IssueDetailServiceDelegate?) {
@@ -21,7 +22,7 @@ class IssueDetailCacheService: IssueDetailService {
     }
     
     func requestComments() {
-        commentNetrworkService.fetchComments(issue: issue) { [weak self] result in
+        commentNetworkService.fetchComments(issue: issue) { [weak self] result in
             guard let self = self else { return }
             switch result {
             case .success(let data):
@@ -30,7 +31,6 @@ class IssueDetailCacheService: IssueDetailService {
             case .failure( _):
                 self.delegate?.didCommentsLoaded(comments: nil)
             }
-            
         }
     }
     
@@ -73,4 +73,23 @@ class IssueDetailCacheService: IssueDetailService {
         }
     }
     
+    func deleteComment(_ comment: Comment, userName: String?) {
+        userNetworkService.status { [weak self] result in
+            guard let user = try? result.get(),
+                  let userName = userName,
+                  user.name == userName else {
+                self?.delegate?.didReceivedError(description: "본인이 작성한 댓글만 삭제할 수 있습니다")
+                return
+            }
+            
+            self?.commentNetworkService.deleteComment(comment: comment) { [weak self] result in
+                switch result {
+                case .success(_):
+                    self?.requestComments()
+                case .failure(let error):
+                    self?.delegate?.didReceivedError(description: error.localizedDescription)
+                }
+            }
+        }
+    }
 }

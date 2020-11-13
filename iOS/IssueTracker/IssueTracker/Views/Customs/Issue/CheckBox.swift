@@ -26,9 +26,11 @@ class CheckBox: UIButton {
     
     private func design() {
         tintColor = UIColor(red: 1, green: 1, blue: 1, alpha: 1)
-        let blueCheckmark = UIImage(systemName: "checkmark.circle")?.withTintColor(.blue, renderingMode: .alwaysOriginal)
+        let blueCheckmark = UIImage(systemName: "checkmark.circle")?
+            .withTintColor(.blue, renderingMode: .alwaysOriginal)
         self.setBackgroundImage(blueCheckmark, for: .selected)
-        let circle = UIImage(systemName: "circle")?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+        let circle = UIImage(systemName: "circle")?
+            .withTintColor(.systemGray, renderingMode: .alwaysOriginal)
         self.setBackgroundImage(circle, for: .normal)
     }
     

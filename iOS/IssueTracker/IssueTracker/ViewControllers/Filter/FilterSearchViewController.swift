@@ -10,7 +10,7 @@ import UIKit
 class FilterSearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private var searchController: SearchController? = nil
+    private var searchController: SearchController?
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
     private var type: Filter.Element?
@@ -55,7 +55,7 @@ class FilterSearchViewController: UIViewController {
 extension FilterSearchViewController {
     func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration
-        <ElementView, SearchController.Element> { (cell, indexPath, element) in
+        <ElementView, SearchController.Element> { (cell, _, element) in
             // Populate the cell with our item description.
             cell.label.text = element.name
             if element.checkable {
@@ -65,10 +65,13 @@ extension FilterSearchViewController {
             }
         }
 
-        dataSource = UICollectionViewDiffableDataSource<Section, SearchController.Element>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: SearchController.Element) -> UICollectionViewCell? in
+        dataSource = UICollectionViewDiffableDataSource<Section, SearchController.Element>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, identifier in
             // Return the cell.
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: identifier)
         }
     }
 
@@ -87,8 +90,7 @@ extension FilterSearchViewController {
 
 extension FilterSearchViewController {
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-                                                            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { _, layoutEnvironment in
 
             let contentSize = layoutEnvironment.container.effectiveContentSize
             let columns = contentSize.width > 800 ? 3 : 2
@@ -130,7 +132,6 @@ extension FilterSearchViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
     }
 }
-
 
 extension FilterSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

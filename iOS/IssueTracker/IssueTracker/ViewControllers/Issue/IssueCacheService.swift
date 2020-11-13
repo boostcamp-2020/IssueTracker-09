@@ -8,7 +8,8 @@
 import Foundation
 
 extension Notification.Name {
-    static let didFilterChangedNotification = Notification.Name(rawValue: "IssueCacheService.didFilterChangedNotification")
+    static let didFilterChangedNotification =
+        Notification.Name(rawValue: "IssueCacheService.didFilterChangedNotification")
 }
 
 class IssueCacheService: IssueService {
@@ -19,7 +20,10 @@ class IssueCacheService: IssueService {
     
     init(delegate: IssueServiceDelegate?) {
         self.delegate = delegate
-        NotificationCenter.default.addObserver(self, selector: #selector(didFilterChanged), name: .didFilterChangedNotification, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didFilterChanged),
+                                               name: .didFilterChangedNotification,
+                                               object: nil)
     }
     
     func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue {
