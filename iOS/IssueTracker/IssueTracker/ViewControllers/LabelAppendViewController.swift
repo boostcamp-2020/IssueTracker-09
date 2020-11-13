@@ -129,6 +129,10 @@ class LabelAppendViewController: UIViewController {
         let alert = AlertControllerFactory.shared.makeSimpleAlert(title: "IssueTracker09", message: message)
         self.present(alert, animated: true, completion: nil)
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 extension LabelAppendViewController {
