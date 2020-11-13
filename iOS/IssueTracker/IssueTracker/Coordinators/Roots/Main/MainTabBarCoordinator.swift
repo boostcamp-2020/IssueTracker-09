@@ -47,8 +47,8 @@ class MainTabBarCoordinator: Coordinator {
         childCoordinators[TabName.issue.rawValue] = issueCoordinator
         childCoordinators[TabName.milestone.rawValue] = milestoneCoordinator
         issueCoordinator.start()
-        milestoneCoordinator.start()
         labelCoordinator.start()
+        milestoneCoordinator.start()
         
         self.issueCoordinator = issueCoordinator
         self.milestoneCoordinator = milestoneCoordinator
