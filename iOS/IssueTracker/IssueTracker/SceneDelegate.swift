@@ -20,13 +20,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: scene)
         
         coordinatorController = RootCoordinateController(window: window)
-        if PersistenceManager.shared.load(forKey: .token) != nil {
-            // user 정보 존재 시,
-            coordinatorController?.root(name: .issue)
-        } else {
-            // user 정보 없을 시,
-            coordinatorController?.root(name: .sign)
-        }
+        coordinatorController?.root(name: .sign)
     }
     
     // 흠 여기서는 노티로 날려서 알리는게 가장 편할거 같은데
