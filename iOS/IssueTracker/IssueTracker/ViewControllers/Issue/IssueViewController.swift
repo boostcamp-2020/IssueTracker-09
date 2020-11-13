@@ -12,6 +12,15 @@ class IssueViewController: UIViewController {
     @IBOutlet private var tableView: IssueTableView!
     private var bottomView: UIView?
     private var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
     
     private weak var delegate: IssueCoordinatorDelegate?
     private let barButtonController = BarButtonController()
@@ -42,6 +51,8 @@ class IssueViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addNotification()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         service?.reloadData()
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
         
@@ -234,6 +245,7 @@ extension IssueViewController: IssueServiceDelegate {
             tableView.reloadData()
         }
         
+        activityIndicator.stopAnimating()
         refreshControl?.endRefreshing()
         
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
