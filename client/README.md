@@ -1,3 +1,7 @@
+## 조원
+
+박은식 심재익 주재우
+
 ### Directory Structure
 
 ```
@@ -27,4 +31,3 @@ export const SERVER_URL = '';
 export const CLIENT_URL = '';
 
 ```
-
