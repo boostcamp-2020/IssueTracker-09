@@ -22,6 +22,16 @@ class IssueDetailViewController: UIViewController {
     @IBOutlet private weak var collectionView: UICollectionView!
     var refreshControl: UIRefreshControl?
     
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
     var service: IssueDetailService?
     var issue: Issue? {
         didSet {
@@ -61,6 +71,8 @@ class IssueDetailViewController: UIViewController {
         super.viewDidLoad()
         request()
         configRefreshControl()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
     
     func configRefreshControl() {
@@ -88,6 +100,7 @@ class IssueDetailViewController: UIViewController {
         service?.requestMilestones()
         
         asyncNotify {
+            self.activityIndicator.stopAnimating()
             self.issue = self.service?.issue
             self.configureHierarchy()
             self.addBottomSheetView()
