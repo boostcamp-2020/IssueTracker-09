@@ -11,9 +11,9 @@ struct Milestones: Codable {
     let milestones: [Milestone]
 }
 
-struct Milestone: Codable {
+struct Milestone: Model, Codable {
     let id: Int
-    let title, content, deadline: String
+    var title, content, deadline: String
     let isOpened: Bool
     let openCount: Int?
     let totalCount: Int?
@@ -22,5 +22,17 @@ struct Milestone: Codable {
         case id, title, content, deadline
         case isOpened = "is_opened"
         case openCount, totalCount
+    }
+}
+
+extension Milestone: Hashable {
+    static func == (rhs: Milestone, lhs: Milestone) -> Bool {
+        return rhs.id == lhs.id &&
+            rhs.title == lhs.title &&
+            rhs.content == lhs.content &&
+            rhs.deadline == lhs.deadline &&
+            rhs.isOpened == lhs.isOpened &&
+            rhs.openCount == lhs.openCount &&
+            rhs.totalCount == lhs.totalCount
     }
 }

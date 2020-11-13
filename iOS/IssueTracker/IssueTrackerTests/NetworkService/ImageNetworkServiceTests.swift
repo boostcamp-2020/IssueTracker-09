@@ -9,8 +9,8 @@ import XCTest
 @testable import IssueTracker
 
 class ImageNetworkServiceTests: XCTestCase {
-    let asyncTimeout: TimeInterval = 1
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0NTYwNjIxfQ.9ArX8vJLN6GuseS5tnDr3f_iH2Z925f6Iy68jHrijpo"
+    let asyncTimeout: TimeInterval = 5
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1MTAzMzU3fQ.4m_c_41zyez5KugqZlY2Xnt50zzcHDGGgbAfgBJOqxM"
     static var originalToken: String?
     
     override class func setUp() {

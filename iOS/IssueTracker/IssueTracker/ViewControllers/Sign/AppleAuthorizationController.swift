@@ -14,7 +14,7 @@ class AppleAuthorizationController: NSObject {
     init(window: UIWindow?) {
         if let window = window {
             self.window = window
-        } else  {
+        } else {
             self.window = UIWindow()
             self.window.makeKeyAndVisible()
         }
@@ -22,7 +22,8 @@ class AppleAuthorizationController: NSObject {
 }
 
 extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+    func authorizationController(controller: ASAuthorizationController,
+                                 didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let id = appleIDCredential.user
@@ -31,9 +32,8 @@ extension AppleAuthorizationController: ASAuthorizationControllerDelegate {
             }
 
             guard let name = PersistenceManager.shared.load(forKey: .name) else { return }
-            let service = UserNetworkService(endPoint: .apple)
-            service.post(code: id, name: name)
-            
+            UserNetworkService().login(endPoint: .apple, code: id, name: name)
+            // TODO response handler는??
         default:
             break
         }

@@ -22,7 +22,7 @@ class InputField: UIView {
         self.config()
     }
     
-    private func config(){
+    private func config() {
         guard let view = Bundle.main.loadNibNamed(xibName, owner: self, options: nil)?.first as? UIView else {
             return
         }
@@ -37,5 +37,9 @@ class InputField: UIView {
     
     func setTitle(_ title: String) {
         titleLabel.text = title
+    }
+    
+    func setText(_ text: String) {
+        textField.text = text
     }
 }

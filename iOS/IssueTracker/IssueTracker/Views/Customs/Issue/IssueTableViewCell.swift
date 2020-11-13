@@ -16,6 +16,8 @@ class IssueTableViewCell: UITableViewCell {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var badgeStackView: UIStackView!
     @IBOutlet weak var wrapperStackView: UIStackView!
+    @IBOutlet weak var openButton: UIButton!
+    @IBOutlet weak var closeButton: UIButton!
     weak var delegate: IssueCellDelegate?
     
     override func prepareForReuse() {
@@ -25,13 +27,22 @@ class IssueTableViewCell: UITableViewCell {
     
     func configure(issue: Issue, isCheck: Bool) {
         titleLabel.text = issue.title
-//        if let title = issue.milestoneID?.title {
-//            badgeStackView.addArrangedSubview(makeBadgeView(content: title, color: .systemGray))
-//        }
+        
+        if issue.isOpened {
+            openButton.isHidden = false
+            closeButton.isHidden = true
+        } else {
+            openButton.isHidden = true
+            closeButton.isHidden = false
+        }
+        
+        if let milestone = issue.milestone?.title {
+            badgeStackView.addArrangedSubview(makeBadgeView(content: milestone, color: .systemGray, isMilestone: true))
+        }
         
         issue.labels?.forEach { label in
             badgeStackView.addArrangedSubview(
-                makeBadgeView(content: label.title, color: UIColor(red: 32, green: 156, blue: 128))
+                makeBadgeView(content: label.title, color: UIColor(hexString: label.color) ?? .green)
             )
         }
         checkBoxWrapper.button.isSelected = isCheck
@@ -41,13 +52,17 @@ class IssueTableViewCell: UITableViewCell {
         delegate?.checked(self)
     }
     
-    func makeBadgeView(content: String, color: UIColor) -> BadgeView {
+    func makeBadgeView(content: String, color: UIColor, isMilestone: Bool = false) -> BadgeView {
         let view = BadgeView()
         view.borderColor = color
-        view.backgroundColor = color
         view.borderWidth = 1
         view.cornerRadius = 5
+        view.textColor = color
         view.text = content
+        if isMilestone {
+            view.textColor = .black
+            view.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.3)
+        }
         return view
     }
 }

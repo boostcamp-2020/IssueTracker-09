@@ -10,8 +10,8 @@ import Alamofire
 
 struct IssueFilterQuery {
     let isOpen: Bool?
-    let author: User?
-    let assignee: User?
+    let author: String?
+    let assignee: String?
     
     var rawValue: String? {
         var query = [String]()
@@ -19,10 +19,10 @@ struct IssueFilterQuery {
             query += ["is:\(isOpen ? "open" : "close")"]
         }
         if let author = author {
-            query += ["author:\(author.name)"]
+            query += ["author:\(author)"]
         }
         if let assignee = assignee {
-            query += ["assignee:\(assignee.name)"]
+            query += ["assignee:\(assignee)"]
         }
         return query.isEmpty ? nil : "?q=" + query.joined(separator: " ")
     }
@@ -38,25 +38,47 @@ class IssueNetworkService: NetworkService {
         case assignees = "/assignees"
     }
     
-    func addIssue(issue: Issue, completion handler: ( (Result<Data?, AFError>) -> Void)?) {
+    func issue(id: Int, completion handler: @escaping (Result<Issue, AFError>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + "/\(id)"),
+              let token = PersistenceManager.shared.load(forKey: .token) else {
+            return
+        }
+        let headers: HTTPHeaders = [.authorization(bearerToken: token)]
+        
+        AF.request(url,
+                   method: .get,
+                   headers: headers)
+            .validate()
+            .responseDecodable(of: Issue.self) { response in
+                handler(response.result)
+            }
+    }
+    
+    func addIssue(title: String,
+                  labelId: [Int]?,
+                  assigneeId: [Int]?,
+                  milestoneId: Int?,
+                  completion handler: ( (Result<Issue, AFError>) -> Void)?) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        // TODO 없는 경우에도 추가할 수 있도록 수정
-        guard let labelId = issue.labels?.compactMap({ $0.id }),
-              let assigneeId = issue.assignees?.compactMap({ $0.id }),
-              let milestoneId = issue.milestone?.id else {
-            return
+        var parameters = [
+            "title": title
+        ] as [String: Any]
+        
+        if let labelId = labelId {
+            parameters["labelId"] = labelId
         }
         
-        let parameters = [
-            "title": issue.title,
-            "labelId": labelId,
-            "assigneeId": assigneeId,
-            "milestoneId": milestoneId
-        ] as [String : Any]
+        if let assigneeId = assigneeId {
+            parameters["assigneeId"] = assigneeId
+        }
+        
+        if let milestoneId = milestoneId {
+            parameters["milestoneId"] = milestoneId
+        }
         
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
@@ -65,7 +87,7 @@ class IssueNetworkService: NetworkService {
                    parameters: parameters,
                    headers: headers)
             .validate()
-            .response { response in
+            .responseDecodable(of: Issue.self) { response in
                 handler?(response.result)
             }
     }
@@ -106,7 +128,9 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueMilestone(of id: Int, to milestone: Milestone, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueMilestone(of id: Int,
+                              to milestone: Milestone,
+                              completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.milestone.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
@@ -114,7 +138,6 @@ class IssueNetworkService: NetworkService {
         
         let parameters = ["milestoneId": milestone.id]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        
         AF.request(url,
                    method: .put,
                    parameters: parameters,
@@ -123,55 +146,74 @@ class IssueNetworkService: NetworkService {
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueStatus(of issue: Issue, completion handler: @escaping (Result<Bool, Error>) -> Void) {
-        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue + "/\(issue.id)"),
+    func modifyIssueStatus(of issue: Issue, to: Bool, completion handler: @escaping (Result<Bool, Error>) -> Void) {
+        guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.state.rawValue),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
-        let parameters = ["isOpened": !issue.isOpened]
-
+        let parameters = ["isOpened": !issue.isOpened, "id": issue.id] as [String: Any]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
                    parameters: parameters,
                    headers: headers)
-            .validate()
-            .responseBool(completionHandler: handler)
+            .validate({ (_, response, _) -> DataRequest.ValidationResult in
+                let statusCode = response.statusCode
+                if (200..<300) ~= statusCode || 400 == statusCode {
+                    return .success(())
+                }
+                return .failure(NetworkError.response)
+            })
+            .response { _ in
+                handler(.success(true))
+            }
     }
     
-    func modifyIssueLabels(of id: Int, checked: [Label], unchecked: [Label], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueLabels(of id: Int,
+                           checked: [Label],
+                           unchecked: [Label],
+                           completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.labels.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
+        let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
         let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
         
         AF.request(url,
                    method: .put,
                    parameters: parameters,
+                   encoder: encoder,
                    headers: headers)
             .validate()
             .responseBool(completionHandler: handler)
     }
     
-    func modifyIssueAssignee(of id: Int, checked: [User], unchecked: [User], completion handler: @escaping (Result<Bool, Error>) -> Void) {
+    func modifyIssueAssignee(of id: Int,
+                             checked: [User],
+                             unchecked: [User],
+                             completion handler: @escaping (Result<Bool, Error>) -> Void) {
         guard let url = URL(string: baseURL + Endpoint.issue.rawValue + Endpoint.assignees.rawValue + "/\(id)"),
               let token = PersistenceManager.shared.load(forKey: .token) else {
             return
         }
         
+        let encoder = URLEncodedFormParameterEncoder(encoder: URLEncodedFormEncoder(arrayEncoding: .noBrackets))
         let parameters = ["checked": checked.map { $0.id }, "unchecked": unchecked.map { $0.id }]
         let headers: HTTPHeaders = [.authorization(bearerToken: token)]
-        
+    
         AF.request(url,
                    method: .put,
                    parameters: parameters,
+                   encoder: encoder,
                    headers: headers)
             .validate()
-            .responseBool(completionHandler: handler)
+            .responseBool(completionHandler: { result in
+                handler(result)
+            })
     }
 }

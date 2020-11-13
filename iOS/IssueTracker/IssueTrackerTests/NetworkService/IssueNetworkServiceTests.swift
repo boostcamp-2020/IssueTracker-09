@@ -11,8 +11,8 @@ import XCTest
 @testable import IssueTracker
 
 class IssueNetworkServiceTests: XCTestCase {
-    let asyncTimeout: TimeInterval = 1
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0NTYwNjIxfQ.9ArX8vJLN6GuseS5tnDr3f_iH2Z925f6Iy68jHrijpo"
+    let asyncTimeout: TimeInterval = 5
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1MTAzMzU3fQ.4m_c_41zyez5KugqZlY2Xnt50zzcHDGGgbAfgBJOqxM"
     static var originalToken: String?
     
     override class func setUp() {
@@ -54,9 +54,28 @@ class IssueNetworkServiceTests: XCTestCase {
     
     func testFetchIssuesByCondition() throws {
         let expectTimer = expectation(description: "testFetchIssuesByCondition")
-        let joojaewoo = User(id: 0, name: "joojaewoo", image: "", userCode: nil)
-        let query = IssueFilterQuery(isOpen: false, author: joojaewoo, assignee: joojaewoo)
+        let query = IssueFilterQuery(isOpen: false, author: "joojaewoo", assignee: "joojaewoo")
         IssueNetworkService().fetchIssues(query: query) { result in
+            switch result {
+            case .success(_):
+                expectTimer.fulfill()
+            case .failure(let error):
+                XCTFail(error.localizedDescription)
+            }
+        }
+        
+        waitForExpectations(timeout: asyncTimeout) { error in
+            if let error = error {
+                XCTFail("waitForExpectationsWithTimeout errored: \(error)")
+            }
+        }
+    }
+    
+    func testModifyIssueStatus() throws {
+        let expectTimer = expectation(description: "testModifyIssueStatus")
+        let issue = Issue(id: 2, title: "", isOpened: true, timestamp: "", assignees: nil, milestone: nil, user: nil, labels: nil)
+
+        IssueNetworkService().modifyIssueStatus(of: issue, to: false) { result in
             switch result {
             case .success(_):
                 expectTimer.fulfill()

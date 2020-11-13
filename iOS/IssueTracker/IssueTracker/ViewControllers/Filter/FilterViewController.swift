@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MoveToSearchPage: AnyObject {
-    func move()
+    func move(to type: Filter.Element)
 }
 
 class FilterViewController: UIViewController {
@@ -51,33 +51,34 @@ class FilterViewController: UIViewController {
     }
     
     @IBAction func touchedCancelButton(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        // 화면을 내려서 닫을 때에도 필터 내용을 초기화하기
+        FilterContext.shared.clear()
+        dismiss(animated: true, completion: nil)
     }
     
     @IBAction func touchedDoneButton(_ sender: Any) {
-        print(dataSource.snapshot().itemIdentifiers.filter({ item -> Bool in
-            if item.filter.category == .condition && item.filter.checkable { return true }
-            return false
-        }))
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
     }
 }
 
 extension FilterViewController {
-    func configureHierarchy() {
+    private func configureHierarchy() {
         collectionView.collectionViewLayout = createLayout()
         collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         collectionView.backgroundColor = .systemGroupedBackground
         collectionView.delegate = self
     }
     
-    func createLayout() -> UICollectionViewLayout {
+    private func createLayout() -> UICollectionViewLayout {
         let configuration = UICollectionLayoutListConfiguration(appearance: .insetGrouped)
         return UICollectionViewCompositionalLayout.list(using: configuration)
     }
     
-    func configureDataSource() {
+    private func configureDataSource() {
         // list cell
-        let cellRegistration = UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { (cell, indexPath, filter) in
+        let cellRegistration =
+            UICollectionView.CellRegistration<UICollectionViewListCell, Filter> { cell, _, filter in
             var contentConfiguration = UIListContentConfiguration.valueCell()
             contentConfiguration.text = filter.text
             cell.contentConfiguration = contentConfiguration
@@ -95,13 +96,16 @@ extension FilterViewController {
         }
         
         // data source
-        dataSource = UICollectionViewDiffableDataSource<Section, Item>(collectionView: collectionView) {
-            (collectionView, indexPath, item) -> UICollectionViewCell? in
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: item.filter)
+        dataSource = UICollectionViewDiffableDataSource<Section, Item>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, item in
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: item.filter)
         }
     }
     
-    func applyInitialSnapshots() {
+    private func applyInitialSnapshots() {
         for category in Filter.Category.allCases {
             var sectionSnapshot = NSDiffableDataSourceSectionSnapshot<Item>()
             let items = category.filters.map { Item(filter: $0) }
@@ -119,17 +123,34 @@ extension FilterViewController: UICollectionViewDelegate {
         }
         
         if data.filter.category == .condition {
+            var newSnapshot = dataSource.snapshot()
+            let checkedFilter = newSnapshot.itemIdentifiers.filter { $0.filter.checkable }
+            
+            // 이미 체크된 항목이 있을 경우
+            if data.filter.checkable == false, checkedFilter.count > 0 {
+                checkedFilter.forEach { data in
+                    var newData = data
+                    newData.filter.checkable = false
+                    
+                    newSnapshot.insertItems([newData], beforeItem: data)
+                    newSnapshot.deleteItems([data])
+                }
+            }
+            
             var newData = data
             newData.filter.checkable = !data.filter.checkable
-            
-            var newSnapshot = dataSource.snapshot()
+            if newData.filter.checkable {
+                FilterContext.shared.condition = indexPath.item
+            } else {
+                FilterContext.shared.condition = nil
+            }
             newSnapshot.insertItems([newData], beforeItem: data)
             newSnapshot.deleteItems([data])
             dataSource.apply(newSnapshot)
             
         } else if data.filter.category == .detail {
-            delegate?.move()
+            collectionView.deselectItem(at: indexPath, animated: true)
+            delegate?.move(to: data.filter.element)
         }
     }
 }
-

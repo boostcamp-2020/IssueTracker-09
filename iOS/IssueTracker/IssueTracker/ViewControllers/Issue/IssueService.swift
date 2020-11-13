@@ -11,10 +11,12 @@ protocol IssueService {
     func issue(at indexPath: IndexPath, isFiltering: Bool) -> Issue
     func count(isFiltering: Bool) -> Int
     func reloadData()
-    func changeStatus(at indexPath: IndexPath)
-    func filter(_ text: String)
+    func changeStatus(at index: Int)
+    func changeStatus(at indices: [Int], to: Bool)
+    func filter(_ text: String?)
 }
 
 protocol IssueServiceDelegate: AnyObject {
     func didDataLoaded(at indexPath: IndexPath?)
+    func didErrorReceived(title: String, message: String, handler: (() -> Void)?)
 }

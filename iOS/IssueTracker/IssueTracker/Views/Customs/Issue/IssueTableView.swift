@@ -8,11 +8,9 @@
 import UIKit
 
 class IssueTableView: UITableView {
-    
-    
-    func applyAll(animated: Bool, body: @escaping (IssueTableViewCell) -> ()) {
+    func applyAll(animated: Bool, body: @escaping (IssueTableViewCell) -> Void) {
         self.visibleCells
-            .compactMap{ $0 as? IssueTableViewCell }
+            .compactMap { $0 as? IssueTableViewCell }
             .forEach { cell in
                 if animated {
                     UIView.animate(withDuration: 0.2) {

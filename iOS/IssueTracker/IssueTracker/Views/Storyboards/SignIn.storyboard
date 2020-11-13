@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,18 +17,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="qlU-7b-yew">
-                                <rect key="frame" x="19.5" y="384" width="375" height="138"/>
+                                <rect key="frame" x="19.5" y="453" width="375" height="138"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NYW-rV-yBA" customClass="RoundButton" customModule="IssueTracker" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="138"/>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
-                                        <state key="normal" title="   Sign In With Github" image="github">
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <state key="normal" title="  Github로 로그인" image="github">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         </state>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="10"/>
+                                                <real key="value" value="4"/>
                                             </userDefinedRuntimeAttribute>
                                             <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
                                                 <real key="value" value="1"/>
@@ -58,16 +58,34 @@
                                     <constraint firstAttribute="width" constant="375" id="c7b-1P-5IK"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IssueTracker 09" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BLV-xw-rt3">
+                                <rect key="frame" x="60" y="317.5" width="294.5" height="45.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="38"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iTb-eJ-tW6">
+                                <rect key="frame" x="132" y="142.5" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="jG8-lR-5nr"/>
+                                    <constraint firstAttribute="width" secondItem="iTb-eJ-tW6" secondAttribute="height" id="lIR-1q-DWw"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="qlU-7b-yew" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="83x-Wh-wcz"/>
+                            <constraint firstItem="BLV-xw-rt3" firstAttribute="top" secondItem="iTb-eJ-tW6" secondAttribute="bottom" constant="25" id="7Ng-0J-RuR"/>
                             <constraint firstItem="qlU-7b-yew" firstAttribute="height" secondItem="6Tk-OE-BBY" secondAttribute="height" multiplier="0.168704" id="Doc-vy-Zlj"/>
                             <constraint firstItem="qlU-7b-yew" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dHY-M0-B9y"/>
+                            <constraint firstItem="qlU-7b-yew" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="r0a-Ob-h0Q"/>
+                            <constraint firstItem="BLV-xw-rt3" firstAttribute="centerX" secondItem="iTb-eJ-tW6" secondAttribute="centerX" id="rtz-5v-AcM"/>
+                            <constraint firstItem="iTb-eJ-tW6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="syc-2z-mji"/>
+                            <constraint firstItem="qlU-7b-yew" firstAttribute="top" secondItem="BLV-xw-rt3" secondAttribute="bottom" constant="90" id="vzQ-7m-iIl"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="gifImageView" destination="iTb-eJ-tW6" id="IgD-i9-oJR"/>
                         <outlet property="loginProviderStackView" destination="qlU-7b-yew" id="eBC-DG-3Uu"/>
                     </connections>
                 </viewController>
@@ -78,7 +96,7 @@
     </scenes>
     <designables>
         <designable name="NYW-rV-yBA">
-            <size key="intrinsicContentSize" width="216" height="26"/>
+            <size key="intrinsicContentSize" width="168" height="25"/>
         </designable>
     </designables>
     <resources>

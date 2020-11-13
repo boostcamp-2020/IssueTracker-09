@@ -12,6 +12,7 @@ class SignViewController: UIViewController {
     @IBOutlet weak var loginProviderStackView: UIStackView!
     private var request: AuthorizationRequestable?
     private var authorization: AppleAuthorizationController?
+    @IBOutlet weak var gifImageView: UIImageView!
     
     init?(coder: NSCoder, request: AuthorizationRequestable) {
         self.request = request
@@ -26,6 +27,7 @@ class SignViewController: UIViewController {
         super.viewDidLoad()
         setUpProviderLoginView()
         authorization = AppleAuthorizationController(window: view.window)
+        gifImageView.loadGif(asset: "github-icon")
     }
     
     override func viewWillAppear(_ animated: Bool) {

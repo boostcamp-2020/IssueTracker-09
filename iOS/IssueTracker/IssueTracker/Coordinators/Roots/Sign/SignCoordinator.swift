@@ -9,7 +9,7 @@ import UIKit
 
 class SignCoordinator: Coordinator {
     private(set) var window: UIWindow
-    private(set) var childCoordinators: [String: ChildCoordinator] = [: ]
+    private(set) var childCoordinators: [String: Coordinator] = [: ]
     
     private let storyboardName: String = "SignIn"
     private weak var delegate: RootCoordinateControllerDelegate?
@@ -24,7 +24,6 @@ class SignCoordinator: Coordinator {
         let viewController = storyBoard.instantiateViewController(identifier: "SignViewController", creator: { coder in
             return SignViewController(coder: coder, request: GithubSignService.shared)
         })
-        //        let viewController = storyBoard.instantiateViewController(identifier: "SignViewController") as? SignViewController
         window.rootViewController = viewController
         window.makeKeyAndVisible()
         addObserver()
@@ -33,7 +32,9 @@ class SignCoordinator: Coordinator {
 
 extension SignCoordinator {
     func addObserver() {
-        NotificationCenter.default.addObserver(self, selector: #selector(didTokenRecieved), name: .succeededBySign, object: nil)
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(didTokenRecieved),
+                                               name: .succeededBySign, object: nil)
     }
     
     @objc func didTokenRecieved(notification: NSNotification) {
@@ -41,7 +42,7 @@ extension SignCoordinator {
               let token = userInfo["token"] as? String else { return }
         
         if PersistenceManager.shared.save(token, forKey: .token) {
-            delegate?.root(name: .Issue)
+            delegate?.root(name: .issue)
         }
     }
 }

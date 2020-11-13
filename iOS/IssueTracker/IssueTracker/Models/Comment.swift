@@ -11,10 +11,10 @@ struct Comments: Codable {
     let comments: [Comment]
 }
 
-struct Comment: Codable {
+struct Comment: Model, Codable {
     let id: Int
     let content: String
     let timestamp: String
     let user_id: Int
-    let issue_id: Int
+    let issue_id: Int?
 }

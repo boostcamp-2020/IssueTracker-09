@@ -54,24 +54,4 @@ class GithubSignService: AuthorizationRequestable {
             }
         }
     }
-    
-    func getUser(token: String) {
-        let url = "https://api.github.com/user"
-        //            let accessToken = KeychainSwift().get("accessToken") ?? ""
-        let headers: HTTPHeaders = ["Accept": "application/vnd.github.v3+json",
-                                    "Authorization": "token \(token)"]
-        
-        AF.request(url, method: .get, parameters: [:], headers: headers).responseJSON(completionHandler: { (response) in
-            switch response.result {
-            case .success(let json):
-                print(json as! [String: Any])
-            case .failure:
-                print("")
-            }
-        })
-    }
-    
-    func logout() {
-        //        KeychainSwift().clear()
-    }
 }

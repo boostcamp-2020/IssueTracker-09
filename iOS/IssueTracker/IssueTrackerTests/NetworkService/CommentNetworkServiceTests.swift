@@ -9,8 +9,8 @@ import XCTest
 @testable import IssueTracker
 
 class CommentNetworkServiceTests: XCTestCase {
-    let asyncTimeout: TimeInterval = 1
-    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA0MzgyNTE2fQ.B2JyeokIT-ImtQBL_J7Blz6H2hTjn70WuDZmmnRGz6Y"
+    let asyncTimeout: TimeInterval = 5
+    static let testToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjA1MTAzMzU3fQ.4m_c_41zyez5KugqZlY2Xnt50zzcHDGGgbAfgBJOqxM"
     static var originalToken: String?
     
     let issue = Issue(id: 2, title: "", isOpened: true, timestamp: "", assignees: nil, milestone: nil, user: User(id: 0, name: "", image: "", userCode: nil), labels: nil)

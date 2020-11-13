@@ -60,15 +60,13 @@ class GithubSignService: AuthorizationRequestable {
         AF.request(url, method: .get, parameters: [:], headers: headers).responseJSON(completionHandler: { (response) in
             switch response.result {
             case .success(let value):
-                if let jsonObj = value as? Dictionary<String, Any>
-                {
+                if let jsonObj = value as? [String: Any] {
                     guard let name =  jsonObj["login"] as? String,
                           let id = jsonObj["id"] as? Int,
                           let image = jsonObj["avatar_url"] as? String else {
                         return
                     }
-                    let service = UserNetworkService(endPoint: .github)
-                    service.post(code: String(id), name: name, image: image)
+                    UserNetworkService().login(endPoint: .github, code: String(id), name: name, image: image)
                 }
             case .failure(let error):
                 print(error.localizedDescription)
@@ -76,7 +74,6 @@ class GithubSignService: AuthorizationRequestable {
         })
     }
 }
-
 
 extension Notification.Name {
     static let succeededBySign = Notification.Name(rawValue: "succeededBySign")

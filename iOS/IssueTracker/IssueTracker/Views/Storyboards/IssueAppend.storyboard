@@ -11,7 +11,7 @@
         <!--Issue Append View Controller-->
         <scene sceneID="RPq-ez-PJ8">
             <objects>
-                <viewController id="bgz-hJ-9z5" customClass="IssueAppendViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IssueAppendViewController" id="bgz-hJ-9z5" customClass="IssueAppendViewController" customModule="IssueTracker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Bvg-Y5-LIH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -35,6 +35,9 @@
                                     <constraint firstAttribute="width" secondItem="gWG-ds-5KK" secondAttribute="height" id="mZg-Ad-f1V"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="arrow.up.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="didSendButtonTapped:" destination="bgz-hJ-9z5" eventType="touchUpInside" id="KnQ-Hk-BSj"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="제목" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cfc-dY-IVJ">
                                 <rect key="frame" x="20" y="143" width="374" height="18.5"/>
@@ -54,6 +57,9 @@
                                     <segment title="마크다운"/>
                                     <segment title="미리보기"/>
                                 </segments>
+                                <connections>
+                                    <action selector="didSegmentChanged:" destination="bgz-hJ-9z5" eventType="valueChanged" id="oKS-h8-fCH"/>
+                                </connections>
                             </segmentedControl>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="NWd-UZ-ZhC">
                                 <rect key="frame" x="20" y="243.5" width="374" height="598.5"/>
@@ -91,6 +97,7 @@
                     </view>
                     <connections>
                         <outlet property="textView" destination="NWd-UZ-ZhC" id="u05-5w-4SS"/>
+                        <outlet property="titleField" destination="cfc-dY-IVJ" id="CeC-un-3J9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fCj-1q-pNc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

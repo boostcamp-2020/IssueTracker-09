@@ -7,23 +7,41 @@
 
 import UIKit
 
-protocol IssueCoordinatorDelegate: AnyObject {
-    func presentToFilterView()
-}
-
 class IssueViewController: UIViewController {
-    @IBOutlet var tableView: IssueTableView!
-    var delegate: IssueCoordinatorDelegate?
-    var service: IssueService?
-    var checks: [Bool] = [] {
+    typealias IssueCoordinatorDelegate = IssueNavigationDelegate & IssuePresentDelegate
+    @IBOutlet private var tableView: IssueTableView!
+    private var bottomView: UIView?
+    private var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
+    
+    private weak var delegate: IssueCoordinatorDelegate?
+    private let barButtonController = BarButtonController()
+    private let searchController = UISearchController(searchResultsController: nil)
+    private var checks: [Bool] = [] {
         didSet {
             if isEditing {
                 setLeftBarButton()
             }
         }
     }
-    let barButtonController = BarButtonController()
-    let searchController = UISearchController(searchResultsController: nil)
+    var service: IssueService?
+    
+    init?(coder: NSCoder, delegate: IssueCoordinatorDelegate) {
+        self.delegate = delegate
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     func setLeftBarButton() {
         let isAllTrue = checks.allSatisfy({ $0 == true })
@@ -32,6 +50,9 @@ class IssueViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNotification()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         service?.reloadData()
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
         
@@ -41,6 +62,37 @@ class IssueViewController: UIViewController {
     
         self.navigationItem.leftBarButtonItem = barButtonController.buttons[.filter]
         configSearchController()
+        configBottomButton()
+        configRefreshControl()
+    }
+    
+    func configRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(didRefreshChanged), for: .valueChanged)
+        tableView.addSubview(refreshControl)
+        self.refreshControl = refreshControl
+    }
+    
+    func configBottomButton() {
+        guard let tabbar = tabBarController?.tabBar else {
+            return
+        }
+        let bottomView = UIView(frame: tabbar.frame)
+        bottomView.backgroundColor = .systemGray6
+        let button = UIButton()
+        button.setTitle("선택 이슈 닫기", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.addTarget(self, action: #selector(didCloseButtonTapped), for: .touchUpInside)
+        bottomView.addSubview(button)
+        bottomView.isHidden = true
+        button.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            button.topAnchor.constraint(equalTo: bottomView.topAnchor, constant: 10),
+            button.trailingAnchor.constraint(equalTo: bottomView.trailingAnchor, constant: -15)
+        ])
+        
+        view.addSubview(bottomView)
+        self.bottomView = bottomView
     }
     
     func configSearchController() {
@@ -67,6 +119,8 @@ class IssueViewController: UIViewController {
             cell.checkBoxWrapper.isHidden = !editing
         }
         
+        tabBarController?.tabBar.isHidden = editing
+        bottomView?.isHidden = !editing
         if editing {
             setLeftBarButton()
         } else {
@@ -89,7 +143,7 @@ class IssueViewController: UIViewController {
     }
     
     @objc func touchedFilterButton(_ sender: Any) {
-        delegate?.presentToFilterView()
+        delegate?.presentToFilter()
     }
     
     @objc func touchedDeselectButton(_ sender: Any) {
@@ -105,8 +159,24 @@ class IssueViewController: UIViewController {
         }
         checks = Array(repeating: true, count: service?.count(isFiltering: isFiltering) ?? 0)
     }
+    @IBAction func touchedAppendButton(_ sender: Any) {
+        delegate?.presentToNew()
+    }
+    
+    @objc func didCloseButtonTapped(_ sender: UIButton) {
+        let checked = checks
+            .enumerated()
+            .filter { $0.element }
+            .compactMap {
+                $0.offset
+            }
+        service?.changeStatus(at: checked, to: false)
+    }
+    
+    @objc func didRefreshChanged(_ sender: UIRefreshControl) {
+        service?.reloadData()
+    }
 }
-
 
 extension IssueViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -126,9 +196,14 @@ extension IssueViewController: UITableViewDataSource {
     }
     
     // https://zetal.tistory.com/entry/UIContextualAction
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let close = UIContextualAction(style: .normal, title: "Close") { [weak self] action, view, completion in
-            self?.service?.changeStatus(at: indexPath)
+    func tableView(_ tableView: UITableView,
+                   trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let issue = service?.issue(at: indexPath, isFiltering: isFiltering)
+        let isOpened = issue?.isOpened
+        
+        let close = UIContextualAction(style: .normal,
+                                       title: (isOpened ?? true) ? "Close" : "Open") { [weak self] _, _, completion in
+            self?.service?.changeStatus(at: indexPath.item)
             completion(true)
         }
         
@@ -139,9 +214,18 @@ extension IssueViewController: UITableViewDataSource {
 extension IssueViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if isEditing {
+            checks[indexPath.item].toggle()
+            let cell = tableView.cellForRow(at: indexPath) as? IssueTableViewCell
+            cell?.checkBoxWrapper.button.isSelected.toggle()
+        } else {
+            guard let issue = service?.issue(at: indexPath, isFiltering: isFiltering) else {
+                return
+            }
+            delegate?.navigationToIssueDetail(issue: issue)
+        }
     }
 }
-
 
 extension IssueViewController: IssueCellDelegate {
     func checked(_ cell: IssueTableViewCell) {
@@ -155,10 +239,23 @@ extension IssueViewController: IssueCellDelegate {
 
 extension IssueViewController: IssueServiceDelegate {
     func didDataLoaded(at indexPath: IndexPath?) {
-        // TODO: - indexPath에 따른 처리 필요
-        tableView.reloadData()
-        // 데이터가 바뀌었을 때는 어떻게 해야 할까?
+        if let indexPath = indexPath {
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        } else {
+            tableView.reloadData()
+        }
+        
+        activityIndicator.stopAnimating()
+        refreshControl?.endRefreshing()
+        
         checks = Array(repeating: false, count: service?.count(isFiltering: isFiltering) ?? 0)
+    }
+    
+    func didErrorReceived(title: String, message: String, handler: (() -> Void)? = nil) {
+        let alert = AlertControllerFactory.shared.makeSimpleAlert(title: title, message: message) {_ in
+            handler?()
+        }
+        present(alert, animated: true, completion: nil)
     }
 }
 
@@ -170,5 +267,18 @@ extension IssueViewController: UISearchResultsUpdating {
         
         service?.filter(text)
         tableView.reloadData()
+    }
+}
+
+extension IssueViewController {
+    func addNotification() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(willResumeView),
+                                               name: .resumeIssueList,
+                                               object: nil)
+    }
+    
+    @objc func willResumeView() {
+        service?.reloadData()
     }
 }

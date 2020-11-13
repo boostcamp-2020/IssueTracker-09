@@ -7,44 +7,55 @@
 
 import UIKit
 
-protocol SearchViewControllerDelegate: AnyObject {
-    func close()
-    func done()
-}
-
 class FilterSearchViewController: UIViewController {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
-    private weak var delegate: SearchViewControllerDelegate?
-    private let searchController: SearchController = SearchController()
+    private var searchController: SearchController?
     private var dataSource: UICollectionViewDiffableDataSource<Section, SearchController.Element>!
     private var nameFilter: String?
-    
+    private var type: Filter.Element?
+
     enum Section: CaseIterable {
         case main
     }
-    
-    init?(coder: NSCoder, delegate: SearchViewControllerDelegate) {
-        self.delegate = delegate
+
+    init?(coder: NSCoder, type: Filter.Element) {
+        searchController = SearchController(type: type)
         super.init(coder: coder)
+        self.type = type
     }
-    
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         configureHierarchy()
         configureDataSource()
-        performQuery(with: nil)
+        searchController?.load { [weak self] in
+            self?.performQuery(with: nil)
+        }
+    }
+
+    @IBAction func didBackButtonTapped(_ sender: UIButton) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    @IBAction func didDoneButtonTapped(_ sender: UIButton) {
+        NotificationCenter.default.post(name: .didFilterChangedNotification, object: self)
+        dismiss(animated: true, completion: nil)
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
 
 extension FilterSearchViewController {
     func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration
-        <ElementView, SearchController.Element> { (cell, indexPath, element) in
+        <ElementView, SearchController.Element> { (cell, _, element) in
             // Populate the cell with our item description.
             cell.label.text = element.name
             if element.checkable {
@@ -53,16 +64,22 @@ extension FilterSearchViewController {
                 cell.accessories = []
             }
         }
-        
-        dataSource = UICollectionViewDiffableDataSource<Section, SearchController.Element>(collectionView: collectionView) {
-            (collectionView: UICollectionView, indexPath: IndexPath, identifier: SearchController.Element) -> UICollectionViewCell? in
+
+        dataSource = UICollectionViewDiffableDataSource<Section, SearchController.Element>(
+            collectionView: collectionView
+        ) { collectionView, indexPath, identifier in
             // Return the cell.
-            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: identifier)
+            return collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
+                                                                for: indexPath,
+                                                                item: identifier)
         }
     }
-    
+
     func performQuery(with filter: String?) {
-        let elements = searchController.filteredElements(with: filter).sorted { $0.name < $1.name }
+        guard let elements = searchController?.filteredElements(with: filter)
+                .sorted(by: { $0.name < $1.name }) else {
+            return
+        }
 
         var snapshot = NSDiffableDataSourceSnapshot<Section, SearchController.Element>()
         snapshot.appendSections([.main])
@@ -73,8 +90,7 @@ extension FilterSearchViewController {
 
 extension FilterSearchViewController {
     func createLayout() -> UICollectionViewLayout {
-        let layout = UICollectionViewCompositionalLayout { (sectionIndex: Int,
-            layoutEnvironment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection in
+        let layout = UICollectionViewCompositionalLayout { _, layoutEnvironment in
 
             let contentSize = layoutEnvironment.container.effectiveContentSize
             let columns = contentSize.width > 800 ? 3 : 2
@@ -111,8 +127,11 @@ extension FilterSearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         performQuery(with: searchText)
     }
-}
 
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+}
 
 extension FilterSearchViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -120,14 +139,44 @@ extension FilterSearchViewController: UICollectionViewDelegate {
             collectionView.deselectItem(at: indexPath, animated: true)
             return
         }
-        
+
         var newData = data
         newData.checkable = !data.checkable
-        
+        applyNewData(newData)
+
         var newSnapshot = dataSource.snapshot()
         newSnapshot.insertItems([newData], beforeItem: data)
         newSnapshot.deleteItems([data])
         dataSource.apply(newSnapshot)
     }
+    
+    private func applyNewData(_ newData: SearchController.Element) {
+        if newData.checkable, let type = type {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = newData.rawModel as? User
+            case .label:
+                FilterContext.shared.label = newData.rawModel as? Label
+            case .milestone:
+                FilterContext.shared.milestone = newData.rawModel as? Milestone
+            case .writer:
+                FilterContext.shared.writer = newData.rawModel as? User
+            default:
+                break
+            }
+        } else {
+            switch type {
+            case .assignee:
+                FilterContext.shared.assignee = nil
+            case .label:
+                FilterContext.shared.label = nil
+            case .milestone:
+                FilterContext.shared.milestone = nil
+            case .writer:
+                FilterContext.shared.writer = nil
+            default:
+                break
+            }
+        }
+    }
 }
-

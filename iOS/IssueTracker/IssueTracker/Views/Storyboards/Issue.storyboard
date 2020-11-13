@@ -21,20 +21,20 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="zLX-wx-5tY" customClass="IssueTableViewCell" customModule="IssueTracker" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="75.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="142.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zLX-wx-5tY" id="Wht-cS-CBT">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="75.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="142.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="center" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="MHV-fG-1GI">
-                                                    <rect key="frame" x="12" y="12" width="390" height="51.5"/>
+                                                    <rect key="frame" x="20" y="12" width="382" height="118.5"/>
                                                     <subviews>
                                                         <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZPJ-zs-Zfb" customClass="SelectButton" customModule="IssueTracker" customModuleProvider="target">
-                                                            <rect key="frame" x="-25" y="0.0" width="25" height="51.5"/>
+                                                            <rect key="frame" x="-25" y="0.0" width="25" height="118.5"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-hw-RNe" customClass="CheckBox" customModule="IssueTracker" customModuleProvider="target">
-                                                                    <rect key="frame" x="0.0" y="13.5" width="25" height="25"/>
+                                                                    <rect key="frame" x="0.0" y="47" width="25" height="25"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="ipx-hw-RNe" secondAttribute="height" id="7Ri-gX-SGE"/>
                                                                         <constraint firstAttribute="width" constant="25" id="rRg-z1-UHd"/>
@@ -54,18 +54,67 @@
                                                             </connections>
                                                         </view>
                                                         <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="150" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="dEt-P3-k0v">
-                                                            <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="186.5" height="102.5"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="150" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="레이블 목록 보기 구현" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLx-UE-tcy">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="219" height="26.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="186.5" height="26.5"/>
                                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVq-hG-J6I">
+                                                                    <rect key="frame" x="0.0" y="31.5" width="186.5" height="71"/>
+                                                                    <subviews>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Zp-XF-b6D">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="87" height="71"/>
+                                                                            <color key="backgroundColor" red="0.79607843140000001" green="1" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                            <color key="tintColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                                            <state key="normal" title=" Open" image="exclamationmark.circle" catalog="system">
+                                                                                <color key="titleColor" red="0.0" green="0.56031829119999998" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                            </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                    <integer key="value" value="10"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                                                    <color key="value" red="0.79607843140000001" green="1" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </button>
+                                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g9J-oo-Gwa">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="100" height="71"/>
+                                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                                                                            <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            <inset key="contentEdgeInsets" minX="10" minY="5" maxX="10" maxY="5"/>
+                                                                            <state key="normal" title=" Closed" image="exclamationmark.circle" catalog="system">
+                                                                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                            </state>
+                                                                            <userDefinedRuntimeAttributes>
+                                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                                    <integer key="value" value="10"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderColor">
+                                                                                    <color key="value" red="0.79607843140000001" green="1" blue="0.90196078430000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                </userDefinedRuntimeAttribute>
+                                                                            </userDefinedRuntimeAttributes>
+                                                                        </button>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="0Zp-XF-b6D" firstAttribute="leading" secondItem="nVq-hG-J6I" secondAttribute="leading" id="BVw-pU-oAJ"/>
+                                                                        <constraint firstItem="0Zp-XF-b6D" firstAttribute="top" secondItem="nVq-hG-J6I" secondAttribute="top" id="Ghr-6N-2Lb"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="0Zp-XF-b6D" secondAttribute="bottom" id="NxN-fa-4mw"/>
+                                                                        <constraint firstItem="g9J-oo-Gwa" firstAttribute="top" secondItem="nVq-hG-J6I" secondAttribute="top" id="fQh-Tj-bEm"/>
+                                                                        <constraint firstItem="g9J-oo-Gwa" firstAttribute="leading" secondItem="nVq-hG-J6I" secondAttribute="leading" id="jeS-Ni-4id"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="g9J-oo-Gwa" secondAttribute="bottom" id="s6o-5N-Ww5"/>
+                                                                    </constraints>
+                                                                </view>
                                                             </subviews>
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="top" horizontalHuggingPriority="251" axis="vertical" distribution="fillEqually" alignment="bottom" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="A42-0J-GOV">
-                                                            <rect key="frame" x="229" y="0.0" width="161" height="50"/>
+                                                            <rect key="frame" x="196.5" y="0.0" width="185.5" height="50"/>
                                                         </stackView>
                                                     </subviews>
                                                     <constraints>
@@ -77,15 +126,16 @@
                                                 <constraint firstAttribute="trailing" secondItem="MHV-fG-1GI" secondAttribute="trailing" constant="12" id="6a7-E6-uUw"/>
                                                 <constraint firstItem="MHV-fG-1GI" firstAttribute="top" secondItem="Wht-cS-CBT" secondAttribute="top" constant="12" id="Jwi-LK-L1N"/>
                                                 <constraint firstAttribute="bottom" secondItem="MHV-fG-1GI" secondAttribute="bottom" constant="12" id="MTY-Si-xzH"/>
-                                                <constraint firstItem="MHV-fG-1GI" firstAttribute="leading" secondItem="Wht-cS-CBT" secondAttribute="leading" constant="12" id="WRN-cj-ycV"/>
+                                                <constraint firstItem="MHV-fG-1GI" firstAttribute="leading" secondItem="Wht-cS-CBT" secondAttribute="leading" constant="20" id="WRN-cj-ycV"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="badgeStackView" destination="A42-0J-GOV" id="0ll-aE-qaJ"/>
                                             <outlet property="checkBoxWrapper" destination="ZPJ-zs-Zfb" id="05S-dd-Hfh"/>
+                                            <outlet property="closeButton" destination="g9J-oo-Gwa" id="krw-8S-s5N"/>
+                                            <outlet property="openButton" destination="0Zp-XF-b6D" id="QvE-Ga-5rM"/>
                                             <outlet property="titleLabel" destination="gLx-UE-tcy" id="GsD-kx-065"/>
                                             <outlet property="wrapperStackView" destination="MHV-fG-1GI" id="t6h-Pg-e0a"/>
-                                            <segue destination="kWc-P2-WDO" kind="show" id="Pu5-ws-97S"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -111,7 +161,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <segue destination="PXi-1d-we0" kind="presentation" id="DmJ-oW-DiQ"/>
+                                    <action selector="touchedAppendButton:" destination="n0Y-7T-26G" eventType="touchUpInside" id="cAZ-36-gWG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -139,27 +189,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNQ-Y0-3ui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1786" y="40"/>
-        </scene>
-        <!--IssueDetail-->
-        <scene sceneID="uxS-ga-ev8">
-            <objects>
-                <viewControllerPlaceholder storyboardName="IssueDetail" id="kWc-P2-WDO" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="FrV-1h-IQK"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Rfi-Lr-B2F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2624" y="-50"/>
-        </scene>
-        <!--IssueAppend-->
-        <scene sceneID="621-bT-EZf">
-            <objects>
-                <viewControllerPlaceholder storyboardName="IssueAppend" id="PXi-1d-we0" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Z0j-zn-DvV"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ivL-9Q-FHz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2631" y="151"/>
+            <point key="canvasLocation" x="1785.5072463768117" y="39.508928571428569"/>
         </scene>
     </scenes>
     <designables>
@@ -171,6 +201,7 @@
         </designable>
     </designables>
     <resources>
+        <image name="exclamationmark.circle" catalog="system" width="128" height="121"/>
         <image name="plus.circle.fill" catalog="system" width="128" height="121"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
