@@ -59,7 +59,55 @@
 						<string>Apple Development</string>
 					</dict>
 					<key>name</key>
+					<string>AlamofireImage.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>B3PWYBKFUK</string>
+						<key>name</key>
+						<string>Codesquad Inc.</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>1C78D0797881AC09651E7BBD6FBA97145AF4CBAC</string>
+						<key>dateExpires</key>
+						<string>2021/09/11</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
 					<string>KeychainSwift.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>B3PWYBKFUK</string>
+						<key>name</key>
+						<string>Codesquad Inc.</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>1C78D0797881AC09651E7BBD6FBA97145AF4CBAC</string>
+						<key>dateExpires</key>
+						<string>2021/09/11</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>name</key>
+					<string>MarkdownView.framework</string>
 					<key>team</key>
 					<dict>
 						<key>id</key>
@@ -87,7 +135,7 @@
 			<key>profile</key>
 			<dict>
 				<key>UUID</key>
-				<string>4b2e0522-10ee-43ea-b196-85c46073c0e1</string>
+				<string>a3e0b28d-fd8e-4270-985a-0d3a2b8c9ce0</string>
 				<key>name</key>
 				<string>iOS Team Provisioning Profile: com.boostcamp.membership.IssueTracker</string>
 			</dict>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>compileBitcode</key>
+	<true/>
+	<key>destination</key>
+	<string>export</string>
+	<key>manifest</key>
+	<dict>
+		<key>appURL</key>
+		<string>https://boostcamp-2020.github.io/IssueTracker-09/IssueTracker.ipa</string>
+		<key>displayImageURL</key>
+		<string>https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif</string>
+		<key>fullSizeImageURL</key>
+		<string>https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif</string>
+	</dict>
+	<key>method</key>
+	<string>development</string>
+	<key>signingStyle</key>
+	<string>automatic</string>
+	<key>stripSwiftSymbols</key>
+	<true/>
+	<key>teamID</key>
+	<string>B3PWYBKFUK</string>
+	<key>thinning</key>
+	<string>&lt;none&gt;</string>
+</dict>
+</plist>
