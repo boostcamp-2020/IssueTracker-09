@@ -14,10 +14,21 @@ class MilestoneViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     var service: MilestoneService?
     private var refreshControl: UIRefreshControl?
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        activityIndicator.center = view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.stopAnimating()
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.collectionViewLayout = createLayout()
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         service?.reloadData()
         configRightItem()
         NotificationCenter.default.addObserver(self,
@@ -133,6 +144,7 @@ extension MilestoneViewController: UICollectionViewDataSource {
 
 extension MilestoneViewController: MileStoneServiceDelegate {
     func didDataLoaded() {
+        activityIndicator.stopAnimating()
         refreshControl?.endRefreshing()
         collectionView.reloadData()
     }
