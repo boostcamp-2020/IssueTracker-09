@@ -24,7 +24,7 @@ export const getMilestonesByIdAPI = async (id) => {
   }
 };
 
-export const createMilestoneAPI = async (title, content, deadline) => {
+export const createMilestoneAPI = async ({ title, content, deadline }) => {
   try {
     await request({
       method: 'post',

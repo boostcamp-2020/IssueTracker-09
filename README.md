@@ -4,21 +4,6 @@
 <img src="https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif" alt="github-icon" width="200" height="200" />
 </p>
 
-
-## 기술 스택
-
-![Swift](https://img.shields.io/badge/swift-v5.1-orange?logo=swift)
-![Xcode](https://img.shields.io/badge/xcode-v12.1-blue?logo=xcode)
-
-![Javascript](https://img.shields.io/badge/javascript-ES6+-yellow?logo=javascript)
-![react](https://img.shields.io/badge/react-0.0-9cf?logo=react)
-![NodeJS](https://img.shields.io/badge/node.js-v12.18.3-green?logo=node.js)
-![MySQL](https://img.shields.io/badge/mysql-v5.7.32-blue?logo=mysql)
-
-<p align="center">
-<img src="https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif" alt="github-icon" width="200" height="200" />
-</p>
-
 ## 배포 주소
 
 [Issuetracker-09](http://101.101.218.244/)

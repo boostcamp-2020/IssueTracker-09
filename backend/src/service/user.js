@@ -3,10 +3,19 @@ const User = require('../model').User;
 const { enrollList, dodgeList } = require('../lib/store');
 
 module.exports = {
-  gitHubLogin: (user) => {
+  gitHubLogin: async (user) => {
     const { id, image, name } = user;
-    const jwtToken = createJWT(id);
-    enrollList(id);
+
+    const [newUser] = await User.findOrCreate({
+      where: { user_code: 'g' + id },
+      defaults: {
+        user_code: 'g' + id,
+        name,
+        image,
+      },
+    });
+    const jwtToken = createJWT(newUser.id);
+    enrollList(newUser.id);
 
     return { token: jwtToken, image, name };
   },

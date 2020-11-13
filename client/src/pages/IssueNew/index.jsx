@@ -22,8 +22,9 @@ const IssueNew = () => {
       title,
       labelId: label.map((l) => l.id),
       assigneeId: assignee.map((a) => a.id),
-      milestoneId: milestone.id,
+      milestoneId: milestone?.id,
     });
+
     if (result) {
       if (comment) {
         await createCommentAPI(comment, result.id);

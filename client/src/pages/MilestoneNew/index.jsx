@@ -8,7 +8,7 @@ import { createMilestoneAPI } from '../../apis/milestone';
 const MilestoneNew = () => {
   const history = useHistory();
   const createHandler = async ({ title, content, deadline }) => {
-    const result = await createMilestoneAPI(title, content, deadline);
+    const result = await createMilestoneAPI({ title, content, deadline });
     if (result) {
       history.push('/milestones');
     }

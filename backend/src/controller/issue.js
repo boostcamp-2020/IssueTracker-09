@@ -7,7 +7,7 @@ module.exports = {
       issueService.create,
       {
         ...req.body,
-        ...req.user,
+        ...req.user.dataValues,
       },
       201
     );
@@ -23,6 +23,12 @@ module.exports = {
 
   read: async (req, res) => {
     const { status, result } = await control(issueService.read, req.query);
+
+    return res.status(status).json(result);
+  },
+
+  readById: async (req, res) => {
+    const { status, result } = await control(issueService.readById, req.params);
 
     return res.status(status).json(result);
   },
