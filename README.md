@@ -69,5 +69,6 @@ iOS: [데모 앱](https://boostcamp-2020.github.io/IssueTracker-09/)
 <img src="https://user-images.githubusercontent.com/16751025/97651361-29e61980-1a9f-11eb-8d7b-83b04c0aaed3.gif" width=200px> <img src="https://user-images.githubusercontent.com/57888770/97651315-091dc400-1a9f-11eb-8375-0e5fbf4c901b.gif" width=200px> <img src="https://user-images.githubusercontent.com/57888770/97651319-0a4ef100-1a9f-11eb-99cd-b039ccd66c68.gif" width=200px> 
 
 * 2주차
+
 <img src="https://user-images.githubusercontent.com/16751025/98316504-d97e3700-201d-11eb-8e6a-aa387ce53e07.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316513-dedb8180-201d-11eb-9919-c09bf2de6597.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316523-e0a54500-201d-11eb-94dd-7dfe19920d61.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316533-e4d16280-201d-11eb-8c84-ab27e06d2600.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316537-e69b2600-201d-11eb-805a-1e0b7bbaf160.gif" width=200px /> <img src="https://user-images.githubusercontent.com/16751025/98316540-e7cc5300-201d-11eb-8e8b-89bd6c3f0f0d.gif" width=200px />
 
