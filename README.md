@@ -7,6 +7,7 @@
 ## 배포 주소
 
 JS: [Issuetracker-09](http://101.101.218.244/)
+동작 예시 Youtube [동작 예시 Youtube](https://www.youtube.com/watch?v=6PTau4uPk9M&feature=youtu.be)
 
 iOS: [데모 앱](https://boostcamp-2020.github.io/IssueTracker-09/)
 
