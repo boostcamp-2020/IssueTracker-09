@@ -1,7 +1,7 @@
 # IssueTracker-09
 
 <p align="center">
-<img src="https://github.com/qkrdmstlr3/svg-icon-animation/blob/master/github-icon/github-icon.gif" alt="github-icon" width="200" height="200" />
+<img src="https://github.com/qkrdmstlr3/techstack-generator/blob/master/techs/github-icon.svg" alt="github-icon" width="200" height="200" />
 </p>
 
 ## 배포 주소
